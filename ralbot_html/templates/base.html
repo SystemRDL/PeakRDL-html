@@ -1,0 +1,22 @@
+<div>
+<h1>{{node.get_property("name")}}</h1>
+
+<dl class="node-info">
+    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Base Offset:</dt><dd class="address">{{"0x%x" % node.inst.addr_offset}}</dd>
+    {% if node.inst.is_array %}
+    <dt>Array Dimensions:</dt><dd>{{node.inst.array_dimensions}}</dd>
+    <dt>Array Stride:</dt><dd>+{{"0x%x" % node.inst.array_stride}}</dd>
+    {% endif %}
+</dl>
+
+{% set desc = node.get_property("desc") %}
+{% if desc %}
+<h2>Description</h2>
+<p>{{desc}}</p>
+{% endif %}
+
+<h2>Contents</h2>
+{% block content %}{% endblock %}
+
+</div>

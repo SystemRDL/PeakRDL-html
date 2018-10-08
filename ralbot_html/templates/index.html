@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{{title}}</title>
+    <style>
+        html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+    </style>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <script src="js/data.js" type="text/javascript"></script>
+    <script src="js/ral.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/sidebar.js" type="text/javascript"></script>
+    <script src="js/index_edit.js" type="text/javascript"></script>
+    <script src="js/search.js" type="text/javascript"></script>
+</head>
+
+<body class="pack-h" onload="onPageLoad()">
+    <div id="sidebar" class="no-stretchy pack-v">
+        <div id="sb-titlebar" class="no-stretchy">
+            <div id="sb-titlebox">{{title}}</div>
+            <div class="sb-button-strip pack-h">
+                <button class="expand-button no-stretchy" title="Expand All" onclick="onClickTreeExpandAll()"></button>
+                <button class="collapse-button no-stretchy" title="Collapse All" onclick="onClickTreeCollapseAll()"></button>
+                <span class="stretchy"></span>
+                <button id="sb-search-button" class="search-button no-stretchy" title="Search" onclick="onSearchButtonClick()"></button>
+            </div>
+        </div>
+        <div id="sb-tree" class="stretchy scroll-v"></div>
+    </div>
+    
+    <div id="main-pane" class="stretchy pack-v">
+        <header id="mobi-titlebar" class="no-stretchy pack-h">
+            <button class="menu-button no-stretchy" title="Show sidebar" onclick="sidebar_open()"></button>
+            <div id="mobi-titlebox" class="stretchy">{{title}}</div>
+            <button id="mobi-search-button" class="search-button no-stretchy" title="Search" onclick="onSearchButtonClick()"></button>
+        </header>
+        
+        <div id="search-bar" class="no-stretchy main limit-h">
+            <form>
+                <input type="search" id="search-input" placeholder="Search by name or @address" autocomplete="off">
+            </form>
+        </div>
+        
+        <div class="scroll-v pack-v stretchy">
+            <div id="content" class="main limit-h">
+                <div id="crumbtrail"></div>
+                <hr>
+                <div id="content-container"></div>
+            </div>
+            
+            <div id="search" class="main limit-h">
+                <ul id="search-results">
+                </ul>
+            </div>
+            
+            <div class="main stretchy limit-h"></div>
+            <footer class="main limit-h">
+                <hr>
+                {{footer}}
+            </footer>
+        </div>
+        
+        <div id="overlay" onclick="sidebar_close()"></div>
+    </div>
+</body>
+
+<div id="idx-edit-modal">
+    <form>
+        <input type="text" id="idx-edit-input" autocomplete="off">
+    </form>
+    <span id="idx-edit-range"></span>
+</div>
+
+</html>

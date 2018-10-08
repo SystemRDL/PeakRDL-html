@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Name</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Description</th>
+    </tr>
+    {% for field in node.fields() %}
+    <tr>
+        {% if field.inst.msb == field.inst.lsb %}
+        <td>[{{field.inst.lsb}}]</td>
+        {% else %}
+        <td>[{{field.inst.msb}}:{{field.inst.lsb}}]</td>
+        {% endif %}
+        <td>{{field.inst.inst_name}}</td>
+        <td>{{field.get_property("sw").name}}</td>
+        <td>
+            {% if field.get_property("reset") != None %}
+                {{"0x%x" % field.get_property("reset")}}
+            {% else %}
+                -
+            {% endif %}
+        </td>
+        <td>{{field.get_property("desc") or ""}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

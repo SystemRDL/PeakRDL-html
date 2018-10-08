@@ -1,0 +1,426 @@
+html{
+    background-color: #eee;
+    font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+    font-weight: normal;
+    color: #404040;
+}
+
+a {
+    text-decoration: none;
+    color: #2980b9;
+}
+
+a:hover {
+    color: #3091d1;
+}
+
+:not(html) {
+    line-height: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+    color: #404040;
+}
+
+table {
+    border: solid 1px #e1e4e5;
+    border-collapse: collapse;
+    empty-cells: show;
+}
+
+th {
+    border-bottom: solid 2px #e1e4e5;
+    font-weight: bold;
+}
+
+td, th {
+    border-color: #e1e4e5;
+    padding: 8px 16px;
+}
+
+td:first-child, th:first-child {
+    border-left-width: 0;
+}
+
+tr:nth-child(2n) td {
+    background-color: #f3f6f6;
+}
+
+hr {
+    border: 0;
+    border-top: solid 1px #e1e4e5;
+    margin: 14px 0px;
+}
+
+dt {
+    font-weight: bold;
+}
+
+/* ------------------------------- Button Icons ----------------------------- */
+.expand-button::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    content: "\f0fe";
+}
+
+.collapse-button::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    content: "\f146";
+}
+
+.search-button::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    content: "\f002";
+}
+
+.close-button::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    content: "\f00d";
+}
+
+.menu-button::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    content: "\f0c9";
+}
+
+.copy-button::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: normal;
+    content: "\f0c5";
+}
+
+/* --------------------------------- Sidebar -------------------------------- */
+#sb-titlebar {
+    background-color: rgb(41, 128, 185);
+}
+
+#sb-titlebox {
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+
+    color: #fff;
+}
+
+.sb-button-strip {
+    padding: 0px 5px;
+}
+
+.sb-button-strip button{
+    background-color: inherit;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 20pt;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    padding: 0px;
+}
+
+.sb-button-strip button:hover{
+    background-color: #2e8ece;
+    border: none;
+}
+
+#sb-tree {
+    background-color: #303030;
+    color: #d9d9d9;
+    padding-top: 12px;
+}
+
+#sb-tree a {
+    color: inherit;
+}
+
+.node {
+    display: flex;
+    flex-direction: row;
+    line-height: 25px;
+    border-color: #303030;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-style: solid;
+    border-left-width: 1px;
+}
+
+.node-icon {
+    width: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.node-link{
+    display: inline-block;
+    flex-grow: 1;
+}
+
+.node:hover{
+    background-color: #4e4a4a;
+}
+
+.node.open .node-icon::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: normal;
+    content: "\f146";
+}
+
+.node.closed .node-icon::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: normal;
+    content: "\f0fe";
+}
+
+.node.leaf .node-icon::before {
+    font-weight: normal;
+    content: "\2022";
+}
+
+.node.selected {
+    background-color: #fff;
+    color: #444;
+    font-weight: bold;
+    border-color: #c9c9c9;
+}
+
+.node.selected a:focus {
+    outline: none;
+}
+
+/* ----------------------------- Mobile Titlebar ---------------------------- */
+#mobi-titlebar {
+    background-color: rgb(41, 128, 185);
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+
+    color: #fff;
+}
+
+#mobi-titlebar button{
+    background-color: inherit;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 20pt;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    padding: 0px;
+}
+
+#mobi-titlebar button:hover{
+    background-color: #2e8ece;
+    border: none;
+}
+/* ------------------------------- Main Window ------------------------------ */
+
+#content-container {
+}
+
+.main {
+    background-color: #fff;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#crumbtrail {
+    padding-top: 14px;
+}
+
+.crumb-separator::before {
+    content: ".";
+}
+
+.crumb-separator {
+    padding: 0px 4px;
+}
+
+.crumb-idx {
+    font-weight: bold;
+    padding: 1px 1px;
+}
+
+.crumb-idx:hover{
+    background-color: #2e8ece;
+    color: #fff;
+}
+
+dl.node-info {
+    display: grid;
+    justify-content: start;
+}
+
+.node-info dt{
+  grid-column: 1; 
+}
+
+.node-info dd {
+  grid-column: 2;
+  margin-left: 8px;
+}
+
+footer {
+    padding-bottom: 14px;
+    color: #808080;
+}
+
+/* --------------------------------- Search --------------------------------- */
+#search-bar {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+#search-bar input {
+    border: solid 1px #aaa;
+    padding: 8px 16px;
+    font-size: 18px;
+}
+
+
+#search-results {
+    padding: 0px;
+    width: 100%;
+}
+
+#search-results li:first-child {
+    border-top: solid 1px #e1e4e5;
+}
+
+#search-results li {
+    display: block;
+    width: 100%;
+    padding: 8px 0px;
+    border-bottom: solid 1px #e1e4e5;
+}
+
+#search-results .selected {
+    background-color: #f3f6f6;
+    /*background-color: #ddd;*/
+}
+
+mark {
+    background-color: #f1c40f;
+}
+
+/* --------------------------- Index Editor Modal --------------------------- */
+#idx-edit-modal {
+    background-color: #2e8ece;
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 6px 1px;
+}
+
+#idx-edit-modal::before {
+    border-bottom-color: #2e8ece;
+}
+
+#idx-edit-input {
+    border: solid 1px #2472a4;
+    padding: 4px 8px;
+}
+
+#idx-edit-range {
+    color: #fff;
+}
+
+/* ---------------------------------- Fonts --------------------------------- */
+@font-face {
+    font-family:"Lato";
+    font-weight:400;
+    font-style:normal;
+    src:url("../fonts/Lato/lato-regular.eot");
+    src:url("../fonts/Lato/lato-regular.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/Lato/lato-regular.woff2") format("woff2"),
+        url("../fonts/Lato/lato-regular.woff") format("woff"),
+        url("../fonts/Lato/lato-regular.ttf") format("truetype");
+}
+@font-face {
+    font-family:"Lato";
+    font-weight:700;
+    font-style:normal;
+    src:url("../fonts/Lato/lato-bold.eot");
+    src:url("../fonts/Lato/lato-bold.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/Lato/lato-bold.woff2") format("woff2"),
+        url("../fonts/Lato/lato-bold.woff") format("woff"),
+        url("../fonts/Lato/lato-bold.ttf") format("truetype");
+}
+@font-face {
+    font-family:"Lato";
+    font-weight:700;
+    font-style:italic;
+    src:url("../fonts/Lato/lato-bolditalic.eot");
+    src:url("../fonts/Lato/lato-bolditalic.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/Lato/lato-bolditalic.woff2") format("woff2"),
+        url("../fonts/Lato/lato-bolditalic.woff") format("woff"),
+        url("../fonts/Lato/lato-bolditalic.ttf") format("truetype");
+}
+@font-face {
+    font-family:"Lato";
+    font-weight:400;
+    font-style:italic;
+    src:url("../fonts/Lato/lato-italic.eot");
+    src:url("../fonts/Lato/lato-italic.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/Lato/lato-italic.woff2") format("woff2"),
+        url("../fonts/Lato/lato-italic.woff") format("woff"),
+        url("../fonts/Lato/lato-italic.ttf") format("truetype");
+}
+@font-face {
+    font-family:"Roboto Slab";
+    font-weight:400;
+    font-style:normal;
+    src:url("../fonts/RobotoSlab/roboto-slab.eot");
+    src:url("../fonts/RobotoSlab/roboto-slab-v7-regular.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/RobotoSlab/roboto-slab-v7-regular.woff2") format("woff2"),
+        url("../fonts/RobotoSlab/roboto-slab-v7-regular.woff") format("woff"),
+        url("../fonts/RobotoSlab/roboto-slab-v7-regular.ttf") format("truetype")
+}
+@font-face {
+    font-family:"Roboto Slab";
+    font-weight:700;
+    font-style:normal;
+    src:url("../fonts/RobotoSlab/roboto-slab-v7-bold.eot");
+    src:url("../fonts/RobotoSlab/roboto-slab-v7-bold.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/RobotoSlab/roboto-slab-v7-bold.woff2") format("woff2"),
+        url("../fonts/RobotoSlab/roboto-slab-v7-bold.woff") format("woff"),
+        url("../fonts/RobotoSlab/roboto-slab-v7-bold.ttf") format("truetype")
+}
+
+
+/*!
+ * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-style: normal;
+    src:url("../fonts/FontAwesome/fa-solid-900.eot");
+    src:url("../fonts/FontAwesome/fa-solid-900.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/FontAwesome/fa-solid-900.woff2") format("woff2"),
+        url("../fonts/FontAwesome/fa-solid-900.woff") format("woff"),
+        url("../fonts/FontAwesome/fa-solid-900.ttf") format("truetype"),
+        url("../fonts/FontAwesome/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+@font-face {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 400;
+    font-style: normal;
+    src:url("../fonts/FontAwesome/fa-regular-400.eot");
+    src:url("../fonts/FontAwesome/fa-regular-400.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/FontAwesome/fa-regular-400.woff2") format("woff2"),
+        url("../fonts/FontAwesome/fa-regular-400.woff") format("woff"),
+        url("../fonts/FontAwesome/fa-regular-400.ttf") format("truetype"),
+        url("../fonts/FontAwesome/fa-regular-400.svg#fontawesome") format("svg");
+}

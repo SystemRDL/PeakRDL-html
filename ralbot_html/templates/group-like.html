@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table border="1">
+    <tr>
+        <th>Offset</th>
+        <th>Name</th>
+        <th>Summary</th>
+    </tr>
+    {% for child_id,child in children.items() %}
+    <tr>
+        <td class="address">{{"0x%x" % child.inst.addr_offset}}</td>
+        <td><a href="#{{child.get_path(empty_array_suffix='')}}" data-id="{{child_id}}" onclick="onClickNodeLink(event); return(false)">{{child.inst.inst_name}}</a></td>
+        <td>{{child.get_property("name")}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

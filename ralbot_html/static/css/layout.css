@@ -1,0 +1,142 @@
+/* Base layout */
+html, body {
+    height: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+#sidebar {
+    height: 100%;
+    width: 300px;
+}
+
+#main-pane {
+    height: 100%;
+}
+
+.node-children {
+    padding-left: 15px;
+}
+
+.closed + .node-children {
+    display: none;
+}
+
+.pack-v {
+    display: flex;
+    flex-direction: column;
+}
+
+.pack-h {
+    display: flex;
+    flex-direction: row;
+}
+
+.scroll-v {
+    overflow-y: auto;
+}
+
+.stretchy {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.no-stretchy {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+#overlay {
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    display:none;
+    z-index: 2;
+    background-color:rgba(0,0,0,0.5);
+    cursor:pointer;
+}
+
+#idx-edit-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 300px;
+    top: 300px;
+    
+    padding: 10px;
+}
+
+/* arrow thingy on top of modal */
+#idx-edit-modal::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 35px; /* = ([input with] + [modal padding]*2)/2 - [this border_width] */
+    top: -20px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid;
+}
+
+#idx-edit-input {
+    width: 70px;
+}
+
+.crumb-idx {
+    cursor:pointer;
+}
+
+#search-results{
+    margin: 0px;
+}
+
+#search-results li{
+    cursor:pointer;
+}
+
+#search, #search-bar{
+    display: none;
+}
+
+#search-input {
+    width: 100%;
+}
+
+/* Mobile mode */
+#sidebar {
+    display: none;
+    position: absolute;
+    z-index: 3;
+}
+
+#sb-search-button {
+    display: none;
+}
+
+
+/* Desktop mode */
+@media (min-width:950px){
+    #sidebar {
+        position: static;
+        display: flex!important;
+        z-index: 0;
+    }
+    #sb-search-button {
+        display: block;
+    }
+    
+    #mobi-titlebar {
+        display:none;
+    }
+    
+    #overlay {
+        display: none!important;
+    }
+    
+    .limit-h {
+        max-width: 900px;
+    }
+}
+
