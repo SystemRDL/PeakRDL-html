@@ -4,10 +4,10 @@
 <table border="1">
     <tr>
         <th>Bits</th>
-        <th>Name</th>
+        <th>Identifier</th>
         <th>Access</th>
         <th>Reset</th>
-        <th>Description</th>
+        <th>Name</th>
     </tr>
     {% for field in node.fields() %}
     <tr>
@@ -25,8 +25,17 @@
                 -
             {% endif %}
         </td>
-        <td>{{field.get_property("desc") or ""}}</td>
+        <td>{{field.get_property("name")}}</td>
     </tr>
     {% endfor %}
 </table>
+
+<h2>Fields</h2>
+{% for field in node.fields() %}
+{% set fdesc = field.get_property("desc") %}
+{% if fdesc %}
+<h3>{{field.get_property("name")}}</h3>
+<p>{{fdesc}}</p>
+{% endif %}
+{% endfor %}
 {% endblock %}
