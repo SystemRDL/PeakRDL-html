@@ -3,8 +3,7 @@
 import sys
 
 from systemrdl import RDLCompiler, RDLCompileError
-
-import ralbot_html
+from ralbot_html import HTMLExporter
 
 #===============================================================================
 input_files = sys.argv[1:]
@@ -18,4 +17,5 @@ try:
 except RDLCompileError:
     sys.exit(1)
 
-ralbot_html.export(root, "html")
+html = HTMLExporter()
+html.export(root, "html")
