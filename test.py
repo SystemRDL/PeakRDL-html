@@ -3,7 +3,7 @@
 import sys
 
 from systemrdl import RDLCompiler, RDLCompileError
-from ralbot_html import HTMLExporter
+from ralbot.html import HTMLExporter
 
 #===============================================================================
 input_files = sys.argv[1:]
