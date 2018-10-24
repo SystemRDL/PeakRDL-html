@@ -58,6 +58,24 @@ dt {
     font-weight: bold;
 }
 
+pre {
+    background-color: rgb(238, 255, 204);
+    border: solid 1px rgb(225, 228, 229);
+    padding: 12px;
+}
+
+blockquote {
+    margin-left: 0px;
+    padding-left: 20px;
+    border-left: solid 5px #ccc;
+}
+
+code {
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
 /* ------------------------------- Button Icons ----------------------------- */
 .expand-button::before {
     font-family: "Font Awesome 5 Free";

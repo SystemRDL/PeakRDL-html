@@ -49,6 +49,7 @@ function exitIndexEditModal(cancel) {
             RALIndex[IndexEditState.id].idxs[IndexEditState.dim] = val;
             
             update_crumbtrail();
+            update_rdlfc_indexes();
             refresh_url();
             update_absolute_addr(get_absolute_addr(IndexEditState.id));
         }

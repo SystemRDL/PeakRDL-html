@@ -30,12 +30,21 @@
     {% endfor %}
 </table>
 
-<h2>Fields</h2>
+{#
+    jinja doesn't support setting variables within a loop yet.
+    using tmp dict as a workaround to store state of whether the section header
+    was emitted yet or not
+#}
+{% set tmp = {'isfirst':True} %}
 {% for field in node.fields() %}
-{% set fdesc = field.get_property("desc") %}
-{% if fdesc %}
-<h3>{{field.get_property("name")}}</h3>
-<p>{{fdesc}}</p>
-{% endif %}
+    {% set fdesc = get_description(field,3) %}
+    {% if fdesc %}
+        {% if tmp['isfirst'] %}
+            <h2>Field Descriptions</h2>
+            {% set dummy = tmp.update({'isfirst':False}) %}
+        {% endif %}
+        <h3>{{field.get_property("name")}}</h3>
+        {{fdesc|safe}}
+    {% endif %}
 {% endfor %}
 {% endblock %}

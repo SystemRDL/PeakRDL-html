@@ -10,10 +10,10 @@
     {% endif %}
 </dl>
 
-{% set desc = node.get_property("desc") %}
+{% set desc = get_description(node,2) %}
 {% if desc %}
 <h2>Description</h2>
-<p>{{desc}}</p>
+{{desc|safe}}
 {% endif %}
 
 <h2>Contents</h2>

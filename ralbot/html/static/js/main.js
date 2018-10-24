@@ -12,6 +12,7 @@ function load_page(id) {
         if (this.readyState == 4 && (this.status == 200 || this.status == 0 && this.responseText)) {
             main_el.innerHTML = this.responseText;
             update_absolute_addr(get_absolute_addr(id));
+            update_rdlfc_indexes();
         } else {
             if(window.location.protocol == "file:"){
                 show_file_protocol_nag();
@@ -189,6 +190,33 @@ function onPageLoad() {
     init_tree();
     load_page_via_url();
     init_index_edit();
+}
+
+function update_rdlfc_indexes() {
+    var index_els = document.getElementsByClassName("rdlfc-index")
+    var index_text = "";
+    if("dims" in RALIndex[CurrentID]){
+        for(var i=0; i<RALIndex[CurrentID].idxs.length; i++){
+            index_text += "[" + RALIndex[CurrentID].idxs[i] + "]";
+        }
+    }
+    for(var i=0; i<index_els.length; i++){
+        index_els[i].innerHTML = index_text;
+    }
+    
+    var index_els = document.getElementsByClassName("rdlfc-index_parent")
+    var index_text = "";
+    var id = RALIndex[CurrentID].parent;
+    if(id != null){
+        if("dims" in RALIndex[id]){
+            for(var i=0; i<RALIndex[id].idxs.length; i++){
+                index_text += "[" + RALIndex[id].idxs[i] + "]";
+            }
+        }
+    }
+    for(var i=0; i<index_els.length; i++){
+        index_els[i].innerHTML = index_text;
+    }
 }
 
 //==============================================================================

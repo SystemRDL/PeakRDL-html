@@ -1,0 +1,3 @@
+recursive-include ralbot/html/static *
+recursive-include ralbot/html/templates *
+recursive-exclude test *

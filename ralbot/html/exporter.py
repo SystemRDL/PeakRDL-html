@@ -1,8 +1,10 @@
 import os
-import sys
+import re
 import json
 import shutil
+import hashlib
 import distutils.dir_util
+import xml.dom.minidom
 
 import jinja2 as jj
 
@@ -14,6 +16,8 @@ class HTMLExporter:
         self.output_dir = None
         self.RALIndex = []
         self.current_id = -1
+        self.footer = None
+        self.title = None
         
         self.jj_env = jj.Environment(
             loader=jj.FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates")),
@@ -115,6 +119,7 @@ class HTMLExporter:
             'this_id': this_id,
             'node' : node,
             'children' : children,
+            "get_description": self.get_node_html_desc
         }
         
         template = self.jj_env.get_template(self._template_map[type(node)])
@@ -133,10 +138,87 @@ class HTMLExporter:
         stream = template.stream(context)
         output_path = os.path.join(self.output_dir, "index.html")
         stream.dump(output_path)
-        
-
-#===============================================================================
-def export(node, output_dir, **kwargs):
-    x = HTMLExporter(node, output_dir, kwargs)
-    x.run()
     
+    def get_node_html_desc(self, node, increment_heading=0):
+        """
+        Wrapper function to get HTML description
+        If no description, returns None
+        
+        Performs the following transformations on top of the built-in HTML desc
+        output:
+        - Increment any heading tags
+        - Transform img paths that point to local files. Copy referenced image to output
+        """
+        
+        desc = node.get_html_desc()
+        if desc is None:
+            return desc
+        
+        # Keep HTML semantically correct by promoting heading tags if desc ends
+        # up as a child of existing headings.
+        if increment_heading > 0:
+            def heading_replace_callback(m):
+                new_heading = "<%sh%d>" % (
+                    m.group(1),
+                    min(int(m.group(2)) + increment_heading, 6)
+                )
+                return new_heading
+            desc = re.sub(r'<(/?)[hH](\d)>', heading_replace_callback, desc)
+        
+        # Transform image references
+        # If an img reference points to a file on the local filesystem, then
+        # copy it to the output and transform the reference
+        if increment_heading > 0:
+            def img_transform_callback(m):
+                dom = xml.dom.minidom.parseString(m.group(0))
+                img_src = dom.childNodes[0].attributes["src"].value
+                
+                if os.path.isabs(img_src):
+                    # Absolute local path, or root URL
+                    pass
+                elif re.match(r'(https?|file)://', img_src):
+                    # Absolute URL
+                    pass
+                else:
+                    # Looks like a relative path
+                    # See if it points to something relative to the source file
+                    new_path = self.try_resolve_rel_path(node.inst.def_src_ref, img_src)
+                    if new_path is not None:
+                        img_src = new_path
+                    
+                if os.path.exists(img_src):
+                    md5 = hashlib.md5(open(img_src,'rb').read()).hexdigest()
+                    new_path = os.path.join(
+                        self.output_dir, "content",
+                        "%s_%s" % (md5[0:8], os.path.basename(img_src))
+                    )
+                    shutil.copyfile(img_src, new_path)
+                    dom.childNodes[0].attributes["src"].value = os.path.join(
+                        "content",
+                        "%s_%s" % (md5[0:8], os.path.basename(img_src))
+                    )
+                    return dom.childNodes[0].toxml()
+                    
+                return m.group(0)
+            
+            desc = re.sub(r'<\s*img.*/>', img_transform_callback, desc)
+        return desc
+    
+    def try_resolve_rel_path(self, src_ref, relpath):
+        """
+        Test if the source reference's base path + the relpath points to a file
+        If it works, returns the new path.
+        If not, return None
+        """
+        if src_ref is None:
+            return None
+        
+        src_ref.derive_coordinates()
+        if src_ref.filename is None:
+            return None
+        
+        path = os.path.join(os.path.dirname(src_ref.filename), relpath)
+        if not os.path.exists(path):
+            return None
+        
+        return path
