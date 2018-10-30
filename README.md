@@ -6,6 +6,12 @@ Install from [PyPi](https://pypi.org/project/ralbot-html) using pip:
 
     python3 -m pip install ralbot-html
 
+
+## Example
+An example of HTML output generated from Accelera's SystemRDL SATA AHCI reference.
+[https://systemrdl.github.io/RALBot-html](https://systemrdl.github.io/RALBot-html)
+
+
 ## Usage
 Pass the elaborated output of the [SystemRDL Compiler](http://systemrdl-compiler.readthedocs.io)
 into the exporter.
@@ -19,6 +25,8 @@ exporter = HTMLExporter()
 
 exporter.export(root, "path/to/output")
 ```
+
+
 ## Reference
 
 ### `HTMLExporter()`
