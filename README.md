@@ -32,7 +32,7 @@ exporter.export(root, "path/to/output")
 ### `HTMLExporter()`
 Constructor for the HTML exporter class
 
-### `HTMLExporter.export(node, output_dir, \*\*kwargs)`
+### `HTMLExporter.export(node, output_dir, **kwargs)`
 Perform the export!
 
 **Parameters**
