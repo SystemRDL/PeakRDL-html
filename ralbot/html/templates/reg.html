@@ -25,7 +25,7 @@
                 -
             {% endif %}
         </td>
-        <td>{{field.get_property("name")}}</td>
+        <td>{{field.get_property("name", default="-")}}</td>
     </tr>
     {% endfor %}
 </table>
@@ -43,7 +43,11 @@
             <h2>Field Descriptions</h2>
             {% set dummy = tmp.update({'isfirst':False}) %}
         {% endif %}
-        <h3>{{field.get_property("name")}}</h3>
+        {% if field.get_property("name", default="") == "" %}
+        <h3>{{field.inst.inst_name}}</h3>
+        {% else %}
+        <h3>{{field.inst.inst_name}} - {{field.get_property("name")}}</h3>
+        {% endif %}
         {{fdesc|safe}}
     {% endif %}
 {% endfor %}
