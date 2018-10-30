@@ -1,0 +1,73 @@
+<div>
+<h1>VS</h1>
+
+<dl class="node-info">
+    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Base Offset:</dt><dd class="address">0x10</dd>
+    
+</dl>
+
+
+
+<h2>Description</h2>
+<p>This register indicates the major and minor version of the AHCI specification that the HBA implementation
+supports.</p>
+<p>The upper two bytes represent the major version number, and the lower two bytes represent
+the minor version number.</p>
+<p><strong>Example:</strong> Version 3.12 would be represented as 00030102h. Three versions
+of the specification are valid: 0.95, 1.0, and 1.1.</p>
+
+
+<h2>Contents</h2>
+
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Name</th>
+    </tr>
+    
+    <tr>
+        
+        <td>[15:0]</td>
+        
+        <td>MNR</td>
+        <td>r</td>
+        <td>
+            
+                0x100
+            
+        </td>
+        <td>Minor Version Number</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[31:16]</td>
+        
+        <td>MJR</td>
+        <td>r</td>
+        <td>
+            
+                0x1
+            
+        </td>
+        <td>Major Version Number</td>
+    </tr>
+    
+</table>
+
+
+
+
+    
+    
+
+    
+    
+
+
+
+</div>

@@ -1,0 +1,170 @@
+<div>
+<h1>GHC</h1>
+
+<dl class="node-info">
+    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Base Offset:</dt><dd class="address">0x4</dd>
+    
+</dl>
+
+
+
+<h2>Description</h2>
+<p>This register controls various global actions of the HBA.</p>
+
+
+<h2>Contents</h2>
+
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Name</th>
+    </tr>
+    
+    <tr>
+        
+        <td>[0]</td>
+        
+        <td>HR</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>HBA Reset</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[1]</td>
+        
+        <td>IE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Interrupt Enable</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[2]</td>
+        
+        <td>MRSM</td>
+        <td>r</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>MSI Revert to Single Message</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[31]</td>
+        
+        <td>AE</td>
+        <td>r</td>
+        <td>
+            
+                0x1
+            
+        </td>
+        <td>AHCI Enable</td>
+    </tr>
+    
+</table>
+
+
+
+
+    
+    
+        
+            <h2>Field Descriptions</h2>
+            
+        
+        
+        <h3>HR - HBA Reset</h3>
+        
+        <p>When set by SW, this bit causes an internal reset of the HBA. All
+state machines that relate to data transfers and queuing shall return to an idle
+condition, and all ports shall be re-initialized via COMRESET (if staggered spin-up is
+not supported).</p>
+<p>If staggered spin-up is supported, then it is the responsibility of
+software to spin-up each port after the reset has completed.
+When the HBA has performed the reset action, it shall reset this bit to '0'.</p>
+<p>A software write of '0' shall have no effect.
+For a description on which bits are reset when this bit is set, see section 10.4.3.</p>
+    
+
+    
+    
+        
+        
+        <h3>IE - Interrupt Enable</h3>
+        
+        <p>This global bit enables interrupts from the HBA. When cleared
+(reset default), all interrupt sources from all ports are disabled. When set, interrupts are
+enabled.</p>
+    
+
+    
+    
+        
+        
+        <h3>MRSM - MSI Revert to Single Message</h3>
+        
+        <p>When set to '1' by hardware, indicates that
+the HBA requested more than one MSI vector but has reverted to using the first vector
+only.</p>
+<p>When this bit is cleared to '0', the HBA has not reverted to single MSI mode (i.e.
+hardware is already in single MSI mode, software has allocated the number of
+messages requested, or hardware is sharing interrupt vectors if MC.MME &lt; MC.MMC).
+The HBA may revert to single MSI mode when the number of vectors allocated by the
+host is less than the number requested.</p>
+<p>This bit shall only be set to '1' when the following conditions hold:</p>
+<ul>
+<li>MC.MSIE = '1' (MSI is enabled)</li>
+<li>MC.MMC &gt; 0 (multiple messages requested)</li>
+<li>MC.MME &gt; 0 (more than one message allocated)</li>
+<li>MC.MME != MC.MMC (messages allocated not equal to number requested)</li>
+</ul>
+<p>When this bit is set to '1', single MSI mode operation is in use and software is
+responsible for clearing bits in the IS register to clear interrupts.
+This bit shall be cleared to '0' by hardware when any of the four conditions stated is
+false. This bit is also cleared to '0' when MC.MSIE = '1' and MC.MME = 0h. In this
+case, the hardware has been programmed to use single MSI mode, and is not
+reverting to that mode.</p>
+    
+
+    
+    
+        
+        
+        <h3>AE - AHCI Enable</h3>
+        
+        <p>When set, indicates that communication to the HBA shall be via
+AHCI mechanisms. This can be used by an HBA that supports both legacy
+mechanisms (such as SFF-8038i) and AHCI to know when the HBA is running under an
+AHCI driver.</p>
+<p>When set, software shall only communicate with the HBA using AHCI. When cleared,
+software shall only communicate with the HBA using legacy mechanisms. When
+cleared FISes are not posted to memory and no commands are sent via AHCI
+mechanisms.</p>
+<p>Software shall set this bit to '1' before accessing other AHCI registers.
+The implementation of this bit is dependent upon the value of the CAP.SAM bit. If
+CAP.SAM is '0', then GHC.AE shall be read-write and shall have a reset value of '0'. If
+CAP.SAM is '1', then AE shall be read-only and shall have a reset value of '1'.</p>
+    
+
+
+
+</div>

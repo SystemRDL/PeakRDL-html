@@ -1,0 +1,458 @@
+<div>
+<h1>IE</h1>
+
+<dl class="node-info">
+    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Base Offset:</dt><dd class="address">0x14</dd>
+    
+</dl>
+
+
+
+
+<h2>Contents</h2>
+
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Name</th>
+    </tr>
+    
+    <tr>
+        
+        <td>[0]</td>
+        
+        <td>DHRE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Device to Host Register FIS Interrupt</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[1]</td>
+        
+        <td>PSE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>PIO Setup FIS Interrupt</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[2]</td>
+        
+        <td>DSE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>DMA Setup FIS Interrupt</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[3]</td>
+        
+        <td>SBDE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Set Device Bits Interrupt</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[4]</td>
+        
+        <td>UFS</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Unknown FIS Interrupt</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[5]</td>
+        
+        <td>DPE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Descriptor Processed</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[6]</td>
+        
+        <td>PCE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Port Connect Change Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[7]</td>
+        
+        <td>DMPE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Device Mechanical Presence Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[22]</td>
+        
+        <td>PRCE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>PhyRdy Change Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[23]</td>
+        
+        <td>IPME</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Incorrect Port Multiplier Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[24]</td>
+        
+        <td>OFE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Overflow Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[26]</td>
+        
+        <td>IONFE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Interface Non-fatal Error Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[27]</td>
+        
+        <td>IFE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Interface Fatal Error Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[28]</td>
+        
+        <td>HBDE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Host Bus Data Error Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[29]</td>
+        
+        <td>HBFE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Host Bus Fatal Error Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[30]</td>
+        
+        <td>TFEE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Task File Error Status</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[31]</td>
+        
+        <td>CPDE</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Cold Port Detect Status</td>
+    </tr>
+    
+</table>
+
+
+
+
+    
+    
+        
+            <h2>Field Descriptions</h2>
+            
+        
+        
+        <h3>DHRE - Device to Host Register FIS Interrupt</h3>
+        
+        <p>A D2H Register FIS has been
+received with the 'I' bit set, and has been copied into system memory.</p>
+    
+
+    
+    
+        
+        
+        <h3>PSE - PIO Setup FIS Interrupt</h3>
+        
+        <p>A PIO Setup FIS has been received with the 'I' bit set,
+it has been copied into system memory, and the data related to that FIS has been
+transferred. This bit shall be set even if the data transfer resulted in an error.</p>
+    
+
+    
+    
+        
+        
+        <h3>DSE - DMA Setup FIS Interrupt</h3>
+        
+        <p>A DMA Setup FIS has been received with the 'I' bit
+set and has been copied into system memory.</p>
+    
+
+    
+    
+        
+        
+        <h3>SBDE - Set Device Bits Interrupt</h3>
+        
+        <p>A Set Device Bits FIS has been received with the
+'I' bit set and has been copied into system memory.</p>
+    
+
+    
+    
+        
+        
+        <h3>UFS - Unknown FIS Interrupt</h3>
+        
+        <p>When set to '1', indicates that an unknown FIS was
+received and has been copied into system memory. This bit is cleared to '0' by
+software clearing the PxSERR.DIAG.F bit to '0'. Note that this bit does not directly
+reflect the PxSERR.DIAG.F bit. PxSERR.DIAG.F is set immediately when an unknown
+FIS is detected, whereas this bit is set when that FIS is posted to memory. Software
+should wait to act on an unknown FIS until this bit is set to '1' or the two bits may
+become out of sync.</p>
+    
+
+    
+    
+        
+        
+        <h3>DPE - Descriptor Processed</h3>
+        
+        <p>A PRD with the 'I' bit set has transferred all of its data.
+Refer to section 5.4.2.</p>
+    
+
+    
+    
+        
+        
+        <h3>PCE - Port Connect Change Status</h3>
+        
+        <p>1=Change in Current Connect Status. 0=No
+change in Current Connect Status. This bit reflects the state of PxSERR.DIAG.X. This
+bit is only cleared when PxSERR.DIAG.X is cleared.</p>
+    
+
+    
+    
+        
+        
+        <h3>DMPE - Device Mechanical Presence Status</h3>
+        
+        <p>When set, indicates that a mechanical
+presence switch attached to this port has been opened or closed, which may lead to a
+change in the connection state of the device. This bit is only valid if both CAP.SMPS
+and P0CMD.MPSP are set to '1'.</p>
+    
+
+    
+    
+        
+        
+        <h3>PRCE - PhyRdy Change Status</h3>
+        
+        <p>When set to '1' indicates the internal PhyRdy signal
+changed state. This bit reflects the state of P0SERR.DIAG.N. To clear this bit,
+software must clear P0SERR.DIAG.N to '0'</p>
+    
+
+    
+    
+        
+        
+        <h3>IPME - Incorrect Port Multiplier Status</h3>
+        
+        <p>Indicates that the HBA received a FIS from a
+device whose Port Multiplier field did not match what was expected. The IPMS bit may
+be set during enumeration of devices on a Port Multiplier due to the normal Port
+Multiplier enumeration process. It is recommended that IPMS only be used after
+enumeration is complete on the Port Multiplier.</p>
+    
+
+    
+    
+        
+        
+        <h3>OFE - Overflow Status</h3>
+        
+        <p>Indicates that the HBA received more bytes from a device
+than was specified in the PRD table for the command.</p>
+    
+
+    
+    
+        
+        
+        <h3>IONFE - Interface Non-fatal Error Status</h3>
+        
+        <p>Indicates that the HBA encountered an error
+on the Serial ATA interface but was able to continue operation. Refer to section 6.1.2.</p>
+    
+
+    
+    
+        
+        
+        <h3>IFE - Interface Fatal Error Status</h3>
+        
+        <p>Indicates that the HBA encountered an error on
+the Serial ATA interface which caused the transfer to stop. Refer to section 6.1.2.</p>
+    
+
+    
+    
+        
+        
+        <h3>HBDE - Host Bus Data Error Status</h3>
+        
+        <p>Indicates that the HBA encountered a data error
+(uncorrectable ECC / parity) when reading from or writing to system memory.</p>
+    
+
+    
+    
+        
+        
+        <h3>HBFE - Host Bus Fatal Error Status</h3>
+        
+        <p>Indicates that the HBA encountered a host bus
+error that it cannot recover from, such as a bad software pointer. In PCI, such an
+indication would be a target or master abort.</p>
+    
+
+    
+    
+        
+        
+        <h3>TFEE - Task File Error Status</h3>
+        
+        <p>This bit is set whenever the status register is updated
+by the device and the error bit (bit 0) is set.</p>
+    
+
+    
+    
+        
+        
+        <h3>CPDE - Cold Port Detect Status</h3>
+        
+        <p>When set, a device status has changed as detected
+by the cold presence detect logic. This bit can either be set due to a non-connected
+port receiving a device, or a connected port having its device removed. This bit is only
+valid if the port supports cold presence detect as indicated by PxCMD.CPD set to '1'.</p>
+    
+
+
+
+</div>

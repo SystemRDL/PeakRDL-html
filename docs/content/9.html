@@ -1,0 +1,67 @@
+<div>
+<h1>EM_CTL</h1>
+
+<dl class="node-info">
+    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Base Offset:</dt><dd class="address">0x20</dd>
+    
+</dl>
+
+
+
+<h2>Description</h2>
+<p>This register is used to control and obtain status for the enclosure management interface. The register
+includes information on the attributes of the implementation, enclosure management messages
+supported, the status of the interface, whether any messages are pending, and is used to initiate sending
+messages</p>
+
+
+<h2>Contents</h2>
+
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Name</th>
+    </tr>
+    
+    <tr>
+        
+        <td>[24]</td>
+        
+        <td>ATTR_SMB</td>
+        <td>r</td>
+        <td>
+            
+                0x1
+            
+        </td>
+        <td>-</td>
+    </tr>
+    
+</table>
+
+
+
+
+    
+    
+        
+            <h2>Field Descriptions</h2>
+            
+        
+        
+        <h3>ATTR_SMB</h3>
+        
+        <p>Single Message Buffer (ATTR.SMB): If set to '1', the HBA has one message buffer
+that is shared for messages to transmit and messages received. In this case,
+unsolicited receive messages are not supported and it is software's responsibility to
+manage access to this buffer. If cleared to '0', there are separate receive and transmit
+buffers such that unsolicited messages could be supported.</p>
+    
+
+
+
+</div>

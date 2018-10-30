@@ -1,0 +1,98 @@
+<div>
+<h1>TFD</h1>
+
+<dl class="node-info">
+    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Base Offset:</dt><dd class="address">0x1c</dd>
+    
+</dl>
+
+
+
+<h2>Description</h2>
+<p>This is a 32-bit register that copies specific fields of the task file when FISes are received.
+The FISes that contain this information are:</p>
+<ul>
+<li>D2H Register FIS</li>
+<li>PIO Setup FIS</li>
+<li>Set Device Bits FIS (BSY and DRQ are not updated with this FIS)</li>
+</ul>
+
+
+<h2>Contents</h2>
+
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Name</th>
+    </tr>
+    
+    <tr>
+        
+        <td>[7:0]</td>
+        
+        <td>ERR</td>
+        <td>r</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Error</td>
+    </tr>
+    
+    <tr>
+        
+        <td>[15:8]</td>
+        
+        <td>STS</td>
+        <td>rw</td>
+        <td>
+            
+                0x7f
+            
+        </td>
+        <td>Status</td>
+    </tr>
+    
+</table>
+
+
+
+
+    
+    
+        
+            <h2>Field Descriptions</h2>
+            
+        
+        
+        <h3>ERR - Error</h3>
+        
+        <p>Contains the latest copy of the task file error register.</p>
+    
+
+    
+    
+        
+        
+        <h3>STS - Status</h3>
+        
+        <p>Contains the latest copy of the task file status register. Fields of note in
+this register that affect AHCI hardware operation are:</p>
+<ul>
+<li>[7] BSY Indicates the interface is busy</li>
+<li>[6:4] cs Command specific</li>
+<li>[3] DRQ Indicates a data transfer is requested</li>
+<li>[2:1] cs Command specific</li>
+<li>[0] ERR Indicates an error during the transfer.</li>
+</ul>
+<p>The HBA shall update the entire 8-bit field, not just the bits noted above. </p>
+    
+
+
+
+</div>

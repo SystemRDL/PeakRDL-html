@@ -1,0 +1,66 @@
+<div>
+<h1>CCC_PORTS</h1>
+
+<dl class="node-info">
+    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Base Offset:</dt><dd class="address">0x18</dd>
+    
+</dl>
+
+
+
+<h2>Description</h2>
+<p>The command completion coalescing ports register is used to specify the ports that are coalesced as part
+of the CCC feature when CCC_CTL.EN = '1'.</p>
+
+
+<h2>Contents</h2>
+
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Name</th>
+    </tr>
+    
+    <tr>
+        
+        <td>[31:0]</td>
+        
+        <td>PRT</td>
+        <td>rw</td>
+        <td>
+            
+                0x0
+            
+        </td>
+        <td>Ports</td>
+    </tr>
+    
+</table>
+
+
+
+
+    
+    
+        
+            <h2>Field Descriptions</h2>
+            
+        
+        
+        <h3>PRT - Ports</h3>
+        
+        <p>This register is bit significant. Each bit corresponds to a particular port,
+where bit 0 corresponds to port 0. If a bit is set to '1', the corresponding port is part of
+the command completion coalescing feature. If a bit is cleared to '0', the port is not part
+of the command completion coalescing feature. Bits set to '1' in this register must also
+have the corresponding bit set to '1' in the Ports Implemented register. An updated
+value for this field shall take effect within one timer increment (1 millisecond).</p>
+    
+
+
+
+</div>

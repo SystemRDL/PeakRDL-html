@@ -1,0 +1,71 @@
+<div>
+<h1>PI</h1>
+
+<dl class="node-info">
+    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Base Offset:</dt><dd class="address">0xc</dd>
+    
+</dl>
+
+
+
+<h2>Description</h2>
+<p>This register indicates which ports are exposed by the HBA. It is loaded by the BIOS. It indicates which
+ports that the HBA supports are available for software to use. For example, on an HBA that supports 6
+ports as indicated in CAP.NP, only ports 1 and 3 could be available, with ports 0, 2, 4, and 5 being
+unavailable.
+Software must not read or write to registers within unavailable ports.
+The intent of this register is to allow system vendors to build platforms that support less than the full
+number of ports implemented on the HBA silicon.</p>
+
+
+<h2>Contents</h2>
+
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Name</th>
+    </tr>
+    
+    <tr>
+        
+        <td>[4:0]</td>
+        
+        <td>PI</td>
+        <td>r</td>
+        <td>
+            
+                0x1
+            
+        </td>
+        <td>Port Implemented</td>
+    </tr>
+    
+</table>
+
+
+
+
+    
+    
+        
+            <h2>Field Descriptions</h2>
+            
+        
+        
+        <h3>PI - Port Implemented</h3>
+        
+        <p>This register is bit significant. If a bit is set to '1', the
+corresponding port is available for software to use. If a bit is cleared to '0', the port is
+not available for software to use.</p>
+<p>The maximum number of bits set to '1' shall not
+exceed CAP.NP + 1, although the number of bits set in this register may be fewer than
+CAP.NP + 1. At least one bit shall be set to '1'.</p>
+    
+
+
+
+</div>
