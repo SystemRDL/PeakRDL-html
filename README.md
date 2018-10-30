@@ -9,6 +9,7 @@ Install from [PyPi](https://pypi.org/project/ralbot-html) using pip:
 
 ## Example
 An example of HTML output generated from Accelera's SystemRDL SATA AHCI reference.
+
 [https://systemrdl.github.io/RALBot-html](https://systemrdl.github.io/RALBot-html)
 
 
