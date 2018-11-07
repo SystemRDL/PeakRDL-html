@@ -13,12 +13,14 @@ function load_page(id) {
             main_el.innerHTML = this.responseText;
             update_absolute_addr(get_absolute_addr(id));
             update_rdlfc_indexes();
+            document.getElementById("content").parentElement.scrollTop = 0;
         } else {
             if(window.location.protocol == "file:"){
                 show_file_protocol_nag();
             }
         }
     };
+    
     
     try {
         xhttp.open("GET", "content/" + id + ".html", true);

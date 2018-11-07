@@ -148,6 +148,7 @@ function onClickTreeLink(ev) {
     select_tree_node();
     refresh_url();
     refresh_title();
+    sidebar_close();
     return(false);
 }
 

@@ -135,9 +135,9 @@ code {
 .sb-button-strip button{
     background-color: inherit;
     border: none;
-    width: 40px;
-    height: 40px;
-    font-size: 20pt;
+    width: 30px;
+    height: 30px;
+    font-size: 18pt;
     text-align: center;
     vertical-align: middle;
     color: #fff;
