@@ -9,7 +9,7 @@ button {
 
 #sidebar {
     height: 100%;
-    width: 300px;
+    width: 19em;
 }
 
 #main-pane {
@@ -17,7 +17,7 @@ button {
 }
 
 .node-children {
-    padding-left: 15px;
+    padding-left: 1em;
 }
 
 .closed + .node-children {
@@ -62,26 +62,26 @@ button {
     display: none; /* Hidden by default */
     position: fixed;
     z-index: 1;
-    left: 300px;
-    top: 300px;
+    left: 18.75em;
+    top: 18.75em;
     
-    padding: 10px;
+    padding: 0.625em;
 }
 
 /* arrow thingy on top of modal */
 #idx-edit-modal::before {
     content: "";
-    width: 0px;
-    height: 0px;
+    width: 0em;
+    height: 0em;
     position: absolute;
-    left: 35px; /* = ([input with] + [modal padding]*2)/2 - [this border_width] */
-    top: -20px;
-    border: 10px solid transparent;
-    border-bottom: 10px solid;
+    left: 2.188em; /* = ([input with] + [modal padding]*2)/2 - [this border_width] */
+    top: -1.25em;
+    border: 0.625em solid transparent;
+    border-bottom: 0.625em solid;
 }
 
 #idx-edit-input {
-    width: 70px;
+    width: 4.375em;
 }
 
 .crumb-idx {
@@ -89,7 +89,7 @@ button {
 }
 
 #search-results{
-    margin: 0px;
+    margin: 0em;
 }
 
 #search-results li{

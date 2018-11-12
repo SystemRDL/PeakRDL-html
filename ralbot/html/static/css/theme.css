@@ -37,7 +37,7 @@ th {
 
 td, th {
     border-color: #e1e4e5;
-    padding: 8px 16px;
+    padding: 0.5em 1em;
 }
 
 td:first-child, th:first-child {
@@ -51,7 +51,7 @@ tr:nth-child(2n) td {
 hr {
     border: 0;
     border-top: solid 1px #e1e4e5;
-    margin: 14px 0px;
+    margin: 1em 0em;
 }
 
 dt {
@@ -61,18 +61,18 @@ dt {
 pre {
     background-color: rgb(238, 255, 204);
     border: solid 1px rgb(225, 228, 229);
-    padding: 12px;
+    padding: 0.75em;
 }
 
 blockquote {
     margin-left: 0px;
-    padding-left: 20px;
-    border-left: solid 5px #ccc;
+    padding-left: 0.25em;
+    border-left: solid 0.313em #ccc;
 }
 
 code {
     font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace;
-    font-size: 12px;
+    font-size: 0.75em;
     line-height: 1.4;
 }
 
@@ -119,29 +119,29 @@ code {
 }
 
 #sb-titlebox {
-    font-size: 14pt;
+    font-size: 1.125em;
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    line-height: 40px;
+    line-height: 2.2em;
 
     color: #fff;
 }
 
 .sb-button-strip {
-    padding: 0px 5px;
+    padding: 0em 0.313em;
 }
 
 .sb-button-strip button{
     background-color: inherit;
     border: none;
-    width: 30px;
-    height: 30px;
-    font-size: 18pt;
+    width: 1.25em;
+    height: 1.25em;
+    font-size: 1.5em;
     text-align: center;
     vertical-align: middle;
     color: #fff;
-    padding: 0px;
+    padding: 0em;
 }
 
 .sb-button-strip button:hover{
@@ -152,7 +152,7 @@ code {
 #sb-tree {
     background-color: #303030;
     color: #d9d9d9;
-    padding-top: 12px;
+    padding-top: 0.5em;
 }
 
 #sb-tree a {
@@ -162,7 +162,7 @@ code {
 .node {
     display: flex;
     flex-direction: row;
-    line-height: 25px;
+    line-height: 1.5em;
     border-color: #303030;
     border-top-style: solid;
     border-top-width: 1px;
@@ -173,7 +173,7 @@ code {
 }
 
 .node-icon {
-    width: 20px;
+    width: 1.25em;
     display: inline-block;
     text-align: center;
 }
@@ -218,25 +218,28 @@ code {
 /* ----------------------------- Mobile Titlebar ---------------------------- */
 #mobi-titlebar {
     background-color: rgb(41, 128, 185);
-    font-size: 14pt;
+    color: #fff;
+}
+
+#mobi-titlebox {
+    vertical-align: middle;
+    font-size: 1.125em;
     font-weight: bold;
     text-align: center;
-    vertical-align: middle;
-    line-height: 40px;
-
-    color: #fff;
+    line-height: 2em;
 }
 
 #mobi-titlebar button{
     background-color: inherit;
     border: none;
-    width: 40px;
-    height: 40px;
-    font-size: 20pt;
+    font-size: 1.5em;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
     text-align: center;
     vertical-align: middle;
     color: #fff;
-    padding: 0px;
+    padding: 0em;
 }
 
 #mobi-titlebar button:hover{
@@ -250,12 +253,12 @@ code {
 
 .main {
     background-color: #fff;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 1.875em;
+    padding-right: 1.875em;
 }
 
 #crumbtrail {
-    padding-top: 14px;
+    padding-top: 0.875em;
 }
 
 .crumb-separator::before {
@@ -263,12 +266,12 @@ code {
 }
 
 .crumb-separator {
-    padding: 0px 4px;
+    padding: 0em 0.25em;
 }
 
 .crumb-idx {
     font-weight: bold;
-    padding: 1px 1px;
+    padding: 0.07em;
 }
 
 .crumb-idx:hover{
@@ -287,29 +290,29 @@ dl.node-info {
 
 .node-info dd {
   grid-column: 2;
-  margin-left: 8px;
+  margin-left: 0.5em;
 }
 
 footer {
-    padding-bottom: 14px;
+    padding-bottom: 0.875em;
     color: #808080;
 }
 
 /* --------------------------------- Search --------------------------------- */
 #search-bar {
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 0.875em;
+    padding-bottom: 0.875em;
 }
 
 #search-bar input {
     border: solid 1px #aaa;
-    padding: 8px 16px;
-    font-size: 18px;
+    padding: 0.5em 1em;
+    font-size: 1.125em;
 }
 
 
 #search-results {
-    padding: 0px;
+    padding: 0em;
     width: 100%;
 }
 
@@ -320,7 +323,7 @@ footer {
 #search-results li {
     display: block;
     width: 100%;
-    padding: 8px 0px;
+    padding: 0.5em 0em;
     border-bottom: solid 1px #e1e4e5;
 }
 
@@ -345,7 +348,7 @@ mark {
 
 #idx-edit-input {
     border: solid 1px #2472a4;
-    padding: 4px 8px;
+    padding: 0.25em 0.5em;
 }
 
 #idx-edit-range {
