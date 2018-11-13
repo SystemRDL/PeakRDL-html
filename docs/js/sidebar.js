@@ -135,6 +135,7 @@ function onClickTreeLink(ev) {
     var id = parseInt(el.dataset.id);
     
     close_search();
+    sidebar_close();
     
     if(id == CurrentID) return(false);
     
@@ -148,7 +149,6 @@ function onClickTreeLink(ev) {
     select_tree_node();
     refresh_url();
     refresh_title();
-    sidebar_close();
     return(false);
 }
 

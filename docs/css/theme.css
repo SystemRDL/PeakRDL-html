@@ -37,7 +37,7 @@ th {
 
 td, th {
     border-color: #e1e4e5;
-    padding: 0.5em 1em;
+    padding: 0.5em;
 }
 
 td:first-child, th:first-child {

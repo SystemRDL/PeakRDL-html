@@ -38,6 +38,10 @@ button {
     overflow-y: auto;
 }
 
+.scroll-h {
+    overflow-x: auto;
+}
+
 .stretchy {
     flex-grow: 1;
     flex-shrink: 1;
