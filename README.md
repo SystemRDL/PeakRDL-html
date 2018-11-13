@@ -51,3 +51,5 @@ Perform the export!
     * Override footer text.
 * `title`
     * Override title text.
+* `home_url`
+    * If a URL is specified, adds a home button to return to a parent home page.

@@ -24,6 +24,10 @@
         <div id="sb-titlebar" class="no-stretchy">
             <div id="sb-titlebox">{{title}}</div>
             <div class="sb-button-strip pack-h">
+                {% if home_url != None %}
+                <a class="button-link home-button no-stretchy" href="{{home_url}}"></a>
+                <span class="stretchy"></span>
+                {% endif %}
                 <button class="expand-button no-stretchy" title="Expand All" aria-label="Expand All" onclick="onClickTreeExpandAll()"></button>
                 <button class="collapse-button no-stretchy" title="Collapse All" aria-label="Collapse All" onclick="onClickTreeCollapseAll()"></button>
                 <span class="stretchy"></span>
