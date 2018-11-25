@@ -4,17 +4,11 @@
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x0</dd>
-    
 </dl>
-
-
-
 <h2>Description</h2>
 <p>This register indicates basic capabilities of the HBA to driver software.</p>
 
-
 <h2>Contents</h2>
-
 <table border="1">
     <tr>
         <th>Bits</th>
@@ -23,329 +17,186 @@
         <th>Reset</th>
         <th>Name</th>
     </tr>
-    
     <tr>
-        
         <td>[4:0]</td>
-        
         <td>NP</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Number of Ports</td>
     </tr>
-    
     <tr>
-        
         <td>[5]</td>
-        
         <td>SXS</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Supports External SATA</td>
     </tr>
-    
     <tr>
-        
         <td>[6]</td>
-        
         <td>EMS</td>
         <td>r</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Enclosure Management Supported</td>
     </tr>
-    
     <tr>
-        
         <td>[7]</td>
-        
         <td>CCCS</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Command Completion Coalescing Supported</td>
     </tr>
-    
     <tr>
-        
         <td>[12:8]</td>
-        
         <td>NCS</td>
         <td>r</td>
-        <td>
-            
-                0x1f
-            
+        <td>0x1f
         </td>
         <td>Number of Command Slots</td>
     </tr>
-    
     <tr>
-        
         <td>[13]</td>
-        
         <td>PSC</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Partial State Capable</td>
     </tr>
-    
     <tr>
-        
         <td>[14]</td>
-        
         <td>SSC</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Slumber State Capable</td>
     </tr>
-    
     <tr>
-        
         <td>[15]</td>
-        
         <td>PMD</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>PIO Multiple DRQ Block</td>
     </tr>
-    
     <tr>
-        
         <td>[16]</td>
-        
         <td>FBSS</td>
         <td>r</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>FIS-based Switching Supported</td>
     </tr>
-    
     <tr>
-        
         <td>[17]</td>
-        
         <td>SPM</td>
         <td>r</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Supports Port Multiplier</td>
     </tr>
-    
     <tr>
-        
         <td>[18]</td>
-        
         <td>SAM</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Supports AHCI mode only</td>
     </tr>
-    
     <tr>
-        
         <td>[19]</td>
-        
         <td>SNZO</td>
         <td>r</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Supports Non-Zero DMA Offsets</td>
     </tr>
-    
     <tr>
-        
         <td>[23:20]</td>
-        
         <td>ISS</td>
         <td>r</td>
-        <td>
-            
-                0x3
-            
+        <td>0x3
         </td>
         <td>Interface Speed Support</td>
     </tr>
-    
     <tr>
-        
         <td>[24]</td>
-        
         <td>SCLO</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Supports Command List Override</td>
     </tr>
-    
     <tr>
-        
         <td>[25]</td>
-        
         <td>SAL</td>
         <td>r</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Supports Activity LED</td>
     </tr>
-    
     <tr>
-        
         <td>[26]</td>
-        
         <td>SALP</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Supports Aggressive Link Power Management</td>
     </tr>
-    
     <tr>
-        
         <td>[27]</td>
-        
         <td>SSS</td>
         <td>r</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Supports Staggered Spin-up</td>
     </tr>
-    
     <tr>
-        
         <td>[28]</td>
-        
         <td>SMPS</td>
         <td>r</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Supports Mechanical Presence Switch</td>
     </tr>
-    
     <tr>
-        
         <td>[29]</td>
-        
         <td>SSNTF</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Supports SNotification Register</td>
     </tr>
-    
     <tr>
-        
         <td>[30]</td>
-        
         <td>SNCQ</td>
         <td>r</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Supports Native Command Queuing</td>
     </tr>
-    
     <tr>
-        
         <td>[31]</td>
-        
         <td>S64A</td>
         <td>r</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Supports 64-bit Addressing</td>
     </tr>
-    
 </table>
+<hr><h2>Field Descriptions</h2>
 
-
-
-
-    
-    
-        
-            <h2>Field Descriptions</h2>
-            
-        
-        
-        <h3>NP - Number of Ports</h3>
-        
-        <p>0's based value indicating the maximum number of ports
+<h3>NP - Number of Ports</h3>
+<p>0's based value indicating the maximum number of ports
 supported by the HBA silicon. A maximum of 32 ports can be supported. A value of
 '0h', indicating one port, is the minimum requirement.</p>
 <p>Note that the number of ports indicated in this field may be more
 than the number of ports indicated in the GHC.PI register.</p>
-    
 
-    
-    
-        
-        
-        <h3>SXS - Supports External SATA</h3>
-        
-        <p>When set to '1', indicates that the HBA has one or
+<h3>SXS - Supports External SATA</h3>
+<p>When set to '1', indicates that the HBA has one or
 more Serial ATA ports that has a signal only connector that is externally accessible.</p>
 <p>If this bit is set to '1', software may refer to the PxCMD.ESP bit to determine whether a
 specific port has its signal connector externally accessible as a signal only connector
@@ -353,57 +204,33 @@ specific port has its signal connector externally accessible as a signal only co
 <p>When the bit is cleared to '0', indicates that
 the HBA has no Serial ATA ports that have a signal only connector externally
 accessible.</p>
-    
 
-    
-    
-        
-        
-        <h3>EMS - Enclosure Management Supported</h3>
-        
-        <p>When set to '1', indicates that the HBA
+<h3>EMS - Enclosure Management Supported</h3>
+<p>When set to '1', indicates that the HBA
 supports enclosure management as defined in section 12.
 When enclosure management is supported, the HBA has implemented the EM_LOC and EM_CTL
 global HBA registers.</p>
 <p>When cleared to '0', indicates that the HBA does not support
 enclosure management and the EM_LOC and EM_CTL global HBA registers are not
 implemented.</p>
-    
 
-    
-    
-        
-        
-        <h3>CCCS - Command Completion Coalescing Supported</h3>
-        
-        <p>When set to '1', indicates
+<h3>CCCS - Command Completion Coalescing Supported</h3>
+<p>When set to '1', indicates
 that the HBA supports command completion coalescing as defined in section 11. When
 command completion coalescing is supported, the HBA has implemented the
 CCC_CTL and the CCC_PORTS global HBA registers.</p>
 <p>When cleared to '0', indicates
 that the HBA does not support command completion coalescing and the CCC_CTL and
 CCC_PORTS global HBA registers are not implemented.</p>
-    
 
-    
-    
-        
-        
-        <h3>NCS - Number of Command Slots</h3>
-        
-        <p>0's based value indicating the number of
+<h3>NCS - Number of Command Slots</h3>
+<p>0's based value indicating the number of
 command slots per port supported by this HBA. A minimum of 1 and maximum of 32
 slots per port can be supported. The same number of command slots is available on
 each implemented port.</p>
-    
 
-    
-    
-        
-        
-        <h3>PSC - Partial State Capable</h3>
-        
-        <p>Indicates whether the HBA can support transitions to the
+<h3>PSC - Partial State Capable</h3>
+<p>Indicates whether the HBA can support transitions to the
 Partial state.</p>
 <p>When cleared to '0', software must not allow the HBA to initiate transitions
 to the Partial state via aggressive link power management nor the PxCMD.ICC field in
@@ -411,15 +238,9 @@ each port, and the PxSCTL.IPM field in each port must be programmed to disallow
 device initiated Partial requests.</p>
 <p>When set to '1', HBA and device initiated Partial
 requests can be supported.</p>
-    
 
-    
-    
-        
-        
-        <h3>SSC - Slumber State Capable</h3>
-        
-        <p>Indicates whether the HBA can support transitions to
+<h3>SSC - Slumber State Capable</h3>
+<p>Indicates whether the HBA can support transitions to
 the Slumber state.</p>
 <p>When cleared to '0', software must not allow the HBA to initiate
 transitions to the Slumber state via aggressive link power management nor the
@@ -427,185 +248,117 @@ PxCMD.ICC field in each port, and the PxSCTL.IPM field in each port must be
 programmed to disallow device initiated Slumber requests.</p>
 <p>When set to '1', HBA and
 device initiated Slumber requests can be supported.</p>
-    
 
-    
-    
-        
-        
-        <h3>PMD - PIO Multiple DRQ Block</h3>
-        
-        <p>If set to '1', the HBA supports multiple DRQ block
+<h3>PMD - PIO Multiple DRQ Block</h3>
+<p>If set to '1', the HBA supports multiple DRQ block
 data transfers for the PIO command protocol.</p>
 <p>If cleared to '0' the HBA only supports
 single DRQ block data transfers for the PIO command protocol.</p>
-    
 
-    
-    
-        
-        
-        <h3>FBSS - FIS-based Switching Supported</h3>
-        
-        <p>When set to '1', indicates that the HBA
+<h3>FBSS - FIS-based Switching Supported</h3>
+<p>When set to '1', indicates that the HBA
 supports Port Multiplier FIS-based switching.</p>
 <p>When cleared to '0', indicates that the
 HBA does not support FIS-based switching. AHCI 1.0 and 1.1 HBAs shall have this bit
 cleared to '0'.</p>
-    
 
-    
-    
-        
-        
-        <h3>SPM - Supports Port Multiplier</h3>
-        
-        <p>Indicates whether the HBA can support a Port
+<h3>SPM - Supports Port Multiplier</h3>
+<p>Indicates whether the HBA can support a Port
 Multiplier. When set, a Port Multiplier using command-based switching is supported.
 When cleared to '0', a Port Multiplier is not supported, and a Port Multiplier may not be
 attached to this HBA.</p>
-    
 
-    
-    
-        
-        
-        <h3>SAM - Supports AHCI mode only</h3>
-        
-        <p>The SATA controller may optionally support AHCI
+<h3>SAM - Supports AHCI mode only</h3>
+<p>The SATA controller may optionally support AHCI
 access mechanisms only.</p>
 <p>A value of '0' indicates that in addition to the native AHCI
 mechanism (via ABAR), the SATA controller implements a legacy, task-file based
 register interface such as SFF-8038i.</p>
 <p>A value of '1' indicates that the SATA controller
 does not implement a legacy, task-file based register interface.</p>
-    
 
-    
-    
-        
-        
-        <h3>SNZO - Supports Non-Zero DMA Offsets</h3>
-        
-        <p>When set to '1', indicates that the HBA
+<h3>SNZO - Supports Non-Zero DMA Offsets</h3>
+<p>When set to '1', indicates that the HBA
 can support non-zero DMA offsets for DMA Setup FISes. This bit is reserved for future
 AHCI enhancements. AHCI 1.0 and 1.1 HBAs shall have this bit cleared to '0'</p>
-    
 
-    
-    
-        
-        
-        <h3>ISS - Interface Speed Support</h3>
-        
-        <p>Indicates the maximum speed the HBA can support
+<h3>ISS - Interface Speed Support</h3>
+<p>Indicates the maximum speed the HBA can support
 on its ports. These encodings match the system software programmable
 PxSCTL.DET.SPD field.</p>
-    
+<table border="1">
+    <tr>
+        <th colspan="3">enum ISS_ENUM</th>
+    </tr>
+    <tr>
+        <td>RESERVED</td>
+        <td>0x0</td>
+        <td><p>Currently Reserved</p></td>
+    </tr>
+    <tr>
+        <td>GEN_1</td>
+        <td>0x1</td>
+        <td><p>1.5 Gbps Link Speed Only!</p></td>
+    </tr>
+    <tr>
+        <td>GEN_2</td>
+        <td>0x2</td>
+        <td><p>1.5 Gbps and 3.0 Gbps Support</p></td>
+    </tr>
+</table>
 
-    
-    
-        
-        
-        <h3>SCLO - Supports Command List Override</h3>
-        
-        <p>When set to '1', the HBA supports the
+<h3>SCLO - Supports Command List Override</h3>
+<p>When set to '1', the HBA supports the
 PxCMD.CLO bit and its associated function.</p>
 <p>When cleared to '0', the HBA is not
 capable of clearing the BSY and DRQ bits in the Status register in order to issue a
 software reset if these bits are still set from a previous operation.</p>
-    
 
-    
-    
-        
-        
-        <h3>SAL - Supports Activity LED</h3>
-        
-        <p>When set to '1', the HBA supports a single activity
+<h3>SAL - Supports Activity LED</h3>
+<p>When set to '1', the HBA supports a single activity
 indication output pin. This pin can be connected to an LED on the platform to indicate
 device activity on any drive.</p>
 <p>When cleared to '0', this function is not supported. See
 section 10.10 for more information.</p>
-    
 
-    
-    
-        
-        
-        <h3>SALP - Supports Aggressive Link Power Management</h3>
-        
-        <p>When set to '1', the HBA
+<h3>SALP - Supports Aggressive Link Power Management</h3>
+<p>When set to '1', the HBA
 can support auto-generating link requests to the Partial or Slumber states when there
 are no commands to process.</p>
 <p>When cleared to '0', this function is not supported and
 software shall treat the PxCMD.ALPE and PxCMD.ASP bits as reserved. Refer to
 section 8.3.1.3.</p>
-    
 
-    
-    
-        
-        
-        <h3>SSS - Supports Staggered Spin-up</h3>
-        
-        <p>When set to '1', the HBA supports staggered
+<h3>SSS - Supports Staggered Spin-up</h3>
+<p>When set to '1', the HBA supports staggered
 spin-up on its ports, for use in balancing power spikes.</p>
 <p>When cleared to '0', this
 function is not supported. This value is loaded by the BIOS prior to OS initialization.</p>
-    
 
-    
-    
-        
-        
-        <h3>SMPS - Supports Mechanical Presence Switch</h3>
-        
-        <p>When set to '1', the HBA supports
+<h3>SMPS - Supports Mechanical Presence Switch</h3>
+<p>When set to '1', the HBA supports
 mechanical presence switches on its ports for use in hot plug operations.</p>
 <p>When cleared to '0', this function is not supported. This value is loaded by the BIOS prior to
 OS initialization.</p>
-    
 
-    
-    
-        
-        
-        <h3>SSNTF - Supports SNotification Register</h3>
-        
-        <p>When set to '1', the
+<h3>SSNTF - Supports SNotification Register</h3>
+<p>When set to '1', the
 HBA supports the PxSNTF (SNotification) register and its associated functionality.</p>
 <p>When cleared to '0', the HBA does not support the PxSNTF (SNotification) register and
 its associated functionality. Refer to section 10.10.1.</p>
-    
 
-    
-    
-        
-        
-        <h3>SNCQ - Supports Native Command Queuing</h3>
-        
-        <p>Indicates whether the HBA supports
+<h3>SNCQ - Supports Native Command Queuing</h3>
+<p>Indicates whether the HBA supports
 Serial ATA native command queuing. If set to '1', an HBA shall handle DMA Setup
 FISes natively, and shall handle the auto-activate optimization through that FIS.</p>
 <p>If cleared to '0', native command queuing is not supported and software should not issue
 any native command queuing commands.</p>
-    
 
-    
-    
-        
-        
-        <h3>S64A - Supports 64-bit Addressing</h3>
-        
-        <p>Indicates whether the HBA can access 64-bit
+<h3>S64A - Supports 64-bit Addressing</h3>
+<p>Indicates whether the HBA can access 64-bit
 data structures.</p>
 <p>When set to '1', the HBA shall make the 32-bit upper bits of the port
 DMA Descriptor, the PRD Base, and each PRD entry read/write.</p>
 <p>When cleared to '0',
 these are read-only and treated as '0' by the HBA.</p>
-    
-
-
-
 </div>

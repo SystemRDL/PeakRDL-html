@@ -120,7 +120,8 @@ class HTMLExporter:
             'this_id': this_id,
             'node' : node,
             'children' : children,
-            "get_description": self.get_node_html_desc
+            'has_description' : has_description,
+            'get_description': self.get_node_html_desc
         }
         
         template = self.jj_env.get_template(self._template_map[type(node)])
@@ -224,3 +225,12 @@ class HTMLExporter:
             return None
         
         return path
+
+def has_description(node):
+    """
+    Test if node has a description defined
+    """
+    if "desc" in node.list_properties():
+        return True
+    else:
+        return False

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{%- block content -%}
 <table border="1">
     <tr>
         <th>Bits</th>
@@ -9,46 +9,32 @@
         <th>Reset</th>
         <th>Name</th>
     </tr>
-    {% for field in node.fields() %}
+    {%- for field in node.fields() %}
     <tr>
-        {% if field.inst.msb == field.inst.lsb %}
+        {%- if field.inst.msb == field.inst.lsb %}
         <td>[{{field.inst.lsb}}]</td>
-        {% else %}
+        {%- else %}
         <td>[{{field.inst.msb}}:{{field.inst.lsb}}]</td>
-        {% endif %}
+        {%- endif %}
         <td>{{field.inst.inst_name}}</td>
         <td>{{field.get_property("sw").name}}</td>
         <td>
-            {% if field.get_property("reset") != None %}
+            {%- if field.get_property("reset") != None -%}
                 {{"0x%x" % field.get_property("reset")}}
-            {% else %}
+            {%- else -%}
                 -
-            {% endif %}
+            {%- endif %}
         </td>
         <td>{{field.get_property("name", default="-")}}</td>
     </tr>
-    {% endfor %}
+    {%- endfor %}
 </table>
 
-{#
-    jinja doesn't support setting variables within a loop yet.
-    using tmp dict as a workaround to store state of whether the section header
-    was emitted yet or not
-#}
-{% set tmp = {'isfirst':True} %}
-{% for field in node.fields() %}
-    {% set fdesc = get_description(field,3) %}
-    {% if fdesc %}
-        {% if tmp['isfirst'] %}
-            <h2>Field Descriptions</h2>
-            {% set dummy = tmp.update({'isfirst':False}) %}
-        {% endif %}
-        {% if field.get_property("name", default="") == "" %}
-        <h3>{{field.inst.inst_name}}</h3>
-        {% else %}
-        <h3>{{field.inst.inst_name}} - {{field.get_property("name")}}</h3>
-        {% endif %}
-        {{fdesc|safe}}
-    {% endif %}
-{% endfor %}
-{% endblock %}
+{%- for field in node.fields() if has_description(field) %}
+{%- if loop.first %}
+<hr><h2>Field Descriptions</h2>
+{%- endif %}
+{% include "field_description.html" %}
+{%- endfor %}
+
+{%- endblock %}

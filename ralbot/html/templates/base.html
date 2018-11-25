@@ -4,19 +4,17 @@
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">{{"0x%x" % node.inst.addr_offset}}</dd>
-    {% if node.inst.is_array %}
+    {%- if node.inst.is_array %}
     <dt>Array Dimensions:</dt><dd>{{node.inst.array_dimensions}}</dd>
     <dt>Array Stride:</dt><dd>+{{"0x%x" % node.inst.array_stride}}</dd>
-    {% endif %}
+    {%- endif %}
 </dl>
 
-{% set desc = get_description(node,2) %}
-{% if desc %}
+{%- if has_description(node) %}
 <h2>Description</h2>
-{{desc|safe}}
-{% endif %}
+{{get_description(node,2)|safe}}
+{%- endif %}
 
 <h2>Contents</h2>
 {% block content %}{% endblock %}
-
 </div>

@@ -4,11 +4,7 @@
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x14</dd>
-    
 </dl>
-
-
-
 <h2>Description</h2>
 <p>The command completion coalescing control register is used to configure the command completion
 coalescing feature for the entire HBA.</p>
@@ -16,9 +12,7 @@ coalescing feature for the entire HBA.</p>
 to describe the required externally visible behavior. Implementations are not required to have internal
 state values that directly correspond to these variables.</p>
 
-
 <h2>Contents</h2>
-
 <table border="1">
     <tr>
         <th>Bits</th>
@@ -27,105 +21,58 @@ state values that directly correspond to these variables.</p>
         <th>Reset</th>
         <th>Name</th>
     </tr>
-    
     <tr>
-        
         <td>[0]</td>
-        
         <td>EN</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Enable</td>
     </tr>
-    
     <tr>
-        
         <td>[7:3]</td>
-        
         <td>INT</td>
         <td>r</td>
-        <td>
-            
-                0x6
-            
+        <td>0x6
         </td>
         <td>Interrupt</td>
     </tr>
-    
     <tr>
-        
         <td>[15:8]</td>
-        
         <td>CC</td>
         <td>rw</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Command Completions</td>
     </tr>
-    
     <tr>
-        
         <td>[31:16]</td>
-        
         <td>TV</td>
         <td>rw</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Timeout Value</td>
     </tr>
-    
 </table>
+<hr><h2>Field Descriptions</h2>
 
-
-
-
-    
-    
-        
-            <h2>Field Descriptions</h2>
-            
-        
-        
-        <h3>EN - Enable</h3>
-        
-        <p>When cleared to '0', the command completion coalescing feature is
+<h3>EN - Enable</h3>
+<p>When cleared to '0', the command completion coalescing feature is
 disabled and no CCC interrupts are generated. When set to '1', the command
 completion coalescing feature is enabled and CCC interrupts may be generated based
 on timeout or command completion conditions. Software shall only change the contents
 of the TV and CC fields when EN is cleared to '0'. On transition of this bit from '0' to '1',
 any updated values for the TV and CC fields shall take effect.</p>
-    
 
-    
-    
-        
-        
-        <h3>INT - Interrupt</h3>
-        
-        <p>Specifies the interrupt used by the CCC feature. This interrupt must be
+<h3>INT - Interrupt</h3>
+<p>Specifies the interrupt used by the CCC feature. This interrupt must be
 marked as unused in the Ports Implemented (PI) register by the corresponding bit being
 set to '0'. Thus, the CCC interrupt corresponds to the interrupt for an unimplemented
 port on the controller. When a CCC interrupt occurs, the IS.IPS[INT] bit shall be
 asserted to '1'. This field also specifies the interrupt vector used for MSI.</p>
-    
 
-    
-    
-        
-        
-        <h3>CC - Command Completions</h3>
-        
-        <p>Specifies the number of command completions that are
+<h3>CC - Command Completions</h3>
+<p>Specifies the number of command completions that are
 necessary to cause a CCC interrupt. The HBA has an internal command completion
 counter, hCccComplete.</p>
 <p>hCccComplete is incremented by one each time a selected
@@ -135,22 +82,12 @@ counter is reset to '0' on the assertion of each CCC interrupt.</p>
 <p>A value of '0' for this field
 shall disable CCC interrupts being generated based on the number of commands
 completed, i.e. CCC interrupts are only generated based on the timer in this case.</p>
-    
 
-    
-    
-        
-        
-        <h3>TV - Timeout Value</h3>
-        
-        <p>The timeout value is specified in 1 millisecond intervals. The timer
+<h3>TV - Timeout Value</h3>
+<p>The timeout value is specified in 1 millisecond intervals. The timer
 accuracy shall be within 5%. hCccTimer is loaded with this timeout value. hCccTimer is
 only decremented when commands are outstanding on selected ports, as defined in
 section 11.2. The HBA will signal a CCC interrupt when hCccTimer has decremented to
 '0'. hCccTimer is reset to the timeout value on the assertion of each CCC interrupt. A
 timeout value of '0' is reserved.</p>
-    
-
-
-
 </div>

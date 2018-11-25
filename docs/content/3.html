@@ -4,18 +4,12 @@
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x8</dd>
-    
 </dl>
-
-
-
 <h2>Description</h2>
 <p>This register indicates which of the ports within the controller have an interrupt pending and require
 service.</p>
 
-
 <h2>Contents</h2>
-
 <table border="1">
     <tr>
         <th>Bits</th>
@@ -24,42 +18,21 @@ service.</p>
         <th>Reset</th>
         <th>Name</th>
     </tr>
-    
     <tr>
-        
         <td>[4:0]</td>
-        
         <td>IPS</td>
         <td>rw</td>
-        <td>
-            
-                0x1
-            
+        <td>0x1
         </td>
         <td>Interrupt Pending Status</td>
     </tr>
-    
 </table>
+<hr><h2>Field Descriptions</h2>
 
-
-
-
-    
-    
-        
-            <h2>Field Descriptions</h2>
-            
-        
-        
-        <h3>IPS - Interrupt Pending Status</h3>
-        
-        <p>If set, indicates that the corresponding port has an
+<h3>IPS - Interrupt Pending Status</h3>
+<p>If set, indicates that the corresponding port has an
 interrupt pending. Software can use this information to determine which ports require
 service after an interrupt.
 The IPS[x] bit is only defined for ports that are implemented or for the command
 completion coalescing interrupt defined by CCC_CTL.INT. All other bits are reserved.</p>
-    
-
-
-
 </div>

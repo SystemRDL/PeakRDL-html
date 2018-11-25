@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
-{% block content %}
+{%- block content %}
 <table border="1">
     <tr>
         <th>Offset</th>
         <th>Identifier</th>
         <th>Name</th>
     </tr>
-    {% for child_id,child in children.items() %}
+    {%- for child_id,child in children.items() %}
     <tr>
         <td class="address">{{"0x%x" % child.inst.addr_offset}}</td>
         <td><a href="#{{child.get_path(empty_array_suffix='')}}" data-id="{{child_id}}" onclick="onClickNodeLink(event); return(false)">
-            {% if child.inst.is_array %}
+            {%- if child.inst.is_array -%}
                 {{child.inst.inst_name}}{{child.inst.array_dimensions}}
-            {% else %}
+            {%- else -%}
                 {{child.inst.inst_name}}
-            {% endif %}
+            {%- endif -%}
         </a></td>
         <td>{{child.get_property("name", default="-")}}</td>
     </tr>
-    {% endfor %}
+    {%- endfor %}
 </table>
-{% endblock %}
+{%- endblock %}

@@ -4,14 +4,9 @@
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x10</dd>
-    
 </dl>
 
-
-
-
 <h2>Contents</h2>
-
 <table border="1">
     <tr>
         <th>Bits</th>
@@ -20,439 +15,226 @@
         <th>Reset</th>
         <th>Name</th>
     </tr>
-    
     <tr>
-        
         <td>[0]</td>
-        
         <td>DHRS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Device to Host Register FIS Interrupt</td>
     </tr>
-    
     <tr>
-        
         <td>[1]</td>
-        
         <td>PSS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>PIO Setup FIS Interrupt</td>
     </tr>
-    
     <tr>
-        
         <td>[2]</td>
-        
         <td>DSS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>DMA Setup FIS Interrupt</td>
     </tr>
-    
     <tr>
-        
         <td>[3]</td>
-        
         <td>SBDS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Set Device Bits Interrupt</td>
     </tr>
-    
     <tr>
-        
         <td>[4]</td>
-        
         <td>UFS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Unknown FIS Interrupt</td>
     </tr>
-    
     <tr>
-        
         <td>[5]</td>
-        
         <td>DPS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Descriptor Processed</td>
     </tr>
-    
     <tr>
-        
         <td>[6]</td>
-        
         <td>PCS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Port Connect Change Status</td>
     </tr>
-    
     <tr>
-        
         <td>[7]</td>
-        
         <td>DMPS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Device Mechanical Presence Status</td>
     </tr>
-    
     <tr>
-        
         <td>[22]</td>
-        
         <td>PRCS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>PhyRdy Change Status</td>
     </tr>
-    
     <tr>
-        
         <td>[23]</td>
-        
         <td>IPMS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Incorrect Port Multiplier Status</td>
     </tr>
-    
     <tr>
-        
         <td>[24]</td>
-        
         <td>OFS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Overflow Status</td>
     </tr>
-    
     <tr>
-        
         <td>[26]</td>
-        
         <td>IONFS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Interface Non-fatal Error Status</td>
     </tr>
-    
     <tr>
-        
         <td>[27]</td>
-        
         <td>IFS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Interface Fatal Error Status</td>
     </tr>
-    
     <tr>
-        
         <td>[28]</td>
-        
         <td>HBDS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Host Bus Data Error Status</td>
     </tr>
-    
     <tr>
-        
         <td>[29]</td>
-        
         <td>HBFS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Host Bus Fatal Error Status</td>
     </tr>
-    
     <tr>
-        
         <td>[30]</td>
-        
         <td>TFES</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Task File Error Status</td>
     </tr>
-    
     <tr>
-        
         <td>[31]</td>
-        
         <td>CPDS</td>
         <td>rw</td>
-        <td>
-            
-                0x0
-            
+        <td>0x0
         </td>
         <td>Cold Port Detect Status</td>
     </tr>
-    
 </table>
+<hr><h2>Field Descriptions</h2>
 
-
-
-
-    
-    
-        
-            <h2>Field Descriptions</h2>
-            
-        
-        
-        <h3>DHRS - Device to Host Register FIS Interrupt</h3>
-        
-        <p>A D2H Register FIS has been
+<h3>DHRS - Device to Host Register FIS Interrupt</h3>
+<p>A D2H Register FIS has been
 received with the 'I' bit set, and has been copied into system memory.</p>
-    
 
-    
-    
-        
-        
-        <h3>PSS - PIO Setup FIS Interrupt</h3>
-        
-        <p>A PIO Setup FIS has been received with the 'I' bit set,
+<h3>PSS - PIO Setup FIS Interrupt</h3>
+<p>A PIO Setup FIS has been received with the 'I' bit set,
 it has been copied into system memory, and the data related to that FIS has been
 transferred. This bit shall be set even if the data transfer resulted in an error.</p>
-    
 
-    
-    
-        
-        
-        <h3>DSS - DMA Setup FIS Interrupt</h3>
-        
-        <p>A DMA Setup FIS has been received with the 'I' bit
+<h3>DSS - DMA Setup FIS Interrupt</h3>
+<p>A DMA Setup FIS has been received with the 'I' bit
 set and has been copied into system memory.</p>
-    
 
-    
-    
-        
-        
-        <h3>SBDS - Set Device Bits Interrupt</h3>
-        
-        <p>A Set Device Bits FIS has been received with the
+<h3>SBDS - Set Device Bits Interrupt</h3>
+<p>A Set Device Bits FIS has been received with the
 'I' bit set and has been copied into system memory.</p>
-    
 
-    
-    
-        
-        
-        <h3>UFS - Unknown FIS Interrupt</h3>
-        
-        <p>When set to '1', indicates that an unknown FIS was
+<h3>UFS - Unknown FIS Interrupt</h3>
+<p>When set to '1', indicates that an unknown FIS was
 received and has been copied into system memory. This bit is cleared to '0' by
 software clearing the PxSERR.DIAG.F bit to '0'. Note that this bit does not directly
 reflect the PxSERR.DIAG.F bit. PxSERR.DIAG.F is set immediately when an unknown
 FIS is detected, whereas this bit is set when that FIS is posted to memory. Software
 should wait to act on an unknown FIS until this bit is set to '1' or the two bits may
 become out of sync.</p>
-    
 
-    
-    
-        
-        
-        <h3>DPS - Descriptor Processed</h3>
-        
-        <p>A PRD with the 'I' bit set has transferred all of its data.
+<h3>DPS - Descriptor Processed</h3>
+<p>A PRD with the 'I' bit set has transferred all of its data.
 Refer to section 5.4.2.</p>
-    
 
-    
-    
-        
-        
-        <h3>PCS - Port Connect Change Status</h3>
-        
-        <p>1=Change in Current Connect Status. 0=No
+<h3>PCS - Port Connect Change Status</h3>
+<p>1=Change in Current Connect Status. 0=No
 change in Current Connect Status. This bit reflects the state of PxSERR.DIAG.X. This
 bit is only cleared when PxSERR.DIAG.X is cleared.</p>
-    
 
-    
-    
-        
-        
-        <h3>DMPS - Device Mechanical Presence Status</h3>
-        
-        <p>When set, indicates that a mechanical
+<h3>DMPS - Device Mechanical Presence Status</h3>
+<p>When set, indicates that a mechanical
 presence switch attached to this port has been opened or closed, which may lead to a
 change in the connection state of the device. This bit is only valid if both CAP.SMPS
 and P0CMD.MPSP are set to '1'.</p>
-    
 
-    
-    
-        
-        
-        <h3>PRCS - PhyRdy Change Status</h3>
-        
-        <p>When set to '1' indicates the internal PhyRdy signal
+<h3>PRCS - PhyRdy Change Status</h3>
+<p>When set to '1' indicates the internal PhyRdy signal
 changed state. This bit reflects the state of P0SERR.DIAG.N. To clear this bit,
 software must clear P0SERR.DIAG.N to '0'</p>
-    
 
-    
-    
-        
-        
-        <h3>IPMS - Incorrect Port Multiplier Status</h3>
-        
-        <p>Indicates that the HBA received a FIS from a
+<h3>IPMS - Incorrect Port Multiplier Status</h3>
+<p>Indicates that the HBA received a FIS from a
 device whose Port Multiplier field did not match what was expected. The IPMS bit may
 be set during enumeration of devices on a Port Multiplier due to the normal Port
 Multiplier enumeration process. It is recommended that IPMS only be used after
 enumeration is complete on the Port Multiplier.</p>
-    
 
-    
-    
-        
-        
-        <h3>OFS - Overflow Status</h3>
-        
-        <p>Indicates that the HBA received more bytes from a device
+<h3>OFS - Overflow Status</h3>
+<p>Indicates that the HBA received more bytes from a device
 than was specified in the PRD table for the command.</p>
-    
 
-    
-    
-        
-        
-        <h3>IONFS - Interface Non-fatal Error Status</h3>
-        
-        <p>Indicates that the HBA encountered an error
+<h3>IONFS - Interface Non-fatal Error Status</h3>
+<p>Indicates that the HBA encountered an error
 on the Serial ATA interface but was able to continue operation. Refer to section 6.1.2.</p>
-    
 
-    
-    
-        
-        
-        <h3>IFS - Interface Fatal Error Status</h3>
-        
-        <p>Indicates that the HBA encountered an error on
+<h3>IFS - Interface Fatal Error Status</h3>
+<p>Indicates that the HBA encountered an error on
 the Serial ATA interface which caused the transfer to stop. Refer to section 6.1.2.</p>
-    
 
-    
-    
-        
-        
-        <h3>HBDS - Host Bus Data Error Status</h3>
-        
-        <p>Indicates that the HBA encountered a data error
+<h3>HBDS - Host Bus Data Error Status</h3>
+<p>Indicates that the HBA encountered a data error
 (uncorrectable ECC / parity) when reading from or writing to system memory.</p>
-    
 
-    
-    
-        
-        
-        <h3>HBFS - Host Bus Fatal Error Status</h3>
-        
-        <p>Indicates that the HBA encountered a host bus
+<h3>HBFS - Host Bus Fatal Error Status</h3>
+<p>Indicates that the HBA encountered a host bus
 error that it cannot recover from, such as a bad software pointer. In PCI, such an
 indication would be a target or master abort.</p>
-    
 
-    
-    
-        
-        
-        <h3>TFES - Task File Error Status</h3>
-        
-        <p>This bit is set whenever the status register is updated
+<h3>TFES - Task File Error Status</h3>
+<p>This bit is set whenever the status register is updated
 by the device and the error bit (bit 0) is set.</p>
-    
 
-    
-    
-        
-        
-        <h3>CPDS - Cold Port Detect Status</h3>
-        
-        <p>When set, a device status has changed as detected
+<h3>CPDS - Cold Port Detect Status</h3>
+<p>When set, a device status has changed as detected
 by the cold presence detect logic. This bit can either be set due to a non-connected
 port receiving a device, or a connected port having its device removed. This bit is only
 valid if the port supports cold presence detect as indicated by PxCMD.CPD set to '1'.</p>
-    
-
-
-
 </div>

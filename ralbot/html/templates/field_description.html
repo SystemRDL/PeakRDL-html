@@ -1,0 +1,11 @@
+{%- import "macros.html" as macros %}
+{% if field.get_property("name", default="") == "" -%}
+    <h3>{{field.inst.inst_name}}</h3>
+{% else -%}
+    <h3>{{field.inst.inst_name}} - {{field.get_property("name")}}</h3>
+{%- endif %}
+{{get_description(field,3)|safe}}
+
+{%- if 'encode' in field.list_properties() %}
+{{ macros.enum_table(field.get_property("encode")) }}
+{%- endif %}
