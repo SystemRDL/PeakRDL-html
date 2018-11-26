@@ -48,6 +48,14 @@ tr:nth-child(2n) td {
     background-color: #f3f6f6;
 }
 
+td > p:first-child {
+    margin-top: 0px;
+}
+
+td > p:last-child {
+    margin-bottom: 0px;
+}
+
 hr {
     border: 0;
     border-top: solid 1px #e1e4e5;
