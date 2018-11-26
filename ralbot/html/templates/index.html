@@ -24,10 +24,10 @@
         <div id="sb-titlebar" class="no-stretchy">
             <div id="sb-titlebox">{{title}}</div>
             <div class="sb-button-strip pack-h">
-                {% if home_url != None %}
+                {%- if home_url != None %}
                 <a class="button-link home-button no-stretchy" href="{{home_url}}"></a>
                 <span class="stretchy"></span>
-                {% endif %}
+                {%- endif %}
                 <button class="expand-button no-stretchy" title="Expand All" aria-label="Expand All" onclick="onClickTreeExpandAll()"></button>
                 <button class="collapse-button no-stretchy" title="Collapse All" aria-label="Collapse All" onclick="onClickTreeCollapseAll()"></button>
                 <span class="stretchy"></span>
@@ -46,14 +46,14 @@
         
         <div id="search-bar" class="no-stretchy main limit-h">
             <form>
-                <input type="search" id="search-input" aria-label="Search input" placeholder="Search by name or @address" autocomplete="off">
+                <input type="search" id="search-input" aria-label="Search input" placeholder="Search by name or @address" autocomplete="off"/>
             </form>
         </div>
         
         <div class="scroll-v pack-v stretchy">
             <div id="content" class="main limit-h">
                 <div id="crumbtrail"></div>
-                <hr>
+                <hr/>
                 <div id="content-container"></div>
             </div>
             
@@ -64,7 +64,7 @@
             
             <div class="main stretchy limit-h"></div>
             <footer class="main limit-h">
-                <hr>
+                <hr/>
                 {{footer}}
             </footer>
         </div>

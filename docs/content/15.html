@@ -9,24 +9,39 @@
 <p>Port N FIS Base Address Upper 32-bits</p>
 
 <h2>Contents</h2>
-<table border="1">
-    <tr>
-        <th>Bits</th>
-        <th>Identifier</th>
-        <th>Access</th>
-        <th>Reset</th>
-        <th>Name</th>
-    </tr>
-    <tr>
-        <td>[31:0]</td>
-        <td>FBU</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>FIS Base Address Upper</td>
-    </tr>
-</table>
-<hr><h2>Field Descriptions</h2>
+<form>
+    <table border="1">
+        <tr>
+            <th>Bits</th>
+            <th>Identifier</th>
+            <th>Access</th>
+            <th>Reset</th>
+            <th>Decoded</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>[31:0]</td>
+            <td>FBU</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="0" data-msb="31"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>FIS Base Address Upper</td>
+        </tr>
+    </table>
+    <p>
+        <label>
+            Encoded Register Value:
+            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+        </label>
+    </p>
+</form>
+<hr/><h2>Field Descriptions</h2>
 
 <h3>FBU - FIS Base Address Upper</h3>
 <p>Indicates the upper 32-bits for the received FIS base

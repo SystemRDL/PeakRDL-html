@@ -86,7 +86,7 @@ function parse_path(path){
         for(var dim=0; dim<split_element.length; dim++){
             if(!split_element[dim].endsWith("]")) return(null);
             var n = Number(split_element[dim].slice(0, -1));
-            if(!isInteger(n)) return(null);
+            if(!isPositiveInteger(n)) return(null);
             if(n<0) return(null);
             idxs.push(n);
         }

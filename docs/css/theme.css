@@ -84,11 +84,10 @@ code {
     line-height: 1.4;
 }
 
-/* ------------------------------- Button Icons ----------------------------- */
-
-a.button-link {
-    
+input.invalid {
+    background-color: #f99;
 }
+/* ------------------------------- Button Icons ----------------------------- */
 
 .expand-button::before {
     font-family: "Font Awesome 5 Free";
@@ -132,6 +131,12 @@ a.button-link {
     content: "\f0c5";
 }
 
+.reset-button::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    content: "\f2ea";
+}
+
 /* --------------------------------- Sidebar -------------------------------- */
 #sb-titlebar {
     background-color: rgb(41, 128, 185);
@@ -163,7 +168,7 @@ a.button-link {
     padding: 0em;
 }
 
-.sb-button-strip button:hover, , .sb-button-strip a.button-link:hover{
+.sb-button-strip button:hover, .sb-button-strip a.button-link:hover{
     background-color: #2e8ece;
     border: none;
 }
@@ -310,6 +315,18 @@ dl.node-info {
 .node-info dd {
   grid-column: 2;
   margin-left: 0.5em;
+}
+
+input.field-value-tester {
+    border: solid 1px #aaa;
+    padding: 0.25em 0.5em;
+    width: 7em;
+}
+
+input#reg-value-tester {
+    border: solid 1px #aaa;
+    padding: 0.25em 0.5em;
+    width: 8em;
 }
 
 footer {

@@ -7,176 +7,286 @@
 </dl>
 
 <h2>Contents</h2>
-<table border="1">
-    <tr>
-        <th>Bits</th>
-        <th>Identifier</th>
-        <th>Access</th>
-        <th>Reset</th>
-        <th>Name</th>
-    </tr>
-    <tr>
-        <td>[0]</td>
-        <td>ST</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Start</td>
-    </tr>
-    <tr>
-        <td>[1]</td>
-        <td>SUD</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Spin-Up Device</td>
-    </tr>
-    <tr>
-        <td>[2]</td>
-        <td>POD</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Power On Device</td>
-    </tr>
-    <tr>
-        <td>[3]</td>
-        <td>CLO</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Command List Override</td>
-    </tr>
-    <tr>
-        <td>[4]</td>
-        <td>FRE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>FIS Receive Enable</td>
-    </tr>
-    <tr>
-        <td>[12:8]</td>
-        <td>CCS</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Current Command Slot</td>
-    </tr>
-    <tr>
-        <td>[13]</td>
-        <td>MPSS</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Mechanical Presence Switch State</td>
-    </tr>
-    <tr>
-        <td>[14]</td>
-        <td>FR</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>FIS Receive Running</td>
-    </tr>
-    <tr>
-        <td>[15]</td>
-        <td>CR</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Command List Running</td>
-    </tr>
-    <tr>
-        <td>[16]</td>
-        <td>CPS</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Cold Presence State</td>
-    </tr>
-    <tr>
-        <td>[17]</td>
-        <td>PMA</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Port Multiplier Attached</td>
-    </tr>
-    <tr>
-        <td>[18]</td>
-        <td>HPCP</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Hot Plug Capable Port</td>
-    </tr>
-    <tr>
-        <td>[19]</td>
-        <td>MPSP</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Mechanical Presence Switch Attached to Port</td>
-    </tr>
-    <tr>
-        <td>[20]</td>
-        <td>CPD</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Cold Presence Detection</td>
-    </tr>
-    <tr>
-        <td>[21]</td>
-        <td>ESP</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>External SATA Port</td>
-    </tr>
-    <tr>
-        <td>[24]</td>
-        <td>ATAPI</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Device is ATAPI</td>
-    </tr>
-    <tr>
-        <td>[25]</td>
-        <td>DLAE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Drive LED on ATAPI Enable</td>
-    </tr>
-    <tr>
-        <td>[26]</td>
-        <td>ALPE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Aggressive Link Power Management Enable</td>
-    </tr>
-    <tr>
-        <td>[27]</td>
-        <td>ASP</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>-</td>
-    </tr>
-    <tr>
-        <td>[31:28]</td>
-        <td>ICC</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Interface Communication Control</td>
-    </tr>
-</table>
-<hr><h2>Field Descriptions</h2>
+<form>
+    <table border="1">
+        <tr>
+            <th>Bits</th>
+            <th>Identifier</th>
+            <th>Access</th>
+            <th>Reset</th>
+            <th>Decoded</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>[0]</td>
+            <td>ST</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="0" data-msb="0"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Start</td>
+        </tr>
+        <tr>
+            <td>[1]</td>
+            <td>SUD</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="1" data-msb="1"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Spin-Up Device</td>
+        </tr>
+        <tr>
+            <td>[2]</td>
+            <td>POD</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="2" data-msb="2"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Power On Device</td>
+        </tr>
+        <tr>
+            <td>[3]</td>
+            <td>CLO</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="3" data-msb="3"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Command List Override</td>
+        </tr>
+        <tr>
+            <td>[4]</td>
+            <td>FRE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="4" data-msb="4"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>FIS Receive Enable</td>
+        </tr>
+        <tr>
+            <td>[12:8]</td>
+            <td>CCS</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="8" data-msb="12"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Current Command Slot</td>
+        </tr>
+        <tr>
+            <td>[13]</td>
+            <td>MPSS</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="13" data-msb="13"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Mechanical Presence Switch State</td>
+        </tr>
+        <tr>
+            <td>[14]</td>
+            <td>FR</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="14" data-msb="14"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>FIS Receive Running</td>
+        </tr>
+        <tr>
+            <td>[15]</td>
+            <td>CR</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="15" data-msb="15"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Command List Running</td>
+        </tr>
+        <tr>
+            <td>[16]</td>
+            <td>CPS</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="16" data-msb="16"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Cold Presence State</td>
+        </tr>
+        <tr>
+            <td>[17]</td>
+            <td>PMA</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="17" data-msb="17"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Port Multiplier Attached</td>
+        </tr>
+        <tr>
+            <td>[18]</td>
+            <td>HPCP</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="18" data-msb="18"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Hot Plug Capable Port</td>
+        </tr>
+        <tr>
+            <td>[19]</td>
+            <td>MPSP</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="19" data-msb="19"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Mechanical Presence Switch Attached to Port</td>
+        </tr>
+        <tr>
+            <td>[20]</td>
+            <td>CPD</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="20" data-msb="20"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Cold Presence Detection</td>
+        </tr>
+        <tr>
+            <td>[21]</td>
+            <td>ESP</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="21" data-msb="21"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>External SATA Port</td>
+        </tr>
+        <tr>
+            <td>[24]</td>
+            <td>ATAPI</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="24" data-msb="24"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Device is ATAPI</td>
+        </tr>
+        <tr>
+            <td>[25]</td>
+            <td>DLAE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="25" data-msb="25"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Drive LED on ATAPI Enable</td>
+        </tr>
+        <tr>
+            <td>[26]</td>
+            <td>ALPE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="26" data-msb="26"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Aggressive Link Power Management Enable</td>
+        </tr>
+        <tr>
+            <td>[27]</td>
+            <td>ASP</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="27" data-msb="27"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>[31:28]</td>
+            <td>ICC</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="28" data-msb="31"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Interface Communication Control</td>
+        </tr>
+    </table>
+    <p>
+        <label>
+            Encoded Register Value:
+            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+        </label>
+    </p>
+</form>
+<hr/><h2>Field Descriptions</h2>
 
 <h3>ST - Start</h3>
 <p>When set, the HBA may process the command list. When cleared, the

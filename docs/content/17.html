@@ -7,152 +7,247 @@
 </dl>
 
 <h2>Contents</h2>
-<table border="1">
-    <tr>
-        <th>Bits</th>
-        <th>Identifier</th>
-        <th>Access</th>
-        <th>Reset</th>
-        <th>Name</th>
-    </tr>
-    <tr>
-        <td>[0]</td>
-        <td>DHRE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Device to Host Register FIS Interrupt</td>
-    </tr>
-    <tr>
-        <td>[1]</td>
-        <td>PSE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>PIO Setup FIS Interrupt</td>
-    </tr>
-    <tr>
-        <td>[2]</td>
-        <td>DSE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>DMA Setup FIS Interrupt</td>
-    </tr>
-    <tr>
-        <td>[3]</td>
-        <td>SBDE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Set Device Bits Interrupt</td>
-    </tr>
-    <tr>
-        <td>[4]</td>
-        <td>UFS</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Unknown FIS Interrupt</td>
-    </tr>
-    <tr>
-        <td>[5]</td>
-        <td>DPE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Descriptor Processed</td>
-    </tr>
-    <tr>
-        <td>[6]</td>
-        <td>PCE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Port Connect Change Status</td>
-    </tr>
-    <tr>
-        <td>[7]</td>
-        <td>DMPE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Device Mechanical Presence Status</td>
-    </tr>
-    <tr>
-        <td>[22]</td>
-        <td>PRCE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>PhyRdy Change Status</td>
-    </tr>
-    <tr>
-        <td>[23]</td>
-        <td>IPME</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Incorrect Port Multiplier Status</td>
-    </tr>
-    <tr>
-        <td>[24]</td>
-        <td>OFE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Overflow Status</td>
-    </tr>
-    <tr>
-        <td>[26]</td>
-        <td>IONFE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Interface Non-fatal Error Status</td>
-    </tr>
-    <tr>
-        <td>[27]</td>
-        <td>IFE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Interface Fatal Error Status</td>
-    </tr>
-    <tr>
-        <td>[28]</td>
-        <td>HBDE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Host Bus Data Error Status</td>
-    </tr>
-    <tr>
-        <td>[29]</td>
-        <td>HBFE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Host Bus Fatal Error Status</td>
-    </tr>
-    <tr>
-        <td>[30]</td>
-        <td>TFEE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Task File Error Status</td>
-    </tr>
-    <tr>
-        <td>[31]</td>
-        <td>CPDE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Cold Port Detect Status</td>
-    </tr>
-</table>
-<hr><h2>Field Descriptions</h2>
+<form>
+    <table border="1">
+        <tr>
+            <th>Bits</th>
+            <th>Identifier</th>
+            <th>Access</th>
+            <th>Reset</th>
+            <th>Decoded</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>[0]</td>
+            <td>DHRE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="0" data-msb="0"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Device to Host Register FIS Interrupt</td>
+        </tr>
+        <tr>
+            <td>[1]</td>
+            <td>PSE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="1" data-msb="1"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>PIO Setup FIS Interrupt</td>
+        </tr>
+        <tr>
+            <td>[2]</td>
+            <td>DSE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="2" data-msb="2"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>DMA Setup FIS Interrupt</td>
+        </tr>
+        <tr>
+            <td>[3]</td>
+            <td>SBDE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="3" data-msb="3"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Set Device Bits Interrupt</td>
+        </tr>
+        <tr>
+            <td>[4]</td>
+            <td>UFS</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="4" data-msb="4"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Unknown FIS Interrupt</td>
+        </tr>
+        <tr>
+            <td>[5]</td>
+            <td>DPE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="5" data-msb="5"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Descriptor Processed</td>
+        </tr>
+        <tr>
+            <td>[6]</td>
+            <td>PCE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="6" data-msb="6"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Port Connect Change Status</td>
+        </tr>
+        <tr>
+            <td>[7]</td>
+            <td>DMPE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="7" data-msb="7"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Device Mechanical Presence Status</td>
+        </tr>
+        <tr>
+            <td>[22]</td>
+            <td>PRCE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="22" data-msb="22"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>PhyRdy Change Status</td>
+        </tr>
+        <tr>
+            <td>[23]</td>
+            <td>IPME</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="23" data-msb="23"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Incorrect Port Multiplier Status</td>
+        </tr>
+        <tr>
+            <td>[24]</td>
+            <td>OFE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="24" data-msb="24"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Overflow Status</td>
+        </tr>
+        <tr>
+            <td>[26]</td>
+            <td>IONFE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="26" data-msb="26"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Interface Non-fatal Error Status</td>
+        </tr>
+        <tr>
+            <td>[27]</td>
+            <td>IFE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="27" data-msb="27"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Interface Fatal Error Status</td>
+        </tr>
+        <tr>
+            <td>[28]</td>
+            <td>HBDE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="28" data-msb="28"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Host Bus Data Error Status</td>
+        </tr>
+        <tr>
+            <td>[29]</td>
+            <td>HBFE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="29" data-msb="29"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Host Bus Fatal Error Status</td>
+        </tr>
+        <tr>
+            <td>[30]</td>
+            <td>TFEE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="30" data-msb="30"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Task File Error Status</td>
+        </tr>
+        <tr>
+            <td>[31]</td>
+            <td>CPDE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="31" data-msb="31"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Cold Port Detect Status</td>
+        </tr>
+    </table>
+    <p>
+        <label>
+            Encoded Register Value:
+            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+        </label>
+    </p>
+</form>
+<hr/><h2>Field Descriptions</h2>
 
 <h3>DHRE - Device to Host Register FIS Interrupt</h3>
 <p>A D2H Register FIS has been

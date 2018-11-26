@@ -13,6 +13,7 @@ function load_page(id) {
             main_el.innerHTML = this.responseText;
             update_absolute_addr(get_absolute_addr(id));
             update_rdlfc_indexes();
+            reset_field_inputs();
             document.getElementById("content").parentElement.scrollTop = 0;
         } else {
             if(window.location.protocol == "file:"){
@@ -33,7 +34,6 @@ function load_page(id) {
     
     CurrentID = id;
     update_crumbtrail();
-    
 }
 
 function show_file_protocol_nag() {
@@ -221,6 +221,69 @@ function update_rdlfc_indexes() {
     }
 }
 
+function onDecodedFieldInput(el){
+    var msb = Number(el.dataset.msb);
+    var lsb = Number(el.dataset.lsb);
+    var value = Number(el.value);
+    if(!isPositiveInteger(value) || (value >= 2**(msb - lsb + 1))){
+        if(!el.classList.contains("invalid")) el.classList.add("invalid");
+        return;
+    }
+    el.classList.remove("invalid");
+    update_reg_value_tester();
+}
+
+function onEncodedRegInput(el){
+    var value = Number(el.value);
+    if(!isPositiveInteger(value)){
+        if(!el.classList.contains("invalid")) el.classList.add("invalid");
+        return;
+    }
+    el.classList.remove("invalid");
+    update_field_value_testers();
+}
+
+function reset_field_inputs(){
+    var field_els = document.getElementsByClassName("field-value-tester");
+    for(var i=0; i<field_els.length; i++){
+        field_els[i].value = field_els[i].dataset.reset;
+    }
+    update_reg_value_tester();
+}
+
+function update_reg_value_tester(){
+    // Update the register tester input based on all of the individual field inputs
+    var reg_value = 0;
+    var field_els = document.getElementsByClassName("field-value-tester");
+    for(var i=0; i<field_els.length; i++){
+        var lsb = Number(field_els[i].dataset.lsb);
+        var msb = Number(field_els[i].dataset.msb);
+        var value = Number(field_els[i].value);
+        var mask = 2**(msb - lsb + 1) - 1;
+        value &= mask;
+        value = value >>> 0;
+        reg_value += (value << lsb) >>> 0;
+    }
+    var reg_el = document.getElementById("reg-value-tester");
+    reg_el.value = "0x" + reg_value.toString(16);
+}
+
+function update_field_value_testers(){
+    // Update all the field tester inputs based on the register input
+    var reg_el = document.getElementById("reg-value-tester");
+    var reg_value = Number(reg_el.value);
+    var field_els = document.getElementsByClassName("field-value-tester");
+    for(var i=0; i<field_els.length; i++){
+        var lsb = Number(field_els[i].dataset.lsb);
+        var msb = Number(field_els[i].dataset.msb);
+        var value = reg_value >>> lsb;
+        var mask = 2**(msb - lsb + 1) - 1;
+        value &= mask;
+        value = value >>> 0;
+        field_els[i].value = value;
+    }
+}
+
 //==============================================================================
 // Misc
 //==============================================================================
@@ -240,8 +303,8 @@ function isDescendant(parent, child) {
 // Compatibility Workarounds
 //==============================================================================
 // IE does not support Number.isInteger
-function isInteger(num) {
-    return (num ^ 0) === num;
+function isPositiveInteger(num) {
+    return ((num ^ 0) >>> 0) === num;
 }
 
 // IE does not support <string>.startsWith

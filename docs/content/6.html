@@ -13,48 +13,78 @@ to describe the required externally visible behavior. Implementations are not re
 state values that directly correspond to these variables.</p>
 
 <h2>Contents</h2>
-<table border="1">
-    <tr>
-        <th>Bits</th>
-        <th>Identifier</th>
-        <th>Access</th>
-        <th>Reset</th>
-        <th>Name</th>
-    </tr>
-    <tr>
-        <td>[0]</td>
-        <td>EN</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Enable</td>
-    </tr>
-    <tr>
-        <td>[7:3]</td>
-        <td>INT</td>
-        <td>r</td>
-        <td>0x6
-        </td>
-        <td>Interrupt</td>
-    </tr>
-    <tr>
-        <td>[15:8]</td>
-        <td>CC</td>
-        <td>rw</td>
-        <td>0x1
-        </td>
-        <td>Command Completions</td>
-    </tr>
-    <tr>
-        <td>[31:16]</td>
-        <td>TV</td>
-        <td>rw</td>
-        <td>0x1
-        </td>
-        <td>Timeout Value</td>
-    </tr>
-</table>
-<hr><h2>Field Descriptions</h2>
+<form>
+    <table border="1">
+        <tr>
+            <th>Bits</th>
+            <th>Identifier</th>
+            <th>Access</th>
+            <th>Reset</th>
+            <th>Decoded</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>[0]</td>
+            <td>EN</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="0" data-msb="0"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Enable</td>
+        </tr>
+        <tr>
+            <td>[7:3]</td>
+            <td>INT</td>
+            <td>r</td>
+            <td>0x6
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="3" data-msb="7"
+                    data-reset="6" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Interrupt</td>
+        </tr>
+        <tr>
+            <td>[15:8]</td>
+            <td>CC</td>
+            <td>rw</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="8" data-msb="15"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Command Completions</td>
+        </tr>
+        <tr>
+            <td>[31:16]</td>
+            <td>TV</td>
+            <td>rw</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="16" data-msb="31"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Timeout Value</td>
+        </tr>
+    </table>
+    <p>
+        <label>
+            Encoded Register Value:
+            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+        </label>
+    </p>
+</form>
+<hr/><h2>Field Descriptions</h2>
 
 <h3>EN - Enable</h3>
 <p>When cleared to '0', the command completion coalescing feature is

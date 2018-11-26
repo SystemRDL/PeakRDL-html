@@ -9,184 +9,299 @@
 <p>This register indicates basic capabilities of the HBA to driver software.</p>
 
 <h2>Contents</h2>
-<table border="1">
-    <tr>
-        <th>Bits</th>
-        <th>Identifier</th>
-        <th>Access</th>
-        <th>Reset</th>
-        <th>Name</th>
-    </tr>
-    <tr>
-        <td>[4:0]</td>
-        <td>NP</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Number of Ports</td>
-    </tr>
-    <tr>
-        <td>[5]</td>
-        <td>SXS</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Supports External SATA</td>
-    </tr>
-    <tr>
-        <td>[6]</td>
-        <td>EMS</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Enclosure Management Supported</td>
-    </tr>
-    <tr>
-        <td>[7]</td>
-        <td>CCCS</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Command Completion Coalescing Supported</td>
-    </tr>
-    <tr>
-        <td>[12:8]</td>
-        <td>NCS</td>
-        <td>r</td>
-        <td>0x1f
-        </td>
-        <td>Number of Command Slots</td>
-    </tr>
-    <tr>
-        <td>[13]</td>
-        <td>PSC</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Partial State Capable</td>
-    </tr>
-    <tr>
-        <td>[14]</td>
-        <td>SSC</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Slumber State Capable</td>
-    </tr>
-    <tr>
-        <td>[15]</td>
-        <td>PMD</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>PIO Multiple DRQ Block</td>
-    </tr>
-    <tr>
-        <td>[16]</td>
-        <td>FBSS</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>FIS-based Switching Supported</td>
-    </tr>
-    <tr>
-        <td>[17]</td>
-        <td>SPM</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Supports Port Multiplier</td>
-    </tr>
-    <tr>
-        <td>[18]</td>
-        <td>SAM</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Supports AHCI mode only</td>
-    </tr>
-    <tr>
-        <td>[19]</td>
-        <td>SNZO</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Supports Non-Zero DMA Offsets</td>
-    </tr>
-    <tr>
-        <td>[23:20]</td>
-        <td>ISS</td>
-        <td>r</td>
-        <td>0x3
-        </td>
-        <td>Interface Speed Support</td>
-    </tr>
-    <tr>
-        <td>[24]</td>
-        <td>SCLO</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Supports Command List Override</td>
-    </tr>
-    <tr>
-        <td>[25]</td>
-        <td>SAL</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Supports Activity LED</td>
-    </tr>
-    <tr>
-        <td>[26]</td>
-        <td>SALP</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Supports Aggressive Link Power Management</td>
-    </tr>
-    <tr>
-        <td>[27]</td>
-        <td>SSS</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Supports Staggered Spin-up</td>
-    </tr>
-    <tr>
-        <td>[28]</td>
-        <td>SMPS</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Supports Mechanical Presence Switch</td>
-    </tr>
-    <tr>
-        <td>[29]</td>
-        <td>SSNTF</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Supports SNotification Register</td>
-    </tr>
-    <tr>
-        <td>[30]</td>
-        <td>SNCQ</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>Supports Native Command Queuing</td>
-    </tr>
-    <tr>
-        <td>[31]</td>
-        <td>S64A</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Supports 64-bit Addressing</td>
-    </tr>
-</table>
-<hr><h2>Field Descriptions</h2>
+<form>
+    <table border="1">
+        <tr>
+            <th>Bits</th>
+            <th>Identifier</th>
+            <th>Access</th>
+            <th>Reset</th>
+            <th>Decoded</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>[4:0]</td>
+            <td>NP</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="0" data-msb="4"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Number of Ports</td>
+        </tr>
+        <tr>
+            <td>[5]</td>
+            <td>SXS</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="5" data-msb="5"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports External SATA</td>
+        </tr>
+        <tr>
+            <td>[6]</td>
+            <td>EMS</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="6" data-msb="6"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Enclosure Management Supported</td>
+        </tr>
+        <tr>
+            <td>[7]</td>
+            <td>CCCS</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="7" data-msb="7"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Command Completion Coalescing Supported</td>
+        </tr>
+        <tr>
+            <td>[12:8]</td>
+            <td>NCS</td>
+            <td>r</td>
+            <td>0x1f
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="8" data-msb="12"
+                    data-reset="31" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Number of Command Slots</td>
+        </tr>
+        <tr>
+            <td>[13]</td>
+            <td>PSC</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="13" data-msb="13"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Partial State Capable</td>
+        </tr>
+        <tr>
+            <td>[14]</td>
+            <td>SSC</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="14" data-msb="14"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Slumber State Capable</td>
+        </tr>
+        <tr>
+            <td>[15]</td>
+            <td>PMD</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="15" data-msb="15"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>PIO Multiple DRQ Block</td>
+        </tr>
+        <tr>
+            <td>[16]</td>
+            <td>FBSS</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="16" data-msb="16"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>FIS-based Switching Supported</td>
+        </tr>
+        <tr>
+            <td>[17]</td>
+            <td>SPM</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="17" data-msb="17"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports Port Multiplier</td>
+        </tr>
+        <tr>
+            <td>[18]</td>
+            <td>SAM</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="18" data-msb="18"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports AHCI mode only</td>
+        </tr>
+        <tr>
+            <td>[19]</td>
+            <td>SNZO</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="19" data-msb="19"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports Non-Zero DMA Offsets</td>
+        </tr>
+        <tr>
+            <td>[23:20]</td>
+            <td>ISS</td>
+            <td>r</td>
+            <td>0x3
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="20" data-msb="23"
+                    data-reset="3" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Interface Speed Support</td>
+        </tr>
+        <tr>
+            <td>[24]</td>
+            <td>SCLO</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="24" data-msb="24"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports Command List Override</td>
+        </tr>
+        <tr>
+            <td>[25]</td>
+            <td>SAL</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="25" data-msb="25"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports Activity LED</td>
+        </tr>
+        <tr>
+            <td>[26]</td>
+            <td>SALP</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="26" data-msb="26"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports Aggressive Link Power Management</td>
+        </tr>
+        <tr>
+            <td>[27]</td>
+            <td>SSS</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="27" data-msb="27"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports Staggered Spin-up</td>
+        </tr>
+        <tr>
+            <td>[28]</td>
+            <td>SMPS</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="28" data-msb="28"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports Mechanical Presence Switch</td>
+        </tr>
+        <tr>
+            <td>[29]</td>
+            <td>SSNTF</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="29" data-msb="29"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports SNotification Register</td>
+        </tr>
+        <tr>
+            <td>[30]</td>
+            <td>SNCQ</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="30" data-msb="30"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports Native Command Queuing</td>
+        </tr>
+        <tr>
+            <td>[31]</td>
+            <td>S64A</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="31" data-msb="31"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Supports 64-bit Addressing</td>
+        </tr>
+    </table>
+    <p>
+        <label>
+            Encoded Register Value:
+            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+        </label>
+    </p>
+</form>
+<hr/><h2>Field Descriptions</h2>
 
 <h3>NP - Number of Ports</h3>
 <p>0's based value indicating the maximum number of ports

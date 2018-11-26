@@ -44,7 +44,7 @@ function exitIndexEditModal(cancel) {
         if(!cancel){
             // Commit modal input value
             var val = Number(input_el.value);
-            if(!isInteger(val)) return;
+            if(!isPositiveInteger(val)) return;
             if((val < 0) || (val >= RALIndex[IndexEditState.id].dims[IndexEditState.dim])) return;
             RALIndex[IndexEditState.id].idxs[IndexEditState.dim] = val;
             

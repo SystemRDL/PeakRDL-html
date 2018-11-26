@@ -9,48 +9,78 @@
 <p>This register controls various global actions of the HBA.</p>
 
 <h2>Contents</h2>
-<table border="1">
-    <tr>
-        <th>Bits</th>
-        <th>Identifier</th>
-        <th>Access</th>
-        <th>Reset</th>
-        <th>Name</th>
-    </tr>
-    <tr>
-        <td>[0]</td>
-        <td>HR</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>HBA Reset</td>
-    </tr>
-    <tr>
-        <td>[1]</td>
-        <td>IE</td>
-        <td>rw</td>
-        <td>0x0
-        </td>
-        <td>Interrupt Enable</td>
-    </tr>
-    <tr>
-        <td>[2]</td>
-        <td>MRSM</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>MSI Revert to Single Message</td>
-    </tr>
-    <tr>
-        <td>[31]</td>
-        <td>AE</td>
-        <td>r</td>
-        <td>0x1
-        </td>
-        <td>AHCI Enable</td>
-    </tr>
-</table>
-<hr><h2>Field Descriptions</h2>
+<form>
+    <table border="1">
+        <tr>
+            <th>Bits</th>
+            <th>Identifier</th>
+            <th>Access</th>
+            <th>Reset</th>
+            <th>Decoded</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>[0]</td>
+            <td>HR</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="0" data-msb="0"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>HBA Reset</td>
+        </tr>
+        <tr>
+            <td>[1]</td>
+            <td>IE</td>
+            <td>rw</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="1" data-msb="1"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Interrupt Enable</td>
+        </tr>
+        <tr>
+            <td>[2]</td>
+            <td>MRSM</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="2" data-msb="2"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>MSI Revert to Single Message</td>
+        </tr>
+        <tr>
+            <td>[31]</td>
+            <td>AE</td>
+            <td>r</td>
+            <td>0x1
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="31" data-msb="31"
+                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>AHCI Enable</td>
+        </tr>
+    </table>
+    <p>
+        <label>
+            Encoded Register Value:
+            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+        </label>
+    </p>
+</form>
+<hr/><h2>Field Descriptions</h2>
 
 <h3>HR - HBA Reset</h3>
 <p>When set by SW, this bit causes an internal reset of the HBA. All

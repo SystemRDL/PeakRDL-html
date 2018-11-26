@@ -101,7 +101,7 @@ function onSearchInputUpdate(ev){
         search_text = search_text.slice(1, search_text.length);
         if(search_text == "") return;
         var addr = Number(search_text);
-        if(!isInteger(addr)) return;
+        if(!isPositiveInteger(addr)) return;
         
         var result = lookup_by_address(addr);
         if(result != null) {

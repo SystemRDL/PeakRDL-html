@@ -15,32 +15,52 @@ The FISes that contain this information are:</p>
 </ul>
 
 <h2>Contents</h2>
-<table border="1">
-    <tr>
-        <th>Bits</th>
-        <th>Identifier</th>
-        <th>Access</th>
-        <th>Reset</th>
-        <th>Name</th>
-    </tr>
-    <tr>
-        <td>[7:0]</td>
-        <td>ERR</td>
-        <td>r</td>
-        <td>0x0
-        </td>
-        <td>Error</td>
-    </tr>
-    <tr>
-        <td>[15:8]</td>
-        <td>STS</td>
-        <td>rw</td>
-        <td>0x7f
-        </td>
-        <td>Status</td>
-    </tr>
-</table>
-<hr><h2>Field Descriptions</h2>
+<form>
+    <table border="1">
+        <tr>
+            <th>Bits</th>
+            <th>Identifier</th>
+            <th>Access</th>
+            <th>Reset</th>
+            <th>Decoded</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>[7:0]</td>
+            <td>ERR</td>
+            <td>r</td>
+            <td>0x0
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="0" data-msb="7"
+                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Error</td>
+        </tr>
+        <tr>
+            <td>[15:8]</td>
+            <td>STS</td>
+            <td>rw</td>
+            <td>0x7f
+            </td>
+            <td>
+                <input class="field-value-tester" type="text" autocomplete="off"
+                    data-lsb="8" data-msb="15"
+                    data-reset="127" oninput="onDecodedFieldInput(this)"/>
+            </td>
+            <td>Status</td>
+        </tr>
+    </table>
+    <p>
+        <label>
+            Encoded Register Value:
+            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+        </label>
+    </p>
+</form>
+<hr/><h2>Field Descriptions</h2>
 
 <h3>ERR - Error</h3>
 <p>Contains the latest copy of the task file error register.</p>
