@@ -19,7 +19,15 @@
             <td>[{{field.inst.msb}}:{{field.inst.lsb}}]</td>
             {%- endif %}
             <td>{{field.inst.inst_name}}</td>
-            <td>{{field.get_property("sw").name}}</td>
+            <td>
+                {{- field.get_property("sw").name -}}
+                {%- if field.get_property("onread") -%}
+                    , {{ field.get_property("onread").name -}}
+                {%- endif -%}
+                {%- if field.get_property("onwrite") -%}
+                    , {{ field.get_property("onwrite").name -}}
+                {%- endif -%}
+            </td>
             <td>
                 {%- if field.get_property("reset") != None -%}
                 {{"0x%x" % field.get_property("reset")}}
