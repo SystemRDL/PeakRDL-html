@@ -15,15 +15,15 @@ var RALIndex = [
       11
     ],
     "name": "den_sata_ahci_map",
-    "offset": 0,
-    "size": 800
+    "offset": "0x0",
+    "size": "0x320"
   },
   {
     "parent": 0,
     "children": [],
     "name": "HBA_CAP",
-    "offset": 0,
-    "size": 4,
+    "offset": "0x0",
+    "size": "0x4",
     "fields": [
       "NP",
       "SXS",
@@ -52,8 +52,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "GHC",
-    "offset": 4,
-    "size": 4,
+    "offset": "0x4",
+    "size": "0x4",
     "fields": [
       "HR",
       "IE",
@@ -65,8 +65,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "IS",
-    "offset": 8,
-    "size": 4,
+    "offset": "0x8",
+    "size": "0x4",
     "fields": [
       "IPS"
     ]
@@ -75,8 +75,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "PI",
-    "offset": 12,
-    "size": 4,
+    "offset": "0xc",
+    "size": "0x4",
     "fields": [
       "PI"
     ]
@@ -85,8 +85,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "VS",
-    "offset": 16,
-    "size": 4,
+    "offset": "0x10",
+    "size": "0x4",
     "fields": [
       "MNR",
       "MJR"
@@ -96,8 +96,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "CCC_CTL",
-    "offset": 20,
-    "size": 4,
+    "offset": "0x14",
+    "size": "0x4",
     "fields": [
       "EN",
       "INT",
@@ -109,8 +109,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "CCC_PORTS",
-    "offset": 24,
-    "size": 4,
+    "offset": "0x18",
+    "size": "0x4",
     "fields": [
       "PRT"
     ]
@@ -119,8 +119,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "EM_LOC",
-    "offset": 28,
-    "size": 4,
+    "offset": "0x1c",
+    "size": "0x4",
     "fields": [
       "SZ",
       "OFST"
@@ -130,8 +130,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "EM_CTL",
-    "offset": 32,
-    "size": 4,
+    "offset": "0x20",
+    "size": "0x4",
     "fields": [
       "ATTR_SMB"
     ]
@@ -140,8 +140,8 @@ var RALIndex = [
     "parent": 0,
     "children": [],
     "name": "foo",
-    "offset": 160,
-    "size": 4,
+    "offset": "0xa0",
+    "size": "0x4",
     "fields": [
       "bar"
     ]
@@ -159,12 +159,12 @@ var RALIndex = [
       19
     ],
     "name": "PORT",
-    "offset": 256,
-    "size": 32,
+    "offset": "0x100",
+    "size": "0x20",
     "dims": [
       5
     ],
-    "stride": 128,
+    "stride": "0x80",
     "idxs": [
       0
     ]
@@ -173,8 +173,8 @@ var RALIndex = [
     "parent": 11,
     "children": [],
     "name": "CLB",
-    "offset": 0,
-    "size": 4,
+    "offset": "0x0",
+    "size": "0x4",
     "fields": [
       "CLB"
     ]
@@ -183,8 +183,8 @@ var RALIndex = [
     "parent": 11,
     "children": [],
     "name": "CLBU",
-    "offset": 4,
-    "size": 4,
+    "offset": "0x4",
+    "size": "0x4",
     "fields": [
       "CLBU"
     ]
@@ -193,8 +193,8 @@ var RALIndex = [
     "parent": 11,
     "children": [],
     "name": "FB",
-    "offset": 8,
-    "size": 4,
+    "offset": "0x8",
+    "size": "0x4",
     "fields": [
       "FB"
     ]
@@ -203,8 +203,8 @@ var RALIndex = [
     "parent": 11,
     "children": [],
     "name": "FBU",
-    "offset": 12,
-    "size": 4,
+    "offset": "0xc",
+    "size": "0x4",
     "fields": [
       "FBU"
     ]
@@ -213,8 +213,8 @@ var RALIndex = [
     "parent": 11,
     "children": [],
     "name": "IS",
-    "offset": 16,
-    "size": 4,
+    "offset": "0x10",
+    "size": "0x4",
     "fields": [
       "DHRS",
       "PSS",
@@ -239,8 +239,8 @@ var RALIndex = [
     "parent": 11,
     "children": [],
     "name": "IE",
-    "offset": 20,
-    "size": 4,
+    "offset": "0x14",
+    "size": "0x4",
     "fields": [
       "DHRE",
       "PSE",
@@ -265,8 +265,8 @@ var RALIndex = [
     "parent": 11,
     "children": [],
     "name": "ICC",
-    "offset": 24,
-    "size": 4,
+    "offset": "0x18",
+    "size": "0x4",
     "fields": [
       "ST",
       "SUD",
@@ -294,8 +294,8 @@ var RALIndex = [
     "parent": 11,
     "children": [],
     "name": "TFD",
-    "offset": 28,
-    "size": 4,
+    "offset": "0x1c",
+    "size": "0x4",
     "fields": [
       "ERR",
       "STS"

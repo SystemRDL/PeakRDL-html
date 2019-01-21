@@ -201,15 +201,15 @@ function get_addr_offset(id){
             }
             flat_idx += sz * RALIndex[id].idxs[i];
         }
-        return(RALIndex[id].offset + flat_idx * RALIndex[id].stride);
+        return(toBigInt(RALIndex[id].offset).add(toBigInt(RALIndex[id].stride).multiply(flat_idx)));
     } else {
-        return(RALIndex[id].offset);
+        return(toBigInt(RALIndex[id].offset));
     }
 }
 
 function get_absolute_addr(id){
     if(RALIndex[id].parent != null){
-        return(get_absolute_addr(RALIndex[id].parent) + get_addr_offset(id));
+        return(get_absolute_addr(RALIndex[id].parent).add(get_addr_offset(id)));
     } else {
         return(get_addr_offset(id));
     }
@@ -222,9 +222,9 @@ function get_total_size(id){
         for(var i=0; i<RALIndex[id].dims.length; i++){
             num_elements *= RALIndex[id].dims[i];
         }
-        return(RALIndex[id].stride * (num_elements - 1) + RALIndex[id].size);
+        return(toBigInt(RALIndex[id].stride).multiply(num_elements - 1).add(toBigInt(RALIndex[id].size)));
     }else{
-        return(RALIndex[id].size);
+        return(toBigInt(RALIndex[id].size));
     }
 }
 
@@ -237,22 +237,22 @@ function lookup_by_address(addr){
     var idx_stack = [];
     var iter_count = 0;
     
-    if(addr < RALIndex[id].offset) return(null);
-    if(addr >= RALIndex[id].offset + get_total_size(id)) return(null);
+    if(addr.lt(toBigInt(RALIndex[id].offset))) return(null);
+    if(addr.geq(toBigInt(RALIndex[id].offset).add(get_total_size(id)))) return(null);
     
     while(iter_count < 100){
         iter_count++;
         // addr is definitely inside this node
         
         // Adjust addr to be relative to this node
-        addr -= RALIndex[id].offset;
+        addr = addr.subtract(toBigInt(RALIndex[id].offset));
         
         // Determine index stack entry for this node
         if("dims" in RALIndex[id]){
             var idxs = [];
             
             // First check if address lands between sparse array entries
-            if(addr % RALIndex[id].stride >= RALIndex[id].size) {
+            if(addr.mod(toBigInt(RALIndex[id].stride)).geq(toBigInt(RALIndex[id].size))) {
                 // missed! Give up and just return the parent node
                 if(RALIndex[id].parent == null){
                     return(null);
@@ -262,7 +262,7 @@ function lookup_by_address(addr){
             }
             
             // index of the flattened array
-            var flat_idx = Math.floor(addr / RALIndex[id].stride);
+            var flat_idx = addr.divide(toBigInt(RALIndex[id].stride)).toJSNumber();
             
             // Re-construct dimensions
             for(var dim=RALIndex[id].dims.length-1; dim>=0; dim--){
@@ -274,7 +274,7 @@ function lookup_by_address(addr){
             idx_stack.push(idxs);
             
             // Adjust addr offset to be relative to this index
-            addr = addr % RALIndex[id].stride;
+            addr = addr.mod(toBigInt(RALIndex[id].stride));
         } else {
             idx_stack.push([]);
         }
@@ -283,7 +283,7 @@ function lookup_by_address(addr){
         var found_match = false;
         for(var i=0; i<RALIndex[id].children.length; i++) {
             var child = RALIndex[id].children[i];
-            if((addr >= RALIndex[child].offset) && (addr < RALIndex[child].offset + get_total_size(child))){
+            if(addr.geq(toBigInt(RALIndex[child].offset)) && addr.lt(toBigInt(RALIndex[child].offset).add(get_total_size(child)))){
                 // hit!
                 id = child;
                 found_match = true;
@@ -298,4 +298,8 @@ function lookup_by_address(addr){
     
     // Hit iteration limit. Something is wrong :-(
     throw "Agh! iteration limit reached while looking up by address";
+}
+
+function is_register(id) {
+    return("fields" in RALIndex[id]);
 }

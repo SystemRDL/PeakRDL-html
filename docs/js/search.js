@@ -100,8 +100,14 @@ function onSearchInputUpdate(ev){
         clear_search_results();
         search_text = search_text.slice(1, search_text.length);
         if(search_text == "") return;
-        var addr = Number(search_text);
-        if(!isPositiveInteger(addr)) return;
+
+        try {
+            addr = toBigInt(search_text);
+        } catch(error) {
+            addr = bigInt(-1);
+        }
+        
+        if(addr.lt(0)) return;
         
         var result = lookup_by_address(addr);
         if(result != null) {

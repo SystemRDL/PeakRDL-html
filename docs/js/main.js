@@ -13,7 +13,9 @@ function load_page(id) {
             main_el.innerHTML = this.responseText;
             update_absolute_addr(get_absolute_addr(id));
             update_rdlfc_indexes();
-            reset_field_inputs();
+            if(is_register(id)) {
+                reset_field_inputs();
+            }
             document.getElementById("content").parentElement.scrollTop = 0;
         } else {
             if(window.location.protocol == "file:"){
@@ -224,8 +226,16 @@ function update_rdlfc_indexes() {
 function onDecodedFieldInput(el){
     var msb = Number(el.dataset.msb);
     var lsb = Number(el.dataset.lsb);
-    var value = Number(el.value);
-    if(!isPositiveInteger(value) || (value >= 2**(msb - lsb + 1))){
+    var value;
+
+    try {
+        value = toBigInt(el.value);
+    } catch(error) {
+        value = bigInt(-1);
+    }
+
+    var max_value = bigInt(1).shiftLeft(msb - lsb + 1);
+    if(value.lt(0) || (value.geq(max_value))){
         if(!el.classList.contains("invalid")) el.classList.add("invalid");
         return;
     }
@@ -234,8 +244,14 @@ function onDecodedFieldInput(el){
 }
 
 function onEncodedRegInput(el){
-    var value = Number(el.value);
-    if(!isPositiveInteger(value)){
+    var value;
+    try {
+        value = toBigInt(el.value);
+    } catch(error) {
+        value = bigInt(-1);
+    }
+
+    if(value.lt(0)){
         if(!el.classList.contains("invalid")) el.classList.add("invalid");
         return;
     }
@@ -253,16 +269,15 @@ function reset_field_inputs(){
 
 function update_reg_value_tester(){
     // Update the register tester input based on all of the individual field inputs
-    var reg_value = 0;
+    var reg_value = bigInt(0);
     var field_els = document.getElementsByClassName("field-value-tester");
     for(var i=0; i<field_els.length; i++){
         var lsb = Number(field_els[i].dataset.lsb);
         var msb = Number(field_els[i].dataset.msb);
-        var value = Number(field_els[i].value);
-        var mask = 2**(msb - lsb + 1) - 1;
-        value &= mask;
-        value = value >>> 0;
-        reg_value += (value << lsb) >>> 0;
+        var value = toBigInt(field_els[i].value);
+        var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
+        value = value.and(mask);
+        reg_value = reg_value.add(value.shiftLeft(lsb));
     }
     var reg_el = document.getElementById("reg-value-tester");
     reg_el.value = "0x" + reg_value.toString(16);
@@ -271,16 +286,15 @@ function update_reg_value_tester(){
 function update_field_value_testers(){
     // Update all the field tester inputs based on the register input
     var reg_el = document.getElementById("reg-value-tester");
-    var reg_value = Number(reg_el.value);
+    var reg_value = toBigInt(reg_el.value);
     var field_els = document.getElementsByClassName("field-value-tester");
     for(var i=0; i<field_els.length; i++){
         var lsb = Number(field_els[i].dataset.lsb);
         var msb = Number(field_els[i].dataset.msb);
-        var value = reg_value >>> lsb;
-        var mask = 2**(msb - lsb + 1) - 1;
-        value &= mask;
-        value = value >>> 0;
-        field_els[i].value = value;
+        var value = reg_value.shiftRight(lsb);
+        var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
+        value = value.and(mask);
+        field_els[i].value = value.toString();
     }
 }
 
@@ -297,6 +311,21 @@ function isDescendant(parent, child) {
         node = node.parentNode;
     }
     return(false);
+}
+
+function toBigInt(str) {
+    // bigInt doesn't handle large hex strings if they use the 0x prefix
+    // Wrap auto-base handling
+    str = str.trim().toLowerCase();
+    if(str.startsWith("0x")) {
+        return(bigInt(str.substring(2), 16));
+    } else if(str.startsWith("0o")) {
+        return(bigInt(str.substring(2), 8));
+    } else if(str.startsWith("0b")) {
+        return(bigInt(str.substring(2), 2));
+    } else {
+        return(bigInt(str));
+    }
 }
 
 //==============================================================================

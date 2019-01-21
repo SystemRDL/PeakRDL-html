@@ -70,12 +70,12 @@ class HTMLExporter:
             'parent'    : parent_id,
             'children'  : child_ids,
             'name'      : node.inst.inst_name,
-            'offset'    : node.inst.addr_offset,
-            'size'      : node.size,
+            'offset'    : "0x%x" % node.inst.addr_offset, # to be encoded as bigInt
+            'size'      : "0x%x" % node.size, # to be encoded as bigInt
         }
         if node.inst.is_array:
             ral_entry['dims'] = node.inst.array_dimensions
-            ral_entry['stride'] = node.inst.array_stride
+            ral_entry['stride'] = "0x%x" % node.inst.array_stride # to be encoded as bigInt
             ral_entry['idxs'] = [0] * len(node.inst.array_dimensions)
 
         if isinstance(node, RegNode):
