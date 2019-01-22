@@ -4,8 +4,11 @@
 {% else -%}
     <h3>{{field.inst.inst_name}} - {{field.get_property("name")}}</h3>
 {%- endif %}
-{{get_description(field,3)|safe}}
 
-{%- if 'encode' in field.list_properties() %}
+{%- if has_description(field) %}
+{{get_description(field,3)|safe}}
+{%- endif %}
+
+{%- if has_enum_encoding(field) %}
 {{ macros.enum_table(field.get_property("encode")) }}
 {%- endif %}

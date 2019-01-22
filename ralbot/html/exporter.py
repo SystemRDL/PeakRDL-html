@@ -122,6 +122,7 @@ class HTMLExporter:
             'node' : node,
             'children' : children,
             'has_description' : has_description,
+            'has_enum_encoding' : has_enum_encoding,
             'get_description': self.get_node_html_desc
         }
 
@@ -232,3 +233,9 @@ def has_description(node):
     Test if node has a description defined
     """
     return "desc" in node.list_properties()
+
+def has_enum_encoding(field):
+    """
+    Test if field is encoded with an enum
+    """
+    return "encode" in field.list_properties()

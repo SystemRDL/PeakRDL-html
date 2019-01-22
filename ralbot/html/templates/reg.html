@@ -53,7 +53,7 @@
     </p>
 </form>
 
-{%- for field in node.fields() if has_description(field) %}
+{%- for field in node.fields() if (has_description(field) or has_enum_encoding(field)) %}
 {%- if loop.first %}
 <hr/><h2>Field Descriptions</h2>
 {%- endif %}
