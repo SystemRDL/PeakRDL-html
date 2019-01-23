@@ -10,6 +10,7 @@
             <th>Reset</th>
             <th>Decoded</th>
             <th>Name</th>
+            <th></th>
         </tr>
         {%- for field in node.fields() %}
         <tr>
@@ -36,11 +37,16 @@
                 {%- endif %}
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="{{field.inst.lsb}}" data-msb="{{field.inst.msb}}"
-                    data-reset="{{field.get_property("reset", default=0)}}" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester{{loop.index0}}" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="{{loop.index0}}" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>{{field.get_property("name", default="-")}}</td>
+            <td>
+                <button id="radix-button{{loop.index0}}" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="{{loop.index0}}" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         {%- endfor %}
     </table>

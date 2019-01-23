@@ -19,6 +19,7 @@ management message buffer.</p>
             <th>Reset</th>
             <th>Decoded</th>
             <th>Name</th>
+            <th></th>
         </tr>
         <tr>
             <td>[15:0]</td>
@@ -27,11 +28,16 @@ management message buffer.</p>
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="0" data-msb="15"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester0" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Buffer Size</td>
+            <td>
+                <button id="radix-button0" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[31:16]</td>
@@ -40,11 +46,16 @@ management message buffer.</p>
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="16" data-msb="31"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester1" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="1" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Offset</td>
+            <td>
+                <button id="radix-button1" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="1" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
     </table>
     <p>

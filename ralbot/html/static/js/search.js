@@ -164,7 +164,7 @@ function do_a_search_chomp(query_sn){
             // No match yet. If this node has fields, add them to the path and try that
             if("fields" in RALIndex[id]){
                 for(var i=0; i<RALIndex[id].fields.length; i++){
-                    var path_with_field = path + "." + RALIndex[id].fields[i];
+                    var path_with_field = path + "." + RALIndex[id].fields[i].name;
                     text_segments = search_test_path(path_with_field, keywords);
                     if(text_segments != null){
                         add_search_result(text_segments, id);

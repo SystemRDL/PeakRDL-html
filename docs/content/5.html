@@ -23,6 +23,7 @@ of the specification are valid: 0.95, 1.0, and 1.1.</p>
             <th>Reset</th>
             <th>Decoded</th>
             <th>Name</th>
+            <th></th>
         </tr>
         <tr>
             <td>[15:0]</td>
@@ -31,11 +32,16 @@ of the specification are valid: 0.95, 1.0, and 1.1.</p>
             <td>0x100
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="0" data-msb="15"
-                    data-reset="256" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester0" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Minor Version Number</td>
+            <td>
+                <button id="radix-button0" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[31:16]</td>
@@ -44,11 +50,16 @@ of the specification are valid: 0.95, 1.0, and 1.1.</p>
             <td>0x1
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="16" data-msb="31"
-                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester1" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="1" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Major Version Number</td>
+            <td>
+                <button id="radix-button1" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="1" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
     </table>
     <p>

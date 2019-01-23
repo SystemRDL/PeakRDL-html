@@ -18,6 +18,7 @@
             <th>Reset</th>
             <th>Decoded</th>
             <th>Name</th>
+            <th></th>
         </tr>
         <tr>
             <td>[0]</td>
@@ -26,11 +27,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="0" data-msb="0"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester0" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>HBA Reset</td>
+            <td>
+                <button id="radix-button0" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[1]</td>
@@ -39,11 +45,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="1" data-msb="1"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester1" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="1" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Interrupt Enable</td>
+            <td>
+                <button id="radix-button1" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="1" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[2]</td>
@@ -52,11 +63,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="2" data-msb="2"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester2" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="2" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>MSI Revert to Single Message</td>
+            <td>
+                <button id="radix-button2" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="2" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[31]</td>
@@ -65,11 +81,16 @@
             <td>0x1
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="31" data-msb="31"
-                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester3" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="3" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>AHCI Enable</td>
+            <td>
+                <button id="radix-button3" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="3" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
     </table>
     <p>

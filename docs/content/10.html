@@ -16,6 +16,7 @@
             <th>Reset</th>
             <th>Decoded</th>
             <th>Name</th>
+            <th></th>
         </tr>
         <tr>
             <td>[31:0]</td>
@@ -24,11 +25,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="0" data-msb="31"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester0" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>-</td>
+            <td>
+                <button id="radix-button0" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
     </table>
     <p>

@@ -21,6 +21,7 @@ messages</p>
             <th>Reset</th>
             <th>Decoded</th>
             <th>Name</th>
+            <th></th>
         </tr>
         <tr>
             <td>[24]</td>
@@ -29,11 +30,16 @@ messages</p>
             <td>0x1
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="24" data-msb="24"
-                    data-reset="1" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester0" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>-</td>
+            <td>
+                <button id="radix-button0" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
     </table>
     <p>

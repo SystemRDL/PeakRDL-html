@@ -70,18 +70,35 @@ class HTMLExporter:
             'parent'    : parent_id,
             'children'  : child_ids,
             'name'      : node.inst.inst_name,
-            'offset'    : "0x%x" % node.inst.addr_offset, # to be encoded as bigInt
-            'size'      : "0x%x" % node.size, # to be encoded as bigInt
+            'offset'    : BigInt(node.inst.addr_offset),
+            'size'      : BigInt(node.size),
         }
         if node.inst.is_array:
             ral_entry['dims'] = node.inst.array_dimensions
-            ral_entry['stride'] = "0x%x" % node.inst.array_stride # to be encoded as bigInt
+            ral_entry['stride'] = BigInt(node.inst.array_stride)
             ral_entry['idxs'] = [0] * len(node.inst.array_dimensions)
 
         if isinstance(node, RegNode):
-            ral_entry['fields'] = []
+            ral_fields = []
             for field in node.fields():
-                ral_entry['fields'].append(field.inst.inst_name)
+                ral_field = {
+                    'name' : field.inst.inst_name,
+                    'lsb'  : field.inst.lsb,
+                    'msb'  : field.inst.msb,
+                    'reset': BigInt(field.get_property("reset", default=0)),
+                    'disp' : 'H'
+                }
+                
+                field_enum = field.get_property("encode")
+                if field_enum is not None:
+                    encode = {}
+                    for member in field_enum:
+                        encode[member.name] = BigInt(member.value)
+                    ral_field['encode'] = encode
+
+                ral_fields.append(ral_field)
+
+            ral_entry['fields'] = ral_fields
 
         # Insert entry now to ensure proper position in list
         self.RALIndex.append(ral_entry)
@@ -105,7 +122,7 @@ class HTMLExporter:
         path = os.path.join(self.output_dir, "js/data.js")
         with open(path, 'w') as fp:
             fp.write("var RALIndex = ")
-            json.dump(self.RALIndex, fp, indent=2)
+            fp.write(RALBotJSEncoder(separators=(',', ':')).encode(self.RALIndex))
             fp.write(";")
 
 
@@ -239,3 +256,20 @@ def has_enum_encoding(field):
     Test if field is encoded with an enum
     """
     return "encode" in field.list_properties()
+
+class BigInt:
+    def __init__(self, v):
+        self.v = v
+
+class RALBotJSEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, BigInt):
+            return "@@bigInt('%x',16)@@" % o.v
+        else:
+            return super().default(o)
+    
+    def encode(self, o):
+        s = super().encode(o)
+        s = s.replace('"@@', '')
+        s = s.replace('@@"', '')
+        return s

@@ -16,6 +16,7 @@
             <th>Reset</th>
             <th>Decoded</th>
             <th>Name</th>
+            <th></th>
         </tr>
         <tr>
             <td>[0]</td>
@@ -24,11 +25,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="0" data-msb="0"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester0" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Device to Host Register FIS Interrupt</td>
+            <td>
+                <button id="radix-button0" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[1]</td>
@@ -37,11 +43,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="1" data-msb="1"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester1" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="1" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>PIO Setup FIS Interrupt</td>
+            <td>
+                <button id="radix-button1" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="1" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[2]</td>
@@ -50,11 +61,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="2" data-msb="2"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester2" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="2" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>DMA Setup FIS Interrupt</td>
+            <td>
+                <button id="radix-button2" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="2" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[3]</td>
@@ -63,11 +79,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="3" data-msb="3"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester3" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="3" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Set Device Bits Interrupt</td>
+            <td>
+                <button id="radix-button3" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="3" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[4]</td>
@@ -76,11 +97,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="4" data-msb="4"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester4" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="4" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Unknown FIS Interrupt</td>
+            <td>
+                <button id="radix-button4" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="4" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[5]</td>
@@ -89,11 +115,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="5" data-msb="5"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester5" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="5" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Descriptor Processed</td>
+            <td>
+                <button id="radix-button5" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="5" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[6]</td>
@@ -102,11 +133,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="6" data-msb="6"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester6" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="6" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Port Connect Change Status</td>
+            <td>
+                <button id="radix-button6" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="6" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[7]</td>
@@ -115,11 +151,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="7" data-msb="7"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester7" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="7" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Device Mechanical Presence Status</td>
+            <td>
+                <button id="radix-button7" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="7" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[22]</td>
@@ -128,11 +169,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="22" data-msb="22"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester8" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="8" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>PhyRdy Change Status</td>
+            <td>
+                <button id="radix-button8" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="8" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[23]</td>
@@ -141,11 +187,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="23" data-msb="23"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester9" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="9" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Incorrect Port Multiplier Status</td>
+            <td>
+                <button id="radix-button9" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="9" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[24]</td>
@@ -154,11 +205,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="24" data-msb="24"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester10" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="10" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Overflow Status</td>
+            <td>
+                <button id="radix-button10" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="10" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[26]</td>
@@ -167,11 +223,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="26" data-msb="26"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester11" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="11" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Interface Non-fatal Error Status</td>
+            <td>
+                <button id="radix-button11" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="11" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[27]</td>
@@ -180,11 +241,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="27" data-msb="27"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester12" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="12" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Interface Fatal Error Status</td>
+            <td>
+                <button id="radix-button12" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="12" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[28]</td>
@@ -193,11 +259,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="28" data-msb="28"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester13" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="13" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Host Bus Data Error Status</td>
+            <td>
+                <button id="radix-button13" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="13" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[29]</td>
@@ -206,11 +277,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="29" data-msb="29"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester14" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="14" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Host Bus Fatal Error Status</td>
+            <td>
+                <button id="radix-button14" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="14" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[30]</td>
@@ -219,11 +295,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="30" data-msb="30"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester15" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="15" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Task File Error Status</td>
+            <td>
+                <button id="radix-button15" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="15" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
         <tr>
             <td>[31]</td>
@@ -232,11 +313,16 @@
             <td>0x0
             </td>
             <td>
-                <input class="field-value-tester" type="text" autocomplete="off"
-                    data-lsb="31" data-msb="31"
-                    data-reset="0" oninput="onDecodedFieldInput(this)"/>
+                <input id="field-value-tester16" class="field-value-tester"
+                    type="text" autocomplete="off"
+                    data-idx="16" oninput="onDecodedFieldInput(this)"/>
             </td>
             <td>Cold Port Detect Status</td>
+            <td>
+                <button id="radix-button16" class="radix-button"
+                    title="Switch radix" aria-label="Switch radix"
+                    data-idx="16" onclick="onRadixSwitch(this)">H</button>
+            </td>
         </tr>
     </table>
     <p>
