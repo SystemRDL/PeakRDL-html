@@ -15,7 +15,7 @@ function add_tree_node(parent_el, id){
     div.appendChild(icon);
     
     var link = document.createElement("a");
-    link.href = "#" + get_path(id, null, false);
+    link.href = "?p=" + get_path(id, null, false);
     link.className = "node-link";
     link.onclick = onClickTreeLink;
     if("dims" in node){

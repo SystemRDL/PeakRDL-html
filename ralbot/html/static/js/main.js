@@ -58,8 +58,9 @@ function show_file_protocol_nag() {
 
 function load_page_via_url(){
     // An event triggered such that the page should be loaded based on the URL
-    var path = window.location.hash.substring(1);
-    if(path == ""){
+    var url = new URL(window.location.href);
+    var path = url.searchParams.get("p", path);
+    if(path == null){
         // No path specified. Default to root node
         CurrentID = 0;
     } else {
@@ -83,8 +84,9 @@ function load_page_via_url(){
         }
         
         if(path != new_path){
-            // Path was sanitized. Update URL
-            set_url_hash("#" + new_path);
+            // Path was sanitized. Patch URL
+            url.searchParams.set("p", new_path);
+            window.history.replaceState({}, "", url.toString())
         }
     }
     
@@ -112,7 +114,7 @@ function update_crumbtrail(){
             var link = document.createElement("a");
             link.dataset.id = path_ids[i];
             link.className = "node-link";
-            link.href = "#" + get_path(path_ids[i]);
+            link.href = "?p=" + get_path(path_ids[i]);
             link.innerHTML = RALIndex[path_ids[i]].name;
             link.onclick = onClickNodeLink;
             crumb_el.appendChild(link);
@@ -164,9 +166,12 @@ function onClickNodeLink(ev) {
 }
 
 function refresh_url() {
-    // Given current state, refresh the URL's hash
+    // Given current state, refresh the URL
     var path = get_path(CurrentID);
-    set_url_hash("#" + path);
+
+    var url = new URL(window.location.href);
+    url.searchParams.set("p", path);
+    window.history.pushState({}, "", url.toString())
 }
 
 function refresh_title() {
@@ -174,26 +179,16 @@ function refresh_title() {
     document.title = RALIndex[CurrentID].name;
 }
 
-var _ignore_hash_change = false;
-function onURLHashChange() {
-    if(_ignore_hash_change){
-        _ignore_hash_change = false;
-        return;
-    }
-    
+function onPopState(event) {
+    console.log("onPopState()");
     load_page_via_url();
-}
-
-function set_url_hash(str) {
-    _ignore_hash_change = true;
-    window.location.hash = str;
 }
 
 function onPageLoad() {
-    window.onhashchange = onURLHashChange;
     init_tree();
     load_page_via_url();
     init_index_edit();
+    window.onpopstate = onPopState;
 }
 
 function update_rdlfc_indexes() {
