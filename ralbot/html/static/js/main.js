@@ -57,6 +57,23 @@ function show_file_protocol_nag() {
     ;
 }
 
+function show_incompatibility_nag() {
+    var el = document.getElementById("content-container");
+    el.innerHTML
+    = "<h1>Nope!</h1>"
+    + "<p>It looks like the browser you are using is not supported.</p>"
+    + "<p>Please use a modern browser such as "
+    + "<a href='https://www.mozilla.org/en-US/firefox' target='_blank'>Firefox</a>"
+    + " or <a href='https://www.google.com/chrome/' target='_blank'>Chrome</a>.</p>"
+    ;
+}
+
+function test_browser_incompatible() {
+    // Test for browser features that absolutely have to exist
+    if(typeof URL === 'undefined') return true;
+    return false;
+}
+
 function load_page_via_url(){
     // An event triggered such that the page should be loaded based on the URL
     var url = new URL(window.location.href);
@@ -186,6 +203,10 @@ function onPopState(event) {
 }
 
 function onPageLoad() {
+    if(test_browser_incompatible()) {
+        show_incompatibility_nag();
+        return;
+    }
     init_tree();
     load_page_via_url();
     init_index_edit();
@@ -216,120 +237,6 @@ function update_rdlfc_indexes() {
     }
     for(var i=0; i<index_els.length; i++){
         index_els[i].innerHTML = index_text;
-    }
-}
-
-//==============================================================================
-// Field value testers
-//==============================================================================
-
-function onRadixSwitch(el){
-    var idx = Number(el.dataset.idx);
-    var d = RALIndex[CurrentID].fields[idx].disp;
-    if(d == "H") {
-        d = "D";
-    } else {
-        d = "H";
-    }
-
-    el.innerHTML = d;
-    RALIndex[CurrentID].fields[idx].disp = d;
-    update_field_value_tester(idx);
-}
-
-function init_radix_buttons(){
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var el = document.getElementById("radix-button" + i);
-        el.innerHTML = RALIndex[CurrentID].fields[i].disp;
-    }
-}
-
-function onDecodedFieldInput(el){
-    var idx = Number(el.dataset.idx);
-    var msb = RALIndex[CurrentID].fields[idx].msb;
-    var lsb = RALIndex[CurrentID].fields[idx].lsb;
-    var value;
-
-    try {
-        value = toBigInt(el.value);
-    } catch(error) {
-        value = bigInt(-1);
-    }
-
-    var max_value = bigInt(1).shiftLeft(msb - lsb + 1);
-    if(value.lt(0) || (value.geq(max_value))){
-        if(!el.classList.contains("invalid")) el.classList.add("invalid");
-        return;
-    }
-    el.classList.remove("invalid");
-    update_reg_value_tester();
-}
-
-function onEncodedRegInput(el){
-    var value;
-    try {
-        value = toBigInt(el.value);
-    } catch(error) {
-        value = bigInt(-1);
-    }
-
-    if(value.lt(0)){
-        if(!el.classList.contains("invalid")) el.classList.add("invalid");
-        return;
-    }
-    el.classList.remove("invalid");
-    update_field_value_testers();
-}
-
-function reset_field_inputs(){
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var el = document.getElementById("field-value-tester" + i);
-        el.value = format_field_value(i, RALIndex[CurrentID].fields[i].reset);
-    }
-    update_reg_value_tester();
-}
-
-function update_reg_value_tester(){
-    // Update the register tester input based on all of the individual field inputs
-    var reg_value = bigInt(0);
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var msb = RALIndex[CurrentID].fields[i].msb;
-        var lsb = RALIndex[CurrentID].fields[i].lsb;
-        var el = document.getElementById("field-value-tester" + i);
-        var value = toBigInt(el.value);
-        var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
-        value = value.and(mask);
-        reg_value = reg_value.add(value.shiftLeft(lsb));
-    }
-    var reg_el = document.getElementById("reg-value-tester");
-    reg_el.value = "0x" + reg_value.toString(16);
-}
-
-function update_field_value_testers(){
-    // Update all the field tester inputs based on the register input
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        update_field_value_tester(i);
-    }
-}
-
-function update_field_value_tester(idx){
-    var reg_el = document.getElementById("reg-value-tester");
-    var reg_value = toBigInt(reg_el.value);
-
-    var msb = RALIndex[CurrentID].fields[idx].msb;
-    var lsb = RALIndex[CurrentID].fields[idx].lsb;
-    var value = reg_value.shiftRight(lsb);
-    var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
-    value = value.and(mask);
-    var el = document.getElementById("field-value-tester" + idx);
-    el.value = format_field_value(idx, value);
-}
-
-function format_field_value(idx, value) {
-    if(RALIndex[CurrentID].fields[idx].disp == "H"){
-        return("0x" + value.toString(16));
-    } else {
-        return(value.toString());
     }
 }
 
