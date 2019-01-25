@@ -70,7 +70,11 @@ function show_incompatibility_nag() {
 
 function test_browser_incompatible() {
     // Test for browser features that absolutely have to exist
-    if(typeof URL === 'undefined') return true;
+    try {
+        var url = new URL(window.location.href);
+    } catch(error) {
+        return true;
+    }
     return false;
 }
 
