@@ -9,44 +9,42 @@
 <p>Port N Command List Base Address</p>
 
 <h2>Contents</h2>
-<form>
-    <table border="1">
-        <tr>
-            <th>Bits</th>
-            <th>Identifier</th>
-            <th>Access</th>
-            <th>Reset</th>
-            <th>Decoded</th>
-            <th>Name</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>[31:20]</td>
-            <td>CLB</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester0" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Command List Base Address</td>
-            <td>
-                <button id="radix-button0" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-    </table>
-    <p>
-        <label>
-            Encoded Register Value:
-            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
-            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
-        </label>
-    </p>
-</form>
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Decoded</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>[31:20]</td>
+        <td>CLB</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester0" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="0" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Command List Base Address</td>
+        <td>
+            <button type="button" id="radix-button0" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="0" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+</table>
+<p>
+    <label>
+        Encoded Register Value:
+        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+    </label>
+</p>
 <hr/><h2>Field Descriptions</h2>
 
 <h3>CLB - Command List Base Address</h3>

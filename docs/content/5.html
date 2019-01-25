@@ -14,60 +14,58 @@ the minor version number.</p>
 of the specification are valid: 0.95, 1.0, and 1.1.</p>
 
 <h2>Contents</h2>
-<form>
-    <table border="1">
-        <tr>
-            <th>Bits</th>
-            <th>Identifier</th>
-            <th>Access</th>
-            <th>Reset</th>
-            <th>Decoded</th>
-            <th>Name</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>[15:0]</td>
-            <td>MNR</td>
-            <td>r</td>
-            <td>0x100
-            </td>
-            <td>
-                <input id="field-value-tester0" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Minor Version Number</td>
-            <td>
-                <button id="radix-button0" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[31:16]</td>
-            <td>MJR</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester1" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="1" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Major Version Number</td>
-            <td>
-                <button id="radix-button1" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="1" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-    </table>
-    <p>
-        <label>
-            Encoded Register Value:
-            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
-            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
-        </label>
-    </p>
-</form>
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Decoded</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>[15:0]</td>
+        <td>MNR</td>
+        <td>r</td>
+        <td>0x100
+        </td>
+        <td>
+            <input id="field-value-tester0" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="0" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Minor Version Number</td>
+        <td>
+            <button type="button" id="radix-button0" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="0" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[31:16]</td>
+        <td>MJR</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester1" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="1" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Major Version Number</td>
+        <td>
+            <button type="button" id="radix-button1" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="1" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+</table>
+<p>
+    <label>
+        Encoded Register Value:
+        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+    </label>
+</p>
 </div>

@@ -7,332 +7,330 @@
 </dl>
 
 <h2>Contents</h2>
-<form>
-    <table border="1">
-        <tr>
-            <th>Bits</th>
-            <th>Identifier</th>
-            <th>Access</th>
-            <th>Reset</th>
-            <th>Decoded</th>
-            <th>Name</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>[0]</td>
-            <td>DHRS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester0" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Device to Host Register FIS Interrupt</td>
-            <td>
-                <button id="radix-button0" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[1]</td>
-            <td>PSS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester1" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="1" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>PIO Setup FIS Interrupt</td>
-            <td>
-                <button id="radix-button1" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="1" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[2]</td>
-            <td>DSS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester2" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="2" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>DMA Setup FIS Interrupt</td>
-            <td>
-                <button id="radix-button2" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="2" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[3]</td>
-            <td>SBDS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester3" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="3" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Set Device Bits Interrupt</td>
-            <td>
-                <button id="radix-button3" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="3" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[4]</td>
-            <td>UFS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester4" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="4" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Unknown FIS Interrupt</td>
-            <td>
-                <button id="radix-button4" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="4" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[5]</td>
-            <td>DPS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester5" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="5" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Descriptor Processed</td>
-            <td>
-                <button id="radix-button5" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="5" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[6]</td>
-            <td>PCS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester6" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="6" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Port Connect Change Status</td>
-            <td>
-                <button id="radix-button6" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="6" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[7]</td>
-            <td>DMPS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester7" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="7" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Device Mechanical Presence Status</td>
-            <td>
-                <button id="radix-button7" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="7" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[22]</td>
-            <td>PRCS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester8" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="8" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>PhyRdy Change Status</td>
-            <td>
-                <button id="radix-button8" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="8" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[23]</td>
-            <td>IPMS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester9" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="9" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Incorrect Port Multiplier Status</td>
-            <td>
-                <button id="radix-button9" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="9" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[24]</td>
-            <td>OFS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester10" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="10" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Overflow Status</td>
-            <td>
-                <button id="radix-button10" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="10" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[26]</td>
-            <td>IONFS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester11" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="11" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Interface Non-fatal Error Status</td>
-            <td>
-                <button id="radix-button11" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="11" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[27]</td>
-            <td>IFS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester12" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="12" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Interface Fatal Error Status</td>
-            <td>
-                <button id="radix-button12" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="12" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[28]</td>
-            <td>HBDS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester13" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="13" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Host Bus Data Error Status</td>
-            <td>
-                <button id="radix-button13" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="13" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[29]</td>
-            <td>HBFS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester14" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="14" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Host Bus Fatal Error Status</td>
-            <td>
-                <button id="radix-button14" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="14" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[30]</td>
-            <td>TFES</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester15" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="15" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Task File Error Status</td>
-            <td>
-                <button id="radix-button15" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="15" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[31]</td>
-            <td>CPDS</td>
-            <td>rw</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester16" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="16" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Cold Port Detect Status</td>
-            <td>
-                <button id="radix-button16" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="16" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-    </table>
-    <p>
-        <label>
-            Encoded Register Value:
-            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
-            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
-        </label>
-    </p>
-</form>
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Decoded</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>[0]</td>
+        <td>DHRS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester0" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="0" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Device to Host Register FIS Interrupt</td>
+        <td>
+            <button type="button" id="radix-button0" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="0" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[1]</td>
+        <td>PSS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester1" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="1" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>PIO Setup FIS Interrupt</td>
+        <td>
+            <button type="button" id="radix-button1" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="1" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[2]</td>
+        <td>DSS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester2" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="2" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>DMA Setup FIS Interrupt</td>
+        <td>
+            <button type="button" id="radix-button2" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="2" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[3]</td>
+        <td>SBDS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester3" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="3" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Set Device Bits Interrupt</td>
+        <td>
+            <button type="button" id="radix-button3" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="3" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[4]</td>
+        <td>UFS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester4" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="4" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Unknown FIS Interrupt</td>
+        <td>
+            <button type="button" id="radix-button4" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="4" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[5]</td>
+        <td>DPS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester5" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="5" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Descriptor Processed</td>
+        <td>
+            <button type="button" id="radix-button5" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="5" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[6]</td>
+        <td>PCS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester6" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="6" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Port Connect Change Status</td>
+        <td>
+            <button type="button" id="radix-button6" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="6" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[7]</td>
+        <td>DMPS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester7" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="7" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Device Mechanical Presence Status</td>
+        <td>
+            <button type="button" id="radix-button7" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="7" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[22]</td>
+        <td>PRCS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester8" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="8" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>PhyRdy Change Status</td>
+        <td>
+            <button type="button" id="radix-button8" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="8" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[23]</td>
+        <td>IPMS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester9" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="9" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Incorrect Port Multiplier Status</td>
+        <td>
+            <button type="button" id="radix-button9" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="9" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[24]</td>
+        <td>OFS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester10" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="10" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Overflow Status</td>
+        <td>
+            <button type="button" id="radix-button10" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="10" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[26]</td>
+        <td>IONFS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester11" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="11" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Interface Non-fatal Error Status</td>
+        <td>
+            <button type="button" id="radix-button11" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="11" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[27]</td>
+        <td>IFS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester12" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="12" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Interface Fatal Error Status</td>
+        <td>
+            <button type="button" id="radix-button12" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="12" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[28]</td>
+        <td>HBDS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester13" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="13" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Host Bus Data Error Status</td>
+        <td>
+            <button type="button" id="radix-button13" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="13" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[29]</td>
+        <td>HBFS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester14" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="14" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Host Bus Fatal Error Status</td>
+        <td>
+            <button type="button" id="radix-button14" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="14" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[30]</td>
+        <td>TFES</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester15" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="15" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Task File Error Status</td>
+        <td>
+            <button type="button" id="radix-button15" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="15" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[31]</td>
+        <td>CPDS</td>
+        <td>rw</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester16" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="16" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Cold Port Detect Status</td>
+        <td>
+            <button type="button" id="radix-button16" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="16" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+</table>
+<p>
+    <label>
+        Encoded Register Value:
+        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+    </label>
+</p>
 <hr/><h2>Field Descriptions</h2>
 
 <h3>DHRS - Device to Host Register FIS Interrupt</h3>

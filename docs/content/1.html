@@ -9,404 +9,402 @@
 <p>This register indicates basic capabilities of the HBA to driver software.</p>
 
 <h2>Contents</h2>
-<form>
-    <table border="1">
-        <tr>
-            <th>Bits</th>
-            <th>Identifier</th>
-            <th>Access</th>
-            <th>Reset</th>
-            <th>Decoded</th>
-            <th>Name</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>[4:0]</td>
-            <td>NP</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester0" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="0" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Number of Ports</td>
-            <td>
-                <button id="radix-button0" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[5]</td>
-            <td>SXS</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester1" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="1" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports External SATA</td>
-            <td>
-                <button id="radix-button1" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="1" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[6]</td>
-            <td>EMS</td>
-            <td>r</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester2" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="2" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Enclosure Management Supported</td>
-            <td>
-                <button id="radix-button2" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="2" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[7]</td>
-            <td>CCCS</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester3" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="3" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Command Completion Coalescing Supported</td>
-            <td>
-                <button id="radix-button3" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="3" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[12:8]</td>
-            <td>NCS</td>
-            <td>r</td>
-            <td>0x1f
-            </td>
-            <td>
-                <input id="field-value-tester4" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="4" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Number of Command Slots</td>
-            <td>
-                <button id="radix-button4" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="4" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[13]</td>
-            <td>PSC</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester5" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="5" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Partial State Capable</td>
-            <td>
-                <button id="radix-button5" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="5" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[14]</td>
-            <td>SSC</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester6" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="6" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Slumber State Capable</td>
-            <td>
-                <button id="radix-button6" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="6" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[15]</td>
-            <td>PMD</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester7" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="7" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>PIO Multiple DRQ Block</td>
-            <td>
-                <button id="radix-button7" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="7" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[16]</td>
-            <td>FBSS</td>
-            <td>r</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester8" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="8" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>FIS-based Switching Supported</td>
-            <td>
-                <button id="radix-button8" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="8" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[17]</td>
-            <td>SPM</td>
-            <td>r</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester9" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="9" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports Port Multiplier</td>
-            <td>
-                <button id="radix-button9" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="9" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[18]</td>
-            <td>SAM</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester10" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="10" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports AHCI mode only</td>
-            <td>
-                <button id="radix-button10" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="10" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[19]</td>
-            <td>SNZO</td>
-            <td>r</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester11" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="11" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports Non-Zero DMA Offsets</td>
-            <td>
-                <button id="radix-button11" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="11" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[23:20]</td>
-            <td>ISS</td>
-            <td>r</td>
-            <td>0x3
-            </td>
-            <td>
-                <input id="field-value-tester12" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="12" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Interface Speed Support</td>
-            <td>
-                <button id="radix-button12" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="12" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[24]</td>
-            <td>SCLO</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester13" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="13" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports Command List Override</td>
-            <td>
-                <button id="radix-button13" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="13" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[25]</td>
-            <td>SAL</td>
-            <td>r</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester14" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="14" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports Activity LED</td>
-            <td>
-                <button id="radix-button14" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="14" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[26]</td>
-            <td>SALP</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester15" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="15" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports Aggressive Link Power Management</td>
-            <td>
-                <button id="radix-button15" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="15" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[27]</td>
-            <td>SSS</td>
-            <td>r</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester16" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="16" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports Staggered Spin-up</td>
-            <td>
-                <button id="radix-button16" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="16" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[28]</td>
-            <td>SMPS</td>
-            <td>r</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester17" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="17" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports Mechanical Presence Switch</td>
-            <td>
-                <button id="radix-button17" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="17" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[29]</td>
-            <td>SSNTF</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester18" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="18" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports SNotification Register</td>
-            <td>
-                <button id="radix-button18" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="18" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[30]</td>
-            <td>SNCQ</td>
-            <td>r</td>
-            <td>0x1
-            </td>
-            <td>
-                <input id="field-value-tester19" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="19" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports Native Command Queuing</td>
-            <td>
-                <button id="radix-button19" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="19" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        <tr>
-            <td>[31]</td>
-            <td>S64A</td>
-            <td>r</td>
-            <td>0x0
-            </td>
-            <td>
-                <input id="field-value-tester20" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="20" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>Supports 64-bit Addressing</td>
-            <td>
-                <button id="radix-button20" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="20" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-    </table>
-    <p>
-        <label>
-            Encoded Register Value:
-            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
-            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
-        </label>
-    </p>
-</form>
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Decoded</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>[4:0]</td>
+        <td>NP</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester0" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="0" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Number of Ports</td>
+        <td>
+            <button type="button" id="radix-button0" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="0" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[5]</td>
+        <td>SXS</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester1" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="1" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports External SATA</td>
+        <td>
+            <button type="button" id="radix-button1" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="1" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[6]</td>
+        <td>EMS</td>
+        <td>r</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester2" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="2" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Enclosure Management Supported</td>
+        <td>
+            <button type="button" id="radix-button2" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="2" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[7]</td>
+        <td>CCCS</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester3" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="3" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Command Completion Coalescing Supported</td>
+        <td>
+            <button type="button" id="radix-button3" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="3" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[12:8]</td>
+        <td>NCS</td>
+        <td>r</td>
+        <td>0x1f
+        </td>
+        <td>
+            <input id="field-value-tester4" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="4" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Number of Command Slots</td>
+        <td>
+            <button type="button" id="radix-button4" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="4" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[13]</td>
+        <td>PSC</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester5" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="5" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Partial State Capable</td>
+        <td>
+            <button type="button" id="radix-button5" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="5" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[14]</td>
+        <td>SSC</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester6" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="6" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Slumber State Capable</td>
+        <td>
+            <button type="button" id="radix-button6" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="6" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[15]</td>
+        <td>PMD</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester7" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="7" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>PIO Multiple DRQ Block</td>
+        <td>
+            <button type="button" id="radix-button7" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="7" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[16]</td>
+        <td>FBSS</td>
+        <td>r</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester8" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="8" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>FIS-based Switching Supported</td>
+        <td>
+            <button type="button" id="radix-button8" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="8" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[17]</td>
+        <td>SPM</td>
+        <td>r</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester9" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="9" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports Port Multiplier</td>
+        <td>
+            <button type="button" id="radix-button9" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="9" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[18]</td>
+        <td>SAM</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester10" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="10" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports AHCI mode only</td>
+        <td>
+            <button type="button" id="radix-button10" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="10" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[19]</td>
+        <td>SNZO</td>
+        <td>r</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester11" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="11" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports Non-Zero DMA Offsets</td>
+        <td>
+            <button type="button" id="radix-button11" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="11" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[23:20]</td>
+        <td>ISS</td>
+        <td>r</td>
+        <td>0x3
+        </td>
+        <td>
+            <input id="field-value-tester12" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="12" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Interface Speed Support</td>
+        <td>
+            <button type="button" id="radix-button12" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="12" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[24]</td>
+        <td>SCLO</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester13" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="13" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports Command List Override</td>
+        <td>
+            <button type="button" id="radix-button13" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="13" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[25]</td>
+        <td>SAL</td>
+        <td>r</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester14" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="14" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports Activity LED</td>
+        <td>
+            <button type="button" id="radix-button14" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="14" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[26]</td>
+        <td>SALP</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester15" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="15" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports Aggressive Link Power Management</td>
+        <td>
+            <button type="button" id="radix-button15" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="15" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[27]</td>
+        <td>SSS</td>
+        <td>r</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester16" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="16" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports Staggered Spin-up</td>
+        <td>
+            <button type="button" id="radix-button16" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="16" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[28]</td>
+        <td>SMPS</td>
+        <td>r</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester17" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="17" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports Mechanical Presence Switch</td>
+        <td>
+            <button type="button" id="radix-button17" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="17" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[29]</td>
+        <td>SSNTF</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester18" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="18" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports SNotification Register</td>
+        <td>
+            <button type="button" id="radix-button18" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="18" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[30]</td>
+        <td>SNCQ</td>
+        <td>r</td>
+        <td>0x1
+        </td>
+        <td>
+            <input id="field-value-tester19" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="19" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports Native Command Queuing</td>
+        <td>
+            <button type="button" id="radix-button19" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="19" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    <tr>
+        <td>[31]</td>
+        <td>S64A</td>
+        <td>r</td>
+        <td>0x0
+        </td>
+        <td>
+            <input id="field-value-tester20" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="20" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>Supports 64-bit Addressing</td>
+        <td>
+            <button type="button" id="radix-button20" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="20" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+</table>
+<p>
+    <label>
+        Encoded Register Value:
+        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+    </label>
+</p>
 <hr/><h2>Field Descriptions</h2>
 
 <h3>NP - Number of Ports</h3>

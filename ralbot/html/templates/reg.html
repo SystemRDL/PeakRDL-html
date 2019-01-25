@@ -1,63 +1,61 @@
 {% extends "base.html" %}
 
 {%- block content -%}
-<form>
-    <table border="1">
-        <tr>
-            <th>Bits</th>
-            <th>Identifier</th>
-            <th>Access</th>
-            <th>Reset</th>
-            <th>Decoded</th>
-            <th>Name</th>
-            <th></th>
-        </tr>
-        {%- for field in node.fields() %}
-        <tr>
-            {%- if field.inst.msb == field.inst.lsb %}
-            <td>[{{field.inst.lsb}}]</td>
-            {%- else %}
-            <td>[{{field.inst.msb}}:{{field.inst.lsb}}]</td>
+<table border="1">
+    <tr>
+        <th>Bits</th>
+        <th>Identifier</th>
+        <th>Access</th>
+        <th>Reset</th>
+        <th>Decoded</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    {%- for field in node.fields() %}
+    <tr>
+        {%- if field.inst.msb == field.inst.lsb %}
+        <td>[{{field.inst.lsb}}]</td>
+        {%- else %}
+        <td>[{{field.inst.msb}}:{{field.inst.lsb}}]</td>
+        {%- endif %}
+        <td>{{field.inst.inst_name}}</td>
+        <td>
+            {{- field.get_property("sw").name -}}
+            {%- if field.get_property("onread") -%}
+                , {{ field.get_property("onread").name -}}
+            {%- endif -%}
+            {%- if field.get_property("onwrite") -%}
+                , {{ field.get_property("onwrite").name -}}
+            {%- endif -%}
+        </td>
+        <td>
+            {%- if field.get_property("reset") != None -%}
+            {{"0x%x" % field.get_property("reset")}}
+            {%- else -%}
+            -
             {%- endif %}
-            <td>{{field.inst.inst_name}}</td>
-            <td>
-                {{- field.get_property("sw").name -}}
-                {%- if field.get_property("onread") -%}
-                    , {{ field.get_property("onread").name -}}
-                {%- endif -%}
-                {%- if field.get_property("onwrite") -%}
-                    , {{ field.get_property("onwrite").name -}}
-                {%- endif -%}
-            </td>
-            <td>
-                {%- if field.get_property("reset") != None -%}
-                {{"0x%x" % field.get_property("reset")}}
-                {%- else -%}
-                -
-                {%- endif %}
-            </td>
-            <td>
-                <input id="field-value-tester{{loop.index0}}" class="field-value-tester"
-                    type="text" autocomplete="off"
-                    data-idx="{{loop.index0}}" oninput="onDecodedFieldInput(this)"/>
-            </td>
-            <td>{{field.get_property("name", default="-")}}</td>
-            <td>
-                <button id="radix-button{{loop.index0}}" class="radix-button"
-                    title="Switch radix" aria-label="Switch radix"
-                    data-idx="{{loop.index0}}" onclick="onRadixSwitch(this)">H</button>
-            </td>
-        </tr>
-        {%- endfor %}
-    </table>
-    <p>
-        <label>
-            Encoded Register Value:
-            <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
-            <button class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
-        </label>
-    </p>
-</form>
+        </td>
+        <td>
+            <input id="field-value-tester{{loop.index0}}" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="{{loop.index0}}" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>{{field.get_property("name", default="-")}}</td>
+        <td>
+            <button type="button" id="radix-button{{loop.index0}}" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="{{loop.index0}}" onclick="onRadixSwitch(this)">H</button>
+        </td>
+    </tr>
+    {%- endfor %}
+</table>
+<p>
+    <label>
+        Encoded Register Value:
+        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+    </label>
+</p>
 
 {%- for field in node.fields() if (has_description(field) or has_enum_encoding(field)) %}
 {%- if loop.first %}

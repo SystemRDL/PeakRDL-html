@@ -15,6 +15,7 @@ function load_page(id) {
             update_rdlfc_indexes();
             if(is_register(id)) {
                 reset_field_inputs();
+                init_radix_buttons();
             }
             document.getElementById("content").parentElement.scrollTop = 0;
         } else {
@@ -234,6 +235,13 @@ function onRadixSwitch(el){
     el.innerHTML = d;
     RALIndex[CurrentID].fields[idx].disp = d;
     update_field_value_tester(idx);
+}
+
+function init_radix_buttons(){
+    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
+        var el = document.getElementById("radix-button" + i);
+        el.innerHTML = RALIndex[CurrentID].fields[i].disp;
+    }
 }
 
 function onDecodedFieldInput(el){
