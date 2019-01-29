@@ -2,7 +2,7 @@
 <h1>EM_LOC</h1>
 
 <dl class="node-info">
-    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x1c</dd>
 </dl>
 <h2>Description</h2>
@@ -20,38 +20,38 @@ management message buffer.</p>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr>
+    <tr id="SZ">
         <td>[15:0]</td>
-        <td>SZ</td>
+        <td><a href="#SZ.desc">SZ</a></td>
         <td>r</td>
         <td>0x0
         </td>
         <td>
-            <input id="field-value-tester0" class="field-value-tester"
+            <input id="_FieldValueTester0" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="0" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>Buffer Size</td>
         <td>
-            <button type="button" id="radix-button0" class="radix-button"
+            <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
         </td>
     </tr>
-    <tr>
+    <tr id="OFST">
         <td>[31:16]</td>
-        <td>OFST</td>
+        <td><a href="#OFST.desc">OFST</a></td>
         <td>r</td>
         <td>0x0
         </td>
         <td>
-            <input id="field-value-tester1" class="field-value-tester"
+            <input id="_FieldValueTester1" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="1" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>Offset</td>
         <td>
-            <button type="button" id="radix-button1" class="radix-button"
+            <button type="button" id="_RadixButton1" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="1" onclick="onRadixSwitch(this)">H</button>
         </td>
@@ -60,20 +60,24 @@ management message buffer.</p>
 <p>
     <label>
         Encoded Register Value:
-        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
 </p>
 <hr/><h2>Field Descriptions</h2>
 
-<h3>SZ - Buffer Size</h3>
+<h3 id="SZ.desc">SZ - Buffer Size
+    <a class="headerlink" href="#SZ.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>Specifies the size of the transmit message buffer area in Dwords. If
 both transmit and receive buffers are supported, then the transmit buffer begins at
 ABAR[EM_LOC.OFST*4] and the receive buffer directly follows it. If both transmit and
 receive buffers are supported, both buffers are of the size indicated in the Buffer Size
 field. A value of '0' is invalid.</p>
 
-<h3>OFST - Offset</h3>
+<h3 id="OFST.desc">OFST - Offset
+    <a class="headerlink" href="#OFST.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>The offset of the message buffer in Dwords from the beginning of the
 ABAR.</p>
 </div>

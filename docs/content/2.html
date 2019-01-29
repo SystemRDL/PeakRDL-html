@@ -2,7 +2,7 @@
 <h1>GHC</h1>
 
 <dl class="node-info">
-    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x4</dd>
 </dl>
 <h2>Description</h2>
@@ -19,74 +19,74 @@
         <th>Name</th>
         <th></th>
     </tr>
-    <tr>
+    <tr id="HR">
         <td>[0]</td>
-        <td>HR</td>
+        <td><a href="#HR.desc">HR</a></td>
         <td>rw</td>
         <td>0x0
         </td>
         <td>
-            <input id="field-value-tester0" class="field-value-tester"
+            <input id="_FieldValueTester0" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="0" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>HBA Reset</td>
         <td>
-            <button type="button" id="radix-button0" class="radix-button"
+            <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
         </td>
     </tr>
-    <tr>
+    <tr id="IE">
         <td>[1]</td>
-        <td>IE</td>
+        <td><a href="#IE.desc">IE</a></td>
         <td>rw</td>
         <td>0x0
         </td>
         <td>
-            <input id="field-value-tester1" class="field-value-tester"
+            <input id="_FieldValueTester1" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="1" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>Interrupt Enable</td>
         <td>
-            <button type="button" id="radix-button1" class="radix-button"
+            <button type="button" id="_RadixButton1" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="1" onclick="onRadixSwitch(this)">H</button>
         </td>
     </tr>
-    <tr>
+    <tr id="MRSM">
         <td>[2]</td>
-        <td>MRSM</td>
+        <td><a href="#MRSM.desc">MRSM</a></td>
         <td>r</td>
         <td>0x0
         </td>
         <td>
-            <input id="field-value-tester2" class="field-value-tester"
+            <input id="_FieldValueTester2" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="2" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>MSI Revert to Single Message</td>
         <td>
-            <button type="button" id="radix-button2" class="radix-button"
+            <button type="button" id="_RadixButton2" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="2" onclick="onRadixSwitch(this)">H</button>
         </td>
     </tr>
-    <tr>
+    <tr id="AE">
         <td>[31]</td>
-        <td>AE</td>
+        <td><a href="#AE.desc">AE</a></td>
         <td>r</td>
         <td>0x1
         </td>
         <td>
-            <input id="field-value-tester3" class="field-value-tester"
+            <input id="_FieldValueTester3" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="3" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>AHCI Enable</td>
         <td>
-            <button type="button" id="radix-button3" class="radix-button"
+            <button type="button" id="_RadixButton3" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="3" onclick="onRadixSwitch(this)">H</button>
         </td>
@@ -95,13 +95,15 @@
 <p>
     <label>
         Encoded Register Value:
-        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
 </p>
 <hr/><h2>Field Descriptions</h2>
 
-<h3>HR - HBA Reset</h3>
+<h3 id="HR.desc">HR - HBA Reset
+    <a class="headerlink" href="#HR.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>When set by SW, this bit causes an internal reset of the HBA. All
 state machines that relate to data transfers and queuing shall return to an idle
 condition, and all ports shall be re-initialized via COMRESET (if staggered spin-up is
@@ -112,12 +114,16 @@ When the HBA has performed the reset action, it shall reset this bit to '0'.</p>
 <p>A software write of '0' shall have no effect.
 For a description on which bits are reset when this bit is set, see section 10.4.3.</p>
 
-<h3>IE - Interrupt Enable</h3>
+<h3 id="IE.desc">IE - Interrupt Enable
+    <a class="headerlink" href="#IE.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>This global bit enables interrupts from the HBA. When cleared
 (reset default), all interrupt sources from all ports are disabled. When set, interrupts are
 enabled.</p>
 
-<h3>MRSM - MSI Revert to Single Message</h3>
+<h3 id="MRSM.desc">MRSM - MSI Revert to Single Message
+    <a class="headerlink" href="#MRSM.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>When set to '1' by hardware, indicates that
 the HBA requested more than one MSI vector but has reverted to using the first vector
 only.</p>
@@ -140,7 +146,9 @@ false. This bit is also cleared to '0' when MC.MSIE = '1' and MC.MME = 0h. In th
 case, the hardware has been programmed to use single MSI mode, and is not
 reverting to that mode.</p>
 
-<h3>AE - AHCI Enable</h3>
+<h3 id="AE.desc">AE - AHCI Enable
+    <a class="headerlink" href="#AE.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>When set, indicates that communication to the HBA shall be via
 AHCI mechanisms. This can be used by an HBA that supports both legacy
 mechanisms (such as SFF-8038i) and AHCI to know when the HBA is running under an

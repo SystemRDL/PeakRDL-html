@@ -12,13 +12,19 @@
         <th></th>
     </tr>
     {%- for field in node.fields() %}
-    <tr>
+    <tr id="{{field.inst.inst_name}}">
         {%- if field.inst.msb == field.inst.lsb %}
         <td>[{{field.inst.lsb}}]</td>
         {%- else %}
         <td>[{{field.inst.msb}}:{{field.inst.lsb}}]</td>
         {%- endif %}
-        <td>{{field.inst.inst_name}}</td>
+        <td>
+            {%- if (has_description(field) or has_enum_encoding(field)) -%}
+                <a href="#{{field.inst.inst_name}}.desc">{{field.inst.inst_name}}</a>
+            {%- else -%}
+                {{- field.inst.inst_name -}}
+            {%- endif -%}
+        </td>
         <td>
             {{- field.get_property("sw").name -}}
             {%- if field.get_property("onread") -%}
@@ -36,13 +42,13 @@
             {%- endif %}
         </td>
         <td>
-            <input id="field-value-tester{{loop.index0}}" class="field-value-tester"
+            <input id="_FieldValueTester{{loop.index0}}" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="{{loop.index0}}" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>{{field.get_property("name", default="-")}}</td>
         <td>
-            <button type="button" id="radix-button{{loop.index0}}" class="radix-button"
+            <button type="button" id="_RadixButton{{loop.index0}}" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="{{loop.index0}}" onclick="onRadixSwitch(this)">H</button>
         </td>
@@ -52,7 +58,7 @@
 <p>
     <label>
         Encoded Register Value:
-        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
 </p>

@@ -2,7 +2,7 @@
 <h1>Command Completion Coalescing Control</h1>
 
 <dl class="node-info">
-    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x14</dd>
 </dl>
 <h2>Description</h2>
@@ -23,74 +23,74 @@ state values that directly correspond to these variables.</p>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr>
+    <tr id="EN">
         <td>[0]</td>
-        <td>EN</td>
+        <td><a href="#EN.desc">EN</a></td>
         <td>rw</td>
         <td>0x0
         </td>
         <td>
-            <input id="field-value-tester0" class="field-value-tester"
+            <input id="_FieldValueTester0" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="0" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>Enable</td>
         <td>
-            <button type="button" id="radix-button0" class="radix-button"
+            <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
         </td>
     </tr>
-    <tr>
+    <tr id="INT">
         <td>[7:3]</td>
-        <td>INT</td>
+        <td><a href="#INT.desc">INT</a></td>
         <td>r</td>
         <td>0x6
         </td>
         <td>
-            <input id="field-value-tester1" class="field-value-tester"
+            <input id="_FieldValueTester1" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="1" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>Interrupt</td>
         <td>
-            <button type="button" id="radix-button1" class="radix-button"
+            <button type="button" id="_RadixButton1" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="1" onclick="onRadixSwitch(this)">H</button>
         </td>
     </tr>
-    <tr>
+    <tr id="CC">
         <td>[15:8]</td>
-        <td>CC</td>
+        <td><a href="#CC.desc">CC</a></td>
         <td>rw</td>
         <td>0x1
         </td>
         <td>
-            <input id="field-value-tester2" class="field-value-tester"
+            <input id="_FieldValueTester2" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="2" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>Command Completions</td>
         <td>
-            <button type="button" id="radix-button2" class="radix-button"
+            <button type="button" id="_RadixButton2" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="2" onclick="onRadixSwitch(this)">H</button>
         </td>
     </tr>
-    <tr>
+    <tr id="TV">
         <td>[31:16]</td>
-        <td>TV</td>
+        <td><a href="#TV.desc">TV</a></td>
         <td>rw</td>
         <td>0x1
         </td>
         <td>
-            <input id="field-value-tester3" class="field-value-tester"
+            <input id="_FieldValueTester3" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="3" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>Timeout Value</td>
         <td>
-            <button type="button" id="radix-button3" class="radix-button"
+            <button type="button" id="_RadixButton3" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="3" onclick="onRadixSwitch(this)">H</button>
         </td>
@@ -99,13 +99,15 @@ state values that directly correspond to these variables.</p>
 <p>
     <label>
         Encoded Register Value:
-        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
 </p>
 <hr/><h2>Field Descriptions</h2>
 
-<h3>EN - Enable</h3>
+<h3 id="EN.desc">EN - Enable
+    <a class="headerlink" href="#EN.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>When cleared to '0', the command completion coalescing feature is
 disabled and no CCC interrupts are generated. When set to '1', the command
 completion coalescing feature is enabled and CCC interrupts may be generated based
@@ -113,14 +115,18 @@ on timeout or command completion conditions. Software shall only change the cont
 of the TV and CC fields when EN is cleared to '0'. On transition of this bit from '0' to '1',
 any updated values for the TV and CC fields shall take effect.</p>
 
-<h3>INT - Interrupt</h3>
+<h3 id="INT.desc">INT - Interrupt
+    <a class="headerlink" href="#INT.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>Specifies the interrupt used by the CCC feature. This interrupt must be
 marked as unused in the Ports Implemented (PI) register by the corresponding bit being
 set to '0'. Thus, the CCC interrupt corresponds to the interrupt for an unimplemented
 port on the controller. When a CCC interrupt occurs, the IS.IPS[INT] bit shall be
 asserted to '1'. This field also specifies the interrupt vector used for MSI.</p>
 
-<h3>CC - Command Completions</h3>
+<h3 id="CC.desc">CC - Command Completions
+    <a class="headerlink" href="#CC.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>Specifies the number of command completions that are
 necessary to cause a CCC interrupt. The HBA has an internal command completion
 counter, hCccComplete.</p>
@@ -132,7 +138,9 @@ counter is reset to '0' on the assertion of each CCC interrupt.</p>
 shall disable CCC interrupts being generated based on the number of commands
 completed, i.e. CCC interrupts are only generated based on the timer in this case.</p>
 
-<h3>TV - Timeout Value</h3>
+<h3 id="TV.desc">TV - Timeout Value
+    <a class="headerlink" href="#TV.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>The timeout value is specified in 1 millisecond intervals. The timer
 accuracy shall be within 5%. hCccTimer is loaded with this timeout value. hCccTimer is
 only decremented when commands are outstanding on selected ports, as defined in

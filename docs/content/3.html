@@ -2,7 +2,7 @@
 <h1>IS</h1>
 
 <dl class="node-info">
-    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x8</dd>
 </dl>
 <h2>Description</h2>
@@ -20,20 +20,20 @@ service.</p>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr>
+    <tr id="IPS">
         <td>[4:0]</td>
-        <td>IPS</td>
+        <td><a href="#IPS.desc">IPS</a></td>
         <td>rw</td>
         <td>0x1
         </td>
         <td>
-            <input id="field-value-tester0" class="field-value-tester"
+            <input id="_FieldValueTester0" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="0" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>Interrupt Pending Status</td>
         <td>
-            <button type="button" id="radix-button0" class="radix-button"
+            <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
         </td>
@@ -42,13 +42,15 @@ service.</p>
 <p>
     <label>
         Encoded Register Value:
-        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
 </p>
 <hr/><h2>Field Descriptions</h2>
 
-<h3>IPS - Interrupt Pending Status</h3>
+<h3 id="IPS.desc">IPS - Interrupt Pending Status
+    <a class="headerlink" href="#IPS.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>If set, indicates that the corresponding port has an
 interrupt pending. Software can use this information to determine which ports require
 service after an interrupt.

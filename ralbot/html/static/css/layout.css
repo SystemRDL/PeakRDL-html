@@ -7,12 +7,12 @@ button {
     cursor: pointer;
 }
 
-#sidebar {
+#_Sidebar {
     height: 100%;
     width: 19em;
 }
 
-#main-pane {
+#MainPane {
     height: 100%;
 }
 
@@ -52,7 +52,7 @@ button {
     flex-shrink: 0;
 }
 
-#overlay {
+#_Overlay {
     width: 100%;
     height: 100%;
     position:absolute;
@@ -62,7 +62,7 @@ button {
     cursor:pointer;
 }
 
-#idx-edit-modal {
+#_IdxEditModal {
     display: none; /* Hidden by default */
     position: fixed;
     z-index: 1;
@@ -73,7 +73,7 @@ button {
 }
 
 /* arrow thingy on top of modal */
-#idx-edit-modal::before {
+#_IdxEditModal::before {
     content: "";
     width: 0em;
     height: 0em;
@@ -84,7 +84,7 @@ button {
     border-bottom: 0.625em solid;
 }
 
-#idx-edit-input {
+#_IdxEditInput {
     width: 4.375em;
 }
 
@@ -92,50 +92,50 @@ button {
     cursor:pointer;
 }
 
-#search-results{
+#_SearchResults{
     margin: 0em;
 }
 
-#search-results li{
+#_SearchResults li{
     cursor:pointer;
 }
 
-#search, #search-bar{
+#_Search, #_SearchBar{
     display: none;
 }
 
-#search-input {
+#_SearchInput {
     width: 100%;
 }
 
 /* Mobile mode */
-#sidebar {
+#_Sidebar {
     display: none;
     position: absolute;
     z-index: 3;
 }
 
-#sb-search-button {
+#_SBSearchButton {
     display: none;
 }
 
 
 /* Desktop mode */
 @media (min-width:950px){
-    #sidebar {
+    #_Sidebar {
         position: static;
         display: flex!important;
         z-index: 0;
     }
-    #sb-search-button {
+    #_SBSearchButton {
         display: block;
     }
     
-    #mobi-titlebar {
+    #_MobiTitlebar {
         display:none;
     }
     
-    #overlay {
+    #_Overlay {
         display: none!important;
     }
     

@@ -1,9 +1,15 @@
+
+function init_tree() {
+    var el = document.getElementById("_SBTree");
+    add_tree_node(el, 0);
+}
+
 function add_tree_node(parent_el, id){
     var node = RALIndex[id];
     
     var div;
     div = document.createElement("div");
-    div.id = "node" + id;
+    div.id = "_SBNode" + id;
     div.dataset.id = id;
     div.className = "node";
     parent_el.appendChild(div);
@@ -47,11 +53,6 @@ function add_tree_node(parent_el, id){
     }
 }
 
-function init_tree() {
-    var el = document.getElementById("sb-tree");
-    add_tree_node(el, 0);
-}
-
 function select_tree_node() {
     var id = CurrentID;
     // Changes the selected tree node
@@ -59,12 +60,12 @@ function select_tree_node() {
     for(var i=selected.length-1; i>=0; i--){
         selected[i].classList.remove("selected");
     }
-    var el = document.getElementById("node" + id);
+    var el = document.getElementById("_SBNode" + id);
     el.classList.add("selected");
 }
 
 function open_tree_node(id) {
-    var el = document.getElementById("node" + id);
+    var el = document.getElementById("_SBNode" + id);
     if(el.classList.contains("leaf")) return;
     
     el.classList.add("open")
@@ -72,7 +73,7 @@ function open_tree_node(id) {
 }
 
 function close_tree_node(id) {
-    var el = document.getElementById("node" + id);
+    var el = document.getElementById("_SBNode" + id);
     if(el.classList.contains("leaf")) return;
     
     el.classList.add("closed")
@@ -92,8 +93,8 @@ function expand_to_tree_node() {
 }
 
 function scroll_to_tree_node(id) {
-    var node_el = document.getElementById("node" + id);
-    var tree_el = document.getElementById("sb-tree");
+    var node_el = document.getElementById("_SBNode" + id);
+    var tree_el = document.getElementById("_SBTree");
     
     var node_rect = node_el.getBoundingClientRect();
     var tree_rect = tree_el.getBoundingClientRect();
@@ -106,13 +107,13 @@ function scroll_to_tree_node(id) {
 }
 
 function sidebar_open() {
-    document.getElementById("sidebar").style.display = "flex";
-    document.getElementById("overlay").style.display = "block";
+    document.getElementById("_Sidebar").style.display = "flex";
+    document.getElementById("_Overlay").style.display = "block";
 }
 
 function sidebar_close() {
-    document.getElementById("sidebar").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
+    document.getElementById("_Sidebar").style.display = "none";
+    document.getElementById("_Overlay").style.display = "none";
 }
 
 function onClickTreeFold(ev) {
@@ -145,10 +146,11 @@ function onClickTreeLink(ev) {
     }
     
     reset_indexes_to_next(id);
-    load_page(id);
-    select_tree_node();
-    refresh_url();
-    refresh_title();
+    load_page(id, function (){
+        select_tree_node();
+        refresh_url();
+        refresh_title();
+    });
     return(false);
 }
 

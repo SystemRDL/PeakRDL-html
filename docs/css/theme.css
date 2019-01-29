@@ -87,6 +87,11 @@ code {
 input.invalid {
     background-color: #f99;
 }
+
+:target, :target td {
+    background-color: #f1c40f!important;
+}
+
 /* ------------------------------- Button Icons ----------------------------- */
 
 .expand-button::before {
@@ -138,11 +143,11 @@ input.invalid {
 }
 
 /* --------------------------------- Sidebar -------------------------------- */
-#sb-titlebar {
+#_SBTitlebar {
     background-color: rgb(41, 128, 185);
 }
 
-#sb-titlebox {
+#_SBTitlebox {
     font-size: 1.125em;
     font-weight: bold;
     text-align: center;
@@ -173,13 +178,13 @@ input.invalid {
     border: none;
 }
 
-#sb-tree {
+#_SBTree {
     background-color: #303030;
     color: #d9d9d9;
     padding-top: 0.5em;
 }
 
-#sb-tree a {
+#_SBTree a {
     color: inherit;
 }
 
@@ -240,12 +245,12 @@ input.invalid {
 }
 
 /* ----------------------------- Mobile Titlebar ---------------------------- */
-#mobi-titlebar {
+#_MobiTitlebar {
     background-color: rgb(41, 128, 185);
     color: #fff;
 }
 
-#mobi-titlebox {
+#_MobiTitlebox {
     vertical-align: middle;
     font-size: 1.125em;
     font-weight: bold;
@@ -253,7 +258,7 @@ input.invalid {
     line-height: 2em;
 }
 
-#mobi-titlebar button{
+#_MobiTitlebar button{
     background-color: inherit;
     border: none;
     font-size: 1.5em;
@@ -266,14 +271,11 @@ input.invalid {
     padding: 0em;
 }
 
-#mobi-titlebar button:hover{
+#_MobiTitlebar button:hover{
     background-color: #2e8ece;
     border: none;
 }
 /* ------------------------------- Main Window ------------------------------ */
-
-#content-container {
-}
 
 .main {
     background-color: #fff;
@@ -281,7 +283,7 @@ input.invalid {
     padding-right: 1.875em;
 }
 
-#crumbtrail {
+#_Crumbtrail {
     padding-top: 0.875em;
 }
 
@@ -323,7 +325,7 @@ input.field-value-tester {
     width: 7em;
 }
 
-input#reg-value-tester {
+input#_RegValueTester {
     border: solid 1px #aaa;
     padding: 0.25em 0.5em;
     width: 8em;
@@ -334,36 +336,54 @@ footer {
     color: #808080;
 }
 
+.headerlink {
+    visibility: hidden;
+}
+
+.headerlink::after {
+    font-family: "Font Awesome 5 Free";
+    font-size: 0.75em;
+    font-weight: bold;
+    content: "\f0c1";
+}
+
+h1:hover .headerlink::after,
+h2:hover .headerlink::after,
+h3:hover .headerlink::after,
+h4:hover .headerlink::after {
+    visibility: visible;
+}
+
 /* --------------------------------- Search --------------------------------- */
-#search-bar {
+#_SearchBar {
     padding-top: 0.875em;
     padding-bottom: 0.875em;
 }
 
-#search-bar input {
+#_SearchBar input {
     border: solid 1px #aaa;
     padding: 0.5em 1em;
     font-size: 1.125em;
 }
 
 
-#search-results {
+#_SearchResults {
     padding: 0em;
     width: 100%;
 }
 
-#search-results li:first-child {
+#_SearchResults li:first-child {
     border-top: solid 1px #e1e4e5;
 }
 
-#search-results li {
+#_SearchResults li {
     display: block;
     width: 100%;
     padding: 0.5em 0em;
     border-bottom: solid 1px #e1e4e5;
 }
 
-#search-results .selected {
+#_SearchResults .selected {
     background-color: #f3f6f6;
     /*background-color: #ddd;*/
 }
@@ -373,21 +393,21 @@ mark {
 }
 
 /* --------------------------- Index Editor Modal --------------------------- */
-#idx-edit-modal {
+#_IdxEditModal {
     background-color: #2e8ece;
     box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 6px 1px;
 }
 
-#idx-edit-modal::before {
+#_IdxEditModal::before {
     border-bottom-color: #2e8ece;
 }
 
-#idx-edit-input {
+#_IdxEditInput {
     border: solid 1px #2472a4;
     padding: 0.25em 0.5em;
 }
 
-#idx-edit-range {
+#_IdxEditRange {
     color: #fff;
 }
 

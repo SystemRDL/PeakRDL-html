@@ -2,7 +2,7 @@
 <h1>EM_CTL</h1>
 
 <dl class="node-info">
-    <dt>Absolute Address:</dt><dd id="abs-addr" class="address"></dd>
+    <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x20</dd>
 </dl>
 <h2>Description</h2>
@@ -22,20 +22,20 @@ messages</p>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr>
+    <tr id="ATTR_SMB">
         <td>[24]</td>
-        <td>ATTR_SMB</td>
+        <td><a href="#ATTR_SMB.desc">ATTR_SMB</a></td>
         <td>r</td>
         <td>0x1
         </td>
         <td>
-            <input id="field-value-tester0" class="field-value-tester"
+            <input id="_FieldValueTester0" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="0" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>-</td>
         <td>
-            <button type="button" id="radix-button0" class="radix-button"
+            <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
         </td>
@@ -44,14 +44,15 @@ messages</p>
 <p>
     <label>
         Encoded Register Value:
-        <input id="reg-value-tester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
+        <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
 </p>
 <hr/><h2>Field Descriptions</h2>
 
-<h3>ATTR_SMB</h3>
-
+<h3 id="ATTR_SMB.desc">ATTR_SMB
+    <a class="headerlink" href="#ATTR_SMB.desc" title="Permalink to this headline">¶</a>
+</h3>
 <p>Single Message Buffer (ATTR.SMB): If set to '1', the HBA has one message buffer
 that is shared for messages to transmit and messages received. In this case,
 unsolicited receive messages are not supported and it is software's responsibility to

@@ -8,13 +8,13 @@ function init_index_edit(){
     // Register index edit modal events:
     // ... close if clicking off of it
     window.onclick = function(ev) {
-        var modal_el = document.getElementById('idx-edit-modal');
+        var modal_el = document.getElementById('_IdxEditModal');
         if(!(isDescendant(modal_el, ev.target) || modal_el==ev.target)){
             exitIndexEditModal();
         }
     };
     // ... close if press enter in input. Cancel if esc
-    document.getElementById('idx-edit-input').onkeypress = onIndexEditKeypress;
+    document.getElementById('_IdxEditInput').onkeypress = onIndexEditKeypress;
 }
 
 function onIndexEditKeypress(ev){
@@ -34,8 +34,8 @@ function onIndexEditKeypress(ev){
 function exitIndexEditModal(cancel) {
     if(typeof cancel === "undefined") cancel = false;
     
-    var modal_el = document.getElementById('idx-edit-modal');
-    var input_el = document.getElementById('idx-edit-input');
+    var modal_el = document.getElementById('_IdxEditModal');
+    var input_el = document.getElementById('_IdxEditInput');
     
     if(IndexEditState.active){
         modal_el.style.display = "none";
@@ -63,9 +63,9 @@ function onClickCrumbtrailIdx(ev) {
         exitIndexEditModal();
     }
     
-    var modal_el = document.getElementById('idx-edit-modal');
-    var input_el = document.getElementById('idx-edit-input');
-    var range_el = document.getElementById('idx-edit-range');
+    var modal_el = document.getElementById('_IdxEditModal');
+    var input_el = document.getElementById('_IdxEditInput');
+    var range_el = document.getElementById('_IdxEditRange');
     
     // Show Modal
     modal_el.style.display = "block";

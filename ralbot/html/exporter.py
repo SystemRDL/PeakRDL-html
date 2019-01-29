@@ -88,7 +88,7 @@ class HTMLExporter:
                     'reset': BigInt(field.get_property("reset", default=0)),
                     'disp' : 'H'
                 }
-                
+
                 field_enum = field.get_property("encode")
                 if field_enum is not None:
                     encode = {}
@@ -262,12 +262,12 @@ class BigInt:
         self.v = v
 
 class RALBotJSEncoder(json.JSONEncoder):
-    def default(self, o):
+    def default(self, o): # pylint: disable=method-hidden
         if isinstance(o, BigInt):
             return "@@bigInt('%x',16)@@" % o.v
         else:
             return super().default(o)
-    
+
     def encode(self, o):
         s = super().encode(o)
         s = s.replace('"@@', '')

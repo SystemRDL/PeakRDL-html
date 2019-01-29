@@ -1,14 +1,14 @@
 
 function init_radix_buttons(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var el = document.getElementById("radix-button" + i);
+        var el = document.getElementById("_RadixButton" + i);
         el.innerHTML = RALIndex[CurrentID].fields[i].disp;
     }
 }
 
 function reset_field_inputs(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var el = document.getElementById("field-value-tester" + i);
+        var el = document.getElementById("_FieldValueTester" + i);
         el.value = format_field_value(i, RALIndex[CurrentID].fields[i].reset);
     }
     update_reg_value_tester();
@@ -27,18 +27,18 @@ function update_reg_value_tester(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
         var msb = RALIndex[CurrentID].fields[i].msb;
         var lsb = RALIndex[CurrentID].fields[i].lsb;
-        var el = document.getElementById("field-value-tester" + i);
+        var el = document.getElementById("_FieldValueTester" + i);
         var value = toBigInt(el.value);
         var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
         value = value.and(mask);
         reg_value = reg_value.add(value.shiftLeft(lsb));
     }
-    var reg_el = document.getElementById("reg-value-tester");
+    var reg_el = document.getElementById("_RegValueTester");
     reg_el.value = "0x" + reg_value.toString(16);
 }
 
 function update_field_value_tester(idx){
-    var reg_el = document.getElementById("reg-value-tester");
+    var reg_el = document.getElementById("_RegValueTester");
     var reg_value = toBigInt(reg_el.value);
 
     var msb = RALIndex[CurrentID].fields[idx].msb;
@@ -46,7 +46,7 @@ function update_field_value_tester(idx){
     var value = reg_value.shiftRight(lsb);
     var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
     value = value.and(mask);
-    var el = document.getElementById("field-value-tester" + idx);
+    var el = document.getElementById("_FieldValueTester" + idx);
     el.value = format_field_value(idx, value);
 }
 

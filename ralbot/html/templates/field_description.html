@@ -1,9 +1,12 @@
 {%- import "macros.html" as macros %}
-{% if field.get_property("name", default="") == "" -%}
-    <h3>{{field.inst.inst_name}}</h3>
-{% else -%}
-    <h3>{{field.inst.inst_name}} - {{field.get_property("name")}}</h3>
-{%- endif %}
+<h3 id="{{field.inst.inst_name}}.desc">
+    {%- if field.get_property("name", default="") == "" -%}
+        {{- field.inst.inst_name -}}
+    {%- else -%}
+        {{- field.inst.inst_name}} - {{field.get_property("name") -}}
+    {%- endif %}
+    <a class="headerlink" href="#{{field.inst.inst_name}}.desc" title="Permalink to this headline">¶</a>
+</h3>
 
 {%- if has_description(field) %}
 {{get_description(field,3)|safe}}

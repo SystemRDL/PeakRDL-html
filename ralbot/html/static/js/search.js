@@ -21,18 +21,18 @@ function onSearchButtonClick() {
 }
 
 function open_search(){
-    document.getElementById("search-bar").style.display = "block";
-    document.getElementById("search").style.display = "flex";
-    document.getElementById("content").style.display = "none";
-    document.getElementById("sb-search-button").classList.add("close-button");
-    document.getElementById("sb-search-button").classList.remove("search-button");
-    document.getElementById("mobi-search-button").classList.add("close-button");
-    document.getElementById("mobi-search-button").classList.remove("search-button");
+    document.getElementById("_SearchBar").style.display = "block";
+    document.getElementById("_Search").style.display = "flex";
+    document.getElementById("_Content").style.display = "none";
+    document.getElementById("_SBSearchButton").classList.add("close-button");
+    document.getElementById("_SBSearchButton").classList.remove("search-button");
+    document.getElementById("_MobiSearchButton").classList.add("close-button");
+    document.getElementById("_MobiSearchButton").classList.remove("search-button");
     SearchState.active = true;
     
     clear_search_results();
     
-    var input_el = document.getElementById('search-input');
+    var input_el = document.getElementById('_SearchInput');
     input_el.onkeydown = onSearchInputKeypress;
     input_el.oninput = onSearchInputUpdate;
     input_el.value = "";
@@ -41,13 +41,13 @@ function open_search(){
 
 function close_search(){
     clear_search_results();
-    document.getElementById("search-bar").style.display = "none";
-    document.getElementById("search").style.display = "none";
-    document.getElementById("content").style.display = "block";
-    document.getElementById("sb-search-button").classList.add("search-button");
-    document.getElementById("sb-search-button").classList.remove("close-button");
-    document.getElementById("mobi-search-button").classList.add("search-button");
-    document.getElementById("mobi-search-button").classList.remove("close-button");
+    document.getElementById("_SearchBar").style.display = "none";
+    document.getElementById("_Search").style.display = "none";
+    document.getElementById("_Content").style.display = "block";
+    document.getElementById("_SBSearchButton").classList.add("search-button");
+    document.getElementById("_SBSearchButton").classList.remove("close-button");
+    document.getElementById("_MobiSearchButton").classList.add("search-button");
+    document.getElementById("_MobiSearchButton").classList.remove("close-button");
     SearchState.active = false;
 }
 
@@ -167,7 +167,7 @@ function do_a_search_chomp(query_sn){
                     var path_with_field = path + "." + RALIndex[id].fields[i].name;
                     text_segments = search_test_path(path_with_field, keywords);
                     if(text_segments != null){
-                        add_search_result(text_segments, id);
+                        add_search_result(text_segments, id, null, RALIndex[id].fields[i].name);
                     }
                 }
             }
@@ -215,7 +215,7 @@ function search_test_path(path, keywords){
 }
 
 function clear_search_results(){
-    var results_el = document.getElementById("search-results");
+    var results_el = document.getElementById("_SearchResults");
     
     var range = document.createRange();
     range.selectNodeContents(results_el);
@@ -225,8 +225,9 @@ function clear_search_results(){
     SearchState.selected_result = null;
 }
 
-function add_search_result(text_segments, id, idx_stack){
+function add_search_result(text_segments, id, idx_stack, anchor){
     if(typeof idx_stack === "undefined") idx_stack = null;
+    if(typeof anchor === "undefined") anchor = "";
     // text_segments is an array of segments that should/shouldn't be highlighted
     // All odd segments are highlighted via <mark> tag.
     // text_segments[0] --> not highlighted
@@ -241,7 +242,7 @@ function add_search_result(text_segments, id, idx_stack){
     result_el.onmouseover = function() {
         onSearchResultMouseover(result_id)
     };
-    document.getElementById("search-results").appendChild(result_el);
+    document.getElementById("_SearchResults").appendChild(result_el);
     
     for(var i=0; i<text_segments.length; i++){
         var el;
@@ -257,7 +258,8 @@ function add_search_result(text_segments, id, idx_stack){
     var result = {
         "id": id,
         "idx_stack": idx_stack,
-        "el": result_el
+        "el": result_el,
+        "anchor": anchor
     };
     SearchState.results.push(result);
 }
@@ -274,20 +276,26 @@ function onSearchResultMouseover(result_id){
 
 function open_search_result(result_id){
     var result = SearchState.results[result_id];
-    
     if(result.idx_stack == null){
         reset_indexes(0, result.id);
     }else{
         apply_idx_stack(result.id, result.idx_stack);
     }
     
+    var hash = "";
+    if(result.anchor != ""){
+        hash = "#" + result.anchor;
+    }
+
     close_search();
-    
-    load_page(result.id);
-    select_tree_node();
-    expand_to_tree_node();
-    open_tree_node(result.id);
-    scroll_to_tree_node(result.id);
-    refresh_url();
-    refresh_title();
+
+    load_page(result.id, function () {
+        select_tree_node();
+        expand_to_tree_node();
+        open_tree_node(result.id);
+        scroll_to_tree_node(result.id);
+        refresh_url(hash);
+        refresh_title();
+        refresh_target_scroll();
+    });
 }
