@@ -80,9 +80,11 @@ function load_page_via_url(){
             open_tree_node(CurrentID);
             scroll_to_tree_node(CurrentID);
             refresh_title();
+            refresh_target_scroll();
         });
+    } else {
+        refresh_target_scroll();
     }
-    refresh_target_scroll();
 }
 
 function onClickNodeLink(ev) {
@@ -112,6 +114,14 @@ function refresh_url(hash) {
     url.searchParams.set("p", path);
     url.hash = hash;
     window.history.pushState({}, "", url.toString())
+}
+
+function patch_url_path() {
+    // refresh only the URL's hier path without affecting history
+    var path = get_path(CurrentID);
+    var url = new URL(window.location.href);
+    url.searchParams.set("p", path);
+    window.history.replaceState({}, "", url.toString())
 }
 
 function refresh_title() {

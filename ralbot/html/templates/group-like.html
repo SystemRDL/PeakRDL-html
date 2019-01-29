@@ -8,7 +8,7 @@
         <th>Name</th>
     </tr>
     {%- for child_id,child in children.items() %}
-    <tr id="child.inst.inst_name">
+    <tr id="{{child.inst.inst_name}}">
         <td class="address">{{"0x%x" % child.inst.addr_offset}}</td>
         <td><a href="?p={{child.get_path(empty_array_suffix='')}}" data-id="{{child_id}}" onclick="onClickNodeLink(event); return(false)">
             {%- if child.inst.is_array -%}
