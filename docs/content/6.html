@@ -39,6 +39,7 @@ state values that directly correspond to these variables.</p>
             <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#EN" title="Permalink to this row"></a>
         </td>
     </tr>
     <tr id="INT">
@@ -57,6 +58,7 @@ state values that directly correspond to these variables.</p>
             <button type="button" id="_RadixButton1" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="1" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#INT" title="Permalink to this row"></a>
         </td>
     </tr>
     <tr id="CC">
@@ -75,6 +77,7 @@ state values that directly correspond to these variables.</p>
             <button type="button" id="_RadixButton2" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="2" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#CC" title="Permalink to this row"></a>
         </td>
     </tr>
     <tr id="TV">
@@ -93,6 +96,7 @@ state values that directly correspond to these variables.</p>
             <button type="button" id="_RadixButton3" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="3" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#TV" title="Permalink to this row"></a>
         </td>
     </tr>
 </table>
@@ -106,7 +110,7 @@ state values that directly correspond to these variables.</p>
 <hr/><h2>Field Descriptions</h2>
 
 <h3 id="EN.desc">EN - Enable
-    <a class="headerlink" href="#EN.desc" title="Permalink to this headline">¶</a>
+    <a class="headerlink" href="#EN.desc" title="Permalink to this headline"></a>
 </h3>
 <p>When cleared to '0', the command completion coalescing feature is
 disabled and no CCC interrupts are generated. When set to '1', the command
@@ -116,7 +120,7 @@ of the TV and CC fields when EN is cleared to '0'. On transition of this bit fro
 any updated values for the TV and CC fields shall take effect.</p>
 
 <h3 id="INT.desc">INT - Interrupt
-    <a class="headerlink" href="#INT.desc" title="Permalink to this headline">¶</a>
+    <a class="headerlink" href="#INT.desc" title="Permalink to this headline"></a>
 </h3>
 <p>Specifies the interrupt used by the CCC feature. This interrupt must be
 marked as unused in the Ports Implemented (PI) register by the corresponding bit being
@@ -125,7 +129,7 @@ port on the controller. When a CCC interrupt occurs, the IS.IPS[INT] bit shall b
 asserted to '1'. This field also specifies the interrupt vector used for MSI.</p>
 
 <h3 id="CC.desc">CC - Command Completions
-    <a class="headerlink" href="#CC.desc" title="Permalink to this headline">¶</a>
+    <a class="headerlink" href="#CC.desc" title="Permalink to this headline"></a>
 </h3>
 <p>Specifies the number of command completions that are
 necessary to cause a CCC interrupt. The HBA has an internal command completion
@@ -139,7 +143,7 @@ shall disable CCC interrupts being generated based on the number of commands
 completed, i.e. CCC interrupts are only generated based on the timer in this case.</p>
 
 <h3 id="TV.desc">TV - Timeout Value
-    <a class="headerlink" href="#TV.desc" title="Permalink to this headline">¶</a>
+    <a class="headerlink" href="#TV.desc" title="Permalink to this headline"></a>
 </h3>
 <p>The timeout value is specified in 1 millisecond intervals. The timer
 accuracy shall be within 5%. hCccTimer is loaded with this timeout value. hCccTimer is

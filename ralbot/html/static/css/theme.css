@@ -88,8 +88,13 @@ input.invalid {
     background-color: #f99;
 }
 
-:target, :target td {
+/*:target, :target td {*/
+.target-highlight, .target-highlight td {
     background-color: #f1c40f!important;
+}
+
+mark {
+    background-color: #f1c40f;
 }
 
 /* ------------------------------- Button Icons ----------------------------- */
@@ -347,10 +352,19 @@ footer {
     content: "\f0c1";
 }
 
+.radix-button {
+
+    font-size: 0.79em;
+    padding: 0em 0.2em;
+    font-weight: bold;
+
+}
+
 h1:hover .headerlink::after,
 h2:hover .headerlink::after,
 h3:hover .headerlink::after,
-h4:hover .headerlink::after {
+h4:hover .headerlink::after,
+tr:hover .headerlink::after {
     visibility: visible;
 }
 
@@ -386,10 +400,6 @@ h4:hover .headerlink::after {
 #_SearchResults .selected {
     background-color: #f3f6f6;
     /*background-color: #ddd;*/
-}
-
-mark {
-    background-color: #f1c40f;
 }
 
 /* --------------------------- Index Editor Modal --------------------------- */

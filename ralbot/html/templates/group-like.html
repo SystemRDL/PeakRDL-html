@@ -6,6 +6,7 @@
         <th>Offset</th>
         <th>Identifier</th>
         <th>Name</th>
+        <th></th>
     </tr>
     {%- for child_id,child in children.items() %}
     <tr id="{{child.inst.inst_name}}">
@@ -18,6 +19,9 @@
             {%- endif -%}
         </a></td>
         <td>{{child.get_property("name", default="-")}}</td>
+        <td>
+            <a class="headerlink" href="#{{child.inst.inst_name}}" title="Permalink to this row"></a>
+        </td>
     </tr>
     {%- endfor %}
 </table>

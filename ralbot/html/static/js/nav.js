@@ -134,8 +134,23 @@ function onPopState(event) {
 }
 
 function refresh_target_scroll() {
+    // Manually implement scroll to hash targets since AJAX-based page loads
+    // make the normal mechanism a little unreliable
+
+    // Clear any target-highlight elements
+    var target_els = document.getElementsByClassName("target-highlight");
+    for(var i=target_els.length-1; i>=0; i--){
+        target_els[i].classList.remove("target-highlight");
+    }
+    
     if(window.location.hash){
-        window.location.hash = window.location.hash;
+        // URL has hash! Scroll to it and apply highlight class
+        var el = document.getElementById(window.location.hash.slice(1));
+        if(el){
+            el.scrollIntoView();
+            el.classList.add("target-highlight");
+        }
+
     } else {
         document.getElementById("_Content").parentElement.scrollTop = 0;
     }

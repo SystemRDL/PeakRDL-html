@@ -35,6 +35,7 @@
             <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#HR" title="Permalink to this row"></a>
         </td>
     </tr>
     <tr id="IE">
@@ -53,6 +54,7 @@
             <button type="button" id="_RadixButton1" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="1" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#IE" title="Permalink to this row"></a>
         </td>
     </tr>
     <tr id="MRSM">
@@ -71,6 +73,7 @@
             <button type="button" id="_RadixButton2" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="2" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#MRSM" title="Permalink to this row"></a>
         </td>
     </tr>
     <tr id="AE">
@@ -89,6 +92,7 @@
             <button type="button" id="_RadixButton3" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="3" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#AE" title="Permalink to this row"></a>
         </td>
     </tr>
 </table>
@@ -102,7 +106,7 @@
 <hr/><h2>Field Descriptions</h2>
 
 <h3 id="HR.desc">HR - HBA Reset
-    <a class="headerlink" href="#HR.desc" title="Permalink to this headline">¶</a>
+    <a class="headerlink" href="#HR.desc" title="Permalink to this headline"></a>
 </h3>
 <p>When set by SW, this bit causes an internal reset of the HBA. All
 state machines that relate to data transfers and queuing shall return to an idle
@@ -115,14 +119,14 @@ When the HBA has performed the reset action, it shall reset this bit to '0'.</p>
 For a description on which bits are reset when this bit is set, see section 10.4.3.</p>
 
 <h3 id="IE.desc">IE - Interrupt Enable
-    <a class="headerlink" href="#IE.desc" title="Permalink to this headline">¶</a>
+    <a class="headerlink" href="#IE.desc" title="Permalink to this headline"></a>
 </h3>
 <p>This global bit enables interrupts from the HBA. When cleared
 (reset default), all interrupt sources from all ports are disabled. When set, interrupts are
 enabled.</p>
 
 <h3 id="MRSM.desc">MRSM - MSI Revert to Single Message
-    <a class="headerlink" href="#MRSM.desc" title="Permalink to this headline">¶</a>
+    <a class="headerlink" href="#MRSM.desc" title="Permalink to this headline"></a>
 </h3>
 <p>When set to '1' by hardware, indicates that
 the HBA requested more than one MSI vector but has reverted to using the first vector
@@ -147,7 +151,7 @@ case, the hardware has been programmed to use single MSI mode, and is not
 reverting to that mode.</p>
 
 <h3 id="AE.desc">AE - AHCI Enable
-    <a class="headerlink" href="#AE.desc" title="Permalink to this headline">¶</a>
+    <a class="headerlink" href="#AE.desc" title="Permalink to this headline"></a>
 </h3>
 <p>When set, indicates that communication to the HBA shall be via
 AHCI mechanisms. This can be used by an HBA that supports both legacy
