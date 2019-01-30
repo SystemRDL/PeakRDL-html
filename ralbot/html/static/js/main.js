@@ -11,9 +11,19 @@ function onPageLoad() {
     }
     
     window.onpopstate = onPopState;
+    window.onkeydown = onKeyDownMain;
     init_tree();
     load_page_via_url();
     init_index_edit();
+}
+
+function onKeyDownMain(ev) {
+    if(!ev) ev = window.event;
+
+    if(!SearchState.active && ev.key == "/"){
+        open_search();
+        return false;
+    }
 }
 
 function show_file_protocol_nag() {
