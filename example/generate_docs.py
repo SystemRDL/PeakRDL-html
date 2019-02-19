@@ -23,4 +23,8 @@ except RDLCompileError:
     sys.exit(1)
 
 html = HTMLExporter()
-html.export(root, os.path.join(this_dir, "../docs"))
+html.export(
+    root,
+    os.path.join(this_dir, "../docs"),
+    home_url="https://github.com/SystemRDL/RALBot-html"
+)
