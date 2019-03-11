@@ -7,18 +7,33 @@ import distutils.dir_util
 import xml.dom.minidom
 
 import jinja2 as jj
+import markdown
 
 from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode
 
 class HTMLExporter:
-    def __init__(self):
+    def __init__(self, markdown_inst=None):
+        """
+        Constructor for the HTML exporter class
 
+        Parameters
+        ----------
+        markdown_inst: ``markdown.Markdown``
+            Override the class instance of the Markdown processor.
+            See the `Markdown module <https://python-markdown.github.io/reference/#Markdown>`_
+            for more details.
+        """
         self.output_dir = None
         self.RALIndex = []
         self.current_id = -1
         self.footer = None
         self.title = None
         self.home_url = None
+
+        if markdown_inst is None:
+            self.markdown_inst = markdown.Markdown()
+        else:
+            self.markdown_inst = markdown_inst
 
         self.jj_env = jj.Environment(
             loader=jj.FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates")),
@@ -27,6 +42,25 @@ class HTMLExporter:
         )
 
     def export(self, node, output_dir, **kwargs):
+        """
+        Perform the export!
+
+        Parameters
+        ----------
+        node: systemrdl.Node
+            Top-level node to export. Can be the top-level `RootNode` or any
+            internal `AddrmapNode`.
+        output_dir: str
+            HTML output directory.
+        footer: str
+            (optional) Override footer text.
+        title: str
+            (optional) Override title text.
+        home_url: str
+            (optional) If a URL is specified, adds a home button to return to a
+            parent home page.
+        """
+
         # If it is the root node, skip to top addrmap
         if isinstance(node, RootNode):
             node = node.top
@@ -140,7 +174,8 @@ class HTMLExporter:
             'children' : children,
             'has_description' : has_description,
             'has_enum_encoding' : has_enum_encoding,
-            'get_description': self.get_node_html_desc
+            'get_enum_desc': self.get_enum_html_desc,
+            'get_node_desc': self.get_node_html_desc,
         }
 
         template = self.jj_env.get_template(self._template_map[type(node)])
@@ -225,6 +260,9 @@ class HTMLExporter:
 
             desc = re.sub(r'<\s*img.*/>', img_transform_callback, desc)
         return desc
+
+    def get_enum_html_desc(self, enum_member):
+        return enum_member.get_html_desc(self.markdown_inst)
 
     def try_resolve_rel_path(self, src_ref, relpath):
         """

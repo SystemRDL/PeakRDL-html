@@ -7,7 +7,7 @@
     <tr>
         <td>{{member.name}}</td>
         <td>{{"0x%x" % member.value}}</td>
-        <td>{{member.get_html_desc()|safe}}</td>
+        <td>{{get_enum_desc(member)|safe}}</td>
     </tr>
     {%- endfor %}
 </table>

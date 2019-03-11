@@ -32,8 +32,15 @@ exporter.export(root, "path/to/output")
 
 ## Reference
 
-### `HTMLExporter()`
+### `HTMLExporter(markdown_inst=None)`
 Constructor for the HTML exporter class
+
+**Optional Parameters**
+
+* `markdown_inst`
+    * Override the class instance of the Markdown processor.
+      See the [Markdown module](https://python-markdown.github.io/reference/#Markdown)
+      for more details.
 
 ### `HTMLExporter.export(node, output_dir, **kwargs)`
 Perform the export!

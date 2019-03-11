@@ -22,8 +22,9 @@ setuptools.setup(
     packages=['ralbot.html'],
     include_package_data=True,
     install_requires=[
-        "systemrdl-compiler>=1.4.0",
+        "systemrdl-compiler>=1.6.0",
         "Jinja2>=2.9",
+        "markdown",
     ],
     classifiers=(
         "Development Status :: 5 - Production/Stable",

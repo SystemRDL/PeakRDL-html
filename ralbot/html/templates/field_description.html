@@ -1,4 +1,4 @@
-{%- import "macros.html" as macros %}
+{%- import "macros.html" as macros with context %}
 <h3 id="{{field.inst.inst_name}}.desc">
     {%- if field.get_property("name", default="") == "" -%}
         {{- field.inst.inst_name -}}
@@ -9,7 +9,7 @@
 </h3>
 
 {%- if has_description(field) %}
-{{get_description(field,3)|safe}}
+{{get_node_desc(field,3)|safe}}
 {%- endif %}
 
 {%- if has_enum_encoding(field) %}
