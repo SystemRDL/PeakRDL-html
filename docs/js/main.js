@@ -106,6 +106,7 @@ function update_crumbtrail(){
         if(i < path_ids.length-1){
             var el = document.createElement("span");
             el.className = "crumb-separator";
+            el.innerHTML = ".";
             crumb_el.appendChild(el);
         }
     }

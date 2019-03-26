@@ -292,10 +292,6 @@ mark {
     padding-top: 0.875em;
 }
 
-.crumb-separator::before {
-    content: ".";
-}
-
 .crumb-separator {
     padding: 0em 0.25em;
 }
