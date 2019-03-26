@@ -126,7 +126,7 @@ function patch_url_path() {
 
 function refresh_title() {
     // Given current state, refresh the page title text
-    document.title = RALIndex[CurrentID].name;
+    document.title = RALIndex[CurrentID].name + " \u2014 " + PageInfo.title;
 }
 
 function onPopState(event) {

@@ -88,8 +88,8 @@ class HTMLExporter:
         # Traverse tree
         self.visit_addressable_node(node)
 
-        # Write out RALIndex
-        self.write_ral_index()
+        # Write out RALIndex and other data to js file
+        self.write_ral_data()
 
         # Write main index.html
         self.write_index_page()
@@ -152,11 +152,18 @@ class HTMLExporter:
         return this_id
 
 
-    def write_ral_index(self):
+    def write_ral_data(self):
+        PageInfo = {
+            "title" : self.title
+        }
         path = os.path.join(self.output_dir, "js/data.js")
         with open(path, 'w') as fp:
             fp.write("var RALIndex = ")
             fp.write(RALBotJSEncoder(separators=(',', ':')).encode(self.RALIndex))
+            fp.write(";")
+
+            fp.write("var PageInfo = ")
+            fp.write(RALBotJSEncoder(separators=(',', ':')).encode(PageInfo))
             fp.write(";")
 
 

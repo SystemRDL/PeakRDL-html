@@ -3,10 +3,12 @@
 
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
-    <dt>Base Offset:</dt><dd class="address">{{"0x%x" % node.inst.addr_offset}}</dd>
+    <dt>Base Offset:</dt><dd class="address">{{"0x%x" % node.raw_address_offset}}</dd>
+    <dt>Size:</dt><dd class="address">{{"0x%x" % node.size}}</dd>
     {%- if node.inst.is_array %}
     <dt>Array Dimensions:</dt><dd>{{node.inst.array_dimensions}}</dd>
     <dt>Array Stride:</dt><dd>+{{"0x%x" % node.inst.array_stride}}</dd>
+    <dt>Total Size:</dt><dd class="address">{{"0x%x" % node.total_size}}</dd>
     {%- endif %}
 </dl>
 
