@@ -12,7 +12,7 @@ import markdown
 from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode
 
 class HTMLExporter:
-    def __init__(self, markdown_inst=None):
+    def __init__(self, markdown_inst=None, user_template_dir=None):
         """
         Constructor for the HTML exporter class
 
@@ -22,6 +22,8 @@ class HTMLExporter:
             Override the class instance of the Markdown processor.
             See the `Markdown module <https://python-markdown.github.io/reference/#Markdown>`_
             for more details.
+        user_template_dir: str
+            Path to a directory where user-defined template overrides are stored.
         """
         self.output_dir = None
         self.RALIndex = []
@@ -35,8 +37,16 @@ class HTMLExporter:
         else:
             self.markdown_inst = markdown_inst
 
+        if user_template_dir:
+            loader = jj.ChoiceLoader([
+                jj.FileSystemLoader(user_template_dir),
+                jj.FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"))
+            ])
+        else:
+            loader = jj.FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"))
+
         self.jj_env = jj.Environment(
-            loader=jj.FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates")),
+            loader=loader,
             autoescape=jj.select_autoescape(['html']),
             undefined=jj.StrictUndefined
         )
@@ -194,7 +204,7 @@ class HTMLExporter:
     def write_index_page(self):
         context = {
             'title': self.title,
-            'footer': self.footer,
+            'footer_text': self.footer,
             'home_url': self.home_url
         }
 
