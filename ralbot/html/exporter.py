@@ -224,7 +224,7 @@ class HTMLExporter:
         - Transform img paths that point to local files. Copy referenced image to output
         """
 
-        desc = node.get_html_desc()
+        desc = node.get_html_desc(self.markdown_inst)
         if desc is None:
             return desc
 
