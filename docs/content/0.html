@@ -1,15 +1,27 @@
 <div>
-<h1>Denali SATA Core Register Map</h1>
+<h1>Turbo-Encabulator</h1>
 
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
     <dt>Base Offset:</dt><dd class="address">0x0</dd>
-    <dt>Size:</dt><dd class="address">0x380</dd>
+    <dt>Size:</dt><dd class="address">0x2800</dd>
 </dl>
 <h2>Description</h2>
-<p>This Map contains the complete register set for
-Denali SATA Core (Host Controller).  There are variables
-here to control the addressing for num_ports &gt; 1</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is an example output from the <a href="https://github.com/SystemRDL/RALBot-html">RALBot HTML</a>
+register space documentation generator.</p>
+<p>The content of these pages are generated from the register structure and
+<code>desc</code> properties from <a href="https://github.com/SystemRDL/RALBot-html/blob/master/example/turboencabulator.rdl">SystemRDL source</a>.
+Description text can be enhanced by using 'RDLFormatCode' tags, or Markdown syntax.</p>
+<p>Look for these 'tip' boxes throughout this demo for more highlights of features.</p>
+</div>
+<p>Configuration &amp; status address space for the state-of-the-art Turbo Encabulator.
+It is strongly recommended that users of the Turbo Encabulator watch the
+<a href="https://www.youtube.com/watch?v=rLDgQg6bq7o">training video</a> prior to attempting
+to supply inverse reactive current. The product brief for Rockwell Automation's
+<a href="https://www.youtube.com/watch?v=RXJKdh1KZ0w">Retro Encabulator</a> is also a sufficient substitute.</p>
+<p><img alt="Turbo Encabulator" src="content/f43affbd_turboencabulator.jpg"/></p>
 
 <h2>Contents</h2>
 
@@ -20,92 +32,28 @@ here to control the addressing for num_ports &gt; 1</p>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr id="HBA_CAP">
+    <tr id="ctrl">
         <td class="address">0x0</td>
-        <td><a href="?p=den_sata_ahci_map.HBA_CAP" data-id="1" onclick="onClickNodeLink(event); return(false)">HBA_CAP</a></td>
-        <td>CAP - HBA Capabilities</td>
+        <td><a href="?p=turbo_encab.ctrl" data-id="1" onclick="onClickNodeLink(event); return(false)">ctrl</a></td>
+        <td>System Control Register</td>
         <td>
-            <a class="headerlink" href="#HBA_CAP" title="Permalink to this row"></a>
+            <a class="headerlink" href="#ctrl" title="Permalink to this row"></a>
         </td>
     </tr>
-    <tr id="GHC">
+    <tr id="status">
         <td class="address">0x4</td>
-        <td><a href="?p=den_sata_ahci_map.GHC" data-id="2" onclick="onClickNodeLink(event); return(false)">GHC</a></td>
-        <td>-</td>
+        <td><a href="?p=turbo_encab.status" data-id="2" onclick="onClickNodeLink(event); return(false)">status</a></td>
+        <td>Encabulator Status</td>
         <td>
-            <a class="headerlink" href="#GHC" title="Permalink to this row"></a>
+            <a class="headerlink" href="#status" title="Permalink to this row"></a>
         </td>
     </tr>
-    <tr id="IS">
-        <td class="address">0x8</td>
-        <td><a href="?p=den_sata_ahci_map.IS" data-id="3" onclick="onClickNodeLink(event); return(false)">IS</a></td>
-        <td>-</td>
+    <tr id="grammeter">
+        <td class="address">0x1000</td>
+        <td><a href="?p=turbo_encab.grammeter" data-id="3" onclick="onClickNodeLink(event); return(false)">grammeter[12]</a></td>
+        <td>Cardinal Grammeter</td>
         <td>
-            <a class="headerlink" href="#IS" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="PI">
-        <td class="address">0xc</td>
-        <td><a href="?p=den_sata_ahci_map.PI" data-id="4" onclick="onClickNodeLink(event); return(false)">PI</a></td>
-        <td>-</td>
-        <td>
-            <a class="headerlink" href="#PI" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="VS">
-        <td class="address">0x10</td>
-        <td><a href="?p=den_sata_ahci_map.VS" data-id="5" onclick="onClickNodeLink(event); return(false)">VS</a></td>
-        <td>-</td>
-        <td>
-            <a class="headerlink" href="#VS" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="CCC_CTL">
-        <td class="address">0x14</td>
-        <td><a href="?p=den_sata_ahci_map.CCC_CTL" data-id="6" onclick="onClickNodeLink(event); return(false)">CCC_CTL</a></td>
-        <td>Command Completion Coalescing Control</td>
-        <td>
-            <a class="headerlink" href="#CCC_CTL" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="CCC_PORTS">
-        <td class="address">0x18</td>
-        <td><a href="?p=den_sata_ahci_map.CCC_PORTS" data-id="7" onclick="onClickNodeLink(event); return(false)">CCC_PORTS</a></td>
-        <td>-</td>
-        <td>
-            <a class="headerlink" href="#CCC_PORTS" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="EM_LOC">
-        <td class="address">0x1c</td>
-        <td><a href="?p=den_sata_ahci_map.EM_LOC" data-id="8" onclick="onClickNodeLink(event); return(false)">EM_LOC</a></td>
-        <td>-</td>
-        <td>
-            <a class="headerlink" href="#EM_LOC" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="EM_CTL">
-        <td class="address">0x20</td>
-        <td><a href="?p=den_sata_ahci_map.EM_CTL" data-id="9" onclick="onClickNodeLink(event); return(false)">EM_CTL</a></td>
-        <td>-</td>
-        <td>
-            <a class="headerlink" href="#EM_CTL" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="foo">
-        <td class="address">0xa0</td>
-        <td><a href="?p=den_sata_ahci_map.foo" data-id="10" onclick="onClickNodeLink(event); return(false)">foo</a></td>
-        <td>Placeholder register</td>
-        <td>
-            <a class="headerlink" href="#foo" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="PORT">
-        <td class="address">0x100</td>
-        <td><a href="?p=den_sata_ahci_map.PORT" data-id="11" onclick="onClickNodeLink(event); return(false)">PORT[5]</a></td>
-        <td>-</td>
-        <td>
-            <a class="headerlink" href="#PORT" title="Permalink to this row"></a>
+            <a class="headerlink" href="#grammeter" title="Permalink to this row"></a>
         </td>
     </tr>
 </table>

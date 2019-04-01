@@ -1,17 +1,11 @@
 <div>
-<h1>Command Completion Coalescing Control</h1>
+<h1>Grammeter measurement register</h1>
 
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
-    <dt>Base Offset:</dt><dd class="address">0x14</dd>
+    <dt>Base Offset:</dt><dd class="address">0x8</dd>
     <dt>Size:</dt><dd class="address">0x4</dd>
 </dl>
-<h2>Description</h2>
-<p>The command completion coalescing control register is used to configure the command completion
-coalescing feature for the entire HBA.</p>
-<p><strong>Implementation Note:</strong> HBA state variables (examples include hCccComplete and hCccTimer) are used
-to describe the required externally visible behavior. Implementations are not required to have internal
-state values that directly correspond to these variables.</p>
 
 <h2>Contents</h2>
 <table border="1">
@@ -24,80 +18,23 @@ state values that directly correspond to these variables.</p>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr id="EN">
-        <td>[0]</td>
-        <td><a href="#EN.desc">EN</a></td>
-        <td>rw</td>
-        <td>0x0
+    <tr id="value">
+        <td>[31:0]</td>
+        <td><a href="#value.desc">value</a></td>
+        <td>r</td>
+        <td>-
         </td>
         <td>
             <input id="_FieldValueTester0" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="0" oninput="onDecodedFieldInput(this)"/>
         </td>
-        <td>Enable</td>
+        <td>-</td>
         <td>
             <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#EN" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="INT">
-        <td>[7:3]</td>
-        <td><a href="#INT.desc">INT</a></td>
-        <td>r</td>
-        <td>0x6
-        </td>
-        <td>
-            <input id="_FieldValueTester1" class="field-value-tester"
-                type="text" autocomplete="off"
-                data-idx="1" oninput="onDecodedFieldInput(this)"/>
-        </td>
-        <td>Interrupt</td>
-        <td>
-            <button type="button" id="_RadixButton1" class="radix-button"
-                title="Switch radix" aria-label="Switch radix"
-                data-idx="1" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#INT" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="CC">
-        <td>[15:8]</td>
-        <td><a href="#CC.desc">CC</a></td>
-        <td>rw</td>
-        <td>0x1
-        </td>
-        <td>
-            <input id="_FieldValueTester2" class="field-value-tester"
-                type="text" autocomplete="off"
-                data-idx="2" oninput="onDecodedFieldInput(this)"/>
-        </td>
-        <td>Command Completions</td>
-        <td>
-            <button type="button" id="_RadixButton2" class="radix-button"
-                title="Switch radix" aria-label="Switch radix"
-                data-idx="2" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#CC" title="Permalink to this row"></a>
-        </td>
-    </tr>
-    <tr id="TV">
-        <td>[31:16]</td>
-        <td><a href="#TV.desc">TV</a></td>
-        <td>rw</td>
-        <td>0x1
-        </td>
-        <td>
-            <input id="_FieldValueTester3" class="field-value-tester"
-                type="text" autocomplete="off"
-                data-idx="3" oninput="onDecodedFieldInput(this)"/>
-        </td>
-        <td>Timeout Value</td>
-        <td>
-            <button type="button" id="_RadixButton3" class="radix-button"
-                title="Switch radix" aria-label="Switch radix"
-                data-idx="3" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#TV" title="Permalink to this row"></a>
+            <a class="headerlink" href="#value" title="Permalink to this row"></a>
         </td>
     </tr>
 </table>
@@ -110,46 +47,9 @@ state values that directly correspond to these variables.</p>
 </p>
 <hr/><h2>Field Descriptions</h2>
 
-<h3 id="EN.desc">EN - Enable
-    <a class="headerlink" href="#EN.desc" title="Permalink to this headline"></a>
+<h3 id="value.desc">value
+    <a class="headerlink" href="#value.desc" title="Permalink to this headline"></a>
 </h3>
-<p>When cleared to '0', the command completion coalescing feature is
-disabled and no CCC interrupts are generated. When set to '1', the command
-completion coalescing feature is enabled and CCC interrupts may be generated based
-on timeout or command completion conditions. Software shall only change the contents
-of the TV and CC fields when EN is cleared to '0'. On transition of this bit from '0' to '1',
-any updated values for the TV and CC fields shall take effect.</p>
-
-<h3 id="INT.desc">INT - Interrupt
-    <a class="headerlink" href="#INT.desc" title="Permalink to this headline"></a>
-</h3>
-<p>Specifies the interrupt used by the CCC feature. This interrupt must be
-marked as unused in the Ports Implemented (PI) register by the corresponding bit being
-set to '0'. Thus, the CCC interrupt corresponds to the interrupt for an unimplemented
-port on the controller. When a CCC interrupt occurs, the IS.IPS[INT] bit shall be
-asserted to '1'. This field also specifies the interrupt vector used for MSI.</p>
-
-<h3 id="CC.desc">CC - Command Completions
-    <a class="headerlink" href="#CC.desc" title="Permalink to this headline"></a>
-</h3>
-<p>Specifies the number of command completions that are
-necessary to cause a CCC interrupt. The HBA has an internal command completion
-counter, hCccComplete.</p>
-<p>hCccComplete is incremented by one each time a selected
-port has a command completion. When hCccComplete is equal to the command
-completions value, a CCC interrupt is signaled. The internal command completion
-counter is reset to '0' on the assertion of each CCC interrupt.</p>
-<p>A value of '0' for this field
-shall disable CCC interrupts being generated based on the number of commands
-completed, i.e. CCC interrupts are only generated based on the timer in this case.</p>
-
-<h3 id="TV.desc">TV - Timeout Value
-    <a class="headerlink" href="#TV.desc" title="Permalink to this headline"></a>
-</h3>
-<p>The timeout value is specified in 1 millisecond intervals. The timer
-accuracy shall be within 5%. hCccTimer is loaded with this timeout value. hCccTimer is
-only decremented when commands are outstanding on selected ports, as defined in
-section 11.2. The HBA will signal a CCC interrupt when hCccTimer has decremented to
-'0'. hCccTimer is reset to the timeout value on the assertion of each CCC interrupt. A
-timeout value of '0' is reserved.</p>
+<p>Current grammeter measurement.</p>
+<p>Units are in Amperes per foot-liter (A/F-L)</p>
 </div>

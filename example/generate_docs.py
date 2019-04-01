@@ -3,6 +3,8 @@
 import sys
 import os
 
+import markdown
+
 # Ignore this. Only needed for this example
 this_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.join(this_dir, "../"))
@@ -22,7 +24,11 @@ try:
 except RDLCompileError:
     sys.exit(1)
 
-html = HTMLExporter()
+md = markdown.Markdown(
+    extensions=['admonition']
+)
+
+html = HTMLExporter(markdown_inst=md)
 html.export(
     root,
     os.path.join(this_dir, "../docs"),

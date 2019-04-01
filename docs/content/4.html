@@ -1,19 +1,11 @@
 <div>
-<h1>PI</h1>
+<h1>control</h1>
 
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
-    <dt>Base Offset:</dt><dd class="address">0xc</dd>
+    <dt>Base Offset:</dt><dd class="address">0x0</dd>
     <dt>Size:</dt><dd class="address">0x4</dd>
 </dl>
-<h2>Description</h2>
-<p>This register indicates which ports are exposed by the HBA. It is loaded by the BIOS. It indicates which
-ports that the HBA supports are available for software to use. For example, on an HBA that supports 6
-ports as indicated in CAP.NP, only ports 1 and 3 could be available, with ports 0, 2, 4, and 5 being
-unavailable.
-Software must not read or write to registers within unavailable ports.
-The intent of this register is to allow system vendors to build platforms that support less than the full
-number of ports implemented on the HBA silicon.</p>
 
 <h2>Contents</h2>
 <table border="1">
@@ -26,23 +18,42 @@ number of ports implemented on the HBA silicon.</p>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr id="PI">
-        <td>[4:0]</td>
-        <td><a href="#PI.desc">PI</a></td>
-        <td>r</td>
-        <td>0x1
+    <tr id="sync_en">
+        <td>[0]</td>
+        <td>sync_en</td>
+        <td>rw</td>
+        <td>-
         </td>
         <td>
             <input id="_FieldValueTester0" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="0" oninput="onDecodedFieldInput(this)"/>
         </td>
-        <td>Port Implemented</td>
+        <td>-</td>
         <td>
             <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#PI" title="Permalink to this row"></a>
+            <a class="headerlink" href="#sync_en" title="Permalink to this row"></a>
+        </td>
+    </tr>
+    <tr id="disable">
+        <td>[1]</td>
+        <td>disable</td>
+        <td>rw</td>
+        <td>-
+        </td>
+        <td>
+            <input id="_FieldValueTester1" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="1" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>-</td>
+        <td>
+            <button type="button" id="_RadixButton1" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="1" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#disable" title="Permalink to this row"></a>
         </td>
     </tr>
 </table>
@@ -53,15 +64,4 @@ number of ports implemented on the HBA silicon.</p>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
 </p>
-<hr/><h2>Field Descriptions</h2>
-
-<h3 id="PI.desc">PI - Port Implemented
-    <a class="headerlink" href="#PI.desc" title="Permalink to this headline"></a>
-</h3>
-<p>This register is bit significant. If a bit is set to '1', the
-corresponding port is available for software to use. If a bit is cleared to '0', the port is
-not available for software to use.</p>
-<p>The maximum number of bits set to '1' shall not
-exceed CAP.NP + 1, although the number of bits set in this register may be fewer than
-CAP.NP + 1. At least one bit shall be set to '1'.</p>
 </div>

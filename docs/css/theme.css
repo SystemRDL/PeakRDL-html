@@ -97,6 +97,80 @@ mark {
     background-color: #f1c40f;
 }
 
+/* ------------------------------- Admonitions ------------------------------ */
+.admonition-title:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    content: "\f06a";
+    margin-right:4px;
+}
+
+.admonition {
+    padding:12px;
+    line-height:24px;
+    margin-bottom:24px;
+    background:#e7f2fa;
+}
+
+.admonition-title {
+    color:#fff;
+    font-weight:bold;
+    display:block;
+    color:#fff;
+    background:#6ab0de;
+    margin:-12px;
+    padding:6px 12px;
+    margin-bottom:12px;
+}
+
+.admonition p:last-child {
+    margin-bottom:0;
+}
+
+.admonition.danger,
+.admonition.error{
+    background:#fdf3f2;
+}
+
+.admonition.danger .admonition-title,
+.admonition.error .admonition-title{
+    background:#f29f97;
+}
+
+.admonition.attention,
+.admonition.caution,
+.admonition.warning {
+    background:#ffedcc;
+}
+
+.admonition.attention .admonition-title,
+.admonition.caution .admonition-title,
+.admonition.warning .admonition-title {
+    background:#f0b37e;
+}
+
+.admonition.note,
+.admonition.seealso {
+    background:#e7f2fa;
+}
+
+.admonition.note .admonition-title,
+.admonition.seealso .admonition-title {
+    background:#6ab0de;
+}
+
+.admonition.hint,
+.admonition.important,
+.admonition.tip {
+    background:#dbfaf4;
+}
+
+.admonition.hint .admonition-title,
+.admonition.important .admonition-title,
+.admonition.tip .admonition-title {
+    background:#1abc9c;
+}
+
 /* ------------------------------- Button Icons ----------------------------- */
 
 .expand-button::before {

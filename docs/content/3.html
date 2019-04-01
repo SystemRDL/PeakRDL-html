@@ -1,61 +1,67 @@
 <div>
-<h1>IS</h1>
+<h1>Cardinal Grammeter</h1>
 
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
-    <dt>Base Offset:</dt><dd class="address">0x8</dd>
-    <dt>Size:</dt><dd class="address">0x4</dd>
+    <dt>Base Offset:</dt><dd class="address">0x1000</dd>
+    <dt>Size:</dt><dd class="address">0xc</dd>
+    <dt>Array Dimensions:</dt><dd>[12]</dd>
+    <dt>Array Stride:</dt><dd>+0x200</dd>
+    <dt>Total Size:</dt><dd class="address">0x1800</dd>
 </dl>
 <h2>Description</h2>
-<p>This register indicates which of the ports within the controller have an interrupt pending and require
-service.</p>
+<p>The Turbo Encabulator contains twelve cardinal grammeters.
+Each has the following features:</p>
+<ul>
+<li>Automatically synchronizing.</li>
+<li>Fully independent of the five dingle arms.</li>
+<li>Produces reliable entropic measurements.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This page represents an array of regfile components.
+The current page represents the grammeter<span class='rdlfc-index'>[0:12]</span> instance, but can be
+changed by clicking on the array index of the crumbtrail above.</p>
+<p>Notice that when the array index is changed:</p>
+<ul>
+<li>Absolute address is re-calculated</li>
+<li>URL crumbtrail is updated</li>
+<li>RDLFormatCode [index] tags are updated</li>
+</ul>
+</div>
 
 <h2>Contents</h2>
+
 <table border="1">
     <tr>
-        <th>Bits</th>
+        <th>Offset</th>
         <th>Identifier</th>
-        <th>Access</th>
-        <th>Reset</th>
-        <th>Decoded</th>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr id="IPS">
-        <td>[4:0]</td>
-        <td><a href="#IPS.desc">IPS</a></td>
-        <td>rw</td>
-        <td>0x1
-        </td>
+    <tr id="control">
+        <td class="address">0x0</td>
+        <td><a href="?p=turbo_encab.grammeter.control" data-id="4" onclick="onClickNodeLink(event); return(false)">control</a></td>
+        <td>-</td>
         <td>
-            <input id="_FieldValueTester0" class="field-value-tester"
-                type="text" autocomplete="off"
-                data-idx="0" oninput="onDecodedFieldInput(this)"/>
+            <a class="headerlink" href="#control" title="Permalink to this row"></a>
         </td>
-        <td>Interrupt Pending Status</td>
+    </tr>
+    <tr id="status">
+        <td class="address">0x4</td>
+        <td><a href="?p=turbo_encab.grammeter.status" data-id="5" onclick="onClickNodeLink(event); return(false)">status</a></td>
+        <td>-</td>
         <td>
-            <button type="button" id="_RadixButton0" class="radix-button"
-                title="Switch radix" aria-label="Switch radix"
-                data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#IPS" title="Permalink to this row"></a>
+            <a class="headerlink" href="#status" title="Permalink to this row"></a>
+        </td>
+    </tr>
+    <tr id="meter">
+        <td class="address">0x8</td>
+        <td><a href="?p=turbo_encab.grammeter.meter" data-id="6" onclick="onClickNodeLink(event); return(false)">meter</a></td>
+        <td>Grammeter measurement register</td>
+        <td>
+            <a class="headerlink" href="#meter" title="Permalink to this row"></a>
         </td>
     </tr>
 </table>
-<p>
-    <label>
-        Encoded Register Value:
-        <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
-        <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
-    </label>
-</p>
-<hr/><h2>Field Descriptions</h2>
-
-<h3 id="IPS.desc">IPS - Interrupt Pending Status
-    <a class="headerlink" href="#IPS.desc" title="Permalink to this headline"></a>
-</h3>
-<p>If set, indicates that the corresponding port has an
-interrupt pending. Software can use this information to determine which ports require
-service after an interrupt.
-The IPS[x] bit is only defined for ports that are implemented or for the command
-completion coalescing interrupt defined by CCC_CTL.INT. All other bits are reserved.</p>
 </div>

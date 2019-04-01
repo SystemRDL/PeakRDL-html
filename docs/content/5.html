@@ -1,18 +1,11 @@
 <div>
-<h1>VS</h1>
+<h1>status</h1>
 
 <dl class="node-info">
     <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
-    <dt>Base Offset:</dt><dd class="address">0x10</dd>
+    <dt>Base Offset:</dt><dd class="address">0x4</dd>
     <dt>Size:</dt><dd class="address">0x4</dd>
 </dl>
-<h2>Description</h2>
-<p>This register indicates the major and minor version of the AHCI specification that the HBA implementation
-supports.</p>
-<p>The upper two bytes represent the major version number, and the lower two bytes represent
-the minor version number.</p>
-<p><strong>Example:</strong> Version 3.12 would be represented as 00030102h. Three versions
-of the specification are valid: 0.95, 1.0, and 1.1.</p>
 
 <h2>Contents</h2>
 <table border="1">
@@ -25,42 +18,42 @@ of the specification are valid: 0.95, 1.0, and 1.1.</p>
         <th>Name</th>
         <th></th>
     </tr>
-    <tr id="MNR">
-        <td>[15:0]</td>
-        <td>MNR</td>
+    <tr id="state">
+        <td>[2:0]</td>
+        <td><a href="#state.desc">state</a></td>
         <td>r</td>
-        <td>0x100
+        <td>-
         </td>
         <td>
             <input id="_FieldValueTester0" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="0" oninput="onDecodedFieldInput(this)"/>
         </td>
-        <td>Minor Version Number</td>
+        <td>Grammeter State</td>
         <td>
             <button type="button" id="_RadixButton0" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#MNR" title="Permalink to this row"></a>
+            <a class="headerlink" href="#state" title="Permalink to this row"></a>
         </td>
     </tr>
-    <tr id="MJR">
-        <td>[31:16]</td>
-        <td>MJR</td>
-        <td>r</td>
-        <td>0x1
+    <tr id="sync_failed">
+        <td>[3]</td>
+        <td><a href="#sync_failed.desc">sync_failed</a></td>
+        <td>r, rclr</td>
+        <td>-
         </td>
         <td>
             <input id="_FieldValueTester1" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="1" oninput="onDecodedFieldInput(this)"/>
         </td>
-        <td>Major Version Number</td>
+        <td>-</td>
         <td>
             <button type="button" id="_RadixButton1" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="1" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#MJR" title="Permalink to this row"></a>
+            <a class="headerlink" href="#sync_failed" title="Permalink to this row"></a>
         </td>
     </tr>
 </table>
@@ -71,4 +64,46 @@ of the specification are valid: 0.95, 1.0, and 1.1.</p>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
 </p>
+<hr/><h2>Field Descriptions</h2>
+
+<h3 id="state.desc">state - Grammeter State
+    <a class="headerlink" href="#state.desc" title="Permalink to this headline"></a>
+</h3>
+<p>Indicates the state of the cardinal grammeter</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Any field that uses an enumerated encoding will also include
+it's enum definition alongside its description.</p>
+</div>
+<table border="1">
+    <tr>
+        <th colspan="3">enum grammeter_state_e</th>
+    </tr>
+    <tr>
+        <td>RESET</td>
+        <td>0x0</td>
+        <td><p>Grammeter is in reset state and <em>not</em> ready to be used.</p></td>
+    </tr>
+    <tr>
+        <td>SYNC</td>
+        <td>0x1</td>
+        <td><p>Automatic synchronization in progress.</p></td>
+    </tr>
+    <tr>
+        <td>READY</td>
+        <td>0x2</td>
+        <td><p>Grammeter has successfully synchronized with the stator</p></td>
+    </tr>
+    <tr>
+        <td>SYNC_FAIL</td>
+        <td>0x3</td>
+        <td><p>Synchronization error!</p>
+<p>It is likely that the differential girdlespring is not on the 'up' position.</p></td>
+    </tr>
+</table>
+
+<h3 id="sync_failed.desc">sync_failed
+    <a class="headerlink" href="#sync_failed.desc" title="Permalink to this headline"></a>
+</h3>
+<p>Sticky-bit indicating whether sync failed</p>
 </div>
