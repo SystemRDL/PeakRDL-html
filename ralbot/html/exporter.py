@@ -5,6 +5,7 @@ import shutil
 import hashlib
 import distutils.dir_util
 import xml.dom.minidom
+from collections import OrderedDict
 
 import jinja2 as jj
 import markdown
@@ -135,7 +136,7 @@ class HTMLExporter:
 
                 field_enum = field.get_property("encode")
                 if field_enum is not None:
-                    encode = {}
+                    encode = OrderedDict()
                     for member in field_enum:
                         encode[member.name] = BigInt(member.value)
                     ral_field['encode'] = encode
@@ -148,7 +149,7 @@ class HTMLExporter:
         self.RALIndex.append(ral_entry)
 
         # Recurse to children
-        children = {}
+        children = OrderedDict()
         for child in node.children():
             if not isinstance(child, AddressableNode):
                 continue
