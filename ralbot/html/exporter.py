@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import math
 import shutil
 import hashlib
 import distutils.dir_util
@@ -194,6 +195,7 @@ class HTMLExporter:
             'has_enum_encoding' : has_enum_encoding,
             'get_enum_desc': self.get_enum_html_desc,
             'get_node_desc': self.get_node_html_desc,
+            'get_child_addr_digits': self.get_child_addr_digits,
         }
 
         template = self.jj_env.get_template(self._template_map[type(node)])
@@ -213,6 +215,9 @@ class HTMLExporter:
         stream = template.stream(context)
         output_path = os.path.join(self.output_dir, "index.html")
         stream.dump(output_path)
+
+    def get_child_addr_digits(self, node):
+        return math.ceil(math.log2(node.size + 1) / 4)
 
     def get_node_html_desc(self, node, increment_heading=0):
         """
