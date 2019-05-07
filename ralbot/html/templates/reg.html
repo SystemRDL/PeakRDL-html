@@ -11,7 +11,7 @@
         <th>Name</th>
         <th></th>
     </tr>
-    {%- for field in node.fields() %}
+    {%- for field in reversed(list(node.fields())) %}
     <tr id="{{field.inst.inst_name}}">
         {%- if field.inst.msb == field.inst.lsb %}
         <td>[{{field.inst.lsb}}]</td>
@@ -64,7 +64,7 @@
     </label>
 </p>
 
-{%- for field in node.fields() if (has_description(field) or has_enum_encoding(field)) %}
+{%- for field in reversed(list(node.fields())) if (has_description(field) or has_enum_encoding(field)) %}
 {%- if loop.first %}
 <hr/><h2>Field Descriptions</h2>
 {%- endif %}

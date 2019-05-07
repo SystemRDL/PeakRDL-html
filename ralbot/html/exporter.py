@@ -196,6 +196,8 @@ class HTMLExporter:
             'get_enum_desc': self.get_enum_html_desc,
             'get_node_desc': self.get_node_html_desc,
             'get_child_addr_digits': self.get_child_addr_digits,
+            'reversed': reversed,
+            'list': list,
         }
 
         template = self.jj_env.get_template(self._template_map[type(node)])

@@ -18,25 +18,6 @@
         <th>Name</th>
         <th></th>
     </tr>
-    <tr id="state">
-        <td>[2:0]</td>
-        <td><a href="#state.desc">state</a></td>
-        <td>r</td>
-        <td>-
-        </td>
-        <td>
-            <input id="_FieldValueTester0" class="field-value-tester"
-                type="text" autocomplete="off"
-                data-idx="0" oninput="onDecodedFieldInput(this)"/>
-        </td>
-        <td>Grammeter State</td>
-        <td>
-            <button type="button" id="_RadixButton0" class="radix-button"
-                title="Switch radix" aria-label="Switch radix"
-                data-idx="0" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#state" title="Permalink to this row"></a>
-        </td>
-    </tr>
     <tr id="sync_failed">
         <td>[3]</td>
         <td><a href="#sync_failed.desc">sync_failed</a></td>
@@ -44,16 +25,35 @@
         <td>-
         </td>
         <td>
+            <input id="_FieldValueTester0" class="field-value-tester"
+                type="text" autocomplete="off"
+                data-idx="0" oninput="onDecodedFieldInput(this)"/>
+        </td>
+        <td>-</td>
+        <td>
+            <button type="button" id="_RadixButton0" class="radix-button"
+                title="Switch radix" aria-label="Switch radix"
+                data-idx="0" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#sync_failed" title="Permalink to this row"></a>
+        </td>
+    </tr>
+    <tr id="state">
+        <td>[2:0]</td>
+        <td><a href="#state.desc">state</a></td>
+        <td>r</td>
+        <td>-
+        </td>
+        <td>
             <input id="_FieldValueTester1" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-idx="1" oninput="onDecodedFieldInput(this)"/>
         </td>
-        <td>-</td>
+        <td>Grammeter State</td>
         <td>
             <button type="button" id="_RadixButton1" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
                 data-idx="1" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#sync_failed" title="Permalink to this row"></a>
+            <a class="headerlink" href="#state" title="Permalink to this row"></a>
         </td>
     </tr>
 </table>
@@ -65,6 +65,11 @@
     </label>
 </p>
 <hr/><h2>Field Descriptions</h2>
+
+<h3 id="sync_failed.desc">sync_failed
+    <a class="headerlink" href="#sync_failed.desc" title="Permalink to this headline"></a>
+</h3>
+<p>Sticky-bit indicating whether sync failed</p>
 
 <h3 id="state.desc">state - Grammeter State
     <a class="headerlink" href="#state.desc" title="Permalink to this headline"></a>
@@ -101,9 +106,4 @@ it's enum definition alongside its description.</p>
 <p>It is likely that the differential girdlespring is not on the 'up' position.</p></td>
     </tr>
 </table>
-
-<h3 id="sync_failed.desc">sync_failed
-    <a class="headerlink" href="#sync_failed.desc" title="Permalink to this headline"></a>
-</h3>
-<p>Sticky-bit indicating whether sync failed</p>
 </div>
