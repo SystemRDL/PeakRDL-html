@@ -268,8 +268,6 @@ mark {
 }
 
 .node {
-    display: flex;
-    flex-direction: row;
     line-height: 1.5em;
     border-color: #303030;
     border-top-style: solid;
