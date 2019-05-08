@@ -9,7 +9,18 @@ button {
 
 #_Sidebar {
     height: 100%;
+}
+
+#_SBContents {
     width: 19em;
+    min-width: 19em !important;
+}
+
+#_SBResizer {
+    width: 6px;
+    margin-left: -3px;
+    margin-right: -3px;
+    cursor: col-resize;
 }
 
 #MainPane {
@@ -22,8 +33,16 @@ button {
 }
 
 .node {
-    display: inline-block;
-    white-space: nowrap;
+    flex-direction: row;
+    display: flex;
+}
+.node-link {
+    flex-grow: 1;
+}
+
+.node-icon {
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .node-children {
@@ -132,7 +151,6 @@ button {
 #_SBSearchButton {
     display: none;
 }
-
 
 /* Desktop mode */
 @media (min-width:950px){

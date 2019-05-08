@@ -1,3 +1,6 @@
+var SBResizeState = {};
+SBResizeState.old_width = 0;
+SBResizeState.start_x = 0;
 
 function init_tree() {
     var el = document.getElementById("_SBTree");
@@ -168,4 +171,30 @@ function onClickTreeCollapseAll() {
         els[i].classList.add("closed");
         els[i].classList.remove("open");
     }
+}
+
+function init_sb_resizer() {
+    var el = document.getElementById("_SBResizer")
+    el.addEventListener("mousedown", onResizeMouseDown);
+}
+
+function onResizeMouseDown(e) {
+    var sb_el = document.getElementById("_SBContents");
+    SBResizeState.old_width = sb_el.getBoundingClientRect().width;
+    SBResizeState.start_x = e.clientX;
+    window.addEventListener('mousemove', onResizeMouseMove);
+    window.addEventListener('mouseup', onResizeMouseUp);
+    e.preventDefault();
+}
+
+function onResizeMouseMove(e) {
+    var sb_el = document.getElementById("_SBContents");
+    var new_width;
+    new_width = SBResizeState.old_width + e.clientX - SBResizeState.start_x;
+    sb_el.style.width = new_width + "px";
+}
+
+function onResizeMouseUp(e) {
+    window.removeEventListener('mousemove', onResizeMouseMove);
+    window.removeEventListener('mouseup', onResizeMouseUp);
 }

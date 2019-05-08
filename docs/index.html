@@ -23,19 +23,22 @@
 </head>
 
 <body class="pack-h" onload="onPageLoad()">
-    <div id="_Sidebar" class="no-stretchy pack-v">
-        <div id="_SBTitlebar" class="no-stretchy">
-            <div id="_SBTitlebox">Turbo-Encabulator Reference</div>
-            <div class="sb-button-strip pack-h">
-                <a class="button-link home-button no-stretchy" href="https://github.com/SystemRDL/RALBot-html"></a>
-                <span class="stretchy"></span>
-                <button type="button" class="expand-button no-stretchy" title="Expand All" aria-label="Expand All" onclick="onClickTreeExpandAll()"></button>
-                <button type="button" class="collapse-button no-stretchy" title="Collapse All" aria-label="Collapse All" onclick="onClickTreeCollapseAll()"></button>
-                <span class="stretchy"></span>
-                <button type="button" id="_SBSearchButton" class="search-button no-stretchy" title="Search" aria-label="Search" onclick="onSearchButtonClick()"></button>
+    <div id="_Sidebar" class="no-stretchy pack-h">
+        <div id="_SBContents" class="pack-v stretchy">
+            <div id="_SBTitlebar" class="no-stretchy">
+                <div id="_SBTitlebox">Turbo-Encabulator Reference</div>
+                <div class="sb-button-strip pack-h">
+                    <a class="button-link home-button no-stretchy" href="https://github.com/SystemRDL/RALBot-html"></a>
+                    <span class="stretchy"></span>
+                    <button type="button" class="expand-button no-stretchy" title="Expand All" aria-label="Expand All" onclick="onClickTreeExpandAll()"></button>
+                    <button type="button" class="collapse-button no-stretchy" title="Collapse All" aria-label="Collapse All" onclick="onClickTreeCollapseAll()"></button>
+                    <span class="stretchy"></span>
+                    <button type="button" id="_SBSearchButton" class="search-button no-stretchy" title="Search" aria-label="Search" onclick="onSearchButtonClick()"></button>
+                </div>
             </div>
+            <div id="_SBTree" class="stretchy scroll-v"></div>
         </div>
-        <div id="_SBTree" class="stretchy scroll-v"></div>
+        <div id="_SBResizer""></div>
     </div>
     
     <div id="_MainPane" class="stretchy pack-v">

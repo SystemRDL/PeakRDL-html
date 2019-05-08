@@ -236,6 +236,10 @@ mark {
     color: #fff;
 }
 
+#_SBResizer:hover {
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
 .sb-button-strip {
     padding: 0em 0.313em;
 }
@@ -268,7 +272,7 @@ mark {
 }
 
 .node {
-    line-height: 1.5em;
+    line-height: 1.3em;
     border-color: #303030;
     border-top-style: solid;
     border-top-width: 1px;
@@ -280,13 +284,7 @@ mark {
 
 .node-icon {
     width: 1.25em;
-    display: inline-block;
     text-align: center;
-}
-
-.node-link{
-    display: inline-block;
-    flex-grow: 1;
 }
 
 .node:hover{

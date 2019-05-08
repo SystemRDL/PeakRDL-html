@@ -13,6 +13,7 @@ function onPageLoad() {
     window.onpopstate = onPopState;
     window.onkeydown = onKeyDownMain;
     init_tree();
+    init_sb_resizer();
     load_page_via_url();
     init_index_edit();
 }
@@ -80,7 +81,6 @@ function update_crumbtrail(){
         if(i < path_ids.length-1){
             var link = document.createElement("a");
             link.dataset.id = path_ids[i];
-            link.className = "node-link";
             link.href = "?p=" + get_path(path_ids[i]);
             link.innerHTML = RALIndex[path_ids[i]].name;
             link.onclick = onClickNodeLink;
