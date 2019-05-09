@@ -27,9 +27,14 @@ button {
     height: 100%;
 }
 
+#_SBTreeContainer {
+    display: flex;
+    flex-direction: column;
+}
 #_SBTree {
     display: inline-flex;
     flex-direction: column;
+    min-width: max-content;
 }
 
 .node {

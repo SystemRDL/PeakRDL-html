@@ -261,9 +261,12 @@ mark {
     border: none;
 }
 
-#_SBTree {
+#_SBTreeContainer {
     background-color: #303030;
     color: #d9d9d9;
+}
+
+#_SBTree {
     padding-top: 0.5em;
 }
 
