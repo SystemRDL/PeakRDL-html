@@ -42,15 +42,15 @@
             {%- endif %}
         </td>
         <td>
-            <input id="_FieldValueTester{{loop.index0}}" class="field-value-tester"
+            <input id="_FieldValueTester{{field.inst.inst_name}}" class="field-value-tester"
                 type="text" autocomplete="off"
-                data-idx="{{loop.index0}}" oninput="onDecodedFieldInput(this)"/>
+                data-name="{{field.inst.inst_name}}" oninput="onDecodedFieldInput(this)"/>
         </td>
         <td>{{field.get_property("name", default="-")}}</td>
         <td>
-            <button type="button" id="_RadixButton{{loop.index0}}" class="radix-button"
+            <button type="button" id="_RadixButton{{field.inst.inst_name}}" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
-                data-idx="{{loop.index0}}" onclick="onRadixSwitch(this)">H</button>
+                data-name="{{field.inst.inst_name}}" onclick="onRadixSwitch(this)">H</button>
             <a class="headerlink" href="#{{field.inst.inst_name}}" title="Permalink to this row"></a>
         </td>
     </tr>

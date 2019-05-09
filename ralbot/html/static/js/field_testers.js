@@ -1,14 +1,14 @@
 
 function init_radix_buttons(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var el = document.getElementById("_RadixButton" + i);
+        var el = document.getElementById("_RadixButton" + RALIndex[CurrentID].fields[i].name);
         el.innerHTML = RALIndex[CurrentID].fields[i].disp;
     }
 }
 
 function reset_field_inputs(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var el = document.getElementById("_FieldValueTester" + i);
+        var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[i].name);
         el.value = format_field_value(i, RALIndex[CurrentID].fields[i].reset);
     }
     update_reg_value_tester();
@@ -27,7 +27,7 @@ function update_reg_value_tester(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
         var msb = RALIndex[CurrentID].fields[i].msb;
         var lsb = RALIndex[CurrentID].fields[i].lsb;
-        var el = document.getElementById("_FieldValueTester" + i);
+        var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[i].name);
         var value = toBigInt(el.value);
         var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
         value = value.and(mask);
@@ -46,7 +46,7 @@ function update_field_value_tester(idx){
     var value = reg_value.shiftRight(lsb);
     var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
     value = value.and(mask);
-    var el = document.getElementById("_FieldValueTester" + idx);
+    var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[idx].name);
     el.value = format_field_value(idx, value);
 }
 
@@ -63,7 +63,7 @@ function format_field_value(idx, value) {
 //==============================================================================
 
 function onRadixSwitch(el){
-    var idx = Number(el.dataset.idx);
+    var idx = lookup_field_idx(el.dataset.name);
     var d = RALIndex[CurrentID].fields[idx].disp;
     if(d == "H") {
         d = "D";
@@ -77,7 +77,7 @@ function onRadixSwitch(el){
 }
 
 function onDecodedFieldInput(el){
-    var idx = Number(el.dataset.idx);
+    var idx = lookup_field_idx(el.dataset.name);
     var msb = RALIndex[CurrentID].fields[idx].msb;
     var lsb = RALIndex[CurrentID].fields[idx].lsb;
     var value;

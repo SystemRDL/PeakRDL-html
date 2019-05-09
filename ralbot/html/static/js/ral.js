@@ -303,3 +303,12 @@ function lookup_by_address(addr){
 function is_register(id) {
     return("fields" in RALIndex[id]);
 }
+
+function lookup_field_idx(name) {
+    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
+        if(name == RALIndex[CurrentID].fields[i].name){
+            return(i);
+        }
+    }
+    return(-1);
+}
