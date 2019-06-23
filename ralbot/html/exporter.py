@@ -287,7 +287,11 @@ class HTMLExporter:
         return desc
 
     def get_enum_html_desc(self, enum_member):
-        return enum_member.get_html_desc(self.markdown_inst)
+        s = enum_member.get_html_desc(self.markdown_inst)
+        if s:
+            return s
+        else:
+            return ""
 
     def try_resolve_rel_path(self, src_ref, relpath):
         """
