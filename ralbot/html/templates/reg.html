@@ -62,6 +62,7 @@
         <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
         <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
     </label>
+    {{- user_macros.reg_value_edit_extra() }}
 </p>
 
 {%- for field in reversed(list(node.fields())) if (has_description(field) or has_enum_encoding(field)) %}

@@ -1,6 +1,30 @@
 var CurrentID;
 
 //==============================================================================
+// User-overridable hooks
+//==============================================================================
+var userHooks = {
+    // Triggered when page is loaded the first time
+    onPageLoad: function() {
+    },
+
+    // Triggered when main pane is loaded with new content and page finished
+    // updating
+    onContentLoad: function() {
+    },
+
+    // Triggered when page's absolute address was updated due to an index-edit
+    // value change
+    onAddressUpdate: function() {
+    },
+
+    // Triggered when any of the register's encoded or decoded value form fields
+    // were changed
+    onRegValueEditorChange: function() {
+    }
+};
+
+//==============================================================================
 // Page actions
 //==============================================================================
 
@@ -16,6 +40,7 @@ function onPageLoad() {
     init_sb_resizer();
     load_page_via_url();
     init_index_edit();
+    userHooks.onPageLoad();
 }
 
 function onKeyDownMain(ev) {

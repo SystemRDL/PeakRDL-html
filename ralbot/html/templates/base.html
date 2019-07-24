@@ -1,3 +1,4 @@
+{%- import "user_macros.html" as user_macros with context -%}
 <div>
 <h1>{{node.get_property("name")}}</h1>
 
@@ -10,6 +11,7 @@
     <dt>Array Stride:</dt><dd>+{{"0x%x" % node.inst.array_stride}}</dd>
     <dt>Total Size:</dt><dd class="address">{{"0x%x" % node.total_size}}</dd>
     {%- endif %}
+    {{- user_macros.node_info_extra() }}
 </dl>
 
 {%- if has_description(node) %}
@@ -19,4 +21,5 @@
 
 <h2>Contents</h2>
 {% block content %}{% endblock %}
+{{- user_macros.contents_extra() }}
 </div>

@@ -37,6 +37,7 @@
                     <button type="button" class="expand-button no-stretchy" title="Expand All" aria-label="Expand All" onclick="onClickTreeExpandAll()"></button>
                     <button type="button" class="collapse-button no-stretchy" title="Collapse All" aria-label="Collapse All" onclick="onClickTreeCollapseAll()"></button>
                     <span class="stretchy"></span>
+                    {{- user_macros.button_strip_extra() }}
                     <button type="button" id="_SBSearchButton" class="search-button no-stretchy" title="Search" aria-label="Search" onclick="onSearchButtonClick()"></button>
                 </div>
             </div>
@@ -81,6 +82,8 @@
         
         <div id="_Overlay" onclick="sidebar_close()"></div>
     </div>
+
+    {{- user_macros.body_extra() }}
 </body>
 
 <div id="_IdxEditModal">
@@ -90,4 +93,5 @@
     <span id="_IdxEditRange"></span>
 </div>
 
+{{- user_macros.html_extra() }}
 </html>

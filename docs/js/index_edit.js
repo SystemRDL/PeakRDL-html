@@ -52,6 +52,7 @@ function exitIndexEditModal(cancel) {
             update_rdlfc_indexes();
             patch_url_path();
             update_absolute_addr(get_absolute_addr(CurrentID));
+            userHooks.onAddressUpdate();
         }
     }
 }

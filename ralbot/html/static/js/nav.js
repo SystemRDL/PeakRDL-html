@@ -18,6 +18,7 @@ function load_page(id, done_callback) {
                 init_radix_buttons();
             }
             if(typeof done_callback !== "undefined") done_callback();
+            userHooks.onContentLoad();
 
         } else {
             // Page load failed

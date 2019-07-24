@@ -19,6 +19,7 @@ function update_field_value_testers(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
         update_field_value_tester(i);
     }
+    userHooks.onRegValueEditorChange();
 }
 
 function update_reg_value_tester(){
@@ -35,6 +36,7 @@ function update_reg_value_tester(){
     }
     var reg_el = document.getElementById("_RegValueTester");
     reg_el.value = "0x" + reg_value.toString(16);
+    userHooks.onRegValueEditorChange();
 }
 
 function update_field_value_tester(idx){
