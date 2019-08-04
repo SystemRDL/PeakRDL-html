@@ -58,15 +58,29 @@ function show_file_protocol_nag() {
     = "<h1>Oops!</h1>"
     + "<p>Your browser's security policy prevents this page from loading properly when using the 'file://' protocol.</p>"
     + "<p>If possible, host this page on a web server and access using the 'http://' protocol.</p>"
-    + "<h2>Other options</h2>"
-    + "<ul>"
-    + "    <li>Open this page using Firefox</li>"
-    + "    <li>Open this page with Chrome using the '--allow-file-access-from-files' switch</li>"
-    + "    <li>"
-    + "        Host using a temporary Python http server:"
-    + "        <pre>python -m http.server</pre>"
-    + "    </li>"
-    + "</ul>"
+
+    + "<h2>Other workarounds</h2>"
+
+    + "<h3>Firefox</h3>"
+    + "<p>"
+    + "Change your Firefox security settings:"
+    + "<ol>"
+    + "    <li>In your address bar, type <code>about:config</code></li>"
+    + "    <li>Set <code>privacy.file_unique_origin</code> to <code>false</code></li>"
+    + "</ol>"
+    + "For more details, see: <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp' target='_blank'>Reason: CORS request not HTTP</a>"
+    + "</p>"
+
+    + "<h3>Chrome</h3>"
+    + "<p>"
+    + "Launch your Chrome session using the <code>--allow-file-access-from-files</code> command line switch"
+    + "</p>"
+
+    + "<h3>Python http server</h3>"
+    + "<p>"
+    + "Host using a temporary Python http server:"
+    + "<pre>python -m http.server</pre>"
+    + "</p>"
     ;
 }
 
