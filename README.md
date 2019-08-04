@@ -32,7 +32,7 @@ exporter.export(root, "path/to/output")
 
 ## Reference
 
-### `HTMLExporter(markdown_inst=None)`
+### `HTMLExporter(markdown_inst=None, user_template_dir=None, user_context={})`
 Constructor for the HTML exporter class
 
 **Optional Parameters**
@@ -43,6 +43,8 @@ Constructor for the HTML exporter class
       for more details.
 * `user_template_dir`
     * Path to a directory where user-defined template overrides are stored.
+* `user_context`
+    * Additional context variables to load into the template namespace.
 
 ### `HTMLExporter.export(node, output_dir, **kwargs)`
 Perform the export!

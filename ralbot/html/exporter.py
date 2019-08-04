@@ -14,7 +14,7 @@ import markdown
 from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode
 
 class HTMLExporter:
-    def __init__(self, markdown_inst=None, user_template_dir=None):
+    def __init__(self, markdown_inst=None, user_template_dir=None, user_context={}):
         """
         Constructor for the HTML exporter class
 
@@ -26,6 +26,8 @@ class HTMLExporter:
             for more details.
         user_template_dir: str
             Path to a directory where user-defined template overrides are stored.
+        user_context: dict
+            Additional context variables to load into the template namespace.
         """
         self.output_dir = None
         self.RALIndex = []
@@ -33,6 +35,7 @@ class HTMLExporter:
         self.footer = None
         self.title = None
         self.home_url = None
+        self.user_context = user_context
 
         if markdown_inst is None:
             self.markdown_inst = markdown.Markdown()
@@ -199,6 +202,7 @@ class HTMLExporter:
             'reversed': reversed,
             'list': list,
         }
+        context.update(self.user_context)
 
         template = self.jj_env.get_template(self._template_map[type(node)])
         stream = template.stream(context)
@@ -212,6 +216,7 @@ class HTMLExporter:
             'footer_text': self.footer,
             'home_url': self.home_url
         }
+        context.update(self.user_context)
 
         template = self.jj_env.get_template("index.html")
         stream = template.stream(context)
