@@ -36,6 +36,7 @@ function update_reg_value_tester(){
     }
     var reg_el = document.getElementById("_RegValueTester");
     reg_el.value = "0x" + reg_value.toString(16);
+    reg_el.classList.remove("invalid");
     userHooks.onRegValueEditorChange();
 }
 
@@ -50,6 +51,7 @@ function update_field_value_tester(idx){
     value = value.and(mask);
     var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[idx].name);
     el.value = format_field_value(idx, value);
+    el.classList.remove("invalid");
 }
 
 function format_field_value(idx, value) {
