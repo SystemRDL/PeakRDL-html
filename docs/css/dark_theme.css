@@ -1,0 +1,243 @@
+@media (prefers-color-scheme: dark) {
+
+    html{
+        background-color: #111;
+        color: #C0C0C0;
+    }
+
+    a {
+        color: #2e8fcf;
+    }
+
+    a:hover {
+        color: #35a0e6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #C0C0C0;
+    }
+
+    table {
+        border-color:#444;
+    }
+
+    td, th {
+        border-color: #444;
+    }
+
+    tr:nth-child(2n) td {
+        background-color: #222;
+    }
+
+    hr {
+        border-color: #444;
+    }
+
+    pre {
+        background-color: #2a301f;
+        border-color: #444;
+    }
+
+    blockquote {
+        border-left-color: #444;
+    }
+
+    input {
+        color: #C0C0C0;
+        background-color: #000;
+    }
+
+    input.invalid {
+        background-color: #A33;
+    }
+
+    .target-highlight, .target-highlight td {
+        background-color: #7e6500!important;
+    }
+
+    mark {
+        background-color: #7e6500;
+    }
+
+    /* ----------------------------- Admonitions ---------------------------- */
+
+    .admonition {
+        background:#263330;
+    }
+
+    .admonition-title {
+        color:#ccc;
+        background:#12806a;
+    }
+
+    .admonition.danger,
+    .admonition.error{
+        background:#300;
+    }
+
+    .admonition.danger .admonition-title,
+    .admonition.error .admonition-title{
+        background:#730000;
+    }
+
+    .admonition.attention,
+    .admonition.caution,
+    .admonition.warning {
+        background:#342800;
+    }
+
+    .admonition.attention .admonition-title,
+    .admonition.caution .admonition-title,
+    .admonition.warning .admonition-title {
+        background:#8b6b00;
+    }
+
+    .admonition.note,
+    .admonition.seealso {
+        background:#262e33;
+    }
+
+    .admonition.note .admonition-title,
+    .admonition.seealso .admonition-title {
+        background:#3d6580;
+    }
+
+    .admonition.hint,
+    .admonition.important,
+    .admonition.tip {
+        background:#263330;
+    }
+
+    .admonition.hint .admonition-title,
+    .admonition.important .admonition-title,
+    .admonition.tip .admonition-title {
+        background:#12806a;
+    }
+
+    /* ------------------------------- Sidebar ------------------------------ */
+    #_SBTitlebar {
+        background-color: #005e9a;
+    }
+
+    #_SBTitlebox {
+        color: #ccc;
+    }
+
+    #_SBResizer:hover {
+        background-color: rgba(128, 128, 128, 0.5);
+    }
+
+    .sb-button-strip button, .sb-button-strip a.button-link{
+        color: #ccc;
+    }
+
+    .sb-button-strip button:hover, .sb-button-strip a.button-link:hover{
+        background-color: #006db2;
+        color: #eee;
+    }
+
+    #_SBTreeContainer {
+        background-color: #303030;
+        color: #d9d9d9;
+    }
+
+    .node {
+        border-color: #303030;
+    }
+
+    .node:hover{
+        background-color: #4e4a4a;
+    }
+
+    .node.selected {
+        background-color: #000;
+        color: #CCC;
+        border-color: #222;
+    }
+
+    /* --------------------------- Mobile Titlebar -------------------------- */
+    #_MobiTitlebar {
+        background-color: #005e9a;
+        color: #ccc;
+    }
+
+    #_MobiTitlebar button{
+        color: #ccc;
+    }
+
+    #_MobiTitlebar button:hover{
+        background-color: #006db2;
+        color: #eee;
+    }
+    /* ----------------------------- Main Window ---------------------------- */
+
+    .main {
+        background-color: #000;
+    }
+
+    .crumb-idx:hover{
+        background-color: #54abe6;
+        color: #000;
+    }
+
+    input.field-value-tester {
+        border-color: #555;
+    }
+
+    input#_RegValueTester {
+        border-color: #555;
+    }
+
+    footer {
+        color: #444;
+    }
+
+    .radix-button {
+        border-color: #6c6c6c;
+        background-color: #444;
+        background-image: linear-gradient(#444, #222);
+        color: #999;
+    }
+
+    .reset-button {
+        border-color: #6c6c6c;
+        background-color: #444;
+        background-image: linear-gradient(#444, #222);
+        color: #999;
+    }
+
+    /* ------------------------------- Search ------------------------------- */
+
+    #_SearchBar input {
+        border-color: #555;
+    }
+
+    #_SearchResults li:first-child {
+        border-top-color: #444;
+    }
+
+    #_SearchResults li {
+        border-bottom-color: #444;
+    }
+
+    #_SearchResults .selected {
+        background-color: #323333;
+    }
+
+    /* ------------------------- Index Editor Modal ------------------------- */
+    #_IdxEditModal {
+        background-color: #005e9a;
+    }
+
+    #_IdxEditModal::before {
+        border-bottom-color: #005e9a;
+    }
+
+    #_IdxEditInput {
+        border-color: #004e80;
+    }
+
+    #_IdxEditRange {
+        color: #ccc;
+    }
+}

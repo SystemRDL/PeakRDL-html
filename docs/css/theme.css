@@ -433,6 +433,17 @@ footer {
     background-image: linear-gradient(#f5f5f5, #dddddd);
 }
 
+.reset-button {
+    font-size: 0.90em;
+    padding: 0.30em 0.50em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #949494;
+    border-radius: 2px;
+    background-color: #eee;
+    background-image: linear-gradient(#f5f5f5, #dddddd);
+}
+
 h1:hover .headerlink::after,
 h2:hover .headerlink::after,
 h3:hover .headerlink::after,
