@@ -3,9 +3,9 @@ function load_page(id, done_callback) {
     // Clears and populates the main div with content/{id}.html's content
 
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onloadend = function() {
         var main_el = document.getElementById("_ContentContainer");
-        if (this.readyState == 4 && (this.status == 200 || this.status == 0 && this.responseText)) {
+        if (this.status == 200 || (this.status == 0 && this.responseText)) {
             // Page loaded successfully
             CurrentID = id;
             update_crumbtrail();
@@ -27,7 +27,6 @@ function load_page(id, done_callback) {
             }
         }
     };
-    
     
     try {
         xhttp.open("GET", "content/" + id + ".html", true);
