@@ -51,6 +51,23 @@ function close_search(){
     SearchState.active = false;
 }
 
+function onKeyDownSearch(ev) {
+    // return True if event was not handled here
+    if(!SearchState.active && ev.key == "/"){
+        open_search();
+        return false;
+    }
+
+    if(SearchState.active){
+        if(ev.key == "Escape"){
+            close_search();
+            return false;
+        }
+    }
+
+    return true;
+}
+
 function onSearchInputKeypress(ev){
     if(!ev) ev = window.event;
     
@@ -61,9 +78,6 @@ function onSearchInputKeypress(ev){
         } else if(SearchState.results.length == 1){
             open_search_result(0);
         }
-        return false;
-    } else if(ev.key == "Escape"){
-        close_search();
         return false;
     } else if(ev.key == "ArrowUp"){
         // Move selection up

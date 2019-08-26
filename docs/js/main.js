@@ -26,6 +26,12 @@ var userHooks = {
     // When saving register state, provide additional data to the state object
     save_extra_reg_state: function(state) {
         return state;
+    },
+
+    // Global keystroke event
+    onKeyDown: function(ev) {
+        // return True if event was not handled here
+        return true;
     }
 };
 
@@ -50,11 +56,13 @@ function onPageLoad() {
 
 function onKeyDownMain(ev) {
     if(!ev) ev = window.event;
+    var unhandled;
 
-    if(!SearchState.active && ev.key == "/"){
-        open_search();
-        return false;
-    }
+    unhandled = onKeyDownSearch(ev);
+    if(!unhandled) return false;
+
+    unhandled = userHooks.onKeyDown(ev);
+    if(!unhandled) return false;
 }
 
 function show_file_protocol_nag() {
