@@ -21,6 +21,11 @@ var userHooks = {
     // Triggered when any of the register's encoded or decoded value form fields
     // were changed
     onRegValueEditorChange: function() {
+    },
+
+    // When saving register state, provide additional data to the state object
+    save_extra_reg_state: function(state) {
+        return state;
     }
 };
 

@@ -14,7 +14,7 @@ function load_page(id, done_callback) {
             update_absolute_addr(get_absolute_addr(id));
             update_rdlfc_indexes();
             if(is_register(id)) {
-                reset_field_inputs();
+                init_reg_value();
                 init_radix_buttons();
             }
             if(typeof done_callback !== "undefined") done_callback();

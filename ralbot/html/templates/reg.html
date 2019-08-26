@@ -60,7 +60,7 @@
     <label>
         Encoded Register Value:
         <input id="_RegValueTester" type="text" autocomplete="off" oninput="onEncodedRegInput(this)"/>
-        <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="reset_field_inputs()"></button>
+        <button type="button" class="reset-button" title="Reset register values" aria-label="Reset register values" onclick="onResetRegValue(this)"></button>
     </label>
     {{- user_macros.reg_value_edit_extra() }}
 </p>

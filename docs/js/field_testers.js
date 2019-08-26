@@ -1,4 +1,38 @@
 
+// registry of register values by address string in hex
+var RegValueRegistery = {};
+
+function init_reg_value(){
+    var state = get_reg_state();
+    if(state != null) {
+        var reg_el = document.getElementById("_RegValueTester");
+        reg_el.value = "0x" + state.value.toString(16);
+        reg_el.classList.remove("invalid");
+        update_field_value_testers();
+    } else {
+        reset_field_inputs();
+    }
+}
+
+function save_reg_state(){
+    var addr_key = get_absolute_addr(CurrentID).toString(16);
+    var reg_el = document.getElementById("_RegValueTester");
+
+    var state = {};
+    state.value = toBigInt(reg_el.value);
+    state = userHooks.save_extra_reg_state(state)
+    RegValueRegistery[addr_key] = state;
+}
+
+function get_reg_state(){
+    var addr_key = get_absolute_addr(CurrentID).toString(16);
+    if(addr_key in RegValueRegistery) {
+        return RegValueRegistery[addr_key];
+    } else {
+        return null;
+    }
+}
+
 function init_radix_buttons(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
         var el = document.getElementById("_RadixButton" + RALIndex[CurrentID].fields[i].name);
@@ -99,6 +133,7 @@ function onDecodedFieldInput(el){
     }
     el.classList.remove("invalid");
     update_reg_value_tester();
+    save_reg_state();
 }
 
 function onEncodedRegInput(el){
@@ -115,4 +150,10 @@ function onEncodedRegInput(el){
     }
     el.classList.remove("invalid");
     update_field_value_testers();
+    save_reg_state();
+}
+
+function onResetRegValue(el){
+    reset_field_inputs();
+    save_reg_state();
 }
