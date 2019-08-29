@@ -253,8 +253,8 @@ function add_search_result(text_segments, id, idx_stack, anchor){
     result_el.onclick = function() {
         open_search_result(result_id);
     };
-    result_el.onmouseover = function() {
-        onSearchResultMouseover(result_id)
+    result_el.onmousemove = function() {
+        onSearchResultMousemove(result_id)
     };
     document.getElementById("_SearchResults").appendChild(result_el);
     
@@ -278,7 +278,7 @@ function add_search_result(text_segments, id, idx_stack, anchor){
     SearchState.results.push(result);
 }
 
-function onSearchResultMouseover(result_id){
+function onSearchResultMousemove(result_id){
     if(SearchState.selected_result == result_id) return;
     
     if(SearchState.selected_result != null){
