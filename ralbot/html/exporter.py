@@ -14,7 +14,7 @@ import markdown
 from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode
 
 class HTMLExporter:
-    def __init__(self, markdown_inst=None, user_template_dir=None, user_context={}):
+    def __init__(self, markdown_inst=None, user_template_dir=None, user_static_dir=None, user_context=None):
         """
         Constructor for the HTML exporter class
 
@@ -26,6 +26,8 @@ class HTMLExporter:
             for more details.
         user_template_dir: str
             Path to a directory where user-defined template overrides are stored.
+        user_static_dir: str
+            Path to user-defined static content to copy to output directory.
         user_context: dict
             Additional context variables to load into the template namespace.
         """
@@ -35,6 +37,10 @@ class HTMLExporter:
         self.footer = None
         self.title = None
         self.home_url = None
+        self.user_static_dir = user_static_dir
+
+        if user_context is None:
+            user_context = {}
         self.user_context = user_context
 
         if markdown_inst is None:
@@ -95,6 +101,8 @@ class HTMLExporter:
         # Copy static files
         static_dir = os.path.join(os.path.dirname(__file__), "static")
         distutils.dir_util.copy_tree(static_dir, self.output_dir, preserve_mode=0, preserve_times=0)
+        if self.user_static_dir:
+            distutils.dir_util.copy_tree(self.user_static_dir, self.output_dir, preserve_mode=0, preserve_times=0)
 
         # Make sure output directory structure exists
         os.makedirs(self.output_dir, exist_ok=True)

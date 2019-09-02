@@ -43,6 +43,8 @@ Constructor for the HTML exporter class
       for more details.
 * `user_template_dir`
     * Path to a directory where user-defined template overrides are stored.
+* `user_static_dir`
+    * Path to user-defined static content to copy to output directory.
 * `user_context`
     * Additional context variables to load into the template namespace.
 
