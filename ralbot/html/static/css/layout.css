@@ -96,7 +96,6 @@ button {
     position:absolute;
     display:none;
     z-index: 2;
-    background-color:rgba(0,0,0,0.5);
     cursor:pointer;
 }
 
@@ -154,7 +153,7 @@ button {
     z-index: 3;
 }
 
-#_SBSearchButton {
+#_SBSearchButton, #_SBSearchButtonSpan {
     display: none;
 }
 
@@ -165,7 +164,7 @@ button {
         display: flex!important;
         z-index: 0;
     }
-    #_SBSearchButton {
+    #_SBSearchButton, #_SBSearchButtonSpan {
         display: block;
     }
     

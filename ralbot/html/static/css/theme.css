@@ -7,6 +7,7 @@
     --footer-text-color: #808080;
     --url-color: #2980b9;
     --url-color-hover: #3091d1;
+    --overlay-bg-rgba: 0,0,0,0.5;
 
     --offpage-bg-color:#eee;
     --main-bg-color:#fff;
@@ -26,6 +27,10 @@
     --button-text-color: #4c4c4c;
     --button-gradient-top-color: #f5f5f5;
     --button-gradient-bottom-color: #dddddd;
+
+    --button-disabled-border-color: #ccc;
+    --button-disabled-text-color: #999;
+    --button-disabled-bg-color: #e8e8e8;
 
     --admonition-title-text-color: #fff;
     --admonition-title-bg-color: #6ab0de;
@@ -65,6 +70,7 @@
         --footer-text-color: #444;
         --url-color: #2e8fcf;
         --url-color-hover: #35a0e6;
+        --overlay-bg-rgba: 0,0,0,0.65;
 
         --offpage-bg-color: #111;
         --main-bg-color: #000;
@@ -84,6 +90,10 @@
         --button-text-color: #999;
         --button-gradient-top-color: #444;
         --button-gradient-bottom-color: #222;
+
+        --button-disabled-border-color: #555;
+        --button-disabled-text-color: #555;
+        --button-disabled-bg-color: #222;
         
         --admonition-title-text-color: #ccc;
         --admonition-title-bg-color: #12806a;
@@ -211,6 +221,24 @@ input {
 input.invalid {
     background-color: var(--input-invalid-bg-color);
 }
+
+button {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--button-border-color);
+    color: var(--button-text-color);
+    border-radius: 2px;
+    background-image: linear-gradient(var(--button-gradient-top-color), var(--button-gradient-bottom-color));
+    padding: 0.25em 0.9em;
+}
+
+button:disabled {
+    border-color: var(--button-disabled-border-color);
+    color: var(--button-disabled-text-color);
+    background-color: var(--button-disabled-bg-color);
+    background-image: none;
+}
+
 
 /*:target, :target td {*/
 .target-highlight, .target-highlight td {
@@ -359,6 +387,10 @@ mark {
     color: var(--title-text-color);
 }
 
+#_Overlay {
+    background-color: rgba(var(--overlay-bg-rgba));
+}
+
 #_SBResizer:hover {
     background-color: rgba(128, 128, 128, 0.5);
 }
@@ -369,6 +401,7 @@ mark {
 
 .sb-button-strip button, .sb-button-strip a.button-link{
     background-color: inherit;
+    background-image: none;
     border: none;
     width: 1.25em;
     height: 1.25em;
@@ -464,6 +497,7 @@ mark {
 
 #_MobiTitlebar button{
     background-color: inherit;
+    background-image: none;
     border: none;
     font-size: 1.5em;
     width: 1.5em;
