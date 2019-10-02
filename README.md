@@ -53,8 +53,9 @@ Perform the export!
 
 **Parameters**
 
-* `node`
+* `nodes`
     * Top-level node to export. Can be the top-level `RootNode` or any internal `AddrmapNode`.
+      Can also be a list of `RootNode` and any internal `AddrmapNode`.
 * `output_dir`
     * HTML output directory.
     
