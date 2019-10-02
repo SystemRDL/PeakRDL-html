@@ -93,15 +93,23 @@ function parse_path(path){
         segment_idxs.push(idxs);
     }
     
-    // Validate first node
-    if(segments[0] != RALIndex[0].name) return(null);
-    if("dims" in RALIndex[0]){
+    // Validate first node in path
+    var id = null;
+    for(var i=0; i<RootNodeIds.length; i++){
+        if(segments[0] == RALIndex[RootNodeIds[i]].name) {
+            id = RootNodeIds[i];
+            break;
+        }
+    }
+    if(id == null) return(null);
+
+    if("dims" in RALIndex[id]){
         var sanitized_idxs = [];
-        for(var dim=0; dim<RALIndex[0].dims.length; dim++){
+        for(var dim=0; dim<RALIndex[id].dims.length; dim++){
             if(dim >= segment_idxs[0].length){
                 sanitized_idxs.push(0);
             } else {
-                sanitized_idxs.push(Math.min(segment_idxs[0][dim], RALIndex[0].dims[dim]-1));
+                sanitized_idxs.push(Math.min(segment_idxs[0][dim], RALIndex[id].dims[dim]-1));
             }
         }
         segment_idxs[0] = sanitized_idxs;
@@ -110,7 +118,6 @@ function parse_path(path){
     }
     
     // Validate the path and find the end ID
-    var id=0;
     for(var i=1; i<segments.length; i++){
         // try to get the child by name
         var next_id = get_child(id, segments[i]);
