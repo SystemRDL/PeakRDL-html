@@ -123,13 +123,15 @@ function onSearchInputUpdate(ev){
         
         if(addr.lt(0)) return;
         
-        var result = lookup_by_address(addr);
-        if(result != null) {
-            add_search_result(
-                [get_path(result[0], result[1])],
-                result[0], result[1]
-            );
-        }
+        RootNodeIds.forEach(function(id) {
+            var result = lookup_by_address(addr, id);
+            if(result != null) {
+                add_search_result(
+                    [get_path(result[0], result[1])],
+                    result[0], result[1]
+                );
+            }
+        });
     } else {
         start_keyword_search(search_text);
     }

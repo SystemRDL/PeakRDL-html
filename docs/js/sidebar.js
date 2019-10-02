@@ -4,7 +4,9 @@ SBResizeState.start_x = 0;
 
 function init_tree() {
     var el = document.getElementById("_SBTree");
-    add_tree_node(el, 0);
+    RootNodeIds.forEach(function(id) {
+        add_tree_node(el, id);
+    });
 }
 
 function add_tree_node(parent_el, id){

@@ -228,12 +228,13 @@ function get_total_size(id){
     }
 }
 
-function lookup_by_address(addr){
+function lookup_by_address(addr, root_id){
     // Finds the deepest RAL node that contains addr
     // If found, returns:
     //  [id, idx_stack]
     // Otherwise, returns null
-    var id=0;
+    if(typeof root_id === "undefined") root_id = 0;
+    var id=root_id;
     var idx_stack = [];
     var iter_count = 0;
     
