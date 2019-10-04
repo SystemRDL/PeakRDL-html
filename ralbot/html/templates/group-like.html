@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{%- macro reserved_addr(addr, addr_digits) -%}
+<tr class="reserved-addr">
+    <td class="address">{{"0x{n:0{width}X}".format(n=addr, width=addr_digits)}}</td>
+    <td>-</td>
+    <td>-</td>
+    <td></td>
+</tr>
+{%- endmacro %}
+
 {%- block content %}
 <table border="1">
     <tr>
@@ -10,6 +19,11 @@
     </tr>
     {%- set addr_digits = get_child_addr_digits(node) -%}
     {%- for child_id,child in children.items() %}
+    {%- if loop.first and child.inst.addr_offset != 0 %}
+    {{reserved_addr(child.inst.addr_offset-1, addr_digits)}}
+    {%- elif (not loop.first) and (loop.previtem[1].inst.addr_offset + loop.previtem[1].total_size) < child.inst.addr_offset %}
+    {{reserved_addr(loop.previtem[1].inst.addr_offset + loop.previtem[1].total_size, addr_digits)}}
+    {%- endif %}
     <tr id="{{child.inst.inst_name}}">
         <td class="address">{{"0x{n:0{width}X}".format(n=child.inst.addr_offset, width=addr_digits)}}</td>
         <td><a href="?p={{child.get_path(empty_array_suffix='')}}" data-id="{{child_id}}" onclick="onClickNodeLink(event); return(false)">

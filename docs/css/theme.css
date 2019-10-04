@@ -8,7 +8,8 @@
     --url-color: #2980b9;
     --url-color-hover: #3091d1;
     --overlay-bg-rgba: 0,0,0,0.5;
-
+    --reserved-text-color:#808080;
+    
     --offpage-bg-color:#eee;
     --main-bg-color:#fff;
     --title-bg-color: #2980b9;
@@ -71,6 +72,7 @@
         --url-color: #2e8fcf;
         --url-color-hover: #35a0e6;
         --overlay-bg-rgba: 0,0,0,0.65;
+        --reserved-text-color:#444;
 
         --offpage-bg-color: #111;
         --main-bg-color: #000;
@@ -175,6 +177,10 @@ td:first-child, th:first-child {
 
 tr:nth-child(2n) td {
     background-color: var(--alt-row-bg-color);
+}
+
+tr.reserved-field, tr.reserved-addr {
+    color: var(--reserved-text-color);
 }
 
 td > p:first-child {

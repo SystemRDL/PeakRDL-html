@@ -1,5 +1,21 @@
 {% extends "base.html" %}
 
+{%- macro reserved_field(msb, lsb) -%}
+<tr class="reserved-field">
+    {%- if msb == lsb %}
+    <td>[{{msb}}]</td>
+    {%- else %}
+    <td>[{{msb}}:{{lsb}}]</td>
+    {%- endif %}
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td></td>
+    <td>-</td>
+    <td></td>
+</tr>
+{%- endmacro %}
+
 {%- block content -%}
 <table border="1">
     <tr>
@@ -12,6 +28,11 @@
         <th></th>
     </tr>
     {%- for field in reversed(list(node.fields())) %}
+    {%- if loop.first and field.inst.msb < (node.get_property('regwidth') - 1) %}
+    {{reserved_field(node.get_property('regwidth') - 1, field.inst.msb + 1)}}
+    {%- elif (not loop.first) and field.inst.msb < loop.previtem.inst.lsb - 1 %}
+    {{reserved_field(loop.previtem.inst.lsb - 1, field.inst.msb + 1)}}
+    {%- endif %}
     <tr id="{{field.inst.inst_name}}">
         {%- if field.inst.msb == field.inst.lsb %}
         <td>[{{field.inst.lsb}}]</td>
@@ -54,6 +75,9 @@
             <a class="headerlink" href="#{{field.inst.inst_name}}" title="Permalink to this row"></a>
         </td>
     </tr>
+    {%- if loop.last and field.inst.lsb != 0 %}
+    {{reserved_field(field.inst.lsb - 1, 0)}}
+    {%- endif %}
     {%- endfor %}
 </table>
 <p>
