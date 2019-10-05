@@ -67,7 +67,7 @@
                 type="text" autocomplete="off"
                 data-name="{{field.inst.inst_name}}" oninput="onDecodedFieldInput(this)"/>
         </td>
-        <td>{{field.get_html_name() or "-"}}</td>
+        <td>{{(field.get_html_name() or "-")|safe}}</td>
         <td>
             <button type="button" id="_RadixButton{{field.inst.inst_name}}" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"

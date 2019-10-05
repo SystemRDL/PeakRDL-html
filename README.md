@@ -10,7 +10,8 @@ Install from [PyPi](https://pypi.org/project/ralbot-html) using pip:
 
 
 ## Example
-An example of HTML output generated from Accelera's SystemRDL SATA AHCI reference.
+An example of HTML output generated from a
+[fictional SystemRDL register description](example/turboencabulator.rdl).
 
 [https://systemrdl.github.io/RALBot-html](https://systemrdl.github.io/RALBot-html)
 
@@ -32,7 +33,7 @@ exporter.export(root, "path/to/output")
 
 ## Reference
 
-### `HTMLExporter(markdown_inst=None, user_template_dir=None, user_context={})`
+### `HTMLExporter(markdown_inst=None, user_template_dir=None, user_static_dir==None, user_context={}, show_signals=False)`
 Constructor for the HTML exporter class
 
 **Optional Parameters**
@@ -47,6 +48,8 @@ Constructor for the HTML exporter class
     * Path to user-defined static content to copy to output directory.
 * `user_context`
     * Additional context variables to load into the template namespace.
+* `show_signals`
+    * Show signal components. Default is False
 
 ### `HTMLExporter.export(node, output_dir, **kwargs)`
 Perform the export!

@@ -11,10 +11,10 @@ from collections import OrderedDict
 import jinja2 as jj
 import markdown
 
-from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode
+from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode, SignalNode
 
 class HTMLExporter:
-    def __init__(self, markdown_inst=None, user_template_dir=None, user_static_dir=None, user_context=None):
+    def __init__(self, markdown_inst=None, user_template_dir=None, user_static_dir=None, user_context=None, show_signals=False):
         """
         Constructor for the HTML exporter class
 
@@ -30,6 +30,8 @@ class HTMLExporter:
             Path to user-defined static content to copy to output directory.
         user_context: dict
             Additional context variables to load into the template namespace.
+        show_signals: bool
+            Show signal components. Default is False
         """
         self.output_dir = None
         self.RALIndex = []
@@ -39,6 +41,7 @@ class HTMLExporter:
         self.title = None
         self.home_url = None
         self.user_static_dir = user_static_dir
+        self.show_signals = show_signals
 
         if user_context is None:
             user_context = {}
@@ -223,7 +226,10 @@ class HTMLExporter:
             'get_enum_desc': self.get_enum_html_desc,
             'get_node_desc': self.get_node_html_desc,
             'get_child_addr_digits': self.get_child_addr_digits,
+            'show_signals': self.show_signals,
+            'SignalNode' : SignalNode,
             'reversed': reversed,
+            'isinstance': isinstance,
             'list': list,
         }
         context.update(self.user_context)

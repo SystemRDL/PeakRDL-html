@@ -1,5 +1,5 @@
 <div>
-<h1>{{node.get_html_name() or node.get_property("name")}}</h1>
+<h1>{{(node.get_html_name() or node.get_property("name"))|safe}}</h1>
 
 <dl class="node-info">
     {%- block node_info %}
@@ -17,6 +17,28 @@
 {%- if has_description(node) %}
 <h2>Description</h2>
 {{get_node_desc(node,2)|safe}}
+{%- endif %}
+
+{%- if show_signals %}
+{%- for signal in node.children() if isinstance(signal, SignalNode) %}
+{%- if loop.first %}
+<h2>Signals</h2>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Width</th>
+        <th>Description</th>
+    </tr>
+{%- endif %}
+    <tr>
+        <td>{{(signal.get_html_name() or signal.get_property("name"))|safe}}</td>
+        <td>{{signal.width}}</td>
+        <td>{{(get_node_desc(signal) or "-")|safe}}</td>
+    </tr>
+{%- if loop.last %}
+</table>
+{%- endif %}
+{%- endfor %}
 {%- endif %}
 
 <h2>Contents</h2>
