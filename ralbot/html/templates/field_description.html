@@ -3,7 +3,7 @@
     {%- if field.get_property("name", default="") == "" -%}
         {{- field.inst.inst_name -}}
     {%- else -%}
-        {{- field.inst.inst_name}} - {{field.get_property("name") -}}
+        {{- field.inst.inst_name}} - {{field.get_html_name() -}}
     {%- endif %}
     <a class="headerlink" href="#{{field.inst.inst_name}}.desc" title="Permalink to this headline"></a>
 </h3>

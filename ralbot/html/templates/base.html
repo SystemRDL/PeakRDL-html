@@ -1,5 +1,5 @@
 <div>
-<h1>{{node.get_property("name")}}</h1>
+<h1>{{node.get_html_name() or node.get_property("name")}}</h1>
 
 <dl class="node-info">
     {%- block node_info %}

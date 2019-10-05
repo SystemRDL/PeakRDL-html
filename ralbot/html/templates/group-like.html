@@ -33,7 +33,7 @@
                 {{child.inst.inst_name}}
             {%- endif -%}
         </a></td>
-        <td>{{child.get_property("name", default="-")}}</td>
+        <td>{{child.get_html_name() or "-"}}</td>
         <td>
             <a class="headerlink" href="#{{child.inst.inst_name}}" title="Permalink to this row"></a>
         </td>
