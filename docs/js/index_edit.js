@@ -52,39 +52,50 @@ function exitIndexEditModal(cancel) {
             update_rdlfc_indexes();
             patch_url_path();
             update_absolute_addr(get_absolute_addr(CurrentID));
-            init_reg_value();
+            if(is_register(CurrentID)){
+                init_reg_value();
+            }
             userHooks.onAddressUpdate();
         }
     }
 }
 
-function onClickCrumbtrailIdx(ev) {
-    ev.stopPropagation();
-    if(IndexEditState.active){
-        // Exit previous modal box
-        exitIndexEditModal();
-    }
-    
+function showIndexEditModal(idx){
+    var span_el = document.getElementById('_CrumbIdxSpan' + idx);
     var modal_el = document.getElementById('_IdxEditModal');
     var input_el = document.getElementById('_IdxEditInput');
     var range_el = document.getElementById('_IdxEditRange');
     
+    if(span_el == null) return;
+    
     // Show Modal
     modal_el.style.display = "block";
-    var rect = ev.target.getBoundingClientRect();
+    var rect = span_el.getBoundingClientRect();
     modal_el.style.left = (rect.left + rect.right)/2 - modal_el.offsetWidth/2 + "px";
     modal_el.style.top = rect.bottom + 10 + "px";
     
     // Initialize modal
     IndexEditState.active = true;
     var sid, sdim;
-    IndexEditState.id = parseInt(ev.target.dataset.id);
-    IndexEditState.dim = parseInt(ev.target.dataset.dim);
+    IndexEditState.id = parseInt(span_el.dataset.id);
+    IndexEditState.dim = parseInt(span_el.dataset.dim);
     input_el.value = RALIndex[IndexEditState.id].idxs[IndexEditState.dim];
     range_el.innerHTML = "0-" + (RALIndex[IndexEditState.id].dims[IndexEditState.dim]-1);
 
     input_el.focus();
     input_el.select();
+}
+
+function onClickCrumbtrailIdx(ev) {
+    ev.stopPropagation();
+
+    // Get index of span that was clicked
+    var idx = ev.target.dataset.span_idx;
+    if(IndexEditState.active){
+        // Exit previous modal box
+        exitIndexEditModal();
+    }
+    showIndexEditModal(idx);
     
     return(false);
 }

@@ -128,6 +128,7 @@ function update_crumbtrail(){
     }
     
     var path_ids = get_ids_in_path(id);
+    var crumb_idx_span_idx = 0;
     
     for(var i=0; i<path_ids.length; i++){
         if(i < path_ids.length-1){
@@ -148,10 +149,13 @@ function update_crumbtrail(){
                 var el = document.createElement("span");
                 el.dataset.id = path_ids[i];
                 el.dataset.dim = dim;
+                el.dataset.span_idx = crumb_idx_span_idx;
                 el.className = "crumb-idx";
+                el.id = "_CrumbIdxSpan" + crumb_idx_span_idx;
                 el.onclick = onClickCrumbtrailIdx;
                 el.innerHTML = "[" + RALIndex[path_ids[i]].idxs[dim] + "]";
                 crumb_el.appendChild(el);
+                crumb_idx_span_idx++;
             }
         }
         

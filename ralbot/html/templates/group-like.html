@@ -28,7 +28,7 @@
         <td class="address">{{"0x{n:0{width}X}".format(n=child.inst.addr_offset, width=addr_digits)}}</td>
         <td><a href="?p={{child.get_path(empty_array_suffix='')}}" data-id="{{child_id}}" onclick="onClickNodeLink(event); return(false)">
             {%- if child.inst.is_array -%}
-                {{child.inst.inst_name}}{{child.inst.array_dimensions}}
+                {{child.inst.inst_name}}{% for dim in child.inst.array_dimensions %}[{{dim}}]{% endfor %}
             {%- else -%}
                 {{child.inst.inst_name}}
             {%- endif -%}

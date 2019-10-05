@@ -167,7 +167,9 @@ function get_path(id, idx_stack, show_idx){
     for(var i=0; i<ids.length; i++){
         var segment = RALIndex[ids[i]].name;
         if(show_idx && idx_stack[i].length){
-            segment += "[" + idx_stack[i] + "]";
+            for(var dim=0; dim<idx_stack[i].length; dim++){
+                segment += "[" + idx_stack[i][dim] + "]";
+            }
         }
         pathparts.push(segment);
     }
