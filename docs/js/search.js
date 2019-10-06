@@ -20,7 +20,8 @@ function onSearchButtonClick() {
     }
 }
 
-function open_search(){
+function open_search(query_text){
+    if(typeof query_text === "undefined") query_text = "";
     document.getElementById("_SearchBar").style.display = "block";
     document.getElementById("_Search").style.display = "flex";
     document.getElementById("_Content").style.display = "none";
@@ -35,8 +36,12 @@ function open_search(){
     var input_el = document.getElementById('_SearchInput');
     input_el.onkeydown = onSearchInputKeypress;
     input_el.oninput = onSearchInputUpdate;
-    input_el.value = "";
+    input_el.value = query_text;
     input_el.focus();
+
+    if(query_text != "") {
+        start_keyword_search(query_text);
+    }
 }
 
 function close_search(){
@@ -53,8 +58,13 @@ function close_search(){
 
 function onKeyDownSearch(ev) {
     // return True if event was not handled here
-    if(!SearchState.active && ev.key == "/"){
+    if(!SearchState.active && ev.key == "/" && !ev.altKey){
         open_search();
+        return false;
+    }
+
+    if(!SearchState.active && ev.key == "/" && ev.altKey){
+        open_search(get_path(CurrentID, undefined, false) + " ");
         return false;
     }
 
