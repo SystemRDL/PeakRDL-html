@@ -2,6 +2,7 @@ var IndexEditState = {};
 IndexEditState.active = false;
 IndexEditState.id = 0;
 IndexEditState.dim = 0;
+IndexEditState.span_idx = 0;
 
 function init_index_edit(){
     
@@ -79,6 +80,7 @@ function showIndexEditModal(idx){
     var sid, sdim;
     IndexEditState.id = parseInt(span_el.dataset.id);
     IndexEditState.dim = parseInt(span_el.dataset.dim);
+    IndexEditState.span_idx = idx;
     input_el.value = RALIndex[IndexEditState.id].idxs[IndexEditState.dim];
     range_el.innerHTML = "0-" + (RALIndex[IndexEditState.id].dims[IndexEditState.dim]-1);
 
@@ -90,12 +92,69 @@ function onClickCrumbtrailIdx(ev) {
     ev.stopPropagation();
 
     // Get index of span that was clicked
-    var idx = ev.target.dataset.span_idx;
+    // Need to save it in case crumbtrail get re-constructed
+    var span_idx = ev.target.dataset.span_idx;
+
     if(IndexEditState.active){
         // Exit previous modal box
         exitIndexEditModal();
     }
-    showIndexEditModal(idx);
+    showIndexEditModal(span_idx);
     
     return(false);
+}
+
+function onKeyDownIdxEdit(ev) {
+    // return True if event was not handled here
+    if(ev.ctrlKey && ev.key == "["){
+        switch_to_prev_idx_edit();
+        return false;
+    }
+
+    if(ev.ctrlKey && ev.key == "]"){
+        switch_to_next_idx_edit();
+        return false;
+    }
+
+    if(IndexEditState.active) {
+        if(ev.key == "Escape"){
+            exitIndexEditModal(true);
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+function switch_to_prev_idx_edit() {
+    var span_idx;
+    if(IndexEditState.active){
+        // Close current modal and flip to next index to the left
+        if(IndexEditState.span_idx == 0) return;
+        span_idx = IndexEditState.span_idx - 1;
+        exitIndexEditModal();
+    } else {
+        // Open first index
+        span_idx = 0;
+    }
+    showIndexEditModal(span_idx);
+}
+
+function switch_to_next_idx_edit() {
+    var span_idx;
+
+    // Determine max idx allowed
+    var n_idx_spans = document.getElementsByClassName("crumb-idx").length;
+
+    if(IndexEditState.active){
+        // Close current modal and flip to next index to the right
+        if(IndexEditState.span_idx == n_idx_spans-1) return;
+        span_idx = IndexEditState.span_idx + 1;
+        exitIndexEditModal();
+    } else {
+        // Open last index
+        span_idx = n_idx_spans-1;
+    }
+    showIndexEditModal(span_idx);
 }

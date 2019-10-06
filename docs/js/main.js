@@ -61,6 +61,9 @@ function onKeyDownMain(ev) {
     unhandled = onKeyDownSearch(ev);
     if(!unhandled) return false;
 
+    unhandled = onKeyDownIdxEdit(ev);
+    if(!unhandled) return false;
+
     unhandled = userHooks.onKeyDown(ev);
     if(!unhandled) return false;
 }
