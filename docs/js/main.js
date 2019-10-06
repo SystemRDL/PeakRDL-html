@@ -58,6 +58,12 @@ function onKeyDownMain(ev) {
     if(!ev) ev = window.event;
     var unhandled;
 
+    if(ev.ctrlKey && ev.key == "\\"){
+        // Navigate to parent node
+        load_parent_page();
+        return false;
+    }
+
     unhandled = onKeyDownSearch(ev);
     if(!unhandled) return false;
 

@@ -58,12 +58,12 @@ function close_search(){
 
 function onKeyDownSearch(ev) {
     // return True if event was not handled here
-    if(!SearchState.active && ev.key == "/" && !ev.altKey){
+    if(!SearchState.active && ev.key == "/" && !ev.ctrlKey){
         open_search();
         return false;
     }
 
-    if(!SearchState.active && ev.key == "/" && ev.altKey){
+    if(!SearchState.active && ev.key == "/" && ev.ctrlKey){
         open_search(get_path(CurrentID, undefined, false) + " ");
         return false;
     }

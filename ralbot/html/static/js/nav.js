@@ -105,6 +105,19 @@ function onClickNodeLink(ev) {
     return(false);
 }
 
+function load_parent_page(){
+    var id = RALIndex[CurrentID].parent;
+    if(id == null) return;
+    load_page(id, function () {
+        select_tree_node();
+        expand_to_tree_node();
+        open_tree_node(id);
+        scroll_to_tree_node(id);
+        refresh_url();
+        refresh_title();
+    });
+}
+
 function refresh_url(hash) {
     // Given current state, refresh the URL
     if(typeof hash === "undefined") hash = "";
