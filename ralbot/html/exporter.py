@@ -14,7 +14,7 @@ import markdown
 from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode, SignalNode
 
 class HTMLExporter:
-    def __init__(self, markdown_inst=None, user_template_dir=None, user_static_dir=None, user_context=None, show_signals=False):
+    def __init__(self, **kwargs):
         """
         Constructor for the HTML exporter class
 
@@ -40,17 +40,17 @@ class HTMLExporter:
         self.footer = None
         self.title = None
         self.home_url = None
-        self.user_static_dir = user_static_dir
-        self.show_signals = show_signals
 
-        if user_context is None:
-            user_context = {}
-        self.user_context = user_context
+        self.user_static_dir = kwargs.pop("user_static_dir", None)
+        self.show_signals = kwargs.pop("show_signals", False)
+        self.user_context = kwargs.pop("user_context", {})
+        self.markdown_inst = kwargs.pop("markdown_inst", markdown.Markdown())
+        user_template_dir = kwargs.pop("user_template_dir", None)
 
-        if markdown_inst is None:
-            self.markdown_inst = markdown.Markdown()
-        else:
-            self.markdown_inst = markdown_inst
+        # Check for stray kwargs
+        if kwargs:
+            raise TypeError("got an unexpected keyword argument '%s'" % list(kwargs.keys())[0])
+
 
         if user_template_dir:
             loader = jj.ChoiceLoader([
@@ -172,7 +172,7 @@ class HTMLExporter:
         self.RALIndex.append(ral_entry)
 
         # Insert root nodes to list
-        if parent_id == None:
+        if parent_id is None:
             self.RootNodeIds.append(this_id)
 
         # Recurse to children

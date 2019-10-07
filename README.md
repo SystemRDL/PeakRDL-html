@@ -33,7 +33,7 @@ exporter.export(root, "path/to/output")
 
 ## Reference
 
-### `HTMLExporter(markdown_inst=None, user_template_dir=None, user_static_dir==None, user_context={}, show_signals=False)`
+### `HTMLExporter(**kwargs)`
 Constructor for the HTML exporter class
 
 **Optional Parameters**
