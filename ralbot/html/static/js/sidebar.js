@@ -99,7 +99,7 @@ function expand_to_tree_node() {
 
 function scroll_to_tree_node(id) {
     var node_el = document.getElementById("_SBNode" + id);
-    var tree_el = document.getElementById("_SBTree");
+    var tree_el = document.getElementById("_SBTreeContainer");
     
     var node_rect = node_el.getBoundingClientRect();
     var tree_rect = tree_el.getBoundingClientRect();
