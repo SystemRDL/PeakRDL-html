@@ -208,6 +208,14 @@ function update_rdlfc_indexes() {
     }
 }
 
+function help_modal_open() {
+    document.getElementById("_HelpOverlay").style.display = "flex";
+}
+
+function help_modal_close () {
+    document.getElementById("_HelpOverlay").style.display = "none";
+}
+
 //==============================================================================
 // Misc
 //==============================================================================

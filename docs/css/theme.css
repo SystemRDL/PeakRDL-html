@@ -366,6 +366,12 @@ mark {
     content: "\f015";
 }
 
+.help-button::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    content: "\f059";
+}
+
 .copy-button::before {
     font-family: "Font Awesome 5 Free";
     font-weight: normal;
@@ -668,6 +674,44 @@ tr:hover .headerlink::after {
 
 #_IdxEditRange {
     color: var(--idx-edit-text-color);
+}
+
+/* ------------------------------ Generic Modal ----------------------------- */
+.generic-modal-overlay {
+    background-color: rgba(var(--overlay-bg-rgba));
+}
+
+.generic-modal {
+    background-color: var(--main-bg-color);
+    border: 1px solid var(--strong-content-border-color);
+    padding: 0em 1em 1em 1em;
+}
+
+.generic-modal h1 {
+    font-size: 1.5em;
+}
+
+.generic-modal h2 {
+    font-size: 1.3em;
+}
+
+.generic-modal h3 {
+    font-size: 1.1em;
+}
+
+/* ------------------------------- Help Modal ------------------------------- */
+.kb-shortcut-key {
+    border: solid 1px var(--strong-content-border-color);
+    background-color: var(--alt-row-bg-color);
+    padding: 0.125em 0.25em;
+    margin-left: 0.125em;
+    margin-right: 0.125em;
+    border-radius: 0.25em;
+}
+
+.generic-modal dt {
+    margin-top: 1em;
+    margin-bottom: 0.1em;
 }
 
 /* ---------------------------------- Fonts --------------------------------- */

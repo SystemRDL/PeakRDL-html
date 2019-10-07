@@ -38,6 +38,8 @@
                     <a class="button-link home-button no-stretchy" href="{{home_url}}"></a>
                     <span class="stretchy"></span>
                     {%- endif %}
+                    <button type="button" class="no-stretchy help-button" title="Help" aria-label="Help" onclick="help_modal_open()"></button>
+                    <span class="stretchy"></span>
                     {%- block button_strip2 %}
                     {%- endblock button_strip2 %}
                     <button type="button" class="expand-button no-stretchy" title="Expand All" aria-label="Expand All" onclick="onClickTreeExpandAll()"></button>
@@ -92,6 +94,22 @@
         </div>
         
         <div id="_Overlay" onclick="sidebar_close()"></div>
+    </div>
+
+    <div id="_HelpOverlay" class="generic-modal-overlay" onclick="help_modal_close()">
+        <div class="generic-modal">
+            {%- block help_contents %}
+            <h1>Keyboard Shortcuts</h1>
+            <dl>
+                {%- block help_kb_shortcuts %}
+                <dt><span class="kb-shortcut-key">/</span></dt><dd>Open Search</dd>
+                <dt><span class="kb-shortcut-key">Ctrl</span>+<span class="kb-shortcut-key">/</span></dt><dd>Open Search relative to current page</dd>
+                <dt><span class="kb-shortcut-key">Ctrl</span>+<span class="kb-shortcut-key">[</span> and <span class="kb-shortcut-key">Ctrl</span>+<span class="kb-shortcut-key">]</span></dt><dd>Cycle through path index editors</dd>
+                <dt><span class="kb-shortcut-key">Ctrl</span>+<span class="kb-shortcut-key">\</span></dt><dd>Navigate to parent page</dd>
+                {%- endblock help_kb_shortcuts %}
+            </dl>
+            {%- endblock help_contents %}
+        </div>
     </div>
     
     {%- endblock body %}
