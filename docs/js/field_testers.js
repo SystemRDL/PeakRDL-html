@@ -12,6 +12,10 @@ function init_reg_value(){
     } else {
         reset_field_inputs();
     }
+
+    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
+        update_field_enum_visibility(i);
+    }
 }
 
 function save_reg_state(){
@@ -44,6 +48,10 @@ function reset_field_inputs(){
     for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
         var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[i].name);
         el.value = format_field_value(i, RALIndex[CurrentID].fields[i].reset);
+        if("encode" in RALIndex[CurrentID].fields[i]) {
+            var el = document.getElementById("_FieldValueEnumTester" + RALIndex[CurrentID].fields[i].name);
+            el.value = "0x" + RALIndex[CurrentID].fields[i].reset.toString(16);
+        }
     }
     update_reg_value_tester();
 }
@@ -86,13 +94,33 @@ function update_field_value_tester(idx){
     var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[idx].name);
     el.value = format_field_value(idx, value);
     el.classList.remove("invalid");
+
+    if("encode" in RALIndex[CurrentID].fields[idx]) {
+        var el = document.getElementById("_FieldValueEnumTester" + RALIndex[CurrentID].fields[idx].name);
+        el.value = "0x" + value.toString(16);
+    }
 }
 
 function format_field_value(idx, value) {
-    if(RALIndex[CurrentID].fields[idx].disp == "H"){
-        return("0x" + value.toString(16));
-    } else {
+    if(RALIndex[CurrentID].fields[idx].disp == "D"){
         return(value.toString());
+    } else {
+        return("0x" + value.toString(16));
+    }
+}
+
+function update_field_enum_visibility(idx){
+    if(!("encode" in RALIndex[CurrentID].fields[idx])) return;
+
+    var d = RALIndex[CurrentID].fields[idx].disp;
+    var enum_el = document.getElementById("_FieldValueEnumTester" + RALIndex[CurrentID].fields[idx].name);
+    var txt_el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[idx].name);
+    if(d == "E") {
+        enum_el.style.display = "inline";
+        txt_el.style.display = "none";
+    } else {
+        enum_el.style.display = "none";
+        txt_el.style.display = "inline";
     }
 }
 
@@ -105,13 +133,24 @@ function onRadixSwitch(el){
     var d = RALIndex[CurrentID].fields[idx].disp;
     if(d == "H") {
         d = "D";
+    } else if((d == "D") && ("encode" in RALIndex[CurrentID].fields[idx])) {
+        d = "E";
     } else {
         d = "H";
     }
 
     el.innerHTML = d;
     RALIndex[CurrentID].fields[idx].disp = d;
+    update_field_enum_visibility(idx);
     update_field_value_tester(idx);
+}
+
+function onDecodedFieldEnumChange(el) {
+    var idx = lookup_field_idx(el.dataset.name);
+    var el2 = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[idx].name);
+    el2.value = el.value;
+    update_reg_value_tester();
+    save_reg_state();
 }
 
 function onDecodedFieldInput(el){
@@ -132,6 +171,11 @@ function onDecodedFieldInput(el){
         return;
     }
     el.classList.remove("invalid");
+
+    if("encode" in RALIndex[CurrentID].fields[idx]) {
+        var el2 = document.getElementById("_FieldValueEnumTester" + RALIndex[CurrentID].fields[idx].name);
+        el2.value = "0x" + value.toString(16);
+    }
     update_reg_value_tester();
     save_reg_state();
 }

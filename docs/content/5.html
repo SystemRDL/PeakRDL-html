@@ -56,6 +56,18 @@
             <input id="_FieldValueTesterstate" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-name="state" oninput="onDecodedFieldInput(this)"/>
+            <select id="_FieldValueEnumTesterstate" class="field-value-enum-tester"
+                data-name="state" onchange="onDecodedFieldEnumChange(this)">
+            
+                <option value="0x0">RESET</option>
+            
+                <option value="0x1">SYNC</option>
+            
+                <option value="0x2">READY</option>
+            
+                <option value="0x3">SYNC_FAIL</option>
+            
+            </select>
         </td>
         <td>Grammeter State</td>
         <td>

@@ -163,6 +163,7 @@ class HTMLExporter:
                     for member in field_enum:
                         encode[member.name] = BigInt(member.value)
                     ral_field['encode'] = encode
+                    ral_field['disp'] = 'E'
 
                 ral_fields.append(ral_field)
 

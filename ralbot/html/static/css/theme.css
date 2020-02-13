@@ -585,7 +585,14 @@ dl.node-info {
 input.field-value-tester {
     border: solid 1px var(--strong-content-border-color);
     padding: 0.25em 0.5em;
-    width: 7em;
+    width: 9em;
+}
+
+select.field-value-enum-tester {
+    padding: 0.0em 0.25em;
+    width: 12em;
+    height: 2.3em;
+    font-size: 0.75em;
 }
 
 input#_RegValueTester {

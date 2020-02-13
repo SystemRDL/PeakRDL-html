@@ -66,6 +66,14 @@
             <input id="_FieldValueTester{{field.inst.inst_name}}" class="field-value-tester"
                 type="text" autocomplete="off"
                 data-name="{{field.inst.inst_name}}" oninput="onDecodedFieldInput(this)"/>
+            {%- if field.get_property("encode") != None %}
+            <select id="_FieldValueEnumTester{{field.inst.inst_name}}" class="field-value-enum-tester"
+                data-name="{{field.inst.inst_name}}" onchange="onDecodedFieldEnumChange(this)">
+            {% for member in field.get_property("encode") %}
+                <option value="{{'0x%x' % member.value}}">{{member.name}}</option>
+            {% endfor %}
+            </select>
+            {%- endif %}
         </td>
         <td>{{(field.get_html_name() or "-")|safe}}</td>
         <td>
