@@ -17,3 +17,21 @@
     {%- endfor %}
 </table>
 {%- endmacro %}
+
+
+{%- macro extra_prop_table(node) -%}
+<table border="1">
+    <tr>
+        <th>Property</th>
+        <th>Value</th>
+    </tr>
+    {%- for prop in extra_properties %}
+    {%- if prop in node.list_properties() %}
+        <tr>
+            <td><code>{{prop}}</code></td>
+            <td>{{stringify_rdl_value(node.get_property(prop), node)}}</td>
+        </tr>
+    {% endif %}
+    {%- endfor %}
+</table>
+{%- endmacro %}

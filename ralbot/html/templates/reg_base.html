@@ -98,7 +98,7 @@
     {%- endblock reg_value_edit %}
 </p>
 
-{%- for field in reversed(list(node.fields())) if (has_description(field) or has_enum_encoding(field)) %}
+{%- for field in reversed(list(node.fields())) if (has_description(field) or has_enum_encoding(field) or has_extra_property_doc(field)) %}
 {%- if loop.first %}
 <hr/><h2>Field Descriptions</h2>
 {%- endif %}

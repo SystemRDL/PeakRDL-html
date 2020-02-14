@@ -161,6 +161,7 @@ table {
     border: solid 1px var(--content-border-color);
     border-collapse: collapse;
     empty-cells: show;
+    margin-top: 1em;
 }
 
 th {

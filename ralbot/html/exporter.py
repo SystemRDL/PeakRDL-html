@@ -13,6 +13,8 @@ import markdown
 
 from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode, SignalNode
 
+from .stringify import stringify_rdl_value
+
 class HTMLExporter:
     def __init__(self, **kwargs):
         """
@@ -32,6 +34,12 @@ class HTMLExporter:
             Additional context variables to load into the template namespace.
         show_signals: bool
             Show signal components. Default is False
+        extra_doc_properties: list[str]
+            List of properties to explicitly document.
+            Nodes that have a property explicitly set will show its value in a
+            table in the node's description.
+            Use this to bring forward user-defined properties, or other built-in
+            properties in your documentation.
         """
         self.output_dir = None
         self.RALIndex = []
@@ -45,6 +53,7 @@ class HTMLExporter:
         self.show_signals = kwargs.pop("show_signals", False)
         self.user_context = kwargs.pop("user_context", {})
         self.markdown_inst = kwargs.pop("markdown_inst", markdown.Markdown())
+        self.extra_properties = kwargs.pop("extra_doc_properties", [])
         user_template_dir = kwargs.pop("user_template_dir", None)
 
         # Check for stray kwargs
@@ -65,6 +74,7 @@ class HTMLExporter:
             autoescape=jj.select_autoescape(['html']),
             undefined=jj.StrictUndefined
         )
+
 
     def export(self, nodes, output_dir, **kwargs):
         """
@@ -228,6 +238,9 @@ class HTMLExporter:
             'get_node_desc': self.get_node_html_desc,
             'get_child_addr_digits': self.get_child_addr_digits,
             'show_signals': self.show_signals,
+            'has_extra_property_doc': self.has_extra_property_doc,
+            'extra_properties': self.extra_properties,
+            'stringify_rdl_value': stringify_rdl_value,
             'SignalNode' : SignalNode,
             'reversed': reversed,
             'isinstance': isinstance,
@@ -254,8 +267,10 @@ class HTMLExporter:
         output_path = os.path.join(self.output_dir, "index.html")
         stream.dump(output_path)
 
+
     def get_child_addr_digits(self, node):
         return math.ceil(math.log2(node.size + 1) / 4)
+
 
     def get_node_html_desc(self, node, increment_heading=0):
         """
@@ -322,12 +337,14 @@ class HTMLExporter:
             desc = re.sub(r'<\s*img.*/>', img_transform_callback, desc)
         return desc
 
+
     def get_enum_html_desc(self, enum_member):
         s = enum_member.get_html_desc(self.markdown_inst)
         if s:
             return s
         else:
             return ""
+
 
     def try_resolve_rel_path(self, src_ref, relpath):
         """
@@ -348,17 +365,32 @@ class HTMLExporter:
 
         return path
 
+
+    def has_extra_property_doc(self, node):
+        """
+        Returns True if node has a property set that is to be explicitly
+        documented.
+        """
+        for prop in self.extra_properties:
+            if prop in node.list_properties():
+                return True
+        return False
+
+
 def has_description(node):
     """
     Test if node has a description defined
     """
     return "desc" in node.list_properties()
 
+
 def has_enum_encoding(field):
     """
     Test if field is encoded with an enum
     """
     return "encode" in field.list_properties()
+
+
 
 class BigInt:
     def __init__(self, v):

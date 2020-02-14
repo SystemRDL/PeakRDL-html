@@ -15,3 +15,7 @@
 {%- if has_enum_encoding(field) %}
 {{ macros.enum_table(field.get_property("encode")) }}
 {%- endif %}
+
+{%- if has_extra_property_doc(field) %}
+{{ macros.extra_prop_table(field) }}
+{%- endif %}

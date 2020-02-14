@@ -1,3 +1,4 @@
+{%- import "macros.html" as macros with context %}
 <div>
 <h1>{{(node.get_html_name() or node.get_property("name"))|safe}}</h1>
 
@@ -17,6 +18,11 @@
 {%- if has_description(node) %}
 <h2>Description</h2>
 {{get_node_desc(node,2)|safe}}
+{%- endif %}
+
+{%- if has_extra_property_doc(node) %}
+<h2>Properties</h2>
+{{ macros.extra_prop_table(node) }}
 {%- endif %}
 
 {%- if show_signals %}
