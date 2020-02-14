@@ -52,10 +52,10 @@ Constructor for the HTML exporter class
     * Show signal components. Default is False
 * `extra_doc_properties`
     * List of properties to explicitly document.
+
       Nodes that have a property explicitly set will show its value in a table
-      in the node's description.
-      Use this to bring forward user-defined properties, or other built-in
-      properties in your documentation.
+      in the node's description. Use this to bring forward user-defined
+      properties, or other built-in properties in your documentation.
 
 ### `HTMLExporter.export(node, output_dir, **kwargs)`
 Perform the export!
