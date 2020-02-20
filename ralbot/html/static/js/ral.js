@@ -322,3 +322,9 @@ function lookup_field_idx(name) {
     }
     return(-1);
 }
+
+function get_node_uid(id) {
+    var path = get_path(id, null, false);
+    var uid = SHA1(path);
+    return uid;
+}

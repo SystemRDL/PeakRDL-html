@@ -29,7 +29,7 @@ function load_page(id, done_callback) {
     };
     
     try {
-        xhttp.open("GET", "content/" + id + ".html", true);
+        xhttp.open("GET", "content/" + get_node_uid(id) + ".html", true);
         xhttp.send();
     } catch(error) {
         if(window.location.protocol == "file:"){

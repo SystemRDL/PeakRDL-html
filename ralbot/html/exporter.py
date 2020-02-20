@@ -248,9 +248,11 @@ class HTMLExporter:
         }
         context.update(self.user_context)
 
+        uid = get_node_uid(node)
+
         template = self.jj_env.get_template(self._template_map[type(node)])
         stream = template.stream(context)
-        output_path = os.path.join(self.output_dir, "content", "%d.html" % this_id)
+        output_path = os.path.join(self.output_dir, "content", "%s.html" % uid)
         stream.dump(output_path)
 
 
@@ -389,6 +391,15 @@ def has_enum_encoding(field):
     Test if field is encoded with an enum
     """
     return "encode" in field.list_properties()
+
+
+def get_node_uid(node):
+    """
+    Returns the node's UID string
+    """
+    node_path = node.get_path(array_suffix="", empty_array_suffix="")
+    path_hash = hashlib.sha1(node_path.encode('utf-8')).hexdigest()
+    return path_hash
 
 
 
