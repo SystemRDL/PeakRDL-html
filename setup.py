@@ -18,7 +18,7 @@ setuptools.setup(
     description="HTML documentation generator for SystemRDL-based register models",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/SystemRDL/RALBot-html",
+    url="https://github.com/SystemRDL/PeakRDL-html",
     packages=['ralbot.html'],
     include_package_data=True,
     install_requires=[
@@ -27,7 +27,7 @@ setuptools.setup(
         "markdown",
     ],
     classifiers=(
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 7 - Inactive",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.5",
@@ -42,7 +42,7 @@ setuptools.setup(
         "Topic :: Software Development :: Documentation",
     ),
     project_urls={
-        "Source": "https://github.com/SystemRDL/RALBot-html",
-        "Tracker": "https://github.com/SystemRDL/RALBot-html/issues",
+        "Source": "https://github.com/SystemRDL/PeakRDL-html",
+        "Tracker": "https://github.com/SystemRDL/PeakRDL-html/issues",
     },
 )
