@@ -5,11 +5,11 @@ addrmap turbo_encab {
     name = "Turbo-Encabulator";
     desc = "
     !!! tip
-        This is an example output from the [RALBot HTML](https://github.com/SystemRDL/RALBot-html)
+        This is an example output from the [PeakRDL HTML](https://github.com/SystemRDL/PeakRDL-html)
         register space documentation generator.
 
         The content of these pages are generated from the register structure and
-        `desc` properties from [SystemRDL source](https://github.com/SystemRDL/RALBot-html/blob/master/example/turboencabulator.rdl).
+        `desc` properties from [SystemRDL source](https://github.com/SystemRDL/PeakRDL-html/blob/master/example/turboencabulator.rdl).
         Description text can be enhanced by using 'RDLFormatCode' tags, or Markdown syntax.
 
         Look for these 'tip' boxes throughout this demo for more highlights of features.

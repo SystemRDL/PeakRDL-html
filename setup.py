@@ -5,21 +5,21 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 
-with open(os.path.join("ralbot/html", "__about__.py")) as f:
+with open(os.path.join("peakrdl/html", "__about__.py")) as f:
     v_dict = {}
     exec(f.read(), v_dict)
     version = v_dict['__version__']
 
 setuptools.setup(
-    name="ralbot-html",
+    name="peakrdl-html",
     version=version,
     author="Alex Mykyta",
     author_email="amykyta3@github.com",
     description="HTML documentation generator for SystemRDL-based register models",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/SystemRDL/RALBot-html",
-    packages=['ralbot.html'],
+    url="https://github.com/SystemRDL/PeakRDL-html",
+    packages=['peakrdl.html'],
     include_package_data=True,
     install_requires=[
         "systemrdl-compiler>=1.8.0",
@@ -42,7 +42,7 @@ setuptools.setup(
         "Topic :: Software Development :: Documentation",
     ),
     project_urls={
-        "Source": "https://github.com/SystemRDL/RALBot-html",
-        "Tracker": "https://github.com/SystemRDL/RALBot-html/issues",
+        "Source": "https://github.com/SystemRDL/PeakRDL-html",
+        "Tracker": "https://github.com/SystemRDL/PeakRDL-html/issues",
     },
 )

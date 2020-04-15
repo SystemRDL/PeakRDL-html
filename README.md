@@ -1,19 +1,20 @@
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ralbot-html.svg)](https://pypi.org/project/ralbot-html)
+[![Build Status](https://travis-ci.org/SystemRDL/PeakRDL-html.svg?branch=master)](https://travis-ci.org/SystemRDL/PeakRDL-html)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/peakrdl-html.svg)](https://pypi.org/project/peakrdl-html)
 
-# RALBot-html
+# PeakRDL-html
 Generate address space documentation HTML from compiled SystemRDL input
 
 ## Installing
-Install from [PyPi](https://pypi.org/project/ralbot-html) using pip:
+Install from [PyPi](https://pypi.org/project/peakrdl-html) using pip:
 
-    python3 -m pip install ralbot-html
+    python3 -m pip install peakrdl-html
 
 
 ## Example
 An example of HTML output generated from a
 [fictional SystemRDL register description](example/turboencabulator.rdl).
 
-[https://systemrdl.github.io/RALBot-html](https://systemrdl.github.io/RALBot-html)
+[https://systemrdl.github.io/PeakRDL-html](https://systemrdl.github.io/PeakRDL-html)
 
 
 ## Usage
@@ -23,7 +24,7 @@ into the exporter.
 Assuming `root` is the elaborated top-level node, or an internal `AddrmapNode`:
 
 ```python
-from ralbot.html import HTMLExporter
+from peakrdl.html import HTMLExporter
 
 exporter = HTMLExporter()
 
