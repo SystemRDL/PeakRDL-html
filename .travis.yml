@@ -2,15 +2,8 @@ language: python
 python:
   - 3.8
 
-install:
-  - pip install pylint
-
-script:
-  - python -m pip install .
-  - pylint --rcfile test/pylint.rc peakrdl
-
 stages:
-  - test
+  - lint
   # Only execute deployment stage on tagged release commits in the form of "v1.2.3"
   # and from your repository (e.g. not PRs).
   # Also allows alpha/beta releases such as "v1.2.3b2"
@@ -19,6 +12,14 @@ stages:
 
 jobs:
   include:
+    # Run lint
+    - stage: lint
+      name: Lint
+      install:
+        - python -m pip install pylint
+        - python -m pip install .
+      script: pylint --rcfile test/pylint.rc peakrdl
+
     # Deploy source distribution
     - stage: deploy
       name: Deploy source distribution
