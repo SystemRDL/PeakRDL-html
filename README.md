@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/SystemRDL/PeakRDL-html.svg?branch=master)](https://travis-ci.org/SystemRDL/PeakRDL-html)
+[![Build Status](https://travis-ci.com/SystemRDL/PeakRDL-html.svg?branch=master)](https://travis-ci.com/SystemRDL/PeakRDL-html)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/peakrdl-html.svg)](https://pypi.org/project/peakrdl-html)
 
 # PeakRDL-html
