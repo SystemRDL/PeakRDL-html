@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/SystemRDL/PeakRDL-html.svg?branch=master)](https://travis-ci.com/SystemRDL/PeakRDL-html)
+![.github/workflows/build.yml](https://github.com/SystemRDL/PeakRDL-html/workflows/.github/workflows/build.yml/badge.svg)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/peakrdl-html.svg)](https://pypi.org/project/peakrdl-html)
 
 # PeakRDL-html
@@ -68,7 +68,7 @@ Perform the export!
       Can also be a list of `RootNode` and any internal `AddrmapNode`.
 * `output_dir`
     * HTML output directory.
-    
+
 **Optional Parameters**
 
 * `footer`
