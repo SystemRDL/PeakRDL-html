@@ -1,3 +1,7 @@
+/* This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
+ * and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
+ */
+
 /* Base layout */
 html, body {
     height: 100%;
@@ -105,7 +109,7 @@ button {
     z-index: 1;
     left: 18.75em;
     top: 18.75em;
-    
+
     padding: 0.625em;
 }
 
@@ -182,17 +186,16 @@ button {
     #_SBSearchButton, #_SBSearchButtonSpan {
         display: block;
     }
-    
+
     #_MobiTitlebar {
         display:none;
     }
-    
+
     #_Overlay {
         display: none!important;
     }
-    
+
     .limit-h {
         max-width: 900px;
     }
 }
-

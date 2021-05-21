@@ -1,3 +1,6 @@
+// This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
+// and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
+
 var IndexEditState = {};
 IndexEditState.active = false;
 IndexEditState.id = 0;
@@ -5,7 +8,7 @@ IndexEditState.dim = 0;
 IndexEditState.span_idx = 0;
 
 function init_index_edit(){
-    
+
     // Register index edit modal events:
     // ... close if clicking off of it
     window.onclick = function(ev) {
@@ -21,7 +24,7 @@ function init_index_edit(){
 function onIndexEditKeypress(ev){
     if(!ev) ev = window.event;
     var keyCode = ev.keyCode || ev.which;
-    
+
     if(keyCode == 13){ // Enter key
         exitIndexEditModal();
         return false;
@@ -34,21 +37,21 @@ function onIndexEditKeypress(ev){
 
 function exitIndexEditModal(cancel) {
     if(typeof cancel === "undefined") cancel = false;
-    
+
     var modal_el = document.getElementById('_IdxEditModal');
     var input_el = document.getElementById('_IdxEditInput');
-    
+
     if(IndexEditState.active){
         modal_el.style.display = "none";
         IndexEditState.active = false;
-        
+
         if(!cancel){
             // Commit modal input value
             var val = Number(input_el.value);
             if(!isPositiveInteger(val)) return;
             if((val < 0) || (val >= RALIndex[IndexEditState.id].dims[IndexEditState.dim])) return;
             RALIndex[IndexEditState.id].idxs[IndexEditState.dim] = val;
-            
+
             update_crumbtrail();
             update_rdlfc_indexes();
             patch_url_path();
@@ -66,15 +69,15 @@ function showIndexEditModal(idx){
     var modal_el = document.getElementById('_IdxEditModal');
     var input_el = document.getElementById('_IdxEditInput');
     var range_el = document.getElementById('_IdxEditRange');
-    
+
     if(span_el == null) return;
-    
+
     // Show Modal
     modal_el.style.display = "block";
     var rect = span_el.getBoundingClientRect();
     modal_el.style.left = (rect.left + rect.right)/2 - modal_el.offsetWidth/2 + "px";
     modal_el.style.top = rect.bottom + 10 + "px";
-    
+
     // Initialize modal
     IndexEditState.active = true;
     var sid, sdim;
@@ -100,7 +103,7 @@ function onClickCrumbtrailIdx(ev) {
         exitIndexEditModal();
     }
     showIndexEditModal(span_idx);
-    
+
     return(false);
 }
 

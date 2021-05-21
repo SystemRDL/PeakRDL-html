@@ -1,14 +1,16 @@
+// This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
+// and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
 
 function get_common_ancestor(id1, id2) {
     var lineage1;
     var lineage2;
-    
+
     lineage1 = get_ancestors(id1);
     lineage1.push(id1);
-    
+
     lineage2 = get_ancestors(id2);
     lineage2.push(id2);
-    
+
     var id = 0;
     while(lineage1.length && lineage2.length && lineage1[0] == lineage2[0]) {
         id = lineage1[0];
@@ -55,7 +57,7 @@ function reset_indexes(from_id, to_id){
                 RALIndex[id].idxs[i] = 0;
             }
         }
-        
+
         id = RALIndex[id].parent;
     }
 }
@@ -73,7 +75,7 @@ function parse_path(path){
     // Otherwise, the following two values are returned as an array:
     //  [id, idx_stack]
     // Any invalid indexes in the path are fixed silently
-    
+
     // Decompose the path
     var pathparts = path.split(".");
     var segments = [];
@@ -92,7 +94,7 @@ function parse_path(path){
         }
         segment_idxs.push(idxs);
     }
-    
+
     // Validate first node in path
     var id = null;
     for(var i=0; i<RootNodeIds.length; i++){
@@ -116,14 +118,14 @@ function parse_path(path){
     } else {
         if(segment_idxs[0].length != 0) segment_idxs[0] = [];
     }
-    
+
     // Validate the path and find the end ID
     for(var i=1; i<segments.length; i++){
         // try to get the child by name
         var next_id = get_child(id, segments[i]);
         if(next_id == null) return(null);
         id = next_id;
-        
+
         // sanitize indexes
         if("dims" in RALIndex[id]){
             var sanitized_idxs = [];
@@ -139,7 +141,7 @@ function parse_path(path){
             if(segment_idxs[i].length != 0) segment_idxs[i] = [];
         }
     }
-    
+
     return([id, segment_idxs]);
 }
 
@@ -157,7 +159,7 @@ function apply_idx_stack(id, idx_stack){
 function get_path(id, idx_stack, show_idx){
     if(typeof idx_stack === "undefined") idx_stack = null;
     if(typeof show_idx === "undefined") show_idx = true;
-    
+
     // Get string representation of the hierarchical path
     if(show_idx && (idx_stack == null)){
         idx_stack = get_current_idx_stack(id);
@@ -173,7 +175,7 @@ function get_path(id, idx_stack, show_idx){
         }
         pathparts.push(segment);
     }
-    
+
     return(pathparts.join("."));
 }
 
@@ -246,21 +248,21 @@ function lookup_by_address(addr, root_id){
     var id=root_id;
     var idx_stack = [];
     var iter_count = 0;
-    
+
     if(addr.lt(RALIndex[id].offset)) return(null);
     if(addr.geq(RALIndex[id].offset.add(get_total_size(id)))) return(null);
-    
+
     while(iter_count < 100){
         iter_count++;
         // addr is definitely inside this node
-        
+
         // Adjust addr to be relative to this node
         addr = addr.subtract(RALIndex[id].offset);
-        
+
         // Determine index stack entry for this node
         if("dims" in RALIndex[id]){
             var idxs = [];
-            
+
             // First check if address lands between sparse array entries
             if(addr.mod(RALIndex[id].stride).geq(RALIndex[id].size)) {
                 // missed! Give up and just return the parent node
@@ -270,10 +272,10 @@ function lookup_by_address(addr, root_id){
                     return([RALIndex[id].parent, idx_stack]);
                 }
             }
-            
+
             // index of the flattened array
             var flat_idx = addr.divide(RALIndex[id].stride).toJSNumber();
-            
+
             // Re-construct dimensions
             for(var dim=RALIndex[id].dims.length-1; dim>=0; dim--){
                 var idx;
@@ -282,13 +284,13 @@ function lookup_by_address(addr, root_id){
                 idxs.unshift(idx);
             }
             idx_stack.push(idxs);
-            
+
             // Adjust addr offset to be relative to this index
             addr = addr.mod(RALIndex[id].stride);
         } else {
             idx_stack.push([]);
         }
-        
+
         // Search this node's children to see which child 'addr' is in
         var found_match = false;
         for(var i=0; i<RALIndex[id].children.length; i++) {
@@ -305,7 +307,7 @@ function lookup_by_address(addr, root_id){
             return([id, idx_stack]);
         }
     }
-    
+
     // Hit iteration limit. Something is wrong :-(
     throw "Agh! iteration limit reached while looking up by address";
 }

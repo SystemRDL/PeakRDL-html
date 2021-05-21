@@ -1,3 +1,6 @@
+/* This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
+ * and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
+ */
 
 /* ------------------------------ Color Scheme ------------------------------ */
 :root {
@@ -9,7 +12,7 @@
     --url-color-hover: #3091d1;
     --overlay-bg-rgba: 0,0,0,0.5;
     --reserved-text-color:#808080;
-    
+
     --offpage-bg-color:#eee;
     --main-bg-color:#fcfcfc;
     --title-bg-color: #2980b9;
@@ -20,11 +23,11 @@
     --input-bg-color: #fff;
     --input-invalid-bg-color: #f99;
     --highlight-color: #f1c40f;
-    
+
     --content-border-color: #e1e4e5;
     --strong-content-border-color: #aaa;
     --blockquote-bar-color: #ccc;
-    
+
     --button-border-color: #949494;
     --button-text-color: #4c4c4c;
     --button-gradient-top-color: #f5f5f5;
@@ -45,7 +48,7 @@
     --admonition-note-bg-color: #e7f2fa;
     --admonition-hint-title-bg-color: #1abc9c;
     --admonition-hint-bg-color: #dbfaf4;
-    
+
     --idx-edit-text-color: #fff;
     --idx-edit-bg-color: #2e8ece;
     --idx-edit-input-border-color: #2472a4;
@@ -61,7 +64,7 @@
     --tree-hover-border-color: #303030;
     --tree-selected-text-color: #444;
     --tree-selected-border-color: #c9c9c9;
-    
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -85,11 +88,11 @@
         --input-bg-color: #000;
         --input-invalid-bg-color: #A33;
         --highlight-color: #7e6500;
-        
+
         --content-border-color: #444;
         --strong-content-border-color: #555;
         --blockquote-bar-color: #444;
-        
+
         --button-border-color: #6c6c6c;
         --button-text-color: #999;
         --button-gradient-top-color: #444;
@@ -98,7 +101,7 @@
         --button-disabled-border-color: #555;
         --button-disabled-text-color: #555;
         --button-disabled-bg-color: #222;
-        
+
         --admonition-title-text-color: #ccc;
         --admonition-title-bg-color: #12806a;
         --admonition-bg-color: #263330;
@@ -110,7 +113,7 @@
         --admonition-note-bg-color: #262e33;
         --admonition-hint-title-bg-color: #12806a;
         --admonition-hint-bg-color: #263330;
-        
+
         --idx-edit-text-color: #ccc;
         --idx-edit-bg-color: #005e9a;
         --idx-edit-input-border-color: #004e80;
@@ -220,7 +223,7 @@ code {
     font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace;
     font-size: 0.75em;
     line-height: 1.4;
-    
+
     /* inline code format */
     background-color: var(--inline-code-block-bg-color);
     border: solid 1px var(--content-border-color);
@@ -575,7 +578,7 @@ dl.node-info {
 }
 
 .node-info dt{
-  grid-column: 1; 
+  grid-column: 1;
 }
 
 .node-info dd {

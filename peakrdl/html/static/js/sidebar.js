@@ -1,3 +1,6 @@
+// This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
+// and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
+
 var SBResizeState = {};
 SBResizeState.old_width = 0;
 SBResizeState.start_x = 0;
@@ -11,20 +14,20 @@ function init_tree() {
 
 function add_tree_node(parent_el, id){
     var node = RALIndex[id];
-    
+
     var div;
     div = document.createElement("div");
     div.id = "_SBNode" + id;
     div.dataset.id = id;
     div.className = "node";
     parent_el.appendChild(div);
-    
+
     var icon;
     icon = document.createElement("div");
     icon.className = "node-icon";
     icon.onclick = onClickTreeFold;
     div.appendChild(icon);
-    
+
     var link = document.createElement("a");
     link.href = "?p=" + get_path(id, null, false);
     link.className = "node-link";
@@ -39,16 +42,16 @@ function add_tree_node(parent_el, id){
         link.innerHTML = node.name;
     }
     div.appendChild(link);
-    
+
     if(node.children.length > 0){
         // has children
         div.classList.add("closed");
-        
+
         var cdiv;
         cdiv = document.createElement("div");
         cdiv.className = "node-children";
         parent_el.appendChild(cdiv);
-        
+
         for(var i=0; i<node.children.length; i++){
             add_tree_node(cdiv, node.children[i]);
         }
@@ -72,7 +75,7 @@ function select_tree_node() {
 function open_tree_node(id) {
     var el = document.getElementById("_SBNode" + id);
     if(el.classList.contains("leaf")) return;
-    
+
     el.classList.add("open")
     el.classList.remove("closed")
 }
@@ -80,7 +83,7 @@ function open_tree_node(id) {
 function close_tree_node(id) {
     var el = document.getElementById("_SBNode" + id);
     if(el.classList.contains("leaf")) return;
-    
+
     el.classList.add("closed")
     el.classList.remove("open")
 }
@@ -89,7 +92,7 @@ function expand_to_tree_node() {
     // Expand tree nodes as needed to make id visible
     var el;
     var id = CurrentID;
-    
+
     // Expand parents as needed
     while(RALIndex[id].parent !== null) {
         id = RALIndex[id].parent;
@@ -100,12 +103,12 @@ function expand_to_tree_node() {
 function scroll_to_tree_node(id) {
     var node_el = document.getElementById("_SBNode" + id);
     var tree_el = document.getElementById("_SBTreeContainer");
-    
+
     var node_rect = node_el.getBoundingClientRect();
     var tree_rect = tree_el.getBoundingClientRect();
-    
+
     if((node_rect.top < tree_rect.top) || (node_rect.bottom > tree_rect.bottom)) {
-        if(typeof node_el.scrollIntoView === "function") { 
+        if(typeof node_el.scrollIntoView === "function") {
             node_el.scrollIntoView();
         }
     }
@@ -124,7 +127,7 @@ function sidebar_close() {
 function onClickTreeFold(ev) {
     var el = ev.target.parentNode;
     if(el.classList.contains("leaf")) return;
-    
+
     if(el.classList.contains("closed")){
         // Open this node
         el.classList.add("open")
@@ -139,17 +142,17 @@ function onClickTreeFold(ev) {
 function onClickTreeLink(ev) {
     var el = ev.target.parentNode;
     var id = parseInt(el.dataset.id);
-    
+
     close_search();
     sidebar_close();
-    
+
     if(id == CurrentID) return(false);
-    
+
     if(!el.classList.contains("leaf")){
         el.classList.add("open");
         el.classList.remove("closed");
     }
-    
+
     reset_indexes_to_next(id);
     load_page(id, function (){
         select_tree_node();

@@ -1,3 +1,6 @@
+// This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
+// and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
+
 var CurrentID;
 
 //==============================================================================
@@ -44,7 +47,7 @@ function onPageLoad() {
         show_incompatibility_nag();
         return;
     }
-    
+
     window.onpopstate = onPopState;
     window.onkeydown = onKeyDownMain;
     init_tree();
@@ -130,15 +133,15 @@ function test_browser_incompatible() {
 function update_crumbtrail(){
     var crumb_el = document.getElementById("_Crumbtrail");
     var id = CurrentID;
-    
+
     // Delete old crumbtrail
     while (crumb_el.hasChildNodes()) {
         crumb_el.removeChild(crumb_el.lastChild);
     }
-    
+
     var path_ids = get_ids_in_path(id);
     var crumb_idx_span_idx = 0;
-    
+
     for(var i=0; i<path_ids.length; i++){
         if(i < path_ids.length-1){
             var link = document.createElement("a");
@@ -167,7 +170,7 @@ function update_crumbtrail(){
                 crumb_idx_span_idx++;
             }
         }
-        
+
         if(i < path_ids.length-1){
             var el = document.createElement("span");
             el.className = "crumb-separator";
@@ -192,7 +195,7 @@ function update_rdlfc_indexes() {
     for(var i=0; i<index_els.length; i++){
         index_els[i].innerHTML = index_text;
     }
-    
+
     var index_els = document.getElementsByClassName("rdlfc-index_parent")
     var index_text = "";
     var id = RALIndex[CurrentID].parent;
