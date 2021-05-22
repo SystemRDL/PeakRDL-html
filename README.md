@@ -1,4 +1,4 @@
-![.github/workflows/build.yml](https://github.com/SystemRDL/PeakRDL-html/workflows/.github/workflows/build.yml/badge.svg)
+[![build](https://github.com/SystemRDL/PeakRDL-html/workflows/build/badge.svg)](https://github.com/SystemRDL/PeakRDL-html/actions?query=workflow%3Abuild+branch%3Amaster)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/peakrdl-html.svg)](https://pypi.org/project/peakrdl-html)
 
 # PeakRDL-html
@@ -57,6 +57,13 @@ Constructor for the HTML exporter class
       Nodes that have a property explicitly set will show its value in a table
       in the node's description. Use this to bring forward user-defined
       properties, or other built-in properties in your documentation.
+* `generate_source_links`
+    * If `True`, attempts to generate links back to original RDL source deginitions.
+      Defaults to `True`.
+* `gitmetheurl_translators`
+    * Override the list of [GitMeTheURL](https://github.com/amykyta3/git-me-the-url/blob/master/README.md) translators to use when generating source links.
+      If unset, GitMeTheURL uses its builtin translators, as well as any installed plugins.
+
 
 ### `HTMLExporter.export(node, output_dir, **kwargs)`
 Perform the export!

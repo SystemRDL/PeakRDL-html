@@ -10,9 +10,11 @@ from collections import OrderedDict
 
 import jinja2 as jj
 import markdown
+from gitmetheurl import GitMeTheURL
 
 from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode, SignalNode
 from systemrdl import rdltypes
+from systemrdl.source_ref import FileSourceRef, DetailedFileSourceRef
 
 from .stringify import stringify_rdl_value
 
@@ -55,6 +57,8 @@ class HTMLExporter:
         self.user_context = kwargs.pop("user_context", {})
         self.markdown_inst = kwargs.pop("markdown_inst", markdown.Markdown())
         self.extra_properties = kwargs.pop("extra_doc_properties", [])
+        self.generate_source_links = kwargs.pop("generate_source_links", True)
+        gmtu_translators = kwargs.pop("gitmetheurl_translators", None)
         user_template_dir = kwargs.pop("user_template_dir", None)
 
         # Check for stray kwargs
@@ -75,6 +79,8 @@ class HTMLExporter:
             autoescape=jj.select_autoescape(['html']),
             undefined=jj.StrictUndefined
         )
+
+        self.gmtu = GitMeTheURL(gmtu_translators)
 
 
     def export(self, nodes, output_dir, **kwargs):
@@ -229,6 +235,8 @@ class HTMLExporter:
     }
 
     def write_page(self, this_id, node, children):
+
+        view_source_url, view_source_filename= self.get_view_source_info(node)
         context = {
             'this_id': this_id,
             'node' : node,
@@ -247,6 +255,8 @@ class HTMLExporter:
             'reversed': reversed,
             'isinstance': isinstance,
             'list': list,
+            'view_source_url': view_source_url,
+            'view_source_filename': view_source_filename,
         }
         context.update(self.user_context)
 
@@ -379,6 +389,31 @@ class HTMLExporter:
             if prop in node.list_properties():
                 return True
         return False
+
+    def get_view_source_info(self, node):
+        """
+        Attempt to derive the node definition's source code sharelink using
+        GitMeTheURL.
+
+        Returns None if not found
+        """
+        if not self.generate_source_links:
+            return None, None
+
+        src_ref = node.inst.def_src_ref or node.inst.inst_src_ref
+        if isinstance(src_ref, DetailedFileSourceRef):
+            path = src_ref.path
+            line = src_ref.line
+        elif isinstance(src_ref, FileSourceRef):
+            path = src_ref.path
+            line = None
+        else:
+            return None, None
+
+        try:
+            return (self.gmtu.get_source_url(path, line), os.path.basename(path))
+        except Exception:
+            return None, None
 
 
 def has_description(node):

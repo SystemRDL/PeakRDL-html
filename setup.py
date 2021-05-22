@@ -22,9 +22,10 @@ setuptools.setup(
     packages=['peakrdl.html'],
     include_package_data=True,
     install_requires=[
-        "systemrdl-compiler>=1.8.0",
+        "systemrdl-compiler>=1.13.0",
         "Jinja2>=2.9",
         "markdown",
+        "gitmetheurl>=2.0.1",
     ],
     classifiers=(
         "Development Status :: 5 - Production/Stable",
@@ -34,6 +35,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3 :: Only",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
