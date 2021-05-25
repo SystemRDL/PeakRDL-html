@@ -12,6 +12,7 @@ import jinja2 as jj
 import markdown
 
 from systemrdl.node import RootNode, AddressableNode, RegNode, RegfileNode, AddrmapNode, MemNode, SignalNode
+from systemrdl import rdltypes
 
 from .stringify import stringify_rdl_value
 
@@ -233,6 +234,7 @@ class HTMLExporter:
             'node' : node,
             'children' : children,
             'has_description' : has_description,
+            'friendly_access' : friendly_access,
             'has_enum_encoding' : has_enum_encoding,
             'get_enum_desc': self.get_enum_html_desc,
             'get_node_desc': self.get_node_html_desc,
@@ -384,6 +386,30 @@ def has_description(node):
     Test if node has a description defined
     """
     return "desc" in node.list_properties()
+
+def friendly_access(obj) -> str:
+    """
+    Convert access types into a human-friendly string
+    """
+    lut = {
+        rdltypes.AccessType.na      : "Not Accessible",
+        rdltypes.AccessType.rw      : "Readable and Writable",
+        rdltypes.AccessType.r       : "Read-only",
+        rdltypes.AccessType.w       : "Write-only",
+        rdltypes.AccessType.rw1     : "Readable. Writable once.",
+        rdltypes.AccessType.w1      : "Writable once",
+        rdltypes.OnReadType.rclr    : "Clear on read",
+        rdltypes.OnReadType.rset    : "Set on read",
+        rdltypes.OnWriteType.woset  : "Bitwise write 1 to set",
+        rdltypes.OnWriteType.woclr  : "Bitwise write 1 to clear",
+        rdltypes.OnWriteType.wot    : "Bitwise write 1 to toggle",
+        rdltypes.OnWriteType.wzs    : "Bitwise write 0 to set",
+        rdltypes.OnWriteType.wzc    : "Bitwise write 0 to clear",
+        rdltypes.OnWriteType.wzt    : "Bitwise write 0 to toggle",
+        rdltypes.OnWriteType.wclr   : "Clear on write",
+        rdltypes.OnWriteType.wset   : "Set on write",
+    }
+    return lut.get(obj, "")
 
 
 def has_enum_encoding(field):

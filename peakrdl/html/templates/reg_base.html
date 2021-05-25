@@ -47,12 +47,12 @@
             {%- endif -%}
         </td>
         <td>
-            {{- field.get_property("sw").name -}}
+            <span title='{{friendly_access(field.get_property("sw"))}}'>{{field.get_property("sw").name}}</span>
             {%- if field.get_property("onread") -%}
-                , {{ field.get_property("onread").name -}}
+                , <span title='{{friendly_access(field.get_property("onread"))}}'>{{ field.get_property("onread").name -}}</span>
             {%- endif -%}
             {%- if field.get_property("onwrite") -%}
-                , {{ field.get_property("onwrite").name -}}
+                , <span title='{{friendly_access(field.get_property("onwrite"))}}'>{{ field.get_property("onwrite").name -}}</span>
             {%- endif -%}
         </td>
         <td>
