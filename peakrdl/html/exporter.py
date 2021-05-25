@@ -61,7 +61,7 @@ class HTMLExporter:
         self.user_static_dir = kwargs.pop("user_static_dir", None) # type: Optional[str] # type: ignore
         self.show_signals = kwargs.pop("show_signals", False)
         self.user_context = kwargs.pop("user_context", {})
-        self.markdown_inst = kwargs.pop("markdown_inst", markdown.Markdown())
+        markdown_inst = kwargs.pop("markdown_inst", None)
         self.extra_properties = kwargs.pop("extra_doc_properties", []) # type: List[str] # type: ignore
         self.generate_source_links = kwargs.pop("generate_source_links", True)
         gmtu_translators = kwargs.pop("gitmetheurl_translators", None)
@@ -71,6 +71,16 @@ class HTMLExporter:
         if kwargs:
             raise TypeError("got an unexpected keyword argument '%s'" % list(kwargs.keys())[0])
 
+        if markdown_inst is None:
+            self.markdown_inst = markdown.Markdown(
+                extensions = [
+                    'admonition',
+                    'fenced_code',
+                    'tables',
+                ]
+            )
+        else:
+            self.markdown_inst = markdown_inst
 
         if user_template_dir:
             loader = jj.ChoiceLoader([

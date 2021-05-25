@@ -13,7 +13,7 @@ addrmap turbo_encab {
         Description text can be enhanced by using 'RDLFormatCode' tags, or Markdown syntax.
 
         Look for these 'tip' boxes throughout this demo for more highlights of features.
-    
+
     Configuration & status address space for the state-of-the-art Turbo Encabulator.
     It is strongly recommended that users of the Turbo Encabulator watch the
     [training video](https://www.youtube.com/watch?v=rLDgQg6bq7o) prior to attempting
@@ -51,7 +51,7 @@ addrmap turbo_encab {
 
         field {
             desc = "Degree of waneshaft side fumbling.
-            
+
             If this reads as non-zero, immediately reduce differential girdle spring tension.";
             sw=r; hw=w;
         }side_fumbling[12];
@@ -93,7 +93,7 @@ addrmap turbo_encab {
             field {
                 name = "Grammeter State";
                 desc = "Indicates the state of the cardinal grammeter
-                
+
                 !!! tip
                     Any field that uses an enumerated encoding will also include
                     it's enum definition alongside its description.
@@ -111,7 +111,7 @@ addrmap turbo_encab {
                     };
                     SYNC_FAIL = 2'd3 {
                         desc = "Synchronization error!
-                        
+
                         It is likely that the differential girdlespring is not on the 'up' position.";
                     };
                 };
@@ -130,24 +130,10 @@ addrmap turbo_encab {
             name = "Grammeter measurement register";
             field {
                 desc = "Current grammeter measurement.
-                
+
                 Units are in Amperes per foot-liter (A/F-L)";
                 sw=r; hw=w;
             } value[31:0];
         } meter;
     } grammeter[12] @ 0x1000 += 0x200;
-    //    Rockwell Software
-    //    enable/disable inverse reactive current (in unilateral phase detractors)
-    //    Synchronize cardinal grammeters
-    //
-    //    Sperving bearings
-    //    Panametric Fam
-    //    Six hydrocoptic marzel vanes
-    //    measure side-fumbling
-    //
-    //    Stator RPM
-    //    Grahm meters
-    //
-    //    Flourescent Score motion
-    //    Sinusoidal deplanaration
 };
