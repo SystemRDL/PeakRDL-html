@@ -2,7 +2,7 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/peakrdl-html.svg)](https://pypi.org/project/peakrdl-html)
 
 # PeakRDL-html
-Generate address space documentation HTML from compiled SystemRDL input
+Generate address space documentation HTML from compiled SystemRDL input.
 
 ## Installing
 Install from [PyPi](https://pypi.org/project/peakrdl-html) using pip:
@@ -42,6 +42,7 @@ Constructor for the HTML exporter class
     * Override the class instance of the Markdown processor.
       See the [Markdown module](https://python-markdown.github.io/reference/#Markdown)
       for more details.
+    * By default, the following extensions are loaded: 'admonition', 'fenced_code', 'tables'
 * `user_template_dir`
     * Path to a directory where user-defined template overrides are stored.
 * `user_static_dir`
