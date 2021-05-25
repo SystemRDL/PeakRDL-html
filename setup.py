@@ -25,7 +25,7 @@ setuptools.setup(
         "systemrdl-compiler>=1.13.0",
         "Jinja2>=2.9",
         "markdown",
-        "gitmetheurl>=2.0.1",
+        "git-me-the-url>=2.0.1",
     ],
     classifiers=(
         "Development Status :: 5 - Production/Stable",
