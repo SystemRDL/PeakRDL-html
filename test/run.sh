@@ -9,3 +9,6 @@ cd $this_dir/../
 cd peakrdl
 pylint --rcfile $this_dir/pylint.rc html | tee $this_dir/lint.rpt
 
+# Run static type checking
+cd $this_dir
+mypy $this_dir/../peakrdl/html
