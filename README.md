@@ -11,10 +11,9 @@ Install from [PyPi](https://pypi.org/project/peakrdl-html) using pip:
 
 
 ## Example
-An example of HTML output generated from a
-[fictional SystemRDL register description](example/turboencabulator.rdl).
 
-[https://systemrdl.github.io/PeakRDL-html](https://systemrdl.github.io/PeakRDL-html)
+An [example of HTML output](https://systemrdl.github.io/PeakRDL-html) generated from a
+fictional SystemRDL register description: [turboencabulator.rdl](example/turboencabulator.rdl).
 
 
 ## Usage
