@@ -153,6 +153,11 @@ class HTMLExporter:
 
         # Traverse trees
         for node in nodes:
+            if node.get_property('bridge'):
+                node.env.msg.warning(
+                    "HTML generator does not have proper support for bridge addmaps yet. The 'bridge' property will be ignored.",
+                    node.inst.property_src_ref.get('bridge', node.inst.inst_src_ref)
+                )
             self.visit_addressable_node(node)
 
         # Write out RALIndex and other data to js file
