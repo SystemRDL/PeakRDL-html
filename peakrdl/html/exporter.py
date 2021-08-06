@@ -25,7 +25,7 @@ if TYPE_CHECKING:
     from systemrdl.source_ref import SourceRefBase
 
 class HTMLExporter:
-    def __init__(self, **kwargs: 'Dict[str, Any]') -> None:
+    def __init__(self, **kwargs: 'Any') -> None:
         """
         Constructor for the HTML exporter class
 
@@ -58,11 +58,11 @@ class HTMLExporter:
         self.title = "" # type: str
         self.home_url = None # type: Optional[str]
 
-        self.user_static_dir = kwargs.pop("user_static_dir", None) # type: Optional[str] # type: ignore
+        self.user_static_dir = kwargs.pop("user_static_dir", None) # type: Optional[str]
         self.show_signals = kwargs.pop("show_signals", False)
         self.user_context = kwargs.pop("user_context", {})
-        markdown_inst = kwargs.pop("markdown_inst", None)
-        self.extra_properties = kwargs.pop("extra_doc_properties", []) # type: List[str] # type: ignore
+        markdown_inst = kwargs.pop("markdown_inst", None) # type: Optional[markdown.Markdown]
+        self.extra_properties = kwargs.pop("extra_doc_properties", []) # type: List[str]
         self.generate_source_links = kwargs.pop("generate_source_links", True)
         gmtu_translators = kwargs.pop("gitmetheurl_translators", None)
         user_template_dir = kwargs.pop("user_template_dir", None)
@@ -355,7 +355,8 @@ class HTMLExporter:
                         img_src = path
 
                 if os.path.exists(img_src):
-                    md5 = hashlib.md5(open(img_src,'rb').read()).hexdigest()
+                    with open(img_src,'rb') as f:
+                        md5 = hashlib.md5(f.read()).hexdigest()
                     new_path = os.path.join(
                         self.output_dir, "content",
                         "%s_%s" % (md5[0:8], os.path.basename(img_src))
