@@ -184,14 +184,26 @@ class HTMLExporter:
             ral_entry['stride'] = BigInt(node.inst.array_stride)
             ral_entry['idxs'] = [0] * len(node.inst.array_dimensions)
 
+
+
         if isinstance(node, RegNode):
             ral_fields = []
             for field in node.fields():
+
+                if "reset" in field.list_properties():
+                    field_reset = field.get_property("reset")
+                    if isinstance(field_reset, (SignalNode, FieldNode)):
+                        ral_field_reset = BigInt(0)
+                    else:
+                        ral_field_reset = BigInt(field_reset)
+                else:
+                    ral_field_reset = BigInt(0)
+
                 ral_field = {
                     'name' : field.inst.inst_name,
                     'lsb'  : field.inst.lsb,
                     'msb'  : field.inst.msb,
-                    'reset': BigInt(field.get_property("reset", default=0)),
+                    'reset': ral_field_reset,
                     'disp' : 'H'
                 }
 
@@ -273,6 +285,7 @@ class HTMLExporter:
             'extra_properties': self.extra_properties,
             'stringify_rdl_value': stringify_rdl_value,
             'SignalNode' : SignalNode,
+            'FieldNode': FieldNode,
             'reversed': reversed,
             'isinstance': isinstance,
             'list': list,

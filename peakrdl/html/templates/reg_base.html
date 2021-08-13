@@ -57,7 +57,11 @@
         </td>
         <td>
             {%- if field.get_property("reset") != None -%}
-            {{"0x%x" % field.get_property("reset")}}
+                {%- if isinstance(field.get_property("reset"),(SignalNode, FieldNode)) -%}
+                  {{ field.get_property("reset").inst_name }}
+                {%- else -%}
+                  {{"0x%x" % field.get_property("reset")}}
+                {%- endif -%}
             {%- else -%}
             -
             {%- endif %}
