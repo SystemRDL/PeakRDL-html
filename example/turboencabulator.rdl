@@ -43,7 +43,8 @@ addrmap turbo_encab {
             Capacitive diractance relative to the lunar waneshaft.
             ";
             sw=rw; hw=r;
-        } diractance[8] = 123;
+        } diractance[8];
+        diractance->reset = reluctance;
     } ctrl @ 0x0000;
 
     reg {

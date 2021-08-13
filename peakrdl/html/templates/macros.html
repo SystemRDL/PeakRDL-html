@@ -27,11 +27,28 @@
     </tr>
     {%- for prop in extra_properties %}
     {%- if prop in node.list_properties() %}
-        <tr>
-            <td><code>{{prop}}</code></td>
-            <td>{{stringify_rdl_value(node.get_property(prop), node)}}</td>
-        </tr>
+    <tr>
+        <td><code>{{prop}}</code></td>
+        <td>{{stringify_rdl_value(node.get_property(prop), node)}}</td>
+    </tr>
     {% endif %}
     {%- endfor %}
 </table>
+{%- endmacro %}
+
+
+{%- macro reference_link(ref) -%}
+    {%- if isinstance(ref, AddressableNode) -%}
+        <a href="?p={{ref.get_path()}}" data-path="{{ref.get_path()}}" onclick="onClickPathLink(event); return(false)">
+            {{ref.get_path()}}
+        </a>
+    {%- elif isinstance(ref, FieldNode) -%}
+        <a href="?p={{ref.parent.get_path()}}" data-path="{{ref.parent.get_path()}}" data-url_hash="#{{ref.inst_name}}" onclick="onClickPathLink(event); return(false)">
+            {{ref.get_path()}}
+        </a>
+    {%- elif isinstance(ref, SignalNode) -%}
+        <code>{{ref.get_path()}}</code>
+    {%- elif isinstance(ref, PropertyReference) -%}
+        {{reference_link(ref.node)}}-&gt;{{ref.name}}
+    {%- endif -%}
 {%- endmacro %}

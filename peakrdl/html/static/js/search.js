@@ -310,9 +310,9 @@ function open_search_result(result_id){
         apply_idx_stack(result.id, result.idx_stack);
     }
 
-    var hash = "";
+    var url_hash = "";
     if(result.anchor != ""){
-        hash = "#" + result.anchor;
+        url_hash = "#" + result.anchor;
     }
 
     close_search();
@@ -322,7 +322,7 @@ function open_search_result(result_id){
         expand_to_tree_node();
         open_tree_node(result.id);
         scroll_to_tree_node(result.id);
-        refresh_url(hash);
+        refresh_url(url_hash);
         refresh_title();
         refresh_target_scroll();
     });

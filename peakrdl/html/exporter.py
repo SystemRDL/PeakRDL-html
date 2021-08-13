@@ -187,11 +187,17 @@ class HTMLExporter:
         if isinstance(node, RegNode):
             ral_fields = []
             for field in node.fields():
+                field_reset = field.get_property("reset", default=0)
+                if isinstance(field_reset, Node):
+                    # Reset value is a reference. Dynamic RAL data does not
+                    # support this, so stuff a 0 in its place
+                    field_reset = 0
+
                 ral_field = {
                     'name' : field.inst.inst_name,
                     'lsb'  : field.inst.lsb,
                     'msb'  : field.inst.msb,
-                    'reset': BigInt(field.get_property("reset", default=0)),
+                    'reset': BigInt(field_reset),
                     'disp' : 'H'
                 }
 
@@ -273,6 +279,9 @@ class HTMLExporter:
             'extra_properties': self.extra_properties,
             'stringify_rdl_value': stringify_rdl_value,
             'SignalNode' : SignalNode,
+            'FieldNode': FieldNode,
+            'AddressableNode': AddressableNode,
+            'PropertyReference': rdltypes.PropertyReference,
             'reversed': reversed,
             'isinstance': isinstance,
             'list': list,

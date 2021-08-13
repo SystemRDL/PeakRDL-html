@@ -89,6 +89,45 @@ function load_page_via_url(){
     }
 }
 
+function load_page_via_path(path, url_hash){
+    if(typeof url_hash === "undefined") url_hash = "";
+    var prev_path = get_path(CurrentID);
+    var prev_url_hash = window.location.hash;
+    var parsed_path = parse_path(path);
+    var new_path;
+    if(parsed_path == null) {
+        // Bad path. Give up
+        return
+    } else {
+        // Path is good.
+        var id, idx_stack;
+        id = parsed_path[0];
+        idx_stack = parsed_path[1];
+        apply_idx_stack(id, idx_stack);
+
+        // Recompute the path in case it needs to be cleaned up
+        new_path = get_path(id);
+        reset_indexes_to_next(id);
+        CurrentID = id;
+    }
+
+    if(prev_path != new_path) {
+        load_page(CurrentID, function () {
+            select_tree_node();
+            expand_to_tree_node();
+            open_tree_node(CurrentID);
+            scroll_to_tree_node(CurrentID);
+            refresh_url(url_hash);
+            refresh_title();
+            refresh_target_scroll();
+        });
+    } else if (prev_url_hash != url_hash){
+        refresh_url(url_hash);
+        refresh_target_scroll();
+    }
+}
+
+
 function onClickNodeLink(ev) {
     var el = ev.target;
     var id = parseInt(el.dataset.id);
@@ -107,6 +146,16 @@ function onClickNodeLink(ev) {
     return(false);
 }
 
+function onClickPathLink(ev) {
+    var el = ev.target;
+    var path = el.dataset.path;
+    var url_hash = el.dataset.url_hash;
+
+    load_page_via_path(path, url_hash);
+
+    return(false);
+}
+
 function load_parent_page(){
     var id = RALIndex[CurrentID].parent;
     if(id == null) return;
@@ -120,14 +169,14 @@ function load_parent_page(){
     });
 }
 
-function refresh_url(hash) {
+function refresh_url(url_hash) {
     // Given current state, refresh the URL
-    if(typeof hash === "undefined") hash = "";
+    if(typeof url_hash === "undefined") url_hash = "";
     var path = get_path(CurrentID);
 
     var url = new URL(window.location.href);
     url.searchParams.set("p", path);
-    url.hash = hash;
+    url.hash = url_hash;
     window.history.pushState({}, "", url.toString())
 }
 

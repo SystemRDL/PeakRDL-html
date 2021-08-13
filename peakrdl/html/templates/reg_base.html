@@ -57,7 +57,11 @@
         </td>
         <td>
             {%- if field.get_property("reset") != None -%}
-            {{"0x%x" % field.get_property("reset")}}
+                {%- if field.get_property("reset") is integer -%}
+                    {{"0x%x" % field.get_property("reset")}}
+                {%- else -%}
+                    {{macros.reference_link(field.get_property("reset"))}}
+                {%- endif -%}
             {%- else -%}
             -
             {%- endif %}
