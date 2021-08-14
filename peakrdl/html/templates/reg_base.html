@@ -57,8 +57,10 @@
         </td>
         <td>
             {%- if field.get_property("reset") != None -%}
-                {%- if isinstance(field.get_property("reset"),(SignalNode, FieldNode)) -%}
-                  {{ field.get_property("reset").inst_name }}
+                {%- if isinstance(field.get_property("reset"), SignalNode) -%}
+                    signal:<code>{{ field.get_property("reset").inst_name }}</code>
+                {%- elif isinstance(field.get_property("reset"), FieldNode) -%}
+                   {{ field.get_property("reset").inst_name }} {# TODO would much prefer to hyperlink this to the field that controls this #}
                 {%- else -%}
                   {{"0x%x" % field.get_property("reset")}}
                 {%- endif -%}
