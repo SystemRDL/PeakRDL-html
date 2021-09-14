@@ -240,7 +240,7 @@ class HTMLExporter:
             "title" : self.title
         }
         path = os.path.join(self.output_dir, "js/data.js")
-        with open(path, 'w') as fp:
+        with open(path, 'w', encoding='utf-8') as fp:
             fp.write("var RALIndex = ")
             fp.write(PeakRDLJSEncoder(separators=(',', ':')).encode(self.RALIndex))
             fp.write(";")
@@ -287,6 +287,7 @@ class HTMLExporter:
             'list': list,
             'view_source_url': view_source_url,
             'view_source_filename': view_source_filename,
+            'reg_fields_are_low_to_high': reg_fields_are_low_to_high,
         }
         context.update(self.user_context)
 
@@ -364,7 +365,7 @@ class HTMLExporter:
                         img_src = path
 
                 if os.path.exists(img_src):
-                    with open(img_src,'rb') as f:
+                    with open(img_src, 'rb') as f:
                         md5 = hashlib.md5(f.read()).hexdigest()
                     new_path = os.path.join(
                         self.output_dir, "content",
@@ -489,6 +490,12 @@ def get_node_uid(node: Node) -> str:
     node_path = node.get_path(array_suffix="", empty_array_suffix="")
     path_hash = hashlib.sha1(node_path.encode('utf-8')).hexdigest()
     return path_hash
+
+def reg_fields_are_low_to_high(node: RegNode) -> bool:
+    for field in node.fields():
+        if field.msb < field.lsb:
+            return True
+    return False
 
 
 

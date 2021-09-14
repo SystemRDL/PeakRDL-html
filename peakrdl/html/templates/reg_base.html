@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
-{%- macro reserved_field(msb, lsb) -%}
+{%- macro reserved_field(high, low, low_to_high) -%}
 <tr class="reserved-field">
-    {%- if msb == lsb %}
-    <td>[{{msb}}]</td>
+    {%- if high == low %}
+    <td>[{{high}}]</td>
+    {%- elif low_to_high %}
+    <td>[{{low}}:{{high}}]</td>
     {%- else %}
-    <td>[{{msb}}:{{lsb}}]</td>
+    <td>[{{high}}:{{low}}]</td>
     {%- endif %}
     <td>-</td>
     <td>-</td>
@@ -28,10 +30,10 @@
         <th></th>
     </tr>
     {%- for field in reversed(list(node.fields())) %}
-    {%- if loop.first and field.inst.msb < (node.get_property('regwidth') - 1) %}
-    {{reserved_field(node.get_property('regwidth') - 1, field.inst.msb + 1)}}
-    {%- elif (not loop.first) and field.inst.msb < loop.previtem.inst.lsb - 1 %}
-    {{reserved_field(loop.previtem.inst.lsb - 1, field.inst.msb + 1)}}
+    {%- if loop.first and field.inst.high < (node.get_property('regwidth') - 1) %}
+    {{reserved_field(node.get_property('regwidth') - 1, field.inst.high + 1, reg_fields_are_low_to_high(node))}}
+    {%- elif (not loop.first) and field.inst.high < loop.previtem.inst.low - 1 %}
+    {{reserved_field(loop.previtem.inst.low - 1, field.inst.high + 1, reg_fields_are_low_to_high(node))}}
     {%- endif %}
     <tr id="{{field.inst.inst_name}}">
         {%- if field.inst.msb == field.inst.lsb %}
@@ -87,8 +89,8 @@
             <a class="headerlink" href="#{{field.inst.inst_name}}" title="Permalink to this row"></a>
         </td>
     </tr>
-    {%- if loop.last and field.inst.lsb != 0 %}
-    {{reserved_field(field.inst.lsb - 1, 0)}}
+    {%- if loop.last and field.inst.low != 0 %}
+    {{reserved_field(field.inst.low - 1, 0, reg_fields_are_low_to_high(node))}}
     {%- endif %}
     {%- endfor %}
 </table>
