@@ -81,8 +81,8 @@ function show_file_protocol_nag() {
     var el = document.getElementById("_ContentContainer");
     el.innerHTML
     = "<h1>Oops!</h1>"
-    + "<p>Your browser's security policy prevents this page from loading properly when using the 'file://' protocol.</p>"
-    + "<p>If possible, host this page on a web server and access using the 'http://' protocol.</p>"
+    + "<p>Your browser's security policy prevents this page from loading properly when using the <code>file://</code>' protocol.</p>"
+    + "<p>If possible, host this page on a web server and access using the <code>http://</code>' protocol.</p>"
 
     + "<h2>Other workarounds</h2>"
 
@@ -91,7 +91,7 @@ function show_file_protocol_nag() {
     + "Change your Firefox security settings:"
     + "<ol>"
     + "    <li>In your address bar, type <code>about:config</code></li>"
-    + "    <li>Set <code>privacy.file_unique_origin</code> to <code>false</code></li>"
+    + "    <li>Set <code>security.fileuri.strict_origin_policy</code> to <code>false</code></li>"
     + "</ol>"
     + "For more details, see: <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp' target='_blank'>Reason: CORS request not HTTP</a>"
     + "</p>"
