@@ -117,10 +117,10 @@ disable=
         bad-python3-import,
         deprecated-string-function,
         deprecated-str-translate-call,
-        
+
         # Disable for now during development
         fixme,
-        
+
         # User ignored limits
         too-many-locals,
         too-many-branches,
@@ -130,7 +130,7 @@ disable=
         too-many-statements,
         too-many-instance-attributes,
         line-too-long,
-        
+
         useless-return,
         no-else-return,
         inconsistent-return-statements,
@@ -142,10 +142,11 @@ disable=
         bad-whitespace,
         invalid-name,
         missing-docstring,
-        
+
         unidiomatic-typecheck,
         abstract-method,
-        protected-access
+        protected-access,
+        consider-using-f-string
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

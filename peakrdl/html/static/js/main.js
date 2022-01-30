@@ -77,36 +77,123 @@ function onKeyDownMain(ev) {
     if(!unhandled) return false;
 }
 
+function platform_is_windows() {
+    try {
+        if(navigator.userAgentData.platform == "Windows") {
+            return true;
+        }
+    } catch(error) {
+        // fall-back to legacy api
+        if((navigator.platform == "Win32") || (navigator.platform == "Win64")) {
+            return true;
+        }
+    }
+    return false
+}
+
 function show_file_protocol_nag() {
+    var this_dir = window.location.pathname.replace(/[\\/]index.html/g, "")
+    if(platform_is_windows()) {
+        // remove leading slash that shows up ahead of path: "/C:/Users/..."
+        this_dir = this_dir.replace(/^\/(\w:)/g, "$1");
+    }
+    var html_str;
+
+    html_str =
+          "<h1>Oops!</h1>"
+        + "<p>Most modern <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp' target='_blank'>browser's security policies</a> "
+        + "prevent this page from loading properly when using the <code>file://</code> protocol.</p>"
+        + "<p>If possible, host this page on a web server and access using the <code>http://</code> protocol.</p>"
+
+        + "<h2>Alternatives</h2>"
+        ;
+
+    if(platform_is_windows()) {
+        html_str +=
+              "<h3>Use one of the included launcher scripts</h3>"
+            + "<p>"
+            + "In the folder that contains these docs, double-click the launcher for the browser of your choice:"
+            + "<ul>"
+            + "    <li><code>launcher-windows-chrome.bat</code></li>"
+            + "    <li><code>launcher-windows-edge.bat</code></li>"
+            + "    <li><code>launcher-windows-firefox.bat</code></li>"
+            + "</ul>"
+            + "These launcher scripts will temporarily disable the security setting so you can view this page locally."
+            + "</p>"
+            ;
+    }
+
+    if(platform_is_windows()) {
+        html_str +=
+            "<h3>Python http server</h3>"
+            + "<p>"
+            + "Launch a temporary http server using Python:"
+            + "<ol>"
+            + "    <li>If you haven't already, <a href='https://www.python.org/downloads/' target='_blank'>download and install Python</a></li>"
+            + "    <li>"
+            + "    Press <span class='kb-shortcut-key'>WIN</span>+<span class='kb-shortcut-key'>R</span> and paste the following into the text box:"
+            + "    <p><input type='text' readonly=true style='width:100%;' value='py.exe -m http.server -d \"" + this_dir + "\"'></p>"
+            + "    </li>"
+            + "    <li>Click 'Ok'</li>"
+            + "    <li>Re-open this page via: <a href='http://localhost:8000/'>http://localhost:8000/</a></li>"
+            + "</ol>"
+            + "</p>"
+            ;
+    } else {
+        html_str +=
+            "<h3>Python http server</h3>"
+            + "<p>"
+            + "Launch a temporary http server using Python:"
+            + "<pre>"
+            + 'python3 -m http.server -d "' + this_dir + '"'
+            + "</pre>"
+            + "Then view via: <a href='http://localhost:8000/' target='_blank'>http://localhost:8000/</a>"
+            + "</p>"
+            ;
+    }
+
+    html_str +=
+          "<h3>Firefox</h3>"
+        + "<p>"
+        + "Change your Firefox security settings:"
+        + "<ol>"
+        + "    <li>In your address bar, type <code>about:config</code></li>"
+        + "    <li>Set <code>security.fileuri.strict_origin_policy</code> to <code>false</code></li>"
+        + "    <li>Refresh this page</li>"
+        + "</ol>"
+        + "</p>"
+        ;
+
+    if(platform_is_windows()) {
+        html_str +=
+              "<h3>Chrome or Edge</h3>"
+            + "<p>"
+            + "<ol>"
+            + "    <li>Close your current Chrome or Edge browser session completely</li>"
+            + "    <li>"
+            + "    Press <span class='kb-shortcut-key'>WIN</span>+<span class='kb-shortcut-key'>R</span> and paste the following into the text box:"
+            + "    <p><input type='text' readonly=true style='width:100%;' value='chrome.exe --allow-file-access-from-files \"" + window.location.href + "\"'></p>"
+            + "    For Microsoft Edge, replace 'chrome.exe' with 'msedge.exe'"
+            + "    </li>"
+            + "    <li>Click 'Ok'</li>"
+            + "</ol>"
+            + "</p>"
+            ;
+    } else {
+        html_str +=
+              "<h3>Chrome</h3>"
+            + "<p>"
+            + "Close your current Chrome session and re-launch it from the command-line using:"
+            + "<pre>"
+            + "google-chrome --allow-file-access-from-files \\\n"
+            + '    "' + window.location.href + '"'
+            + "</pre>"
+            + "</p>"
+            ;
+    }
+
     var el = document.getElementById("_ContentContainer");
-    el.innerHTML
-    = "<h1>Oops!</h1>"
-    + "<p>Your browser's security policy prevents this page from loading properly when using the <code>file://</code>' protocol.</p>"
-    + "<p>If possible, host this page on a web server and access using the <code>http://</code>' protocol.</p>"
-
-    + "<h2>Other workarounds</h2>"
-
-    + "<h3>Firefox</h3>"
-    + "<p>"
-    + "Change your Firefox security settings:"
-    + "<ol>"
-    + "    <li>In your address bar, type <code>about:config</code></li>"
-    + "    <li>Set <code>security.fileuri.strict_origin_policy</code> to <code>false</code></li>"
-    + "</ol>"
-    + "For more details, see: <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp' target='_blank'>Reason: CORS request not HTTP</a>"
-    + "</p>"
-
-    + "<h3>Chrome</h3>"
-    + "<p>"
-    + "Launch your Chrome session using the <code>--allow-file-access-from-files</code> command line switch"
-    + "</p>"
-
-    + "<h3>Python http server</h3>"
-    + "<p>"
-    + "Host using a temporary Python http server:"
-    + "<pre>python -m http.server</pre>"
-    + "</p>"
-    ;
+    el.innerHTML = html_str;
 }
 
 function show_incompatibility_nag() {
