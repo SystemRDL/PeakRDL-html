@@ -330,3 +330,18 @@ function get_node_uid(id) {
     var uid = SHA1(path);
     return uid;
 }
+
+function toBigInt(str) {
+    // bigInt doesn't handle large hex strings if they use the 0x prefix
+    // Wrap auto-base handling
+    str = str.trim().toLowerCase();
+    if(str.startsWith("0x")) {
+        return(bigInt(str.substring(2), 16));
+    } else if(str.startsWith("0o")) {
+        return(bigInt(str.substring(2), 8));
+    } else if(str.startsWith("0b")) {
+        return(bigInt(str.substring(2), 2));
+    } else {
+        return(bigInt(str));
+    }
+}

@@ -1,43 +1,44 @@
 // This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
 // and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
 
-function load_page(id, done_callback) {
-    // Clears and populates the main div with content/{id}.html's content
+async function load_page(id, done_callback) {
+    var awaitable = fetch_page_content(id);
+    awaitable.then(text => {
+        // Page loaded successfully
+        CurrentID = id;
+        update_crumbtrail();
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onloadend = function() {
         var main_el = document.getElementById("_ContentContainer");
-        if (this.status == 200 || (this.status == 0 && this.responseText)) {
-            // Page loaded successfully
-            CurrentID = id;
-            update_crumbtrail();
-
-            main_el.innerHTML = this.responseText;
-            update_absolute_addr(get_absolute_addr(id));
-            update_rdlfc_indexes();
-            if(is_register(id)) {
-                init_reg_value();
-                init_radix_buttons();
-            }
-            if(typeof done_callback !== "undefined") done_callback();
-            userHooks.onContentLoad();
-
-        } else {
-            // Page load failed
-            if(window.location.protocol == "file:"){
-                show_file_protocol_nag();
-            }
+        main_el.innerHTML = text;
+        update_absolute_addr(get_absolute_addr(id));
+        update_rdlfc_indexes();
+        if(is_register(id)) {
+            init_reg_value();
+            init_radix_buttons();
         }
-    };
-
-    try {
-        xhttp.open("GET", "content/" + get_node_uid(id) + ".html?ts=" + BUILD_TS, true);
-        xhttp.send();
-    } catch(error) {
+        if(typeof done_callback !== "undefined") done_callback();
+        userHooks.onContentLoad();
+    })
+    .catch(e => {
+        // Page load failed
         if(window.location.protocol == "file:"){
             show_file_protocol_nag();
         }
-    }
+    });
+
+    return awaitable;
+}
+
+async function fetch_page_content(id){
+    var path = "content/" + get_node_uid(id) + ".html?ts=" + BUILD_TS;
+    var awaitable = fetch(path)
+        .then(response => {
+            if(!response.ok){
+                throw new Error("page fetch failed");
+            }
+            return response.text();
+        });
+    return awaitable;
 }
 
 function load_page_via_url(){

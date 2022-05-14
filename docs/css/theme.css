@@ -12,6 +12,7 @@
     --url-color-hover: #3091d1;
     --overlay-bg-rgba: 0,0,0,0.5;
     --reserved-text-color:#808080;
+    --content-preview-text-color:#ccc;
 
     --offpage-bg-color:#eee;
     --main-bg-color:#fcfcfc;
@@ -77,6 +78,7 @@
         --url-color-hover: #35a0e6;
         --overlay-bg-rgba: 0,0,0,0.65;
         --reserved-text-color:#444;
+        --content-preview-text-color:#888;
 
         --offpage-bg-color: #111;
         --main-bg-color: #000;
@@ -683,6 +685,12 @@ tr:hover .headerlink::after {
 #_SearchResults .selected {
     background-color: var(--alt-row-bg-color);
 }
+
+.search-content-preview {
+    color: var(--content-preview-text-color);
+    padding-left: 2em;
+    padding-top: 0.5em;
+  }
 
 /* --------------------------- Index Editor Modal --------------------------- */
 #_IdxEditModal {

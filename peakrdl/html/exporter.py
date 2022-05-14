@@ -20,6 +20,7 @@ from systemrdl import rdltypes
 from systemrdl.source_ref import FileSourceRef, DetailedFileSourceRef
 
 from .stringify import stringify_rdl_value
+from .search_indexer import SearchIndexer
 from .__about__ import __version__
 
 if TYPE_CHECKING:
@@ -100,6 +101,8 @@ class HTMLExporter:
 
         self.gmtu = GitMeTheURL(gmtu_translators)
 
+        self.indexer = None # type: SearchIndexer
+
 
     def export(self, nodes: 'Union[Node, List[Node]]', output_dir: str, **kwargs: 'Dict[str, Any]') -> None:
         """
@@ -142,6 +145,7 @@ class HTMLExporter:
         self.output_dir = output_dir
         self.RALIndex = []
         self.current_id = -1
+        self.indexer = SearchIndexer()
 
         # Copy static files
         static_dir = os.path.join(os.path.dirname(__file__), "static")
@@ -152,6 +156,7 @@ class HTMLExporter:
         # Make sure output directory structure exists
         os.makedirs(self.output_dir, exist_ok=True)
         os.makedirs(os.path.join(self.output_dir, "content"), exist_ok=True)
+        os.makedirs(os.path.join(self.output_dir, "search"), exist_ok=True)
 
         # Traverse trees
         for node in nodes:
@@ -168,11 +173,16 @@ class HTMLExporter:
         # Write main index.html
         self.write_index_page()
 
+        # Write search index
+        self.indexer.write_index_js(os.path.join(output_dir, "search"))
+
 
     def visit_addressable_node(self, node: Node, parent_id: 'Optional[int]'=None) -> int:
         self.current_id += 1
         this_id = self.current_id
         child_ids = [] # type: List[int]
+
+        self.indexer.add_node(node, this_id)
 
         ral_entry = {
             'parent'    : parent_id,
@@ -188,7 +198,9 @@ class HTMLExporter:
 
         if isinstance(node, RegNode):
             ral_fields = []
-            for field in node.fields():
+            for i, field in enumerate(node.fields()):
+                self.indexer.add_node(field, this_id, i)
+
                 field_reset = field.get_property("reset", default=0)
                 if isinstance(field_reset, Node):
                     # Reset value is a reference. Dynamic RAL data does not

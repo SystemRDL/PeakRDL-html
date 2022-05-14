@@ -3,14 +3,10 @@
 
 var SearchState = {};
 SearchState.active = false;
-SearchState.query_sn = 0; // Sequence number of the current query
-SearchState.query_keywords = [];
-SearchState.query_start_id = 0;
 SearchState.results = [];
 SearchState.selected_result = null;
+SearchState.abortController = null;
 
-// Number of nodes to test per search iteration
-var SEARCH_CHOMP_SIZE = 100;
 
 function onSearchButtonClick() {
     if(SearchState.active){
@@ -42,7 +38,7 @@ function open_search(query_text){
     input_el.focus();
 
     if(query_text != "") {
-        start_keyword_search(query_text);
+        start_search(query_text);
     }
 }
 
@@ -56,6 +52,8 @@ function close_search(){
     document.getElementById("_MobiSearchButton").classList.add("search-button");
     document.getElementById("_MobiSearchButton").classList.remove("close-button");
     SearchState.active = false;
+    SearchState.abortController.abort();
+    SearchState.abortController = null;
 }
 
 function onKeyDownSearch(ev) {
@@ -109,7 +107,7 @@ function onSearchInputKeypress(ev){
                 SearchState.selected_result++;
                 SearchState.results[SearchState.selected_result].el.classList.add("selected");
             }
-        }else if(SearchState.results.length){
+        } else if(SearchState.results.length){
             // Select first
             SearchState.selected_result = 0;
             SearchState.results[0].el.classList.add("selected");
@@ -120,126 +118,11 @@ function onSearchInputKeypress(ev){
 }
 
 function onSearchInputUpdate(ev){
-    var search_text = ev.target.value.trim().toLowerCase();
+    var query = ev.target.value.trim().toLowerCase();
 
-    if(search_text.startsWith("@")){
-        clear_search_results();
-        search_text = search_text.slice(1, search_text.length);
-        if(search_text == "") return;
-
-        try {
-            addr = toBigInt(search_text);
-        } catch(error) {
-            addr = bigInt(-1);
-        }
-
-        if(addr.lt(0)) return;
-
-        RootNodeIds.forEach(function(id) {
-            var result = lookup_by_address(addr, id);
-            if(result != null) {
-                add_search_result(
-                    [get_path(result[0], result[1])],
-                    result[0], result[1]
-                );
-            }
-        });
-    } else {
-        start_keyword_search(search_text);
-    }
-}
-
-function start_keyword_search(query){
     clear_search_results();
 
-    if(query.length < 2) return;
-
-    // Sanitize query
-    query = query.split(" ");
-    SearchState.query_keywords = [];
-    for(var i=0; i<query.length; i++){
-        if(query[i] == "") continue;
-        SearchState.query_keywords.push(query[i]);
-    }
-    SearchState.query_sn++;
-    SearchState.query_start_id = 0;
-
-    do_a_search_chomp(SearchState.query_sn);
-}
-
-function do_a_search_chomp(query_sn){
-
-    // Abort if a new query was already started
-    if(query_sn != SearchState.query_sn) {
-        return;
-    }
-
-    var keywords = SearchState.query_keywords;
-    var id = SearchState.query_start_id;
-    var chomp_counter = SEARCH_CHOMP_SIZE;
-
-    // Search each node in the index
-    while(chomp_counter != 0){
-        if(id >= RALIndex.length) return;
-
-        var path = get_path(id, null, false);
-
-        // Search regular path
-        var text_segments = search_test_path(path, keywords);
-        if(text_segments != null){
-            add_search_result(text_segments, id);
-        } else {
-            // No match yet. If this node has fields, add them to the path and try that
-            if("fields" in RALIndex[id]){
-                for(var i=0; i<RALIndex[id].fields.length; i++){
-                    var path_with_field = path + "." + RALIndex[id].fields[i].name;
-                    text_segments = search_test_path(path_with_field, keywords);
-                    if(text_segments != null){
-                        add_search_result(text_segments, id, null, RALIndex[id].fields[i].name);
-                    }
-                }
-            }
-        }
-
-        id++;
-        chomp_counter--;
-    }
-
-    // Hit chomp limit.
-    // Schedule another iteration later
-    SearchState.query_start_id = id;
-    setTimeout(function() {
-        do_a_search_chomp(query_sn);
-    }, 1);
-}
-
-function search_test_path(path, keywords){
-    // If match, returns text_segments.
-    // Otherwise, null
-    var path_lc = path.toLowerCase();
-    var text_segments = [];
-    var start = 0;
-
-    // Scan path to see if all keywords match
-    for(var i=0; i<keywords.length; i++){
-        var result = path_lc.indexOf(keywords[i], start);
-        if(result < 0){
-            // Did not match
-            return(null);
-        }
-
-        // matched!
-        // extract non-highlighted text before
-        text_segments.push(path.slice(start, result));
-        // highlighted text
-        text_segments.push(path.slice(result, result + keywords[i].length));
-
-        // move search start for next keyword
-        start = result + keywords[i].length;
-    }
-
-    text_segments.push(path.slice(start, path.length));
-    return(text_segments);
+    start_search(query);
 }
 
 function clear_search_results(){
@@ -253,25 +136,51 @@ function clear_search_results(){
     SearchState.selected_result = null;
 }
 
-function add_search_result(text_segments, id, idx_stack, anchor){
-    if(typeof idx_stack === "undefined") idx_stack = null;
-    if(typeof anchor === "undefined") anchor = "";
+async function start_search(query) {
+
+    // Abort any prior search
+    if(SearchState.abortController){
+        SearchState.abortController.abort();
+    }
+    SearchState.abortController = new AbortController();
+    var abortSignal = SearchState.abortController.signal;
+
+    if(query.length == 0) return;
+
+    if(query.startsWith("@")){
+        AddressSearch.start(query);
+    } else {
+        await PathSearch.start(query, abortSignal);
+        if(abortSignal.aborted) return;
+
+        // Start a content search if path search completed successfully
+        await ContentSearch.start(query, abortSignal);
+    }
+}
+
+
+async function take_a_break(){
+    await new Promise(r => setTimeout(r, 1));
+}
+
+function add_search_result(text_segments, node_id, idx_stack=null, anchor="", content_preview=null){
     // text_segments is an array of segments that should/shouldn't be highlighted
     // All odd segments are highlighted via <mark> tag.
     // text_segments[0] --> not highlighted
     // text_segments[1] --> highlighted
 
-    var result_id = SearchState.results.length;
+    var result_idx = SearchState.results.length;
     var result_el = document.createElement("li");
-    result_el.dataset.id = result_id;
     result_el.onclick = function() {
-        open_search_result(result_id);
+        open_search_result(result_idx);
     };
     result_el.onmousemove = function() {
-        onSearchResultMousemove(result_id)
+        onSearchResultMousemove(result_idx)
     };
-    document.getElementById("_SearchResults").appendChild(result_el);
+    var path_div_el = document.createElement("div");
+    result_el.appendChild(path_div_el);
 
+    // Build highlighted path crumbtrail
     for(var i=0; i<text_segments.length; i++){
         var el;
         if(i%2){
@@ -280,34 +189,42 @@ function add_search_result(text_segments, id, idx_stack, anchor){
             el = document.createElement("span");
         }
         el.innerHTML = text_segments[i];
-        result_el.appendChild(el);
+        path_div_el.appendChild(el);
+    }
+
+    if(content_preview != null){
+        var content_preview_el = document.createElement("div");
+        content_preview_el.classList.add("search-content-preview");
+        result_el.appendChild(content_preview_el);
+        content_preview_el.innerHTML = content_preview;
     }
 
     var result = {
-        "id": id,
+        "node_id": node_id,
         "idx_stack": idx_stack,
         "el": result_el,
         "anchor": anchor
     };
+    document.getElementById("_SearchResults").appendChild(result_el);
     SearchState.results.push(result);
 }
 
-function onSearchResultMousemove(result_id){
-    if(SearchState.selected_result == result_id) return;
+function onSearchResultMousemove(result_idx){
+    if(SearchState.selected_result == result_idx) return;
 
     if(SearchState.selected_result != null){
         SearchState.results[SearchState.selected_result].el.classList.remove("selected");
     }
-    SearchState.selected_result = result_id;
-    SearchState.results[result_id].el.classList.add("selected");
+    SearchState.selected_result = result_idx;
+    SearchState.results[result_idx].el.classList.add("selected");
 }
 
-function open_search_result(result_id){
-    var result = SearchState.results[result_id];
+function open_search_result(result_idx){
+    var result = SearchState.results[result_idx];
     if(result.idx_stack == null){
-        reset_indexes(0, result.id);
+        reset_indexes(0, result.node_id);
     }else{
-        apply_idx_stack(result.id, result.idx_stack);
+        apply_idx_stack(result.node_id, result.idx_stack);
     }
 
     var url_hash = "";
@@ -317,11 +234,11 @@ function open_search_result(result_id){
 
     close_search();
 
-    load_page(result.id, function () {
+    load_page(result.node_id, function () {
         select_tree_node();
         expand_to_tree_node();
-        open_tree_node(result.id);
-        scroll_to_tree_node(result.id);
+        open_tree_node(result.node_id);
+        scroll_to_tree_node(result.node_id);
         refresh_url(url_hash);
         refresh_title();
         refresh_target_scroll();

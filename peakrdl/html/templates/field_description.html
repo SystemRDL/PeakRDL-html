@@ -7,7 +7,7 @@
     {%- endif %}
     <a class="headerlink" href="#{{field.inst.inst_name}}.desc" title="Permalink to this headline"></a>
 </h3>
-
+<div id="_Content.{{field.inst.inst_name}}.desc">
 {%- if has_description(field) %}
 {{get_node_desc(field,3)|safe}}
 {%- endif %}
@@ -19,3 +19,4 @@
 {%- if has_extra_property_doc(field) %}
 {{ macros.extra_prop_table(field) }}
 {%- endif %}
+</div>
