@@ -119,7 +119,7 @@ class ContentSearch {
     }
 
     static async #fetch_bucket_file(bidx) {
-        var path = "../search/bkt-" + bidx + ".json?ts=" + BUILD_TS;
+        var path = "search/bkt-" + bidx + ".json?ts=" + BUILD_TS;
 
         var awaitable = fetch(path)
             .then(response => {
