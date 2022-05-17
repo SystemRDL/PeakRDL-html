@@ -33,7 +33,7 @@
 {%- endif %}
 
 {%- if show_signals %}
-{%- for signal in node.children() if isinstance(signal, SignalNode) %}
+{%- for signal in node.signals(skip_not_present=skip_not_present) %}
 {%- if loop.first %}
 <h2>Signals</h2>
 <table border="1">

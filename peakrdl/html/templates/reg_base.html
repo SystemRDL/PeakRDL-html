@@ -29,7 +29,7 @@
         <th>Name</th>
         <th></th>
     </tr>
-    {%- for field in reversed(list(node.fields())) %}
+    {%- for field in reversed(list(node.fields(skip_not_present=skip_not_present))) %}
     {%- if loop.first and field.inst.high < (node.get_property('regwidth') - 1) %}
     {{reserved_field(node.get_property('regwidth') - 1, field.inst.high + 1, reg_fields_are_low_to_high(node))}}
     {%- elif (not loop.first) and field.inst.high < loop.previtem.inst.low - 1 %}
@@ -104,7 +104,7 @@
     {%- endblock reg_value_edit %}
 </p>
 
-{%- for field in reversed(list(node.fields())) if (has_description(field) or has_enum_encoding(field) or has_extra_property_doc(field)) %}
+{%- for field in reversed(list(node.fields(skip_not_present=skip_not_present))) if (has_description(field) or has_enum_encoding(field) or has_extra_property_doc(field)) %}
 {%- if loop.first %}
 <hr/><h2>Field Descriptions</h2>
 {%- endif %}
