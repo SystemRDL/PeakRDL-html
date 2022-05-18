@@ -16,6 +16,8 @@ async function load_page(id) {
             init_reg_value();
             init_radix_buttons();
         }
+        //MathJax.Hub.Queue(["Typeset", MathJax.Hub, main_el]);
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         userHooks.onContentLoad();
     })
     .catch(e => {

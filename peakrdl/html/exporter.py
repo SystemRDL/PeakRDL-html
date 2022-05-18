@@ -78,10 +78,15 @@ class HTMLExporter:
         if markdown_inst is None:
             self.markdown_inst = markdown.Markdown(
                 extensions = [
+                    'extra',
                     'admonition',
-                    'fenced_code',
-                    'tables',
-                ]
+                    'mdx_math',
+                ],
+                extension_configs={
+                    'mdx_math':{
+                        'add_preview': True
+                    }
+                }
             )
         else:
             self.markdown_inst = markdown_inst

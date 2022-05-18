@@ -26,6 +26,7 @@ setuptools.setup(
         "Jinja2>=2.9",
         "markdown",
         "git-me-the-url>=2.0.1",
+        "python-markdown-math",
     ],
     classifiers=(
         "Development Status :: 5 - Production/Stable",

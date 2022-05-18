@@ -25,6 +25,20 @@ addrmap turbo_encab {
     ";
     reg {
         name = "System Control Register";
+        desc = "
+        !!! tip
+            This page demonstrates the use of the Markdown Math plugin to insert
+            LaTeX-style equations that are rendered using MathJax.
+
+            For inline math, use `\\(...\\)`.
+
+            For standalone math blocks, use `$$...$$`, `\\[...\\]` or `\\begin...\\end`.
+
+            Reminder: In RDL strings, backslashes need to be escaped.
+
+        &nbsp;
+        ";
+
         field {
             sw=rw; hw=r;
         } reset;
@@ -33,6 +47,10 @@ addrmap turbo_encab {
             name = "Magneto-reluctance";
             desc = "
             Set the absolute magneto-reluctance.
+
+            The definition of magnetic reluctance is:
+
+            $$\\mathcal{R} = \\frac{l}{\\mu_0 \\mu_r A} = \\frac{l}{\\mu A}$$
             ";
             sw=rw; hw=r;
         } reluctance[8] = 0x42;
@@ -41,6 +59,10 @@ addrmap turbo_encab {
             name = "Capactive diractance";
             desc = "
             Capacitive diractance relative to the lunar waneshaft.
+
+            The amount of energy that can be stored in a capacitor is \\(E = \\frac{1}{2} CV^2\\),
+            but that is irrelevant because nobody knows what 'diractance' is, so we'll leave
+            that as an exercise to the reader.
             ";
             sw=rw; hw=r;
         } diractance[8];
