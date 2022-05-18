@@ -20,7 +20,7 @@ addrmap turbo_encab {
     to supply inverse reactive current. The product brief for Rockwell Automation's
     [Retro Encabulator](https://www.youtube.com/watch?v=RXJKdh1KZ0w) is also a sufficient substitute.
 
-    ![Turbo Encabulator](turboencabulator.jpg)
+    ![Turbo Encabulator](example.jpg)
 
     ";
     reg {

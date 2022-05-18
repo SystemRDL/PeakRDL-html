@@ -1,7 +1,7 @@
 // This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
 // and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
 
-async function load_page(id, done_callback) {
+async function load_page(id) {
     var awaitable = fetch_page_content(id);
     awaitable.then(text => {
         // Page loaded successfully
@@ -16,7 +16,6 @@ async function load_page(id, done_callback) {
             init_reg_value();
             init_radix_buttons();
         }
-        if(typeof done_callback !== "undefined") done_callback();
         userHooks.onContentLoad();
     })
     .catch(e => {
@@ -77,7 +76,7 @@ function load_page_via_url(){
         }
     }
     if(prev_id != CurrentID) {
-        load_page(CurrentID, function () {
+        load_page(CurrentID).then(() => {
             select_tree_node();
             expand_to_tree_node();
             open_tree_node(CurrentID);
@@ -113,7 +112,7 @@ function load_page_via_path(path, url_hash){
     }
 
     if(prev_path != new_path) {
-        load_page(CurrentID, function () {
+        load_page(CurrentID).then(() => {
             select_tree_node();
             expand_to_tree_node();
             open_tree_node(CurrentID);
@@ -135,7 +134,7 @@ function onClickNodeLink(ev) {
     if(id == CurrentID) return(false);
 
     reset_indexes_to_next(id);
-    load_page(id, function () {
+    load_page(id).then(() => {
         select_tree_node();
         expand_to_tree_node();
         open_tree_node(id);
@@ -160,7 +159,7 @@ function onClickPathLink(ev) {
 function load_parent_page(){
     var id = RALIndex[CurrentID].parent;
     if(id == null) return;
-    load_page(id, function () {
+    load_page(id).then(() => {
         select_tree_node();
         expand_to_tree_node();
         open_tree_node(id);

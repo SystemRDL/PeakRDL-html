@@ -52,8 +52,10 @@ function close_search(){
     document.getElementById("_MobiSearchButton").classList.add("search-button");
     document.getElementById("_MobiSearchButton").classList.remove("close-button");
     SearchState.active = false;
-    SearchState.abortController.abort();
-    SearchState.abortController = null;
+    if(SearchState.abortController) {
+        SearchState.abortController.abort();
+        SearchState.abortController = null;
+    }
 }
 
 function onKeyDownSearch(ev) {
@@ -234,7 +236,7 @@ function open_search_result(result_idx){
 
     close_search();
 
-    load_page(result.node_id, function () {
+    load_page(result.node_id).then(() => {
         select_tree_node();
         expand_to_tree_node();
         open_tree_node(result.node_id);

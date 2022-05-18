@@ -154,7 +154,8 @@ function onClickTreeLink(ev) {
     }
 
     reset_indexes_to_next(id);
-    load_page(id, function (){
+
+    load_page(id).then(() => {
         select_tree_node();
         refresh_url();
         refresh_title();
