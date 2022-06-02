@@ -5,14 +5,60 @@ var SBResizeState = {};
 SBResizeState.old_width = 0;
 SBResizeState.start_x = 0;
 
-function init_tree() {
+function init_tree_pass1(first_id){
+    // initialize the bare-minimum of the sidebar tree in order to display the
+    // first_id page
+
+    // array of required ID lineage
+    var id_chain = get_ancestors(first_id);
+    id_chain.push(first_id);
+
+    // deferred sidebar work for 2nd pass
+    // array of pairs: [cdiv, id]
+    var deferred_sb_work = [];
+
     var el = document.getElementById("_SBTree");
-    RootNodeIds.forEach(function(id) {
-        add_tree_node(el, id);
-    });
+    for(var i=0; i<RootNodeIds.length; i++){
+        add_tree_nodes_in_chain(el, RootNodeIds[i], id_chain, deferred_sb_work);
+    };
+
+    return deferred_sb_work;
 }
 
-function add_tree_node(parent_el, id){
+function init_tree_pass2(deferred_sb_work){
+    for(var i=0; i<deferred_sb_work.length; i++){
+        var cdiv = deferred_sb_work[i][0];
+        var cid = deferred_sb_work[i][1];
+        add_tree_node_recursive(cdiv, cid);
+    }
+}
+
+function add_tree_nodes_in_chain(parent_el, id, id_chain, deferred_sb_work){
+    var node = RALIndex[id];
+    var cdiv;
+
+    cdiv = create_tree_node(parent_el, id);
+    if(node.children.length > 0){
+        if((id_chain.length != 0) && (id_chain[0] == id)){
+            // node is in chain. Keep going
+            id_chain.shift();
+            for(var i=0; i<node.children.length; i++){
+                var cid = node.children[i];
+                add_tree_nodes_in_chain(cdiv, cid, id_chain, deferred_sb_work);
+            }
+        } else {
+            // node is not in chain, but has children. Defer them
+            for(var i=0; i<node.children.length; i++){
+                var cid = node.children[i];
+                deferred_sb_work.push([cdiv, cid]);
+            }
+        }
+    }
+}
+
+function create_tree_node(parent_el, id) {
+    // Creates a single tree node.
+    // If has children, returns the div element that shall contain children
     var node = RALIndex[id];
 
     var div;
@@ -38,7 +84,7 @@ function add_tree_node(parent_el, id){
             txt += "[]";
         }
         link.innerHTML = txt;
-    }else{
+    } else {
         link.innerHTML = node.name;
     }
     div.appendChild(link);
@@ -52,14 +98,27 @@ function add_tree_node(parent_el, id){
         cdiv.className = "node-children";
         parent_el.appendChild(cdiv);
 
-        for(var i=0; i<node.children.length; i++){
-            add_tree_node(cdiv, node.children[i]);
-        }
+        return cdiv;
     } else {
         // is leaf node
         div.classList.add("leaf");
+
+        return null;
     }
 }
+
+function add_tree_node_recursive(parent_el, id){
+    var node = RALIndex[id];
+    var cdiv;
+
+    cdiv = create_tree_node(parent_el, id);
+    if(node.children.length > 0){
+        for(var i=0; i<node.children.length; i++){
+            add_tree_node_recursive(cdiv, node.children[i]);
+        }
+    }
+}
+
 
 function select_tree_node() {
     var id = CurrentID;
@@ -100,8 +159,8 @@ function expand_to_tree_node() {
     }
 }
 
-function scroll_to_tree_node(id) {
-    var node_el = document.getElementById("_SBNode" + id);
+function scroll_to_tree_node() {
+    var node_el = document.getElementById("_SBNode" + CurrentID);
     var tree_el = document.getElementById("_SBTreeContainer");
 
     var node_rect = node_el.getBoundingClientRect();

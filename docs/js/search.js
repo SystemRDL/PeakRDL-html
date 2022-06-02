@@ -160,11 +160,6 @@ async function start_search(query) {
     }
 }
 
-
-async function take_a_break(){
-    await new Promise(r => setTimeout(r, 1));
-}
-
 function add_search_result(text_segments, node_id, idx_stack=null, anchor="", content_preview=null){
     // text_segments is an array of segments that should/shouldn't be highlighted
     // All odd segments are highlighted via <mark> tag.
@@ -240,7 +235,7 @@ function open_search_result(result_idx){
         select_tree_node();
         expand_to_tree_node();
         open_tree_node(result.node_id);
-        scroll_to_tree_node(result.node_id);
+        scroll_to_tree_node();
         refresh_url(url_hash);
         refresh_title();
         refresh_target_scroll();

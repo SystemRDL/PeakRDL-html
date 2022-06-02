@@ -50,9 +50,36 @@ function onPageLoad() {
 
     window.onpopstate = onPopState;
     window.onkeydown = onKeyDownMain;
-    init_tree();
+
+    // Determine what page id will be loaded
+    var url = new URL(window.location.href);
+    var path = url.searchParams.get("p", path);
+    var parsed_path = parse_path(path);
+    var id;
+    if(parsed_path == null) {
+        id = 0;
+    } else {
+        id = parsed_path[0];
+    }
+
+    // Prepare content for initial page load
+    ral_expand_all_bigint_pass1(id);
+    var deferred_sb_work;
+    deferred_sb_work = init_tree_pass1(id);
     init_sb_resizer();
-    load_page_via_url();
+
+    // Load content
+    load_page_via_url().then(() => {
+        // finish remaining initialization after page load
+        // defer it to the next animation frame
+        // TODO: Figure out a better way to defer these to after page rendering
+        // requestAnimationFrame and other methods don't seem to work
+        setTimeout(() => {
+            ral_expand_all_bigint_pass2();
+            init_tree_pass2(deferred_sb_work);
+        }, 100);
+    });
+
     init_index_edit();
     userHooks.onPageLoad();
 }
@@ -319,6 +346,10 @@ function isDescendant(parent, child) {
         node = node.parentNode;
     }
     return(false);
+}
+
+async function take_a_break(){
+    await new Promise(r => setTimeout(r, 1));
 }
 
 //==============================================================================

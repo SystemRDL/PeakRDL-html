@@ -16,7 +16,6 @@ async function load_page(id) {
             init_reg_value();
             init_radix_buttons();
         }
-        //MathJax.Hub.Queue(["Typeset", MathJax.Hub, main_el]);
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         userHooks.onContentLoad();
     })
@@ -42,47 +41,42 @@ async function fetch_page_content(id){
     return awaitable;
 }
 
-function load_page_via_url(){
+async function load_page_via_url(){
     // An event triggered such that the page should be loaded based on the URL
     var prev_id = CurrentID;
 
     var url = new URL(window.location.href);
     var path = url.searchParams.get("p", path);
-    if(path == null){
-        // No path specified. Default to root node
+    var parsed_path = parse_path(path);
+    var new_path;
+    if(parsed_path == null) {
+        // Bad path. Discard it
+        new_path = "";
         CurrentID = 0;
     } else {
-        // URL contains a hier path
-        var parsed_path = parse_path(path);
-        var new_path;
-        if(parsed_path == null) {
-            // Bad path. Discard it
-            new_path = "";
-            CurrentID = 0;
-        } else {
-            // Path is good.
-            var id, idx_stack;
-            id = parsed_path[0];
-            idx_stack = parsed_path[1];
-            apply_idx_stack(id, idx_stack);
+        // Path is good.
+        var id, idx_stack;
+        id = parsed_path[0];
+        idx_stack = parsed_path[1];
+        apply_idx_stack(id, idx_stack);
 
-            // Recompute the path in case it needs to be cleaned up
-            new_path = get_path(id);
-            CurrentID = id;
-        }
-
-        if(path != new_path){
-            // Path was sanitized. Patch URL
-            url.searchParams.set("p", new_path);
-            window.history.replaceState({}, "", url.toString())
-        }
+        // Recompute the path in case it needs to be cleaned up
+        new_path = get_path(id);
+        CurrentID = id;
     }
+
+    if(path != new_path){
+        // Path was sanitized. Patch URL
+        url.searchParams.set("p", new_path);
+        window.history.replaceState({}, "", url.toString())
+    }
+
     if(prev_id != CurrentID) {
-        load_page(CurrentID).then(() => {
+        await load_page(CurrentID).then(() => {
             select_tree_node();
             expand_to_tree_node();
             open_tree_node(CurrentID);
-            scroll_to_tree_node(CurrentID);
+            scroll_to_tree_node();
             refresh_title();
             refresh_target_scroll();
         });
@@ -118,7 +112,7 @@ function load_page_via_path(path, url_hash){
             select_tree_node();
             expand_to_tree_node();
             open_tree_node(CurrentID);
-            scroll_to_tree_node(CurrentID);
+            scroll_to_tree_node();
             refresh_url(url_hash);
             refresh_title();
             refresh_target_scroll();
@@ -140,7 +134,7 @@ function onClickNodeLink(ev) {
         select_tree_node();
         expand_to_tree_node();
         open_tree_node(id);
-        scroll_to_tree_node(id);
+        scroll_to_tree_node();
         refresh_url();
         refresh_title();
     });
@@ -165,7 +159,7 @@ function load_parent_page(){
         select_tree_node();
         expand_to_tree_node();
         open_tree_node(id);
-        scroll_to_tree_node(id);
+        scroll_to_tree_node();
         refresh_url();
         refresh_title();
     });

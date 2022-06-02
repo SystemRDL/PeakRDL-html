@@ -200,7 +200,7 @@ class ContentSearch {
                 }
             }
         }
-        take_a_break();
+        await take_a_break();
         if(abortSignal.aborted) return;
 
         // Sort results by match score

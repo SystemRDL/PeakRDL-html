@@ -76,6 +76,10 @@ function parse_path(path){
     //  [id, idx_stack]
     // Any invalid indexes in the path are fixed silently
 
+    if(path == null){
+        return null;
+    }
+
     // Decompose the path
     var pathparts = path.split(".");
     var segments = [];
@@ -343,5 +347,40 @@ function toBigInt(str) {
         return(bigInt(str.substring(2), 2));
     } else {
         return(bigInt(str));
+    }
+}
+
+function ral_expand_bigint(id){
+    // Check if RAL entry has been converted yet
+    if(typeof RALIndex[id].offset !== 'string') return;
+
+    // Needs conversion from base-16 string --> bigInt object
+    RALIndex[id].offset = bigInt(RALIndex[id].offset, 16);
+    RALIndex[id].size = bigInt(RALIndex[id].size, 16);
+    if('stride' in RALIndex[id]) RALIndex[id].stride = bigInt(RALIndex[id].stride, 16);
+
+    if(is_register(id)) {
+        for(var i=0; i<RALIndex[id].fields.length; i++){
+            RALIndex[id].fields[i].reset = bigInt(RALIndex[id].fields[i].reset, 16);
+        }
+    }
+}
+
+function ral_expand_all_bigint_pass1(first_id){
+    // RALIndex contains strings that represent integers that need to be expanded
+    // to bigInt objects
+
+    // To keep initial page load fast, only expand ids in the linage of first_id
+    var ids = get_ancestors(first_id);
+    ids.push(first_id);
+    for(var i=0; i<ids.length; i++){
+        ral_expand_bigint(ids[i]);
+    }
+}
+
+function ral_expand_all_bigint_pass2(){
+    // Next, asynchronously process all others
+    for(var i=0; i<RALIndex.length; i++){
+        ral_expand_bigint(i);
     }
 }

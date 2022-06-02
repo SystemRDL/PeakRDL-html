@@ -227,10 +227,7 @@ class HTMLExporter:
 
                 field_enum = field.get_property("encode")
                 if field_enum is not None:
-                    encode = OrderedDict()
-                    for member in field_enum:
-                        encode[member.name] = BigInt(member.value)
-                    ral_field['encode'] = encode
+                    ral_field['encode'] = True
                     ral_field['disp'] = 'E'
 
                 ral_fields.append(ral_field)
@@ -267,15 +264,15 @@ class HTMLExporter:
         with open(path, 'w', encoding='utf-8') as fp:
             fp.write("var RALIndex = ")
             fp.write(PeakRDLJSEncoder(separators=(',', ':')).encode(self.RALIndex))
-            fp.write(";")
+            fp.write(";\n")
 
             fp.write("var RootNodeIds = ")
             fp.write(PeakRDLJSEncoder(separators=(',', ':')).encode(self.RootNodeIds))
-            fp.write(";")
+            fp.write(";\n")
 
             fp.write("var PageInfo = ")
             fp.write(PeakRDLJSEncoder(separators=(',', ':')).encode(PageInfo))
-            fp.write(";")
+            fp.write(";\n")
 
 
     _template_map = {
@@ -534,12 +531,7 @@ class BigInt:
 class PeakRDLJSEncoder(json.JSONEncoder):
     def default(self, o: 'Any') -> str: # pylint: disable=method-hidden
         if isinstance(o, BigInt):
-            return "@@bigInt('%x',16)@@" % o.v
+            # store bigInt integers as hex string. JS will convert to bigInt objects post-load.
+            return "%x" % o.v
         else:
             return super().default(o)
-
-    def encode(self, o: 'Any') -> str:
-        s = super().encode(o)
-        s = s.replace('"@@', '')
-        s = s.replace('@@"', '')
-        return s
