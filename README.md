@@ -23,7 +23,7 @@ into the exporter.
 Assuming `root` is the elaborated top-level node, or an internal `AddrmapNode`:
 
 ```python
-from peakrdl.html import HTMLExporter
+from peakrdl_html import HTMLExporter
 
 exporter = HTMLExporter()
 

@@ -8,7 +8,7 @@ this_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.join(this_dir, "../"))
 
 from systemrdl import RDLCompiler, RDLCompileError
-from peakrdl.html import HTMLExporter
+from peakrdl_html import HTMLExporter
 
 #===============================================================================
 input_files = sys.argv[1:]
