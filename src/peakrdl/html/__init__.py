@@ -1,7 +1,6 @@
 import warnings
 
 # Load modules
-from peakrdl_html import __about__
 from peakrdl_html import exporter
 from peakrdl_html import search_indexer
 from peakrdl_html import stringify
