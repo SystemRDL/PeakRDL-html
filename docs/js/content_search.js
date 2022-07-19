@@ -203,6 +203,16 @@ class ContentSearch {
         await take_a_break();
         if(abortSignal.aborted) return;
 
+        // Filter out matches that did not succeed in matching ALL keywords
+        var filtered_match_list = [];
+        for(var midx=0; midx<match_list.length; midx++){
+            var kw_set = new Set(keywords);
+            if(difference(kw_set, match_list[midx].get_matched_keywords()).size == 0){
+                filtered_match_list.push(match_list[midx]);
+            }
+        }
+        match_list = filtered_match_list;
+
         // Sort results by match score
         match_list.sort((a, b) => {
             return a.compare_rank_to(b);
@@ -294,17 +304,17 @@ class ContentSearch {
 
     static #shorten_text_first(text){
         var L = this.#PREVIEW_MAX_RUN_LENGTH;
-        return "..." + text.slice(text.length - L, text.length);
+        return "\u22ef" + text.slice(text.length - L, text.length);
     }
 
     static #shorten_text_middle(text){
         var L = this.#PREVIEW_MAX_RUN_LENGTH;
-        return text.slice(0, L/2) + "..." + text.slice(text.length - L/2, text.length);
+        return text.slice(0, L/2) + "\u22ef \u22ef" + text.slice(text.length - L/2, text.length);
     }
 
     static #shorten_text_last(text){
         var L = this.#PREVIEW_MAX_RUN_LENGTH;
-        return text.slice(0, L) + "...";
+        return text.slice(0, L) + "\u22ef";
     }
 }
 
@@ -332,12 +342,16 @@ class ContentSearchMatch {
         return String([this.page_id, this.field_name]);
     }
 
+    get_matched_keywords(){
+        return new Set([...this.full_match_keywords, ...this.partial_match_keywords]);
+    }
+
     compare_rank_to(other){
         // +1: other has higher rank than this
         // -1: other has lower rank than this
         // 0: Other is the same rank
-        var this_merged_keywords = new Set([...this.full_match_keywords, ...this.partial_match_keywords]);
-        var other_merged_keywords = new Set([...other.full_match_keywords, ...other.partial_match_keywords]);
+        var this_merged_keywords = this.get_matched_keywords();
+        var other_merged_keywords = other.get_matched_keywords();
 
         // Total number of matching keywords is most important
         if(this_merged_keywords.size < other_merged_keywords.size) return 1;

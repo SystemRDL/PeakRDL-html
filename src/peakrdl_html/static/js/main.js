@@ -352,6 +352,14 @@ async function take_a_break(){
     await new Promise(r => setTimeout(r, 1));
 }
 
+function difference(setA, setB) {
+    const _difference = new Set(setA);
+    for (const elem of setB) {
+        _difference.delete(elem);
+    }
+    return _difference;
+}
+
 //==============================================================================
 // Compatibility Workarounds
 //==============================================================================
