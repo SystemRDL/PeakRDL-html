@@ -32,6 +32,11 @@ setuptools.setup(
         "git-me-the-url>=2.0.1",
         "python-markdown-math",
     ],
+    entry_points = {
+        "peakrdl.exporters": [
+            'html = peakrdl_html.__peakrdl__:Exporter'
+        ]
+    },
     classifiers=(
         "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python",
