@@ -248,13 +248,18 @@ class ContentSearch {
 
             // Mark all keywords in content
             var keywords = Array.from(new Set([...match.full_match_keywords, ...match.partial_match_keywords]));
-            var regex = new RegExp("\\b(?:" + keywords.join("|") + ")", "ig");
+            var regex = new RegExp("(?:\\b|_)(" + keywords.join("|") + ")", "ig");
             var marked_text = "";
             var prev_idx = 0;
             for (const m of text.matchAll(regex)) {
+                var m_idx = m.index;
+
+                // advance match past underscore if it is in match
+                if(text[m_idx] == "_") m_idx += 1;
+
                 // Pass through prior segment
-                if(prev_idx < m.index) {
-                    var unmarked_segment = text.slice(prev_idx, m.index);
+                if(prev_idx < m_idx) {
+                    var unmarked_segment = text.slice(prev_idx, m_idx);
                     if(unmarked_segment.length > this.#PREVIEW_MAX_RUN_LENGTH) {
                         // shorten the segment
                         if(marked_text == ""){
@@ -269,8 +274,8 @@ class ContentSearch {
                 }
 
                 // highlight segment
-                marked_text += "<mark>" + m[0] + "</mark>";
-                prev_idx = m.index + m[0].length;
+                marked_text += "<mark>" + m[1] + "</mark>";
+                prev_idx = m_idx + m[1].length;
             }
 
             if(prev_idx < text.length){
