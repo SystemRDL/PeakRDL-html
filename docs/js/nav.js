@@ -137,6 +137,7 @@ function onClickNodeLink(ev) {
         scroll_to_tree_node();
         refresh_url();
         refresh_title();
+        refresh_target_scroll();
     });
 
     return(false);
@@ -162,6 +163,7 @@ function load_parent_page(){
         scroll_to_tree_node();
         refresh_url();
         refresh_title();
+        refresh_target_scroll();
     });
 }
 
