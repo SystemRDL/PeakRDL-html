@@ -4,6 +4,8 @@
 # PeakRDL-html
 Generate address space documentation HTML from compiled SystemRDL input.
 
+For the command line tool, see the [PeakRDL project](https://peakrdl.readthedocs.io).
+
 ## Installing
 Install from [PyPi](https://pypi.org/project/peakrdl-html) using pip:
 
