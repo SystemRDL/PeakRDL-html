@@ -29,7 +29,7 @@ setuptools.setup(
         "systemrdl-compiler>=1.13.0",
         "Jinja2>=2.9",
         "markdown",
-        "git-me-the-url>=2.0.1",
+        "git-me-the-url>=2.0.3",
         "python-markdown-math",
     ],
     entry_points = {
