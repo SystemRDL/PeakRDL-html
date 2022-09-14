@@ -339,7 +339,7 @@ class HTMLExporter:
 
 
     def get_child_addr_digits(self, node: AddressableNode) -> int:
-        return math.ceil(math.log2(node.size + 1) / 4)
+        return math.ceil(math.log2(node.size) / 4)
 
 
     def get_node_html_desc(self, node: Node, increment_heading: int=0) -> 'Optional[str]':
