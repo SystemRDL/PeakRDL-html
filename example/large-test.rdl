@@ -1,0 +1,18 @@
+addrmap top {
+
+    reg myreg {
+        field {
+            sw=rw; hw=r;
+        } f[31:0] = 0;
+    };
+
+    regfile thing {
+        <% for( $i = 0; $i < 1000; $i += 1 ) { %>
+        myreg foo<%=$i%>;
+        <% } %>
+    };
+
+    <% for( $i = 0; $i < 100; $i += 1 ) { %>
+    thing thing<%=$i%>;
+    <% } %>
+};
