@@ -232,8 +232,8 @@ function open_search_result(result_idx){
     close_search();
 
     load_page(result.node_id).then(() => {
-        Sidebar.select_node(result.node_id);
         Sidebar.expand_to_id(result.node_id);
+        Sidebar.select_node(result.node_id);
         Sidebar.scroll_into_view(result.node_id);
         refresh_url(url_hash);
         refresh_title();

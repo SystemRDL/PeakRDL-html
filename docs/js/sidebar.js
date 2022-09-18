@@ -178,7 +178,9 @@ class Sidebar {
         var el;
         if(this.#selected_node_id != null){
             el = this.#get_node_el(this.#selected_node_id)
-            el.classList.remove("selected");
+            if(el != null){ // element might have already been deleted
+                el.classList.remove("selected");
+            }
         }
 
         el = this.#get_node_el(id);
@@ -262,6 +264,7 @@ function onClickTreeLink(ev) {
     reset_indexes_to_next(id);
 
     load_page(id).then(() => {
+        Sidebar.expand_to_id(id);
         Sidebar.select_node(id);
         refresh_url();
         refresh_title();
