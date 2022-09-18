@@ -1,200 +1,248 @@
 // This file is part of PeakRDL-html <https://github.com/SystemRDL/PeakRDL-html>.
 // and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
 
-var SBResizeState = {};
-SBResizeState.old_width = 0;
-SBResizeState.start_x = 0;
+class Sidebar {
+    static #selected_node_id = null;
+    static #resizer_old_width = 0;
+    static #resizer_start_x = 0;
 
-function init_tree_pass1(first_id){
-    // initialize the bare-minimum of the sidebar tree in order to display the
-    // first_id page
+    static init(first_id){
+        var el;
+        // Initialize the sidebar
 
-    // array of required ID lineage
-    var id_chain = get_ancestors(first_id);
-    id_chain.push(first_id);
+        // Bind event to resizer
+        el = document.getElementById("_SBResizer")
+        el.addEventListener("mousedown", this.#onResizeMouseDown);
 
-    // deferred sidebar work for 2nd pass
-    // array of pairs: [cdiv, id]
-    var deferred_sb_work = [];
+        // create the root node(s). Do not recurse
+        el = document.getElementById("_SBTree");
+        for(var i=0; i<RootNodeIds.length; i++){
+            this.#create_node(el, RootNodeIds[i]);
+        };
 
-    var el = document.getElementById("_SBTree");
-    for(var i=0; i<RootNodeIds.length; i++){
-        add_tree_nodes_in_chain(el, RootNodeIds[i], id_chain, deferred_sb_work);
-    };
-
-    return deferred_sb_work;
-}
-
-function init_tree_pass2(deferred_sb_work){
-    for(var i=0; i<deferred_sb_work.length; i++){
-        var cdiv = deferred_sb_work[i][0];
-        var cid = deferred_sb_work[i][1];
-        add_tree_node_recursive(cdiv, cid);
+        // Create and expand nodes up to the current selected ID
+        this.expand_to_id(first_id);
     }
-}
 
-function add_tree_nodes_in_chain(parent_el, id, id_chain, deferred_sb_work){
-    var node = RALIndex[id];
-    var cdiv;
+    static expand_to_id(id){
+        // Create sidebar elements as needed up to the given ID
 
-    cdiv = create_tree_node(parent_el, id);
-    if(node.children.length > 0){
-        if((id_chain.length != 0) && (id_chain[0] == id)){
-            // node is in chain. Keep going
-            id_chain.shift();
-            for(var i=0; i<node.children.length; i++){
-                var cid = node.children[i];
-                add_tree_nodes_in_chain(cdiv, cid, id_chain, deferred_sb_work);
-            }
-        } else {
-            // node is not in chain, but has children. Defer them
-            for(var i=0; i<node.children.length; i++){
-                var cid = node.children[i];
-                deferred_sb_work.push([cdiv, cid]);
+        // array of required ID lineage
+        var id_chain = get_ancestors(id);
+        id_chain.push(id);
+
+
+        // Find the innermost element that already exists and all the ids that
+        // still need to have their children created
+        var node_ids_to_expand = [];
+        for(var i=id_chain.length-1; i>=0; i--){
+            var current_id = id_chain[i];
+            var el = this.#get_node_el(current_id);
+            if(el == null){
+                // doesnt exist. it will get expanded once created
+                node_ids_to_expand.unshift(current_id);
+            } else {
+                // reached node that exists already
+                if(el.classList.contains("closed")){
+                    // .. but it is still closed
+                    node_ids_to_expand.unshift(current_id);
+                }
+                break;
             }
         }
-    }
-}
 
-function create_tree_node(parent_el, id) {
-    // Creates a single tree node.
-    // If has children, returns the div element that shall contain children
-    var node = RALIndex[id];
-
-    var div;
-    div = document.createElement("div");
-    div.id = "_SBNode" + id;
-    div.dataset.id = id;
-    div.className = "node";
-    parent_el.appendChild(div);
-
-    var icon;
-    icon = document.createElement("div");
-    icon.className = "node-icon";
-    icon.onclick = onClickTreeFold;
-    div.appendChild(icon);
-
-    var link = document.createElement("a");
-    link.href = "?p=" + get_path(id, null, false);
-    link.className = "node-link";
-    link.onclick = onClickTreeLink;
-    if("dims" in node){
-        var txt = node.name;
-        for(var i=0; i<node.dims.length; i++) {
-            txt += "[]";
+        // Create missing elements
+        for(var i=0; i<node_ids_to_expand.length; i++){
+            this.expand_node(node_ids_to_expand[i]);
         }
-        link.innerHTML = txt;
-    } else {
-        link.innerHTML = node.name;
     }
-    div.appendChild(link);
 
-    if(node.children.length > 0){
-        // has children
-        div.classList.add("closed");
-
-        var cdiv;
-        cdiv = document.createElement("div");
-        cdiv.className = "node-children";
-        parent_el.appendChild(cdiv);
-
-        return cdiv;
-    } else {
-        // is leaf node
-        div.classList.add("leaf");
-
-        return null;
+    static #get_node_el(id){
+        // Get the sidebar node by ID
+        return document.getElementById("_SBNode" + id);
     }
-}
 
-function add_tree_node_recursive(parent_el, id){
-    var node = RALIndex[id];
-    var cdiv;
+    static expand_node(id){
+        var el = this.#get_node_el(id);
+        var node = RALIndex[id];
+        if(node.children.length > 0){
+            if(el.classList.contains("open")){
+                return; // already open
+            }
 
-    cdiv = create_tree_node(parent_el, id);
-    if(node.children.length > 0){
+            var cdiv;
+            cdiv = document.createElement("div");
+            cdiv.className = "node-children";
+            el.after(cdiv);
+
+            for(var i=0; i<node.children.length; i++){
+                var cid = node.children[i];
+                this.#create_node(cdiv, cid);
+            }
+
+            // children created. mark as open
+            el.classList.add("open")
+            el.classList.remove("closed")
+        }
+    }
+
+    static expand_recursive(id){
+        this.expand_node(id);
+        var node = RALIndex[id];
         for(var i=0; i<node.children.length; i++){
-            add_tree_node_recursive(cdiv, node.children[i]);
+            var cid = node.children[i];
+            this.expand_recursive(cid);
         }
     }
-}
 
-
-function select_tree_node() {
-    var id = CurrentID;
-    // Changes the selected tree node
-    var selected = document.getElementsByClassName("selected");
-    for(var i=selected.length-1; i>=0; i--){
-        selected[i].classList.remove("selected");
-    }
-    var el = document.getElementById("_SBNode" + id);
-    el.classList.add("selected");
-}
-
-function open_tree_node(id) {
-    var el = document.getElementById("_SBNode" + id);
-    if(el.classList.contains("leaf")) return;
-
-    el.classList.add("open")
-    el.classList.remove("closed")
-}
-
-function close_tree_node(id) {
-    var el = document.getElementById("_SBNode" + id);
-    if(el.classList.contains("leaf")) return;
-
-    el.classList.add("closed")
-    el.classList.remove("open")
-}
-
-function expand_to_tree_node() {
-    // Expand tree nodes as needed to make id visible
-    var el;
-    var id = CurrentID;
-
-    // Expand parents as needed
-    while(RALIndex[id].parent !== null) {
-        id = RALIndex[id].parent;
-        open_tree_node(id);
-    }
-}
-
-function scroll_to_tree_node() {
-    var node_el = document.getElementById("_SBNode" + CurrentID);
-    var tree_el = document.getElementById("_SBTreeContainer");
-
-    var node_rect = node_el.getBoundingClientRect();
-    var tree_rect = tree_el.getBoundingClientRect();
-
-    if((node_rect.top < tree_rect.top) || (node_rect.bottom > tree_rect.bottom)) {
-        if(typeof node_el.scrollIntoView === "function") {
-            node_el.scrollIntoView();
+    static collapse_node(id){
+        var el = this.#get_node_el(id);
+        var node = RALIndex[id];
+        if(node.children.length > 0){
+            if(el.classList.contains("closed")){
+                return; // already closed
+            }
+            var cdiv = el.nextElementSibling;
+            if(cdiv.classList.contains('node-children')){
+                cdiv.remove();
+            } else {
+                console.error("OOPS");
+            }
+            el.classList.add("closed")
+            el.classList.remove("open")
         }
     }
-}
 
-function sidebar_open() {
-    document.getElementById("_Sidebar").style.display = "flex";
-    document.getElementById("_Overlay").style.display = "block";
-}
+    static collapse_all(){
+        for(var i=0; i<RootNodeIds.length; i++){
+            var id = RootNodeIds[i];
+            this.collapse_node(id);
+        }
+    }
 
-function sidebar_close() {
-    document.getElementById("_Sidebar").style.display = "none";
-    document.getElementById("_Overlay").style.display = "none";
+    static expand_all(){
+        for(var i=0; i<RootNodeIds.length; i++){
+            var id = RootNodeIds[i];
+            this.expand_recursive(id);
+        }
+    }
+
+    static #create_node(parent_el, id){
+        // Creates a single tree node element
+        var node = RALIndex[id];
+
+        var div;
+        div = document.createElement("div");
+        div.id = "_SBNode" + id;
+        div.dataset.id = id;
+        div.className = "node";
+        parent_el.appendChild(div);
+
+        var icon;
+        icon = document.createElement("div");
+        icon.className = "node-icon";
+        icon.onclick = onClickTreeFold;
+        div.appendChild(icon);
+
+        var link = document.createElement("a");
+        link.href = "?p=" + get_path(id, null, false);
+        link.className = "node-link";
+        link.onclick = onClickTreeLink;
+        if("dims" in node){
+            var txt = node.name;
+            for(var i=0; i<node.dims.length; i++) {
+                txt += "[]";
+            }
+            link.innerHTML = txt;
+        } else {
+            link.innerHTML = node.name;
+        }
+        div.appendChild(link);
+
+        if(node.children.length > 0){
+            // has children
+            div.classList.add("closed");
+
+            var cdiv;
+            cdiv = document.createElement("div");
+            cdiv.className = "node-children";
+            parent_el.appendChild(cdiv);
+        } else {
+            // is leaf node
+            div.classList.add("leaf");
+        }
+    }
+
+    static select_node(id) {
+        // Changes the selected tree node
+        var el;
+        if(this.#selected_node_id != null){
+            el = this.#get_node_el(this.#selected_node_id)
+            el.classList.remove("selected");
+        }
+
+        el = this.#get_node_el(id);
+        el.classList.add("selected");
+        this.#selected_node_id = id;
+    }
+
+    static #onResizeMouseDown(e) {
+        var sb_el = document.getElementById("_SBContents");
+        this.#resizer_old_width = sb_el.getBoundingClientRect().width;
+        this.#resizer_start_x = e.clientX;
+        window.addEventListener('mousemove', this.#onResizeMouseMove);
+        window.addEventListener('mouseup', this.#onResizeMouseUp);
+        e.preventDefault();
+    }
+
+    static #onResizeMouseMove(e) {
+        var sb_el = document.getElementById("_SBContents");
+        var new_width;
+        new_width = this.#resizer_old_width + e.clientX - this.#resizer_start_x;
+        sb_el.style.width = new_width + "px";
+    }
+
+    static #onResizeMouseUp(e) {
+        window.removeEventListener('mousemove', this.#onResizeMouseMove);
+        window.removeEventListener('mouseup', this.#onResizeMouseUp);
+    }
+
+    static show() {
+        document.getElementById("_Sidebar").style.display = "flex";
+        document.getElementById("_Overlay").style.display = "block";
+    }
+
+    static hide() {
+        document.getElementById("_Sidebar").style.display = "none";
+        document.getElementById("_Overlay").style.display = "none";
+    }
+
+    static scroll_into_view(id){
+        var node_el = this.#get_node_el(id);
+        var tree_el = document.getElementById("_SBTreeContainer");
+
+        var node_rect = node_el.getBoundingClientRect();
+        var tree_rect = tree_el.getBoundingClientRect();
+
+        if((node_rect.top < tree_rect.top) || (node_rect.bottom > tree_rect.bottom)) {
+            if(typeof node_el.scrollIntoView === "function") {
+                node_el.scrollIntoView();
+            }
+        }
+    }
 }
 
 function onClickTreeFold(ev) {
     var el = ev.target.parentNode;
+    var id = parseInt(el.dataset.id);
     if(el.classList.contains("leaf")) return;
 
     if(el.classList.contains("closed")){
         // Open this node
-        el.classList.add("open")
-        el.classList.remove("closed")
+        Sidebar.expand_node(id);
     }else{
         // Close this node
-        el.classList.add("closed")
-        el.classList.remove("open")
+        Sidebar.collapse_node(id);
     }
 }
 
@@ -203,19 +251,18 @@ function onClickTreeLink(ev) {
     var id = parseInt(el.dataset.id);
 
     close_search();
-    sidebar_close();
+    Sidebar.hide();
 
     if(id == CurrentID) return(false);
 
     if(!el.classList.contains("leaf")){
-        el.classList.add("open");
-        el.classList.remove("closed");
+        Sidebar.expand_node(id);
     }
 
     reset_indexes_to_next(id);
 
     load_page(id).then(() => {
-        select_tree_node();
+        Sidebar.select_node(id);
         refresh_url();
         refresh_title();
         refresh_target_scroll();
@@ -224,43 +271,9 @@ function onClickTreeLink(ev) {
 }
 
 function onClickTreeExpandAll() {
-    var els = document.getElementsByClassName("closed");
-    for(var i=els.length-1; i>=0; i--){
-        els[i].classList.add("open");
-        els[i].classList.remove("closed");
-    }
+    Sidebar.expand_all()
 }
 
 function onClickTreeCollapseAll() {
-    var els = document.getElementsByClassName("open");
-    for(var i=els.length-1; i>=0; i--){
-        els[i].classList.add("closed");
-        els[i].classList.remove("open");
-    }
-}
-
-function init_sb_resizer() {
-    var el = document.getElementById("_SBResizer")
-    el.addEventListener("mousedown", onResizeMouseDown);
-}
-
-function onResizeMouseDown(e) {
-    var sb_el = document.getElementById("_SBContents");
-    SBResizeState.old_width = sb_el.getBoundingClientRect().width;
-    SBResizeState.start_x = e.clientX;
-    window.addEventListener('mousemove', onResizeMouseMove);
-    window.addEventListener('mouseup', onResizeMouseUp);
-    e.preventDefault();
-}
-
-function onResizeMouseMove(e) {
-    var sb_el = document.getElementById("_SBContents");
-    var new_width;
-    new_width = SBResizeState.old_width + e.clientX - SBResizeState.start_x;
-    sb_el.style.width = new_width + "px";
-}
-
-function onResizeMouseUp(e) {
-    window.removeEventListener('mousemove', onResizeMouseMove);
-    window.removeEventListener('mouseup', onResizeMouseUp);
+    Sidebar.collapse_all()
 }

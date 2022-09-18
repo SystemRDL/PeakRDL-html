@@ -232,10 +232,9 @@ function open_search_result(result_idx){
     close_search();
 
     load_page(result.node_id).then(() => {
-        select_tree_node();
-        expand_to_tree_node();
-        open_tree_node(result.node_id);
-        scroll_to_tree_node();
+        Sidebar.select_node(result.node_id);
+        Sidebar.expand_to_id(result.node_id);
+        Sidebar.scroll_into_view(result.node_id);
         refresh_url(url_hash);
         refresh_title();
         refresh_target_scroll();

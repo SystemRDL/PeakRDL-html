@@ -64,9 +64,7 @@ function onPageLoad() {
 
     // Prepare content for initial page load
     ral_expand_all_bigint_pass1(id);
-    var deferred_sb_work;
-    deferred_sb_work = init_tree_pass1(id);
-    init_sb_resizer();
+    Sidebar.init(id);
 
     // Load content
     load_page_via_url().then(() => {
@@ -76,7 +74,6 @@ function onPageLoad() {
         // requestAnimationFrame and other methods don't seem to work
         setTimeout(() => {
             ral_expand_all_bigint_pass2();
-            init_tree_pass2(deferred_sb_work);
         }, 100);
     });
 

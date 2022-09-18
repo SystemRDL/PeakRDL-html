@@ -73,10 +73,9 @@ async function load_page_via_url(){
 
     if(prev_id != CurrentID) {
         await load_page(CurrentID).then(() => {
-            select_tree_node();
-            expand_to_tree_node();
-            open_tree_node(CurrentID);
-            scroll_to_tree_node();
+            Sidebar.select_node(CurrentID);
+            Sidebar.expand_to_id(CurrentID);
+            Sidebar.scroll_into_view(CurrentID);
             refresh_title();
             refresh_target_scroll();
         });
@@ -109,10 +108,9 @@ function load_page_via_path(path, url_hash){
 
     if(prev_path != new_path) {
         load_page(CurrentID).then(() => {
-            select_tree_node();
-            expand_to_tree_node();
-            open_tree_node(CurrentID);
-            scroll_to_tree_node();
+            Sidebar.select_node(CurrentID);
+            Sidebar.expand_to_id(CurrentID);
+            Sidebar.scroll_into_view(CurrentID);
             refresh_url(url_hash);
             refresh_title();
             refresh_target_scroll();
@@ -131,10 +129,9 @@ function onClickNodeLink(ev) {
 
     reset_indexes_to_next(id);
     load_page(id).then(() => {
-        select_tree_node();
-        expand_to_tree_node();
-        open_tree_node(id);
-        scroll_to_tree_node();
+        Sidebar.select_node(id);
+        Sidebar.expand_to_id(id);
+        Sidebar.scroll_into_view(id);
         refresh_url();
         refresh_title();
         refresh_target_scroll();
@@ -157,10 +154,9 @@ function load_parent_page(){
     var id = RALIndex[CurrentID].parent;
     if(id == null) return;
     load_page(id).then(() => {
-        select_tree_node();
-        expand_to_tree_node();
-        open_tree_node(id);
-        scroll_to_tree_node();
+        Sidebar.select_node(id);
+        Sidebar.expand_to_id(id);
+        Sidebar.scroll_into_view(id);
         refresh_url();
         refresh_title();
         refresh_target_scroll();

@@ -79,7 +79,7 @@
 
     <div id="_MainPane" class="stretchy pack-v">
         <header id="_MobiTitlebar" class="no-stretchy pack-h">
-            <button type="button" class="menu-button no-stretchy" title="Show sidebar" aria-label="Show sidebar" onclick="sidebar_open()"></button>
+            <button type="button" class="menu-button no-stretchy" title="Show sidebar" aria-label="Show sidebar" onclick="Sidebar.show()"></button>
             <div id="_MobiTitlebox" class="stretchy">{{title}}</div>
             <button type="button" id="_MobiSearchButton" class="search-button no-stretchy" title="Search" aria-label="Search" onclick="onSearchButtonClick()"></button>
         </header>
@@ -111,7 +111,7 @@
             </footer>
         </div>
 
-        <div id="_Overlay" onclick="sidebar_close()"></div>
+        <div id="_Overlay" onclick="Sidebar.hide()"></div>
     </div>
 
     <div id="_HelpOverlay" class="generic-modal-overlay" onclick="help_modal_close()">

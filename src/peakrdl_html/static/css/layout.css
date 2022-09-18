@@ -66,10 +66,6 @@ img {
     min-width: max-content;
 }
 
-.closed + .node-children {
-    display: none;
-}
-
 .pack-v {
     display: flex;
     flex-direction: column;

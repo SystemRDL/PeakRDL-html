@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/theme.css?v=2.7.0">
     <link rel="icon" type="image/png" href="favicon.png">
     <script>
-        var BUILD_TS = 1658981847;
+        var BUILD_TS = 1663472322;
     </script>
     <script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
     <script type="text/x-mathjax-config">
@@ -26,8 +26,8 @@
     </script>
     <script src="js/BigInteger.min.js?v=2.7.0" type="text/javascript"></script>
     <script src="js/sha1.js?v=2.7.0" type="text/javascript"></script>
-    <script src="js/data.js?ts=1658981847" type="text/javascript"></script>
-    <script src="search/bkt_index.js?ts=1658981847" type="text/javascript"></script>
+    <script src="js/data.js?ts=1663472322" type="text/javascript"></script>
+    <script src="search/bkt_index.js?ts=1663472322" type="text/javascript"></script>
     <script src="js/ral.js?v=2.7.0" type="text/javascript"></script>
     <script src="js/main.js?v=2.7.0" type="text/javascript"></script>
     <script src="js/nav.js?v=2.7.0" type="text/javascript"></script>
@@ -65,7 +65,7 @@
 
     <div id="_MainPane" class="stretchy pack-v">
         <header id="_MobiTitlebar" class="no-stretchy pack-h">
-            <button type="button" class="menu-button no-stretchy" title="Show sidebar" aria-label="Show sidebar" onclick="sidebar_open()"></button>
+            <button type="button" class="menu-button no-stretchy" title="Show sidebar" aria-label="Show sidebar" onclick="Sidebar.show()"></button>
             <div id="_MobiTitlebox" class="stretchy">Turbo-Encabulator Reference</div>
             <button type="button" id="_MobiSearchButton" class="search-button no-stretchy" title="Search" aria-label="Search" onclick="onSearchButtonClick()"></button>
         </header>
@@ -95,7 +95,7 @@
             </footer>
         </div>
 
-        <div id="_Overlay" onclick="sidebar_close()"></div>
+        <div id="_Overlay" onclick="Sidebar.hide()"></div>
     </div>
 
     <div id="_HelpOverlay" class="generic-modal-overlay" onclick="help_modal_close()">
