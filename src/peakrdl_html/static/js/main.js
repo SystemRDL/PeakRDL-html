@@ -54,7 +54,7 @@ function onPageLoad() {
     // Determine what page id will be loaded
     var url = new URL(window.location.href);
     var path = url.searchParams.get("p", path);
-    var parsed_path = parse_path(path);
+    var parsed_path = RAL.parse_path(path);
     var id;
     if(parsed_path == null) {
         id = 0;
@@ -250,25 +250,26 @@ function update_crumbtrail(){
         crumb_el.removeChild(crumb_el.lastChild);
     }
 
-    var path_ids = get_ids_in_path(id);
+    var path_ids = RAL.get_ids_in_path(id);
     var crumb_idx_span_idx = 0;
 
     for(var i=0; i<path_ids.length; i++){
+        var node = RAL.get_node(path_ids[i]);
         if(i < path_ids.length-1){
             var link = document.createElement("a");
             link.dataset.id = path_ids[i];
-            link.href = "?p=" + get_path(path_ids[i]);
-            link.innerHTML = RALIndex[path_ids[i]].name;
+            link.href = "?p=" + RAL.get_path(path_ids[i]);
+            link.innerHTML = node.name;
             link.onclick = onClickNodeLink;
             crumb_el.appendChild(link);
         } else {
             var el = document.createElement("span");
-            el.innerHTML = RALIndex[path_ids[i]].name;
+            el.innerHTML = node.name;
             crumb_el.appendChild(el);
         }
 
-        if("dims" in RALIndex[path_ids[i]]){
-            for(var dim=0; dim<RALIndex[path_ids[i]].dims.length; dim++){
+        if(RAL.is_array(path_ids[i])){
+            for(var dim=0; dim<node.dims.length; dim++){
                 var el = document.createElement("span");
                 el.dataset.id = path_ids[i];
                 el.dataset.dim = dim;
@@ -276,7 +277,7 @@ function update_crumbtrail(){
                 el.className = "crumb-idx";
                 el.id = "_CrumbIdxSpan" + crumb_idx_span_idx;
                 el.onclick = onClickCrumbtrailIdx;
-                el.innerHTML = "[" + RALIndex[path_ids[i]].idxs[dim] + "]";
+                el.innerHTML = "[" + node.idxs[dim] + "]";
                 crumb_el.appendChild(el);
                 crumb_idx_span_idx++;
             }
@@ -300,9 +301,9 @@ function update_absolute_addr(addr){
 function update_rdlfc_indexes() {
     var index_els = document.getElementsByClassName("rdlfc-index")
     var index_text = "";
-    if("dims" in RALIndex[CurrentID]){
-        for(var i=0; i<RALIndex[CurrentID].idxs.length; i++){
-            index_text += "[" + RALIndex[CurrentID].idxs[i] + "]";
+    if(RAL.is_array(CurrentID)){
+        for(var i=0; i<RAL.get_node(CurrentID).idxs.length; i++){
+            index_text += "[" + RAL.get_node(CurrentID).idxs[i] + "]";
         }
     }
     for(var i=0; i<index_els.length; i++){
@@ -311,11 +312,11 @@ function update_rdlfc_indexes() {
 
     var index_els = document.getElementsByClassName("rdlfc-index_parent")
     var index_text = "";
-    var id = RALIndex[CurrentID].parent;
+    var id = RAL.get_node(CurrentID).parent;
     if(id != null){
-        if("dims" in RALIndex[id]){
-            for(var i=0; i<RALIndex[id].idxs.length; i++){
-                index_text += "[" + RALIndex[id].idxs[i] + "]";
+        if(RAL.is_array(id)){
+            for(var i=0; i<RAL.get_node(id).idxs.length; i++){
+                index_text += "[" + RAL.get_node(id).idxs[i] + "]";
             }
         }
     }
@@ -357,6 +358,21 @@ function difference(setA, setB) {
         _difference.delete(elem);
     }
     return _difference;
+}
+
+function toBigInt(str) {
+    // bigInt doesn't handle large hex strings if they use the 0x prefix
+    // Wrap auto-base handling
+    str = str.trim().toLowerCase();
+    if(str.startsWith("0x")) {
+        return(bigInt(str.substring(2), 16));
+    } else if(str.startsWith("0o")) {
+        return(bigInt(str.substring(2), 8));
+    } else if(str.startsWith("0b")) {
+        return(bigInt(str.substring(2), 2));
+    } else {
+        return(bigInt(str));
+    }
 }
 
 //==============================================================================

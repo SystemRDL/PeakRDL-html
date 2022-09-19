@@ -66,7 +66,7 @@ function onKeyDownSearch(ev) {
     }
 
     if(!SearchState.active && ev.key == "/" && ev.ctrlKey){
-        open_search(get_path(CurrentID, undefined, false) + " ");
+        open_search(RAL.get_path(CurrentID, undefined, false) + " ");
         return false;
     }
 
@@ -219,9 +219,9 @@ function onSearchResultMousemove(result_idx){
 function open_search_result(result_idx){
     var result = SearchState.results[result_idx];
     if(result.idx_stack == null){
-        reset_indexes(0, result.node_id);
+        RAL.reset_indexes(0, result.node_id);
     }else{
-        apply_idx_stack(result.node_id, result.idx_stack);
+        RAL.apply_idx_stack(result.node_id, result.idx_stack);
     }
 
     var url_hash = "";

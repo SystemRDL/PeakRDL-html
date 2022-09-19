@@ -53,7 +53,7 @@ class ContentSearch {
 
             // Prepare result entry
             var result_id = matches[i].page_id;
-            var path = get_path(result_id, null, false);
+            var path = RAL.get_path(result_id, null, false);
             var anchor = "";
             if(matches[i].is_field){
                 path = path + "." + matches[i].field_name;
@@ -331,7 +331,7 @@ class ContentSearchMatch {
         this.is_field = Boolean(location_code & 0x2);
         if(this.is_field){
             var field_idx = (location_code >> 3);
-            this.field_name = RALIndex[this.page_id].fields[field_idx].name;
+            this.field_name = RAL.get_node(this.page_id).fields[field_idx].name;
         } else {
             this.field_name = null;
         }

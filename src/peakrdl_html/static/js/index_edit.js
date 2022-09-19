@@ -49,14 +49,14 @@ function exitIndexEditModal(cancel) {
             // Commit modal input value
             var val = Number(input_el.value);
             if(!isPositiveInteger(val)) return;
-            if((val < 0) || (val >= RALIndex[IndexEditState.id].dims[IndexEditState.dim])) return;
-            RALIndex[IndexEditState.id].idxs[IndexEditState.dim] = val;
+            if((val < 0) || (val >= RAL.get_node(IndexEditState.id).dims[IndexEditState.dim])) return;
+            RAL.get_node(IndexEditState.id).idxs[IndexEditState.dim] = val;
 
             update_crumbtrail();
             update_rdlfc_indexes();
             patch_url_path();
-            update_absolute_addr(get_absolute_addr(CurrentID));
-            if(is_register(CurrentID)){
+            update_absolute_addr(RAL.get_absolute_addr(CurrentID));
+            if(RAL.is_register(CurrentID)){
                 init_reg_value();
             }
             userHooks.onAddressUpdate();
@@ -80,12 +80,11 @@ function showIndexEditModal(idx){
 
     // Initialize modal
     IndexEditState.active = true;
-    var sid, sdim;
     IndexEditState.id = parseInt(span_el.dataset.id);
     IndexEditState.dim = parseInt(span_el.dataset.dim);
     IndexEditState.span_idx = idx;
-    input_el.value = RALIndex[IndexEditState.id].idxs[IndexEditState.dim];
-    range_el.innerHTML = "0-" + (RALIndex[IndexEditState.id].dims[IndexEditState.dim]-1);
+    input_el.value = RAL.get_node(IndexEditState.id).idxs[IndexEditState.dim];
+    range_el.innerHTML = "0-" + (RAL.get_node(IndexEditState.id).dims[IndexEditState.dim]-1);
 
     input_el.focus();
     input_el.select();

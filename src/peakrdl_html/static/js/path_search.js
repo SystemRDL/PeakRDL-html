@@ -17,8 +17,8 @@ class PathSearch {
         }
 
         var match_count = 0;
-        for(var id=0; id<RALIndex.length; id++){
-            var path = get_path(id, null, false);
+        for(var id=0; id<RAL.number_of_ids(); id++){
+            var path = RAL.get_path(id, null, false);
 
             if(id % this.#SEARCH_CHOMP_SIZE == (this.#SEARCH_CHOMP_SIZE-1)){
                 // Occasionally insert break to allow other events to continue
@@ -34,12 +34,13 @@ class PathSearch {
                 match_count++;
             } else {
                 // No match yet. If this node has fields, add them to the path and try that
-                if("fields" in RALIndex[id]){
-                    for(var i=0; i<RALIndex[id].fields.length; i++){
-                        var path_with_field = path + "." + RALIndex[id].fields[i].name;
+                if(RAL.is_register(id)){
+                    var node = RAL.get_node(id);
+                    for(var i=0; i<node.fields.length; i++){
+                        var path_with_field = path + "." + node.fields[i].name;
                         text_segments = this.#test_path(path_with_field, keywords);
                         if(text_segments != null){
-                            add_search_result(text_segments, id, null, RALIndex[id].fields[i].name);
+                            add_search_result(text_segments, id, null, node.fields[i].name);
                             match_count++;
                         }
                     }

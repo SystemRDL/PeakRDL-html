@@ -10,9 +10,9 @@ async function load_page(id) {
 
         var main_el = document.getElementById("_ContentContainer");
         main_el.innerHTML = text;
-        update_absolute_addr(get_absolute_addr(id));
+        update_absolute_addr(RAL.get_absolute_addr(id));
         update_rdlfc_indexes();
-        if(is_register(id)) {
+        if(RAL.is_register(id)) {
             init_reg_value();
             init_radix_buttons();
         }
@@ -30,7 +30,7 @@ async function load_page(id) {
 }
 
 async function fetch_page_content(id){
-    var path = "content/" + get_node_uid(id) + ".html?ts=" + BUILD_TS;
+    var path = "content/" + RAL.get_node_uid(id) + ".html?ts=" + BUILD_TS;
     var awaitable = fetch(path)
         .then(response => {
             if(!response.ok){
@@ -47,7 +47,7 @@ async function load_page_via_url(){
 
     var url = new URL(window.location.href);
     var path = url.searchParams.get("p", path);
-    var parsed_path = parse_path(path);
+    var parsed_path = RAL.parse_path(path);
     var new_path;
     if(parsed_path == null) {
         // Bad path. Discard it
@@ -58,10 +58,10 @@ async function load_page_via_url(){
         var id, idx_stack;
         id = parsed_path[0];
         idx_stack = parsed_path[1];
-        apply_idx_stack(id, idx_stack);
+        RAL.apply_idx_stack(id, idx_stack);
 
         // Recompute the path in case it needs to be cleaned up
-        new_path = get_path(id);
+        new_path = RAL.get_path(id);
         CurrentID = id;
     }
 
@@ -86,9 +86,9 @@ async function load_page_via_url(){
 
 function load_page_via_path(path, url_hash){
     if(typeof url_hash === "undefined") url_hash = "";
-    var prev_path = get_path(CurrentID);
+    var prev_path = RAL.get_path(CurrentID);
     var prev_url_hash = window.location.hash;
-    var parsed_path = parse_path(path);
+    var parsed_path = RAL.parse_path(path);
     var new_path;
     if(parsed_path == null) {
         // Bad path. Give up
@@ -98,11 +98,11 @@ function load_page_via_path(path, url_hash){
         var id, idx_stack;
         id = parsed_path[0];
         idx_stack = parsed_path[1];
-        apply_idx_stack(id, idx_stack);
+        RAL.apply_idx_stack(id, idx_stack);
 
         // Recompute the path in case it needs to be cleaned up
-        new_path = get_path(id);
-        reset_indexes_to_next(id);
+        new_path = RAL.get_path(id);
+        RAL.reset_indexes_to_next(id);
         CurrentID = id;
     }
 
@@ -127,7 +127,7 @@ function onClickNodeLink(ev) {
     var id = parseInt(el.dataset.id);
     if(id == CurrentID) return(false);
 
-    reset_indexes_to_next(id);
+    RAL.reset_indexes_to_next(id);
     load_page(id).then(() => {
         Sidebar.expand_to_id(id);
         Sidebar.select_node(id);
@@ -151,7 +151,7 @@ function onClickPathLink(ev) {
 }
 
 function load_parent_page(){
-    var id = RALIndex[CurrentID].parent;
+    var id = RAL.get_node(CurrentID).parent;
     if(id == null) return;
     load_page(id).then(() => {
         Sidebar.expand_to_id(id);
@@ -166,7 +166,7 @@ function load_parent_page(){
 function refresh_url(url_hash) {
     // Given current state, refresh the URL
     if(typeof url_hash === "undefined") url_hash = "";
-    var path = get_path(CurrentID);
+    var path = RAL.get_path(CurrentID);
 
     var url = new URL(window.location.href);
     url.searchParams.set("p", path);
@@ -176,7 +176,7 @@ function refresh_url(url_hash) {
 
 function patch_url_path() {
     // refresh only the URL's hier path without affecting history
-    var path = get_path(CurrentID);
+    var path = RAL.get_path(CurrentID);
     var url = new URL(window.location.href);
     url.searchParams.set("p", path);
     window.history.replaceState({}, "", url.toString())
@@ -184,7 +184,7 @@ function patch_url_path() {
 
 function refresh_title() {
     // Given current state, refresh the page title text
-    document.title = RALIndex[CurrentID].name + " \u2014 " + PageInfo.title;
+    document.title = RAL.get_node(CurrentID).name + " \u2014 " + PageInfo.title;
 }
 
 function onPopState(event) {

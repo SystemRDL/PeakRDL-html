@@ -28,7 +28,7 @@ class Sidebar {
         // Create sidebar elements as needed up to the given ID
 
         // array of required ID lineage
-        var id_chain = get_ancestors(id);
+        var id_chain = RAL.get_ancestors(id);
         id_chain.push(id);
 
 
@@ -64,7 +64,7 @@ class Sidebar {
 
     static expand_node(id){
         var el = this.#get_node_el(id);
-        var node = RALIndex[id];
+        var node = RAL.get_node(id);
         if(node.children.length > 0){
             if(el.classList.contains("open")){
                 return; // already open
@@ -88,7 +88,7 @@ class Sidebar {
 
     static expand_recursive(id){
         this.expand_node(id);
-        var node = RALIndex[id];
+        var node = RAL.get_node(id);
         for(var i=0; i<node.children.length; i++){
             var cid = node.children[i];
             this.expand_recursive(cid);
@@ -97,7 +97,7 @@ class Sidebar {
 
     static collapse_node(id){
         var el = this.#get_node_el(id);
-        var node = RALIndex[id];
+        var node = RAL.get_node(id);
         if(node.children.length > 0){
             if(el.classList.contains("closed")){
                 return; // already closed
@@ -129,7 +129,7 @@ class Sidebar {
 
     static #create_node(parent_el, id){
         // Creates a single tree node element
-        var node = RALIndex[id];
+        var node = RAL.get_node(id);
 
         var div;
         div = document.createElement("div");
@@ -145,10 +145,10 @@ class Sidebar {
         div.appendChild(icon);
 
         var link = document.createElement("a");
-        link.href = "?p=" + get_path(id, null, false);
+        link.href = "?p=" + RAL.get_path(id, null, false);
         link.className = "node-link";
         link.onclick = onClickTreeLink;
-        if("dims" in node){
+        if(RAL.is_array(id)){
             var txt = node.name;
             for(var i=0; i<node.dims.length; i++) {
                 txt += "[]";
@@ -261,7 +261,7 @@ function onClickTreeLink(ev) {
         Sidebar.expand_node(id);
     }
 
-    reset_indexes_to_next(id);
+    RAL.reset_indexes_to_next(id);
 
     load_page(id).then(() => {
         Sidebar.expand_to_id(id);

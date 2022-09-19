@@ -15,13 +15,13 @@ function init_reg_value(){
         reset_field_inputs();
     }
 
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
+    for(var i=0; i<RAL.get_node(CurrentID).fields.length; i++){
         update_field_enum_visibility(i);
     }
 }
 
 function save_reg_state(){
-    var addr_key = get_absolute_addr(CurrentID).toString(16);
+    var addr_key = RAL.get_absolute_addr(CurrentID).toString(16);
     var reg_el = document.getElementById("_RegValueTester");
 
     var state = {};
@@ -31,7 +31,7 @@ function save_reg_state(){
 }
 
 function get_reg_state(){
-    var addr_key = get_absolute_addr(CurrentID).toString(16);
+    var addr_key = RAL.get_absolute_addr(CurrentID).toString(16);
     if(addr_key in RegValueRegistery) {
         return RegValueRegistery[addr_key];
     } else {
@@ -40,19 +40,21 @@ function get_reg_state(){
 }
 
 function init_radix_buttons(){
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var el = document.getElementById("_RadixButton" + RALIndex[CurrentID].fields[i].name);
-        el.innerHTML = RALIndex[CurrentID].fields[i].disp;
+    var node = RAL.get_node(CurrentID);
+    for(var i=0; i<node.fields.length; i++){
+        var el = document.getElementById("_RadixButton" + node.fields[i].name);
+        el.innerHTML = node.fields[i].disp;
     }
 }
 
 function reset_field_inputs(){
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[i].name);
-        el.value = format_field_value(i, RALIndex[CurrentID].fields[i].reset);
-        if("encode" in RALIndex[CurrentID].fields[i]) {
-            var el = document.getElementById("_FieldValueEnumTester" + RALIndex[CurrentID].fields[i].name);
-            el.value = "0x" + RALIndex[CurrentID].fields[i].reset.toString(16);
+    var node = RAL.get_node(CurrentID);
+    for(var i=0; i<node.fields.length; i++){
+        var el = document.getElementById("_FieldValueTester" + node.fields[i].name);
+        el.value = format_field_value(i, node.fields[i].reset);
+        if("encode" in node.fields[i]) {
+            var el = document.getElementById("_FieldValueEnumTester" + node.fields[i].name);
+            el.value = "0x" + node.fields[i].reset.toString(16);
         }
     }
     update_reg_value_tester();
@@ -60,7 +62,7 @@ function reset_field_inputs(){
 
 function update_field_value_testers(){
     // Update all the field tester inputs based on the register input
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
+    for(var i=0; i<RAL.get_node(CurrentID).fields.length; i++){
         update_field_value_tester(i);
     }
     userHooks.onRegValueEditorChange();
@@ -69,10 +71,11 @@ function update_field_value_testers(){
 function update_reg_value_tester(){
     // Update the register tester input based on all of the individual field inputs
     var reg_value = bigInt(0);
-    for(var i=0; i<RALIndex[CurrentID].fields.length; i++){
-        var msb = RALIndex[CurrentID].fields[i].msb;
-        var lsb = RALIndex[CurrentID].fields[i].lsb;
-        var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[i].name);
+    var node = RAL.get_node(CurrentID);
+    for(var i=0; i<node.fields.length; i++){
+        var msb = node.fields[i].msb;
+        var lsb = node.fields[i].lsb;
+        var el = document.getElementById("_FieldValueTester" + node.fields[i].name);
         var value = toBigInt(el.value);
         var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
         value = value.and(mask);
@@ -87,24 +90,25 @@ function update_reg_value_tester(){
 function update_field_value_tester(idx){
     var reg_el = document.getElementById("_RegValueTester");
     var reg_value = toBigInt(reg_el.value);
+    var node = RAL.get_node(CurrentID);
 
-    var msb = RALIndex[CurrentID].fields[idx].msb;
-    var lsb = RALIndex[CurrentID].fields[idx].lsb;
+    var msb = node.fields[idx].msb;
+    var lsb = node.fields[idx].lsb;
     var value = reg_value.shiftRight(lsb);
     var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
     value = value.and(mask);
-    var el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[idx].name);
+    var el = document.getElementById("_FieldValueTester" + node.fields[idx].name);
     el.value = format_field_value(idx, value);
     el.classList.remove("invalid");
 
-    if("encode" in RALIndex[CurrentID].fields[idx]) {
-        var el = document.getElementById("_FieldValueEnumTester" + RALIndex[CurrentID].fields[idx].name);
+    if("encode" in RAL.get_node(CurrentID).fields[idx]) {
+        var el = document.getElementById("_FieldValueEnumTester" + node.fields[idx].name);
         el.value = "0x" + value.toString(16);
     }
 }
 
 function format_field_value(idx, value) {
-    if(RALIndex[CurrentID].fields[idx].disp == "D"){
+    if(RAL.get_node(CurrentID).fields[idx].disp == "D"){
         return(value.toString());
     } else {
         return("0x" + value.toString(16));
@@ -112,11 +116,13 @@ function format_field_value(idx, value) {
 }
 
 function update_field_enum_visibility(idx){
-    if(!("encode" in RALIndex[CurrentID].fields[idx])) return;
+    var node = RAL.get_node(CurrentID);
 
-    var d = RALIndex[CurrentID].fields[idx].disp;
-    var enum_el = document.getElementById("_FieldValueEnumTester" + RALIndex[CurrentID].fields[idx].name);
-    var txt_el = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[idx].name);
+    if(!("encode" in node.fields[idx])) return;
+
+    var d = node.fields[idx].disp;
+    var enum_el = document.getElementById("_FieldValueEnumTester" + node.fields[idx].name);
+    var txt_el = document.getElementById("_FieldValueTester" + node.fields[idx].name);
     if(d == "E") {
         enum_el.style.display = "inline";
         txt_el.style.display = "none";
@@ -131,34 +137,36 @@ function update_field_enum_visibility(idx){
 //==============================================================================
 
 function onRadixSwitch(el){
-    var idx = lookup_field_idx(el.dataset.name);
-    var d = RALIndex[CurrentID].fields[idx].disp;
+    var idx = RAL.lookup_field_idx(el.dataset.name);
+    var node = RAL.get_node(CurrentID);
+    var d = node.fields[idx].disp;
     if(d == "H") {
         d = "D";
-    } else if((d == "D") && ("encode" in RALIndex[CurrentID].fields[idx])) {
+    } else if((d == "D") && ("encode" in node.fields[idx])) {
         d = "E";
     } else {
         d = "H";
     }
 
     el.innerHTML = d;
-    RALIndex[CurrentID].fields[idx].disp = d;
+    node.fields[idx].disp = d;
     update_field_enum_visibility(idx);
     update_field_value_tester(idx);
 }
 
 function onDecodedFieldEnumChange(el) {
-    var idx = lookup_field_idx(el.dataset.name);
-    var el2 = document.getElementById("_FieldValueTester" + RALIndex[CurrentID].fields[idx].name);
+    var idx = RAL.lookup_field_idx(el.dataset.name);
+    var el2 = document.getElementById("_FieldValueTester" + RAL.get_node(CurrentID).fields[idx].name);
     el2.value = el.value;
     update_reg_value_tester();
     save_reg_state();
 }
 
 function onDecodedFieldInput(el){
-    var idx = lookup_field_idx(el.dataset.name);
-    var msb = RALIndex[CurrentID].fields[idx].msb;
-    var lsb = RALIndex[CurrentID].fields[idx].lsb;
+    var idx = RAL.lookup_field_idx(el.dataset.name);
+    var node = RAL.get_node(CurrentID);
+    var msb = node.fields[idx].msb;
+    var lsb = node.fields[idx].lsb;
     var value;
 
     try {
@@ -174,8 +182,8 @@ function onDecodedFieldInput(el){
     }
     el.classList.remove("invalid");
 
-    if("encode" in RALIndex[CurrentID].fields[idx]) {
-        var el2 = document.getElementById("_FieldValueEnumTester" + RALIndex[CurrentID].fields[idx].name);
+    if("encode" in node.fields[idx]) {
+        var el2 = document.getElementById("_FieldValueEnumTester" + node.fields[idx].name);
         el2.value = "0x" + value.toString(16);
     }
     update_reg_value_tester();
