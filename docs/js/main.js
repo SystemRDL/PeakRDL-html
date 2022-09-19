@@ -62,21 +62,9 @@ function onPageLoad() {
         id = parsed_path[0];
     }
 
-    // Prepare content for initial page load
-    ral_expand_all_bigint_pass1(id);
-    Sidebar.init(id);
-
     // Load content
-    load_page_via_url().then(() => {
-        // finish remaining initialization after page load
-        // defer it to the next animation frame
-        // TODO: Figure out a better way to defer these to after page rendering
-        // requestAnimationFrame and other methods don't seem to work
-        setTimeout(() => {
-            ral_expand_all_bigint_pass2();
-        }, 100);
-    });
-
+    Sidebar.init(id);
+    load_page_via_url();
     init_index_edit();
     userHooks.onPageLoad();
 }

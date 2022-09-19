@@ -4,7 +4,25 @@
 class RAL {
 
     static get_node(id){
-        return RALIndex[id];
+        var node = RALIndex[id];
+        this.#expand_bigint(node);
+        return node;
+    }
+
+    static #expand_bigint(node){
+        // Check if RAL entry has been converted yet
+        if(typeof node.offset !== 'string') return;
+
+        // Needs conversion from base-16 string --> bigInt object
+        node.offset = bigInt(node.offset, 16);
+        node.size = bigInt(node.size, 16);
+        if('stride' in node) node.stride = bigInt(node.stride, 16);
+
+        if(RAL.is_register_node(node)) {
+            for(var i=0; i<node.fields.length; i++){
+                node.fields[i].reset = bigInt(node.fields[i].reset, 16);
+            }
+        }
     }
 
     static number_of_ids(){
@@ -12,7 +30,11 @@ class RAL {
     }
 
     static is_register(id) {
-        return("fields" in this.get_node(id));
+        return(this.is_register_node(this.get_node(id)));
+    }
+
+    static is_register_node(node) {
+        return("fields" in node);
     }
 
     static is_array(id) {
@@ -373,24 +395,5 @@ function ral_expand_bigint(id){
         for(var i=0; i<node.fields.length; i++){
             node.fields[i].reset = bigInt(node.fields[i].reset, 16);
         }
-    }
-}
-
-function ral_expand_all_bigint_pass1(first_id){
-    // RAL data contains strings that represent integers that need to be expanded
-    // to bigInt objects
-
-    // To keep initial page load fast, only expand ids in the linage of first_id
-    var ids = RAL.get_ancestors(first_id);
-    ids.push(first_id);
-    for(var i=0; i<ids.length; i++){
-        ral_expand_bigint(ids[i]);
-    }
-}
-
-function ral_expand_all_bigint_pass2(){
-    // Next, asynchronously process all others
-    for(var id=0; id<RAL.number_of_ids(); id++){
-        ral_expand_bigint(id);
     }
 }
