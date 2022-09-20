@@ -10,7 +10,7 @@ async function load_page(id) {
 
         var main_el = document.getElementById("_ContentContainer");
         main_el.innerHTML = text;
-        update_absolute_addr(RAL.get_absolute_addr(id));
+        update_absolute_addr();
         update_rdlfc_indexes();
         if(RAL.is_register(id)) {
             init_reg_value();

@@ -7,6 +7,7 @@
 <dl class="node-info">
     {%- block node_info %}
     <dt>Absolute Address:</dt><dd id="_AbsAddr" class="address"></dd>
+    <div id="_AbsAddrDetails"></div>
     <dt>Base Offset:</dt><dd class="address">{{"0x%x" % node.raw_address_offset}}</dd>
     <dt>Size:</dt><dd class="address">{{"0x%x" % node.size}}</dd>
     {%- if node.inst.is_array %}

@@ -55,7 +55,7 @@ function exitIndexEditModal(cancel) {
             update_crumbtrail();
             update_rdlfc_indexes();
             patch_url_path();
-            update_absolute_addr(RAL.get_absolute_addr(CurrentID));
+            update_absolute_addr();
             if(RAL.is_register(CurrentID)){
                 init_reg_value();
             }

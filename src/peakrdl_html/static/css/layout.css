@@ -133,6 +133,10 @@ img {
     cursor:pointer;
 }
 
+#_AbsAddr div {
+    cursor: pointer;
+}
+
 #_SearchResults{
     margin: 0em;
 }

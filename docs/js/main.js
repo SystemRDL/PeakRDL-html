@@ -282,8 +282,65 @@ function update_crumbtrail(){
     }
 }
 
-function update_absolute_addr(addr){
-    document.getElementById("_AbsAddr").innerHTML = "0x" + addr.toString(16);
+function onClickAbsAddrDetailsInfo(){
+    var details_el = document.getElementById("_AbsAddrDetails");
+    if(details_el.classList.contains("open")){
+        details_el.classList.remove("open");
+    } else {
+        details_el.classList.add("open");
+    }
+}
+
+function update_absolute_addr(){
+    var addr = RAL.get_absolute_addr(CurrentID);
+    var addr_el = document.getElementById("_AbsAddr");
+    addr_el.innerHTML = "0x" + addr.toString(16);
+
+    var showmore_div = document.createElement("div");
+    showmore_div.onclick = onClickAbsAddrDetailsInfo;
+    addr_el.appendChild(showmore_div);
+
+    var ids = RAL.get_ancestors(CurrentID);
+    ids.push(CurrentID);
+
+    var details_el = document.getElementById("_AbsAddrDetails");
+
+    while(details_el.firstElementChild){
+        details_el.firstElementChild.remove();
+    }
+
+    for(var i=0; i<ids.length; i++){
+        var id = ids[i];
+        var node = RAL.get_node(id);
+        var el;
+
+        el = document.createElement("dt");
+        el.innerHTML = node.name + ":";
+        details_el.appendChild(el);
+
+        el = document.createElement("dd");
+        el.innerHTML = "+ 0x" + node.offset.toString(16);
+        details_el.appendChild(el);
+
+        if(RAL.is_array(id)){
+            for(var ii=0; ii<node.idxs.length; ii++){
+                el = document.createElement("dt");
+                el.innerHTML = "[" + node.idxs[ii] + "]:";
+                details_el.appendChild(el);
+
+
+                var mults = []
+                for(var j=ii+1; j<node.dims.length; j++){
+                    mults.push(node.dims[j].toString());
+                }
+                mults.push(node.idxs[ii].toString())
+                mults.push("0x" + node.stride.toString(16))
+                el = document.createElement("dd");
+                el.innerHTML = "+ " + mults.join("*");
+                details_el.appendChild(el);
+            }
+        }
+    }
 }
 
 function update_rdlfc_indexes() {
