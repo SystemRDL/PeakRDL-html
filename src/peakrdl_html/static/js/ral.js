@@ -2,9 +2,65 @@
 // and can be redistributed under the terms of GNU GPL v3 <https://www.gnu.org/licenses/>.
 
 class RAL {
+    static #ral_data_files = new Array(N_RAL_FILES).fill(null);
+
+    static async load_ral_data(){
+        this.#init_progressbar();
+
+        // Dispatch all JSON fetch requests in parallel
+        var fetches = [];
+        for(var i=0; i<N_RAL_FILES; i++){
+            var awaitable = this.#load_ral_file(i);
+            fetches.push(awaitable);
+        }
+        await Promise.all(fetches);
+    }
+
+    static async #load_ral_file(idx){
+        var path = "data/ral-data-" + idx + ".json?ts=" + BUILD_TS;
+        var awaitable = fetch(path)
+            .then(response => {
+                if(!response.ok){
+                    throw new Error("fetch failed");
+                }
+                return response.json();
+            })
+            .then(data => {
+                this.#increment_progressbar();
+                this.#ral_data_files[idx] = data;
+            });
+        return awaitable;
+    }
+
+    static #progress_points = 0;
+    static #progressbar = null;
+    static #init_progressbar(){
+        this.#progressbar = new ProgressBar.Circle("#_ProgressBar", {
+            strokeWidth: 10, // forces extra padding
+            trailWidth: 3,
+            text: {
+                value: "Loading..."
+            }
+        });
+
+        if(N_RAL_FILES == 1){
+            // Only one object to load. animate progress as stand-in.
+            this.#progressbar.animate(1, {duration:400});
+        }
+    }
+    static #increment_progressbar(){
+        this.#progress_points++;
+        this.#progressbar.set(this.#progress_points / N_RAL_FILES);
+        if(this.#progress_points == N_RAL_FILES) {
+            this.#progressbar.destroy();
+            this.#progressbar = null;
+        }
+    }
 
     static get_node(id){
-        var node = RALIndex[id];
+        var file_idx = Math.floor(id / N_RAL_NODES_PER_FILE);
+        var idx = id % N_RAL_NODES_PER_FILE;
+        var node = this.#ral_data_files[file_idx][idx];
         this.#expand_bigint(node);
         return node;
     }
@@ -26,7 +82,10 @@ class RAL {
     }
 
     static number_of_ids(){
-        return RALIndex.length;
+        return (
+            (this.#ral_data_files.length - 1) * N_RAL_FILES
+            + this.#ral_data_files[this.#ral_data_files.length - 1].length
+        );
     }
 
     static is_register(id) {

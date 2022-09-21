@@ -18,12 +18,6 @@ async function load_page(id) {
         }
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         userHooks.onContentLoad();
-    })
-    .catch(e => {
-        // Page load failed
-        if(window.location.protocol == "file:"){
-            show_file_protocol_nag();
-        }
     });
 
     return awaitable;

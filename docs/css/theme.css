@@ -24,6 +24,7 @@
     --input-bg-color: #fff;
     --input-invalid-bg-color: #f99;
     --highlight-color: #f1c40f;
+    --progressbar-color: #f1c40f;
 
     --content-border-color: #e1e4e5;
     --strong-content-border-color: #aaa;
@@ -90,6 +91,7 @@
         --input-bg-color: #000;
         --input-invalid-bg-color: #A33;
         --highlight-color: #7e6500;
+        --progressbar-color: #7e6500;
 
         --content-border-color: #444;
         --strong-content-border-color: #555;
@@ -275,6 +277,25 @@ button:disabled {
 
 mark {
     background-color: var(--highlight-color);
+}
+
+#_ProgressBar {
+    width: 15em;
+    margin: auto;
+}
+
+#_ProgressBar path {
+    stroke: var(--strong-content-border-color);
+    stroke-width: 3;
+}
+
+#_ProgressBar path + path {
+    stroke: var(--progressbar-color);
+    stroke-width: 8;
+}
+
+.progressbar-text {
+    color: var(--main-text-color)!important;
 }
 
 /* ------------------------------- Admonitions ------------------------------ */

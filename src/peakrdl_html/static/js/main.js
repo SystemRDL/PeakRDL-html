@@ -51,22 +51,30 @@ function onPageLoad() {
     window.onpopstate = onPopState;
     window.onkeydown = onKeyDownMain;
 
-    // Determine what page id will be loaded
-    var url = new URL(window.location.href);
-    var path = url.searchParams.get("p", path);
-    var parsed_path = RAL.parse_path(path);
-    var id;
-    if(parsed_path == null) {
-        id = 0;
-    } else {
-        id = parsed_path[0];
-    }
+    RAL.load_ral_data().then(() => {
+        // Determine what page id will be loaded
+        var url = new URL(window.location.href);
+        var path = url.searchParams.get("p", path);
+        var parsed_path = RAL.parse_path(path);
+        var id;
+        if(parsed_path == null) {
+            id = 0;
+        } else {
+            id = parsed_path[0];
+        }
 
-    // Load content
-    Sidebar.init(id);
-    load_page_via_url();
-    init_index_edit();
-    userHooks.onPageLoad();
+        // Load content
+        Sidebar.init(id);
+        load_page_via_url();
+        init_index_edit();
+        userHooks.onPageLoad();
+    })
+    .catch(e => {
+        // Page load failed
+        if(window.location.protocol == "file:"){
+            show_file_protocol_nag();
+        }
+    });
 }
 
 function onKeyDownMain(ev) {

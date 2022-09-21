@@ -54,7 +54,7 @@ class HTMLExporter:
             properties in your documentation.
         """
         self.output_dir = "" # type: str
-        self.RALIndex = [] # type: List[Dict[str, Any]]
+        self.RALData = [] # type: List[Dict[str, Any]]
         self.RootNodeIds = [] # type: List[int]
         self.current_id = -1
         self.footer = "" # type: str
@@ -153,7 +153,7 @@ class HTMLExporter:
             raise TypeError("got an unexpected keyword argument '%s'" % list(kwargs.keys())[0])
 
         self.output_dir = output_dir
-        self.RALIndex = []
+        self.RALData = []
         self.current_id = -1
         self.indexer = SearchIndexer()
 
@@ -167,6 +167,7 @@ class HTMLExporter:
         os.makedirs(self.output_dir, exist_ok=True)
         os.makedirs(os.path.join(self.output_dir, "content"), exist_ok=True)
         os.makedirs(os.path.join(self.output_dir, "search"), exist_ok=True)
+        os.makedirs(os.path.join(self.output_dir, "data"), exist_ok=True)
 
         # Traverse trees
         for node in nodes:
@@ -177,7 +178,7 @@ class HTMLExporter:
                 )
             self.visit_addressable_node(node)
 
-        # Write out RALIndex and other data to js file
+        # Write out RALData and other data
         self.write_ral_data()
 
         # Write main index.html
@@ -235,7 +236,7 @@ class HTMLExporter:
             ral_entry['fields'] = ral_fields
 
         # Insert entry now to ensure proper position in list
-        self.RALIndex.append(ral_entry)
+        self.RALData.append(ral_entry)
 
         # Insert root nodes to list
         if parent_id is None:
@@ -257,22 +258,33 @@ class HTMLExporter:
 
 
     def write_ral_data(self) -> None:
+        N_RAL_NODES_PER_FILE = 16384
+        n_files = math.ceil(len(self.RALData)/N_RAL_NODES_PER_FILE)
+
+        # Write data index
         PageInfo = {
             "title" : self.title
         }
-        path = os.path.join(self.output_dir, "js/data.js")
-        with open(path, 'w', encoding='utf-8') as fp:
-            fp.write("var RALIndex = ")
-            fp.write(PeakRDLJSEncoder(separators=(',', ':')).encode(self.RALIndex))
-            fp.write(";\n")
+        path = os.path.join(self.output_dir, "data/data_index.js")
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write("var N_RAL_FILES = %d;\n" % n_files)
+            f.write("var N_RAL_NODES_PER_FILE = %d;\n" % N_RAL_NODES_PER_FILE)
 
-            fp.write("var RootNodeIds = ")
-            fp.write(PeakRDLJSEncoder(separators=(',', ':')).encode(self.RootNodeIds))
-            fp.write(";\n")
+            f.write("var RootNodeIds = ")
+            f.write(PeakRDLJSEncoder(separators=(',', ':')).encode(self.RootNodeIds))
+            f.write(";\n")
 
-            fp.write("var PageInfo = ")
-            fp.write(PeakRDLJSEncoder(separators=(',', ':')).encode(PageInfo))
-            fp.write(";\n")
+            f.write("var PageInfo = ")
+            f.write(PeakRDLJSEncoder(separators=(',', ':')).encode(PageInfo))
+            f.write(";\n")
+
+        # Write RALData files
+        for file_idx in range(n_files):
+            start = file_idx * N_RAL_NODES_PER_FILE
+            end = min((file_idx + 1) * N_RAL_NODES_PER_FILE, len(self.RALData))
+            path = os.path.join(self.output_dir, "data/ral-data-%d.json" % file_idx)
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(PeakRDLJSEncoder(separators=(',', ':')).encode(self.RALData[start:end]))
 
 
     _template_map = {
