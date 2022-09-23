@@ -28,6 +28,10 @@ class RAL {
             .then(data => {
                 this.#increment_progressbar();
                 this.#ral_data_files[idx] = data;
+            })
+            .catch(e => {
+                this.#destroy_progressbar();
+                throw new Error("fetch failed");
             });
         return awaitable;
     }
@@ -52,9 +56,13 @@ class RAL {
         this.#progress_points++;
         this.#progressbar.set(this.#progress_points / N_RAL_FILES);
         if(this.#progress_points == N_RAL_FILES) {
-            this.#progressbar.destroy();
-            this.#progressbar = null;
+            this.#destroy_progressbar();
         }
+    }
+
+    static #destroy_progressbar(){
+        this.#progressbar.destroy();
+        this.#progressbar = null;
     }
 
     static get_node(id){
