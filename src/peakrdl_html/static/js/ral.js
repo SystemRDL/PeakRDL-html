@@ -77,14 +77,14 @@ class RAL {
         // Check if RAL entry has been converted yet
         if(typeof node.offset !== 'string') return;
 
-        // Needs conversion from base-16 string --> bigInt object
-        node.offset = bigInt(node.offset, 16);
-        node.size = bigInt(node.size, 16);
-        if('stride' in node) node.stride = bigInt(node.stride, 16);
+        // Needs conversion from base-16 string --> BigInt object
+        node.offset = BigInt("0x" + node.offset);
+        node.size = BigInt("0x" + node.size);
+        if('stride' in node) node.stride = BigInt("0x" + node.stride);
 
         if(RAL.is_register_node(node)) {
             for(var i=0; i<node.fields.length; i++){
-                node.fields[i].reset = bigInt(node.fields[i].reset, 16);
+                node.fields[i].reset = BigInt("0x" + node.fields[i].reset);
             }
         }
     }
@@ -327,7 +327,7 @@ class RAL {
                 }
                 flat_idx += sz * node.idxs[i];
             }
-            return(node.offset.add(node.stride.multiply(flat_idx)));
+            return(node.offset + node.stride * BigInt(flat_idx));
         } else {
             return(node.offset);
         }
@@ -336,7 +336,7 @@ class RAL {
     static get_absolute_addr(id){
         var node = this.get_node(id);
         if(node.parent != null){
-            return(this.get_absolute_addr(node.parent).add(this.get_addr_offset(id)));
+            return(this.get_absolute_addr(node.parent) + this.get_addr_offset(id));
         } else {
             return(this.get_addr_offset(id));
         }
@@ -350,7 +350,7 @@ class RAL {
             for(var i=0; i<node.dims.length; i++){
                 num_elements *= node.dims[i];
             }
-            return(node.stride.multiply(num_elements - 1).add(node.size));
+            return(node.stride * BigInt(num_elements - 1) + node.size);
         }else{
             return(node.size);
         }
@@ -366,22 +366,22 @@ class RAL {
         var idx_stack = [];
         var iter_count = 0;
 
-        if(addr.lt(this.get_node(id).offset)) return(null);
-        if(addr.geq(this.get_node(id).offset.add(this.get_total_size(id)))) return(null);
+        if(addr < this.get_node(id).offset) return(null);
+        if(addr >= (this.get_node(id).offset + this.get_total_size(id))) return(null);
 
         while(iter_count < 100){
             iter_count++;
             // addr is definitely inside this node
 
             // Adjust addr to be relative to this node
-            addr = addr.subtract(this.get_node(id).offset);
+            addr = addr - this.get_node(id).offset;
 
             // Determine index stack entry for this node
             if(this.is_array(id)){
                 var idxs = [];
 
                 // First check if address lands between sparse array entries
-                if(addr.mod(this.get_node(id).stride).geq(this.get_node(id).size)) {
+                if((addr % this.get_node(id).stride) >= this.get_node(id).size) {
                     // missed! Give up and just return the parent node
                     if(this.get_node(id).parent == null){
                         return(null);
@@ -391,7 +391,7 @@ class RAL {
                 }
 
                 // index of the flattened array
-                var flat_idx = addr.divide(this.get_node(id).stride).toJSNumber();
+                var flat_idx = Number(addr / this.get_node(id).stride);
 
                 // Re-construct dimensions
                 for(var dim=this.get_node(id).dims.length-1; dim>=0; dim--){
@@ -403,7 +403,7 @@ class RAL {
                 idx_stack.push(idxs);
 
                 // Adjust addr offset to be relative to this index
-                addr = addr.mod(this.get_node(id).stride);
+                addr = addr % this.get_node(id).stride;
             } else {
                 idx_stack.push([]);
             }
@@ -412,7 +412,7 @@ class RAL {
             var found_match = false;
             for(var i=0; i<this.get_node(id).children.length; i++) {
                 var child = this.get_node(id).children[i];
-                if(addr.geq(this.get_node(child).offset) && addr.lt(this.get_node(child).offset.add(this.get_total_size(child)))){
+                if((addr >= this.get_node(child).offset) && (addr < (this.get_node(child).offset + this.get_total_size(child)))){
                     // hit!
                     id = child;
                     found_match = true;
@@ -443,24 +443,5 @@ class RAL {
         var path = this.get_path(id, null, false);
         var uid = SHA1(path);
         return uid;
-    }
-}
-
-
-
-function ral_expand_bigint(id){
-    var node = RAL.get_node(id);
-    // Check if RAL entry has been converted yet
-    if(typeof node.offset !== 'string') return;
-
-    // Needs conversion from base-16 string --> bigInt object
-    node.offset = bigInt(node.offset, 16);
-    node.size = bigInt(node.size, 16);
-    if('stride' in node) node.stride = bigInt(node.stride, 16);
-
-    if(RAL.is_register(id)) {
-        for(var i=0; i<node.fields.length; i++){
-            node.fields[i].reset = bigInt(node.fields[i].reset, 16);
-        }
     }
 }

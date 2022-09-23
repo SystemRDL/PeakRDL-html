@@ -8,12 +8,12 @@ class AddressSearch {
 
         var addr;
         try {
-            addr = toBigInt(query);
+            addr = BigInt(query);
         } catch(error) {
-            addr = bigInt(-1);
+            addr = -1n;
         }
 
-        if(addr.lt(0)) return;
+        if(addr < 0) return;
 
         RootNodeIds.forEach(function(id) {
             var result = RAL.lookup_by_address(addr, id);

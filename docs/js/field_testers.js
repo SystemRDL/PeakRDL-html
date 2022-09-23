@@ -25,7 +25,7 @@ function save_reg_state(){
     var reg_el = document.getElementById("_RegValueTester");
 
     var state = {};
-    state.value = toBigInt(reg_el.value);
+    state.value = BigInt(reg_el.value);
     state = userHooks.save_extra_reg_state(state)
     RegValueRegistery[addr_key] = state;
 }
@@ -70,16 +70,16 @@ function update_field_value_testers(){
 
 function update_reg_value_tester(){
     // Update the register tester input based on all of the individual field inputs
-    var reg_value = bigInt(0);
+    var reg_value = 0n;
     var node = RAL.get_node(CurrentID);
     for(var i=0; i<node.fields.length; i++){
-        var msb = node.fields[i].msb;
-        var lsb = node.fields[i].lsb;
+        var msb = BigInt(node.fields[i].msb);
+        var lsb = BigInt(node.fields[i].lsb);
         var el = document.getElementById("_FieldValueTester" + node.fields[i].name);
-        var value = toBigInt(el.value);
-        var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
-        value = value.and(mask);
-        reg_value = reg_value.add(value.shiftLeft(lsb));
+        var value = BigInt(el.value);
+        var mask = (1n << (msb - lsb + 1n)) - 1n;
+        value = value & mask;
+        reg_value = reg_value + (value << lsb);
     }
     var reg_el = document.getElementById("_RegValueTester");
     reg_el.value = "0x" + reg_value.toString(16);
@@ -89,14 +89,14 @@ function update_reg_value_tester(){
 
 function update_field_value_tester(idx){
     var reg_el = document.getElementById("_RegValueTester");
-    var reg_value = toBigInt(reg_el.value);
+    var reg_value = BigInt(reg_el.value);
     var node = RAL.get_node(CurrentID);
 
-    var msb = node.fields[idx].msb;
-    var lsb = node.fields[idx].lsb;
-    var value = reg_value.shiftRight(lsb);
-    var mask = bigInt(1).shiftLeft(msb - lsb + 1).subtract(1);
-    value = value.and(mask);
+    var msb = BigInt(node.fields[idx].msb);
+    var lsb = BigInt(node.fields[idx].lsb);
+    var value = reg_value >> lsb;
+    var mask = (1n << (msb - lsb + 1n)) - 1n;
+    value = value & mask;
     var el = document.getElementById("_FieldValueTester" + node.fields[idx].name);
     el.value = format_field_value(idx, value);
     el.classList.remove("invalid");
@@ -165,18 +165,18 @@ function onDecodedFieldEnumChange(el) {
 function onDecodedFieldInput(el){
     var idx = RAL.lookup_field_idx(el.dataset.name);
     var node = RAL.get_node(CurrentID);
-    var msb = node.fields[idx].msb;
-    var lsb = node.fields[idx].lsb;
+    var msb = BigInt(node.fields[idx].msb);
+    var lsb = BigInt(node.fields[idx].lsb);
     var value;
 
     try {
-        value = toBigInt(el.value);
+        value = BigInt(el.value);
     } catch(error) {
-        value = bigInt(-1);
+        value = -1n;
     }
 
-    var max_value = bigInt(1).shiftLeft(msb - lsb + 1);
-    if(value.lt(0) || (value.geq(max_value))){
+    var max_value = 1n << (msb - lsb + 1n);
+    if((value < 0) || (value >= max_value)){
         if(!el.classList.contains("invalid")) el.classList.add("invalid");
         return;
     }
@@ -193,12 +193,12 @@ function onDecodedFieldInput(el){
 function onEncodedRegInput(el){
     var value;
     try {
-        value = toBigInt(el.value);
+        value = BigInt(el.value);
     } catch(error) {
-        value = bigInt(-1);
+        value = -1n;
     }
 
-    if(value.lt(0)){
+    if(value < 0){
         if(!el.classList.contains("invalid")) el.classList.add("invalid");
         return;
     }
