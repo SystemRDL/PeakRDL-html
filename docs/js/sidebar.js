@@ -231,10 +231,16 @@ class Sidebar {
         var node_rect = node_el.getBoundingClientRect();
         var tree_rect = tree_el.getBoundingClientRect();
 
-        if((node_rect.top < tree_rect.top) || (node_rect.bottom > tree_rect.bottom)) {
-            if(typeof node_el.scrollIntoView === "function") {
-                node_el.scrollIntoView();
-            }
+        if(
+            (node_rect.top < tree_rect.top)
+            || (node_rect.bottom > tree_rect.bottom)
+            || (node_rect.left < tree_rect.left)
+            || (node_rect.right > tree_rect.right)
+        ) {
+            node_el.scrollIntoView({
+                block: "nearest",
+                inline: "start"
+            });
         }
     }
 }
