@@ -253,6 +253,9 @@ function onClickTreeFold(ev) {
     if(el.classList.contains("closed")){
         // Open this node
         Sidebar.expand_node(id);
+
+        // may need to re-select current
+        Sidebar.select_node(CurrentID);
     }else{
         // Close this node
         Sidebar.collapse_node(id);
@@ -286,6 +289,9 @@ function onClickTreeLink(ev) {
 
 function onClickTreeExpandAll() {
     Sidebar.expand_all()
+
+    // may need to re-select current
+    Sidebar.select_node(CurrentID);
 }
 
 function onClickTreeCollapseAll() {
