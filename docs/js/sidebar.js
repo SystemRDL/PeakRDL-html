@@ -6,13 +6,18 @@ class Sidebar {
     static #resizer_old_width = 0;
     static #resizer_start_x = 0;
 
+    static #mousemove_cb = null;
+    static #mouseup_cb = null;
+
     static init(first_id){
         var el;
         // Initialize the sidebar
 
         // Bind event to resizer
+        this.#mousemove_cb = this.#onResizeMouseMove.bind(this);
+        this.#mouseup_cb = this.#onResizeMouseUp.bind(this);
         el = document.getElementById("_SBResizer")
-        el.addEventListener("mousedown", this.#onResizeMouseDown);
+        el.addEventListener("mousedown", this.#onResizeMouseDown.bind(this));
 
         // create the root node(s). Do not recurse
         el = document.getElementById("_SBTree");
@@ -192,8 +197,8 @@ class Sidebar {
         var sb_el = document.getElementById("_SBContents");
         this.#resizer_old_width = sb_el.getBoundingClientRect().width;
         this.#resizer_start_x = e.clientX;
-        window.addEventListener('mousemove', this.#onResizeMouseMove);
-        window.addEventListener('mouseup', this.#onResizeMouseUp);
+        window.addEventListener('mousemove', this.#mousemove_cb);
+        window.addEventListener('mouseup', this.#mouseup_cb);
         e.preventDefault();
     }
 
@@ -205,8 +210,8 @@ class Sidebar {
     }
 
     static #onResizeMouseUp(e) {
-        window.removeEventListener('mousemove', this.#onResizeMouseMove);
-        window.removeEventListener('mouseup', this.#onResizeMouseUp);
+        window.removeEventListener('mousemove', this.#mousemove_cb);
+        window.removeEventListener('mouseup', this.#mouseup_cb);
     }
 
     static show() {
