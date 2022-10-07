@@ -451,7 +451,7 @@ mark {
 }
 
 .sb-button-strip {
-    padding: 0em 0.313em;
+    padding: 0em 0.3em 0.3em 0.3em;
 }
 
 .sb-button-strip button, .sb-button-strip a.button-link{
@@ -465,6 +465,7 @@ mark {
     vertical-align: middle;
     color: var(--title-text-color);
     padding: 0em;
+    border-radius: 3px;
 }
 
 .sb-button-strip button:hover, .sb-button-strip a.button-link:hover{
