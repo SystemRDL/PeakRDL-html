@@ -428,6 +428,12 @@ function toBigInt(str) {
     }
 }
 
+function page_specific_key(key){
+    var url = new URL(window.location.href);
+    key = url.origin + url.pathname + "::" + key;
+    return key;
+}
+
 //==============================================================================
 // Compatibility Workarounds
 //==============================================================================

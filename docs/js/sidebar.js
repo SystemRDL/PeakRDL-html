@@ -27,6 +27,13 @@ class Sidebar {
 
         // Create and expand nodes up to the current selected ID
         this.expand_to_id(first_id);
+
+        // restore sidebar width from previous session
+        var sb_width = localStorage.getItem(page_specific_key("sb_width"));
+        if(sb_width != null){
+            var sb_el = document.getElementById("_SBContents");
+            sb_el.style.width = sb_width;
+        }
     }
 
     static expand_to_id(id){
@@ -212,6 +219,10 @@ class Sidebar {
     static #onResizeMouseUp(e) {
         window.removeEventListener('mousemove', this.#mousemove_cb);
         window.removeEventListener('mouseup', this.#mouseup_cb);
+
+        // remember sidebar width
+        var sb_el = document.getElementById("_SBContents");
+        localStorage.setItem(page_specific_key("sb_width"), sb_el.style.width);
     }
 
     static show() {
