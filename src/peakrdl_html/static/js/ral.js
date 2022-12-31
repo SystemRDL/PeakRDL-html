@@ -91,7 +91,7 @@ class RAL {
 
     static number_of_ids(){
         return (
-            (this.#ral_data_files.length - 1) * N_RAL_FILES
+            (this.#ral_data_files.length - 1) * N_RAL_NODES_PER_FILE
             + this.#ral_data_files[this.#ral_data_files.length - 1].length
         );
     }
