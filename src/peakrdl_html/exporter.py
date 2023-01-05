@@ -61,6 +61,7 @@ class HTMLExporter:
         self.title = "" # type: str
         self.home_url = None # type: Optional[str]
         self.skip_not_present = True
+        self.current_top_node = None # type: AddrmapNode
 
         self.user_static_dir = kwargs.pop("user_static_dir", None) # type: Optional[str]
         self.show_signals = kwargs.pop("show_signals", False)
@@ -171,6 +172,7 @@ class HTMLExporter:
 
         # Traverse trees
         for node in nodes:
+            self.current_top_node = node
             if node.get_property('bridge'):
                 node.env.msg.warning(
                     "HTML generator does not have proper support for bridge addmaps yet. The 'bridge' property will be ignored.",
@@ -325,7 +327,7 @@ class HTMLExporter:
         }
         context.update(self.user_context)
 
-        uid = get_node_uid(node)
+        uid = self.get_node_uid(node)
 
         template = self.jj_env.get_template(self._template_map[type(node)])
         stream = template.stream(context)
@@ -481,6 +483,14 @@ class HTMLExporter:
         except Exception: # pylint: disable=broad-except
             return None, None
 
+    def get_node_uid(self, node: Node) -> str:
+        """
+        Returns the node's UID string
+        """
+        node_path = node.get_rel_path(self.current_top_node.parent, array_suffix="", empty_array_suffix="")
+        path_hash = hashlib.sha1(node_path.encode('utf-8')).hexdigest()
+        return path_hash
+
 
 def has_description(node: Node) -> bool:
     """
@@ -519,14 +529,6 @@ def has_enum_encoding(field: FieldNode) -> bool:
     """
     return "encode" in field.list_properties()
 
-
-def get_node_uid(node: Node) -> str:
-    """
-    Returns the node's UID string
-    """
-    node_path = node.get_path(array_suffix="", empty_array_suffix="")
-    path_hash = hashlib.sha1(node_path.encode('utf-8')).hexdigest()
-    return path_hash
 
 def reg_fields_are_low_to_high(node: RegNode) -> bool:
     for field in node.fields():
