@@ -1,5 +1,7 @@
 from typing import TYPE_CHECKING
 
+from peakrdl.plugins.exporter import ExporterSubcommandPlugin #pylint: disable=import-error
+
 from .exporter import HTMLExporter
 
 if TYPE_CHECKING:
@@ -7,7 +9,7 @@ if TYPE_CHECKING:
     from systemrdl.node import AddrmapNode
 
 
-class Exporter:
+class Exporter(ExporterSubcommandPlugin):
     short_desc = "Generate HTML documentation"
     long_desc = "Generate dynamic HTML documentation pages"
 
