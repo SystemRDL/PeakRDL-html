@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING
 
 from peakrdl.plugins.exporter import ExporterSubcommandPlugin #pylint: disable=import-error
+from peakrdl.config import schema #pylint: disable=import-error
 
 from .exporter import HTMLExporter
 
@@ -12,6 +13,12 @@ if TYPE_CHECKING:
 class Exporter(ExporterSubcommandPlugin):
     short_desc = "Generate HTML documentation"
     long_desc = "Generate dynamic HTML documentation pages"
+
+    cfg_schema = {
+        "user_template_dir": schema.DirectoryPath(),
+        "user_static_dir": schema.DirectoryPath(),
+        "extra_doc_properties": [schema.String()],
+    }
 
 
     def add_exporter_arguments(self, arg_group: 'argparse.ArgumentParser') -> None:
@@ -42,6 +49,9 @@ class Exporter(ExporterSubcommandPlugin):
     def do_export(self, top_node: 'AddrmapNode', options: 'argparse.Namespace') -> None:
         html = HTMLExporter(
             show_signals=options.show_signals,
+            user_template_dir=self.cfg['user_template_dir'],
+            user_static_dir=self.cfg['user_static_dir'],
+            extra_doc_properties=self.cfg['extra_doc_properties'],
         )
         html.export(
             top_node,

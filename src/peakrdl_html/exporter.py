@@ -46,7 +46,7 @@ class HTMLExporter:
             Additional context variables to load into the template namespace.
         show_signals: bool
             Show signal components. Default is False
-        extra_doc_properties: list[str]
+        extra_doc_properties: List[str]
             List of properties to explicitly document.
             Nodes that have a property explicitly set will show its value in a
             table in the node's description.
