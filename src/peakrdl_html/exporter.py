@@ -5,7 +5,6 @@ import json
 import math
 import shutil
 import hashlib
-import distutils.dir_util
 import xml.dom.minidom
 from collections import OrderedDict
 from typing import TYPE_CHECKING
@@ -160,9 +159,9 @@ class HTMLExporter:
 
         # Copy static files
         static_dir = os.path.join(os.path.dirname(__file__), "static")
-        distutils.dir_util.copy_tree(static_dir, self.output_dir, preserve_mode=0, preserve_times=0)
+        copy_recursive(static_dir, self.output_dir)
         if self.user_static_dir:
-            distutils.dir_util.copy_tree(self.user_static_dir, self.output_dir, preserve_mode=0, preserve_times=0)
+            copy_recursive(self.user_static_dir, self.output_dir)
 
         # Make sure output directory structure exists
         os.makedirs(self.output_dir, exist_ok=True)
@@ -536,6 +535,21 @@ def reg_fields_are_low_to_high(node: RegNode) -> bool:
             return True
     return False
 
+def copy_recursive(src: str, dst: str) -> None:
+    """
+    distutils.dir_util.copy_tree is deprecated, and shutil.copytree does not have
+    the dirs_exist_ok option until py3.8.
+    Implement an equivalent
+    """
+    os.makedirs(dst, exist_ok=True)
+
+    for entry in os.listdir(src):
+        spath = os.path.join(src, entry)
+        dpath = os.path.join(dst, entry)
+        if os.path.isdir(spath):
+            copy_recursive(spath, dpath)
+        else:
+            shutil.copyfile(spath, dpath)
 
 
 class BigInt:
