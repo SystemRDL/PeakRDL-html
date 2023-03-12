@@ -373,12 +373,6 @@ mark {
 
 /* ------------------------------- Button Icons ----------------------------- */
 
-.expand-button::before {
-    font-family: "Font Awesome 5 Free";
-    font-weight: bold;
-    content: "\f0fe";
-}
-
 .collapse-button::before {
     font-family: "Font Awesome 5 Free";
     font-weight: bold;
@@ -748,6 +742,10 @@ tr:hover .headerlink::after {
 
 #_SearchResults .selected {
     background-color: var(--alt-row-bg-color);
+}
+
+#_SearchResults a {
+    color: var(--main-text-color);
 }
 
 .search-content-preview {

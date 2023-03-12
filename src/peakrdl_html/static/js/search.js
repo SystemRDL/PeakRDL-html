@@ -168,14 +168,24 @@ function add_search_result(text_segments, node_id, idx_stack=null, anchor="", co
 
     var result_idx = SearchState.results.length;
     var result_el = document.createElement("li");
-    result_el.onclick = function() {
-        open_search_result(result_idx);
-    };
     result_el.onmousemove = function() {
         onSearchResultMousemove(result_idx)
     };
+
+    // wrap in clickable link
+    result_link = document.createElement("a");
+    result_link.href = "?p=" + RAL.get_path(node_id, idx_stack);
+    if(anchor != ""){
+        result_link.href += "#" + anchor;
+    }
+    result_link.onclick = function(ev) {
+        open_search_result(result_idx);
+        return(false);
+    };
+    result_el.appendChild(result_link);
+
     var path_div_el = document.createElement("div");
-    result_el.appendChild(path_div_el);
+    result_link.appendChild(path_div_el);
 
     // Build highlighted path crumbtrail
     for(var i=0; i<text_segments.length; i++){
@@ -192,7 +202,7 @@ function add_search_result(text_segments, node_id, idx_stack=null, anchor="", co
     if(content_preview != null){
         var content_preview_el = document.createElement("div");
         content_preview_el.classList.add("search-content-preview");
-        result_el.appendChild(content_preview_el);
+        result_link.appendChild(content_preview_el);
         content_preview_el.innerHTML = content_preview;
     }
 

@@ -744,6 +744,10 @@ tr:hover .headerlink::after {
     background-color: var(--alt-row-bg-color);
 }
 
+#_SearchResults a {
+    color: var(--main-text-color);
+}
+
 .search-content-preview {
     color: var(--content-preview-text-color);
     padding-left: 2em;
