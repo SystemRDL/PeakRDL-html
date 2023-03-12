@@ -88,3 +88,16 @@ Perform the export!
     * If a URL is specified, adds a home button to return to a parent home page.
 * `skip_not_present`
     * Control whether nodes with `ispresent=false` are generated. Default is True.
+
+
+## PeakRDL TOML config options
+
+If using the [PeakRDL command-line tool](https://peakrdl.readthedocs.io), some
+additional things can be configured via the TOML configuration file.
+
+```toml
+[html]
+user_template_dir = "path/to/dir/"
+user_static_dir = "path/to/dir/"
+extra_doc_properties = ["list", "of", "properties"]
+```
