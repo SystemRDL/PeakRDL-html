@@ -56,12 +56,11 @@
                     <a class="button-link home-button no-stretchy" href="{{home_url}}"></a>
                     <span class="stretchy"></span>
                     {%- endif %}
-                    <button type="button" class="no-stretchy help-button" title="Help" aria-label="Help" onclick="help_modal_open()"></button>
+                    <button type="button" class="collapse-button no-stretchy" title="Collapse All" aria-label="Collapse All" onclick="onClickTreeCollapseAll()"></button>
                     <span class="stretchy"></span>
                     {%- block button_strip2 %}
                     {%- endblock button_strip2 %}
-                    <button type="button" class="expand-button no-stretchy" title="Expand All" aria-label="Expand All" onclick="onClickTreeExpandAll()"></button>
-                    <button type="button" class="collapse-button no-stretchy" title="Collapse All" aria-label="Collapse All" onclick="onClickTreeCollapseAll()"></button>
+                    <button type="button" class="no-stretchy help-button" title="Help" aria-label="Help" onclick="help_modal_open()"></button>
                     {%- block button_strip3 %}
                     {%- endblock button_strip3 %}
                     <span class="stretchy" id="_SBSearchButtonSpan"></span>

@@ -98,15 +98,6 @@ class Sidebar {
         }
     }
 
-    static expand_recursive(id){
-        this.expand_node(id);
-        var node = RAL.get_node(id);
-        for(var i=0; i<node.children.length; i++){
-            var cid = node.children[i];
-            this.expand_recursive(cid);
-        }
-    }
-
     static collapse_node(id){
         var el = this.#get_node_el(id);
         var node = RAL.get_node(id);
@@ -129,13 +120,6 @@ class Sidebar {
         for(var i=0; i<RootNodeIds.length; i++){
             var id = RootNodeIds[i];
             this.collapse_node(id);
-        }
-    }
-
-    static expand_all(){
-        for(var i=0; i<RootNodeIds.length; i++){
-            var id = RootNodeIds[i];
-            this.expand_recursive(id);
         }
     }
 
@@ -296,13 +280,6 @@ function onClickTreeLink(ev) {
         refresh_target_scroll();
     });
     return(false);
-}
-
-function onClickTreeExpandAll() {
-    Sidebar.expand_all()
-
-    // may need to re-select current
-    Sidebar.select_node(CurrentID);
 }
 
 function onClickTreeCollapseAll() {
