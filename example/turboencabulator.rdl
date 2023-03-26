@@ -119,7 +119,7 @@ addrmap turbo_encab {
 
                 !!! tip
                     Any field that uses an enumerated encoding will also include
-                    it's enum definition alongside its description.
+                    its enum definition alongside its description.
                 ";
 
                 enum grammeter_state_e {
