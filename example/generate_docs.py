@@ -5,7 +5,7 @@ import os
 
 # Ignore this. Only needed for this example
 this_dir = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(this_dir, "../"))
+sys.path.insert(0, os.path.join(this_dir, "../src/"))
 
 from systemrdl import RDLCompiler, RDLCompileError
 from peakrdl_html import HTMLExporter

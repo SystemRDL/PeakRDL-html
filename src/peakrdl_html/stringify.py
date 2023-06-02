@@ -10,15 +10,17 @@ def stringify_rdl_value(value: Any, owner_node: node.Node) -> str:
     """
 
     if type(value) == int:
-        return stringify_scalar(value)
+        return stringify_int(value)
     elif type(value) == bool:
         return stringify_boolean(value)
     elif type(value) == str:
         return stringify_string(value)
     elif type(value) == list:
         return stringify_array(value, owner_node)
-    elif isinstance(value, enum.Enum):
-        return stringify_enum(value)
+    elif isinstance(value, rdltypes.BuiltinEnum):
+        return stringify_builtin_enum(value)
+    elif isinstance(value, rdltypes.UserEnum):
+        return stringify_user_enum_member(value)
     elif isinstance(value, rdltypes.UserStruct):
         return stringify_struct(value, owner_node)
     elif isinstance(value, node.Node):
@@ -32,7 +34,7 @@ def stringify_rdl_value(value: Any, owner_node: node.Node) -> str:
         raise RuntimeError
 
 
-def stringify_scalar(value: int) -> str:
+def stringify_int(value: int) -> str:
     return str(value)
 
 
@@ -49,11 +51,12 @@ def stringify_array(value: List[Any], owner_node: node.Node) -> str:
     return '[' + ", ".join(elements) + ']'
 
 
-def stringify_enum(value: enum.Enum) -> str:
-    if rdltypes.is_user_enum(type(value)):
-        return "%s::%s" % (type(value).__name__, value.name)
-    else:
-        return value.name
+def stringify_builtin_enum(value: rdltypes.BuiltinEnum) -> str:
+    return value.name
+
+
+def stringify_user_enum_member(value: rdltypes.UserEnum) -> str:
+    return "%s::%s" % (type(value).type_name, value.name)
 
 
 def stringify_struct(value: rdltypes.UserStruct, owner_node: node.Node) -> str:
