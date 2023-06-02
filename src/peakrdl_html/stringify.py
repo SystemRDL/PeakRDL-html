@@ -1,4 +1,3 @@
-import enum
 from typing import Any, List
 
 from systemrdl import rdltypes, node
