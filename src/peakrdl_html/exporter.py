@@ -477,6 +477,9 @@ class HTMLExporter:
         else:
             return None, None
 
+        # resolve any symlinks to ensure true git path
+        path = os.path.realpath(path)
+
         try:
             return (self.gmtu.get_source_url(path, line), os.path.basename(path))
         except Exception: # pylint: disable=broad-except
