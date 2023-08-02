@@ -51,6 +51,8 @@ class HTMLExporter:
             table in the node's description.
             Use this to bring forward user-defined properties, or other built-in
             properties in your documentation.
+        rdl_name_in_sidebar: bool
+            Use systemRDL name property in sidebar instead of instance name (if available). Default is False
         """
         self.output_dir = "" # type: str
         self.RALData = [] # type: List[Dict[str, Any]]
@@ -70,6 +72,7 @@ class HTMLExporter:
         self.generate_source_links = kwargs.pop("generate_source_links", True)
         gmtu_translators = kwargs.pop("gitmetheurl_translators", None)
         user_template_dir = kwargs.pop("user_template_dir", None)
+        self.rdl_name_in_sidebar = kwargs.pop("rdl_name_in_sidebar", False)
 
         # Check for stray kwargs
         if kwargs:
@@ -196,10 +199,17 @@ class HTMLExporter:
 
         self.indexer.add_node(node, this_id)
 
+        # Set display name based on user input and presence of name property
+        if self.rdl_name_in_sidebar:
+            display_name = node.get_property('name', default=node.inst.inst_name)
+        else:
+            display_name = node.inst.inst_name
+    
         ral_entry = {
             'parent'    : parent_id,
             'children'  : child_ids,
             'name'      : node.inst.inst_name,
+            'display'   : display_name,
             'offset'    : BigInt(node.inst.addr_offset),
             'size'      : BigInt(node.size),
         }
