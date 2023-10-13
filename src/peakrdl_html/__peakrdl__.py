@@ -18,6 +18,7 @@ class Exporter(ExporterSubcommandPlugin):
         "user_template_dir": schema.DirectoryPath(),
         "user_static_dir": schema.DirectoryPath(),
         "extra_doc_properties": [schema.String()],
+        "generate_source_links": schema.Boolean(),
     }
 
 
@@ -52,6 +53,7 @@ class Exporter(ExporterSubcommandPlugin):
             user_template_dir=self.cfg['user_template_dir'],
             user_static_dir=self.cfg['user_static_dir'],
             extra_doc_properties=self.cfg['extra_doc_properties'],
+            generate_source_links=self.cfg['generate_source_links'],
         )
         html.export(
             top_node,

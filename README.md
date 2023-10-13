@@ -100,4 +100,5 @@ additional things can be configured via the TOML configuration file.
 user_template_dir = "path/to/dir/"
 user_static_dir = "path/to/dir/"
 extra_doc_properties = ["list", "of", "properties"]
+generate_source_links = false
 ```
