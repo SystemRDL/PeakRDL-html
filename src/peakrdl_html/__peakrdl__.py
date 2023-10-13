@@ -18,6 +18,7 @@ class Exporter(ExporterSubcommandPlugin):
         "user_template_dir": schema.DirectoryPath(),
         "user_static_dir": schema.DirectoryPath(),
         "extra_doc_properties": [schema.String()],
+        "generate_source_links": schema.Boolean(),
     }
 
 
@@ -47,11 +48,16 @@ class Exporter(ExporterSubcommandPlugin):
 
 
     def do_export(self, top_node: 'AddrmapNode', options: 'argparse.Namespace') -> None:
+        generate_source_links = self.cfg['generate_source_links']
+        if generate_source_links is None:
+            generate_source_links = True
+
         html = HTMLExporter(
             show_signals=options.show_signals,
             user_template_dir=self.cfg['user_template_dir'],
             user_static_dir=self.cfg['user_static_dir'],
             extra_doc_properties=self.cfg['extra_doc_properties'],
+            generate_source_links=generate_source_links,
         )
         html.export(
             top_node,
