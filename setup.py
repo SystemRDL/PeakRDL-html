@@ -25,7 +25,7 @@ setuptools.setup(
     ],
     include_package_data=True,
     install_requires=[
-        "systemrdl-compiler>=1.13.0",
+        "systemrdl-compiler >= 1.13.0, < 2",
         "Jinja2>=2.9",
         "markdown",
         "git-me-the-url>=2.0.3",
@@ -57,5 +57,6 @@ setuptools.setup(
     project_urls={
         "Source": "https://github.com/SystemRDL/PeakRDL-html",
         "Tracker": "https://github.com/SystemRDL/PeakRDL-html/issues",
+        "Changelog": "https://github.com/SystemRDL/PeakRDL-html/releases",
     },
 )
