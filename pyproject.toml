@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "peakrdl-html"
+dynamic = ["version"]
+requires-python = ">=3.5"
+dependencies = [
+    "systemrdl-compiler >= 1.13.0, < 2",
+    "Jinja2>=2.9",
+    "markdown",
+    "git-me-the-url>=2.0.3",
+    "python-markdown-math",
+]
+
+authors = [
+    {name="Alex Mykyta"},
+]
+description = "HTML documentation generator for SystemRDL-based register models"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = [
+    "SystmRDL", "PeakRDL", "CSR", "compiler", "tool", "registers", "generator",
+    "HTML", "documentation",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
+    "Topic :: Software Development :: Documentation",
+]
+
+[project.urls]
+Source = "https://github.com/SystemRDL/PeakRDL-html"
+Tracker = "https://github.com/SystemRDL/PeakRDL-html/issues"
+Changelog = "https://github.com/SystemRDL/PeakRDL-html/releases"
+
+[tool.setuptools.dynamic]
+version = {attr = "peakrdl_html.__about__.__version__"}
+
+[project.entry-points."peakrdl.exporters"]
+html = "peakrdl_html.__peakrdl__:Exporter"
