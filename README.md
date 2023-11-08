@@ -14,7 +14,7 @@ Install from [PyPi](https://pypi.org/project/peakrdl-html) using pip:
 
 ## Example
 
-The easiest way to use PeakRDL-ipxact is via the `PeakRDL command line tool <https://peakrdl.readthedocs.io/>`_:
+The easiest way to use PeakRDL-ipxact is via the [PeakRDL command line tool](https://peakrdl.readthedocs.io/):
 
 .. code-block:: bash
 
