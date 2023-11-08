@@ -21,7 +21,7 @@ description = "HTML documentation generator for SystemRDL-based register models"
 readme = "README.md"
 license = {file = "LICENSE"}
 keywords = [
-    "SystmRDL", "PeakRDL", "CSR", "compiler", "tool", "registers", "generator",
+    "SystemRDL", "PeakRDL", "CSR", "compiler", "tool", "registers", "generator",
     "HTML", "documentation",
 ]
 classifiers = [
