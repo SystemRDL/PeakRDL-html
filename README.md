@@ -14,23 +14,34 @@ Install from [PyPi](https://pypi.org/project/peakrdl-html) using pip:
 
 ## Example
 
-An [example of HTML output](https://systemrdl.github.io/PeakRDL-html) generated from a
+The easiest way to use PeakRDL-ipxact is via the `PeakRDL command line tool <https://peakrdl.readthedocs.io/>`_:
+
+.. code-block:: bash
+
+    # Install the command line tool
+    python3 -m pip install peakrdl
+
+    # Generate HTML
+    peakrdl html your_design.rdl -o output_dir
+
+
+Here is an [example of HTML output](https://systemrdl.github.io/PeakRDL-html) generated from a
 fictional SystemRDL register description: [turboencabulator.rdl](example/turboencabulator.rdl).
 
 
-## Usage
-Pass the elaborated output of the [SystemRDL Compiler](http://systemrdl-compiler.readthedocs.io)
-into the exporter.
+## PeakRDL TOML config options
 
-Assuming `root` is the elaborated top-level node, or an internal `AddrmapNode`:
+If using the [PeakRDL command-line tool](https://peakrdl.readthedocs.io), some
+additional things can be configured via the TOML configuration file.
 
-```python
-from peakrdl_html import HTMLExporter
-
-exporter = HTMLExporter()
-
-exporter.export(root, "path/to/output")
+```toml
+[html]
+user_template_dir = "path/to/dir/"
+user_static_dir = "path/to/dir/"
+extra_doc_properties = ["list", "of", "properties"]
+generate_source_links = false
 ```
+
 
 
 ## Reference
@@ -90,15 +101,16 @@ Perform the export!
     * Control whether nodes with `ispresent=false` are generated. Default is True.
 
 
-## PeakRDL TOML config options
+### API Example
+Pass the elaborated output of the [SystemRDL Compiler](http://systemrdl-compiler.readthedocs.io)
+into the exporter.
 
-If using the [PeakRDL command-line tool](https://peakrdl.readthedocs.io), some
-additional things can be configured via the TOML configuration file.
+Assuming `root` is the elaborated top-level node, or an internal `AddrmapNode`:
 
-```toml
-[html]
-user_template_dir = "path/to/dir/"
-user_static_dir = "path/to/dir/"
-extra_doc_properties = ["list", "of", "properties"]
-generate_source_links = false
+```python
+from peakrdl_html import HTMLExporter
+
+exporter = HTMLExporter()
+
+exporter.export(root, "path/to/output")
 ```
