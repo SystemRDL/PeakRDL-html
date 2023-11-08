@@ -16,14 +16,13 @@ Install from [PyPi](https://pypi.org/project/peakrdl-html) using pip:
 
 The easiest way to use PeakRDL-html is via the [PeakRDL command line tool](https://peakrdl.readthedocs.io/):
 
-.. code-block:: bash
+```bash
+# Install the command line tool
+python3 -m pip install peakrdl
 
-    # Install the command line tool
-    python3 -m pip install peakrdl
-
-    # Generate HTML
-    peakrdl html your_design.rdl -o output_dir
-
+# Generate HTML
+peakrdl html your_design.rdl -o output_dir
+```
 
 Here is an [example of HTML output](https://systemrdl.github.io/PeakRDL-html) generated from a
 fictional SystemRDL register description: [turboencabulator.rdl](example/turboencabulator.rdl).
