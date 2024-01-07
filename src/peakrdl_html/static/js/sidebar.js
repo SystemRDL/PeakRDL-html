@@ -145,13 +145,13 @@ class Sidebar {
         link.className = "node-link";
         link.onclick = onClickTreeLink;
         if(RAL.is_array(id)){
-            var txt = node.name;
+            var txt = node.display;
             for(var i=0; i<node.dims.length; i++) {
                 txt += "[]";
             }
             link.innerHTML = txt;
         } else {
-            link.innerHTML = node.name;
+            link.innerHTML = node.display;
         }
         div.appendChild(link);
 
