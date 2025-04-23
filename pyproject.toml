@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "peakrdl-html"
 dynamic = ["version"]
-requires-python = ">=3.5"
+requires-python = ">=3.7"
 dependencies = [
     "systemrdl-compiler >= 1.13.0, < 2",
     "Jinja2>=2.9",
@@ -19,7 +19,7 @@ authors = [
 ]
 description = "HTML documentation generator for SystemRDL-based register models"
 readme = "README.md"
-license = {file = "LICENSE"}
+license = {text = "GPLv3"}
 keywords = [
     "SystemRDL", "PeakRDL", "CSR", "compiler", "tool", "registers", "generator",
     "HTML", "documentation",
@@ -34,6 +34,11 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
     "Topic :: Software Development :: Documentation",
+]
+
+[project.optional-dependencies]
+cli = [
+    "peakrdl-cli >= 1.2.3",
 ]
 
 [project.urls]
