@@ -84,7 +84,8 @@ class HTMLExporter:
                 ],
                 extension_configs={
                     'mdx_math':{
-                        'add_preview': True
+                        'add_preview': True,
+                        'enable_dollar_delimiter': True,
                     }
                 }
             )

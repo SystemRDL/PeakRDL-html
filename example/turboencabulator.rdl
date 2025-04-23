@@ -30,9 +30,9 @@ addrmap turbo_encab {
             This page demonstrates the use of the Markdown Math plugin to insert
             LaTeX-style equations that are rendered using MathJax.
 
-            For inline math, use `\\(...\\)`.
+            For inline math, use `$...$`.
 
-            For standalone math blocks, use `$$...$$`, `\\[...\\]` or `\\begin...\\end`.
+            For standalone math blocks, use `$$...$$`.
 
             Reminder: In RDL strings, backslashes need to be escaped.
 
@@ -60,7 +60,7 @@ addrmap turbo_encab {
             desc = "
             Capacitive diractance relative to the lunar waneshaft.
 
-            The amount of energy that can be stored in a capacitor is \\(E = \\frac{1}{2} CV^2\\),
+            The amount of energy that can be stored in a capacitor is $E = \\frac{1}{2} CV^2$,
             but that is irrelevant because nobody knows what 'diractance' is, so we'll leave
             that as an exercise to the reader.
             ";
