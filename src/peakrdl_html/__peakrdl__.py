@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
 
-from peakrdl.plugins.exporter import ExporterSubcommandPlugin #pylint: disable=import-error
-from peakrdl.config import schema #pylint: disable=import-error
+from peakrdl.plugins.exporter import ExporterSubcommandPlugin
+from peakrdl.config import schema
 
 from .exporter import HTMLExporter
 
