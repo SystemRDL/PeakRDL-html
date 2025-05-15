@@ -4,6 +4,7 @@ from peakrdl.plugins.exporter import ExporterSubcommandPlugin
 from peakrdl.config import schema
 
 from .exporter import HTMLExporter
+from .udps import ALL_UDPS
 
 if TYPE_CHECKING:
     import argparse
@@ -13,6 +14,8 @@ if TYPE_CHECKING:
 class Exporter(ExporterSubcommandPlugin):
     short_desc = "Generate HTML documentation"
     long_desc = "Generate dynamic HTML documentation pages"
+
+    udp_definitions = ALL_UDPS
 
     cfg_schema = {
         "user_template_dir": schema.DirectoryPath(),
