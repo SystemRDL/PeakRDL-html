@@ -76,7 +76,16 @@ function update_reg_value_tester(){
         var msb = BigInt(node.fields[i].msb);
         var lsb = BigInt(node.fields[i].lsb);
         var el = document.getElementById("_FieldValueTester" + node.fields[i].name);
-        var value = BigInt(el.value);
+        var value;
+        try {
+            value = parse_field_value(i, el.value);
+        } catch(error) {
+            if(error instanceof RangeError) {
+                value = error.clamped;
+            } else {
+                throw error;
+            }
+        }
         var mask = (1n << (msb - lsb + 1n)) - 1n;
         value = value & mask;
         reg_value = reg_value + (value << lsb);
@@ -107,11 +116,97 @@ function update_field_value_tester(idx){
     }
 }
 
+// Helper: Convert raw unsigned value to signed integer
+function toSigned(value, width) {
+    var sign_bit = 1n << (BigInt(width) - 1n);
+    if((value & sign_bit) !== 0n) {
+        value = value - (1n << BigInt(width));
+    }
+    return value;
+}
+
+// Helper: Convert signed integer to its raw unsigned representation
+function fromSigned(value, width) {
+    var sign_bit = 1n << (BigInt(width) - 1n);
+    if((value & sign_bit) !== 0n) {
+        value = value + (1n << BigInt(width));
+    }
+    return value;
+}
+
+// Helper: Convert fixed-point field value to a real number
+function fromFixedPoint(value, width, fracw, is_signed) {
+    if(is_signed) {
+        value = toSigned(value, width);
+    }
+    return Number(value) * Math.pow(2, -fracw);
+}
+
 function format_field_value(idx, value) {
-    if(RAL.get_node(CurrentID).fields[idx].disp == "D"){
-        return(value.toString());
+    var field = RAL.get_node(CurrentID).fields[idx];
+    var width = BigInt(field.msb) - BigInt(field.lsb) + 1n;
+    if(field.disp == "R") {
+        var num = fromFixedPoint(value, width, field.fracwidth, field.is_signed);
+        // Always print a decimal point for real numbers
+        return num % 1 === 0 ? num.toFixed(1) : num.toString();
+    } else if(field.disp == "D") {
+        if(field.is_signed) {
+            return toSigned(value, width).toString();
+        } else {
+            return value.toString();
+        }
     } else {
         return("0x" + value.toString(16));
+    }
+}
+
+// parse a formatted (input) value into the raw field value
+// if out of bounds, throw a RangeError with a "clamped"
+//   property containg the closest valid field value
+function parse_field_value(idx, str) {
+    var node = RAL.get_node(CurrentID);
+    var disp = node.fields[idx].disp;
+    var width = BigInt(node.fields[idx].msb) - BigInt(node.fields[idx].lsb) + 1n;
+    var is_signed = node.fields[idx].is_signed;
+
+    var value;
+    if(disp === "R") {
+        // Fixed-point: parse as real, convert to (signed) integer
+        var fracw = node.fields[idx].fracwidth;
+        var realval = Number(str);
+        if(isNaN(realval)) throw new SyntaxError("Invalid real number");
+        value = BigInt(Math.round(realval * Math.pow(2, fracw)));
+    } else {
+        // Parse as integer
+        value = BigInt(str);
+    }
+
+    // range checks
+    if(is_signed && (disp === "R" || disp === "D")) {
+        // check signed integer
+        var min = -(1n << (width - 1n));
+        var max = (1n << (width - 1n)) - 1n;
+
+        if(value < min || value > max) {
+            const err = new RangeError("Input out of bounds");
+            clamped = value < min ? min : (value > max ? max : value);
+            err.clamped = fromSigned(clamped, width);
+            throw err;
+        }
+
+        return fromSigned(value, width);
+    } else {
+        // check unsigned integer
+        var min = 0n;
+        var max = (1n << width) - 1n;
+
+        if(value < min || value > max) {
+            const err = new RangeError("Input out of bounds");
+            err.clamped = value < min ? min : (value > max ? max : value);
+            throw err;
+        }
+
+        return value;
     }
 }
 
@@ -140,10 +235,13 @@ function onRadixSwitch(el){
     var idx = RAL.lookup_field_idx(el.dataset.name);
     var node = RAL.get_node(CurrentID);
     var d = node.fields[idx].disp;
+    var field = node.fields[idx];
     if(d == "H") {
         d = "D";
-    } else if((d == "D") && ("encode" in node.fields[idx])) {
+    } else if(d == "D" && ("encode" in field)) {
         d = "E";
+    } else if((d == "D" || d == "E") && ("fracwidth" in field)) {
+        d = "R";
     } else {
         d = "H";
     }
@@ -165,22 +263,19 @@ function onDecodedFieldEnumChange(el) {
 function onDecodedFieldInput(el){
     var idx = RAL.lookup_field_idx(el.dataset.name);
     var node = RAL.get_node(CurrentID);
-    var msb = BigInt(node.fields[idx].msb);
-    var lsb = BigInt(node.fields[idx].lsb);
     var value;
 
-    try {
-        value = BigInt(el.value);
-    } catch(error) {
-        value = -1n;
-    }
-
-    var max_value = 1n << (msb - lsb + 1n);
-    if((value < 0) || (value >= max_value)){
-        if(!el.classList.contains("invalid")) el.classList.add("invalid");
-        return;
-    }
     el.classList.remove("invalid");
+    try {
+        value = parse_field_value(idx, el.value);
+    } catch(error) {
+        if(!el.classList.contains("invalid")) el.classList.add("invalid");
+        if(error instanceof RangeError) {
+            value = error.clamped;
+        } else {
+            return;
+        }
+    }
 
     if("encode" in node.fields[idx]) {
         var el2 = document.getElementById("_FieldValueEnumTester" + node.fields[idx].name);
