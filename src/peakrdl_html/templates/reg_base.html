@@ -80,6 +80,11 @@
             {% endfor %}
             </select>
             {%- endif %}
+            {%- if field.get_property('is_signed') or field.get_property('fracwidth') != None %}
+            <div id="_FieldValueDisplay{{field.inst.inst_name}}" class="field-value-display" style="font-size:smaller;color:#808080;margin-top:6px;">
+                <!-- Value will be filled by JS -->
+            </div>
+            {%- endif %}
         </td>
         <td>{{(field.get_html_name() or "-")|safe}}</td>
         <td>

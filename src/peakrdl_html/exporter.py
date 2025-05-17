@@ -220,18 +220,29 @@ class HTMLExporter:
                     # support this, so stuff a 0 in its place
                     field_reset = 0
 
+                is_signed = field.get_property("is_signed")
+
                 ral_field = {
-                    'name' : field.inst.inst_name,
-                    'lsb'  : field.inst.lsb,
-                    'msb'  : field.inst.msb,
-                    'reset': BigInt(field_reset),
-                    'disp' : 'H'
+                    'name'     : field.inst.inst_name,
+                    'lsb'      : field.inst.lsb,
+                    'msb'      : field.inst.msb,
+                    'reset'    : BigInt(field_reset),
+                    'is_signed': is_signed,
+                    'disp'     : 'H',
                 }
 
                 field_enum = field.get_property("encode")
                 if field_enum is not None:
                     ral_field['encode'] = True
                     ral_field['disp'] = 'E'
+
+                if is_signed:
+                    ral_field['disp'] = 'D'
+
+                fracwidth = field.get_property("fracwidth")
+                if fracwidth is not None:
+                    ral_field['fracwidth'] = fracwidth
+                    ral_field['disp'] = 'R'
 
                 ral_fields.append(ral_field)
 
