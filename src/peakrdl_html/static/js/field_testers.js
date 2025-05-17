@@ -58,6 +58,7 @@ function reset_field_inputs(){
         }
     }
     update_reg_value_tester();
+    update_field_value_testers();
 }
 
 function update_field_value_testers(){
@@ -99,20 +100,35 @@ function update_reg_value_tester(){
 function update_field_value_tester(idx){
     var reg_el = document.getElementById("_RegValueTester");
     var reg_value = BigInt(reg_el.value);
-    var node = RAL.get_node(CurrentID);
+    var field = RAL.get_node(CurrentID).fields[idx];
 
-    var msb = BigInt(node.fields[idx].msb);
-    var lsb = BigInt(node.fields[idx].lsb);
+    var msb = BigInt(field.msb);
+    var lsb = BigInt(field.lsb);
     var value = reg_value >> lsb;
     var mask = (1n << (msb - lsb + 1n)) - 1n;
     value = value & mask;
-    var el = document.getElementById("_FieldValueTester" + node.fields[idx].name);
+    var el = document.getElementById("_FieldValueTester" + field.name);
     el.value = format_field_value(idx, value);
     el.classList.remove("invalid");
 
-    if("encode" in RAL.get_node(CurrentID).fields[idx]) {
-        var el = document.getElementById("_FieldValueEnumTester" + node.fields[idx].name);
+    if("encode" in field) {
+        var el = document.getElementById("_FieldValueEnumTester" + field.name);
         el.value = "0x" + value.toString(16);
+    }
+
+    update_field_display(idx, value);
+}
+
+function update_field_display(idx, value){
+    // Update the display field for signed/fixed-point fields
+    var field = RAL.get_node(CurrentID).fields[idx];
+    if (field.is_signed || ("fracwidth" in field)) {
+        var dispEl = document.getElementById("_FieldValueDisplay" + field.name);
+        if (dispEl) {
+            // Always show as signed int or real, regardless of current disp
+            var show_disp = ("fracwidth" in field) ? "R" : "D";
+            dispEl.textContent = format_field_value(idx, value, show_disp);
+        }
     }
 }
 
@@ -142,14 +158,15 @@ function fromFixedPoint(value, width, fracw, is_signed) {
     return Number(value) * Math.pow(2, -fracw);
 }
 
-function format_field_value(idx, value) {
+function format_field_value(idx, value, override_disp) {
     var field = RAL.get_node(CurrentID).fields[idx];
     var width = BigInt(field.msb) - BigInt(field.lsb) + 1n;
-    if(field.disp == "R") {
+    var disp = override_disp !== undefined ? override_disp : field.disp;
+    if(disp == "R") {
         var num = fromFixedPoint(value, width, field.fracwidth, field.is_signed);
         // Always print a decimal point for real numbers
         return num % 1 === 0 ? num.toFixed(1) : num.toString();
-    } else if(field.disp == "D") {
+    } else if(disp == "D") {
         if(field.is_signed) {
             return toSigned(value, width).toString();
         } else {
@@ -262,7 +279,7 @@ function onDecodedFieldEnumChange(el) {
 
 function onDecodedFieldInput(el){
     var idx = RAL.lookup_field_idx(el.dataset.name);
-    var node = RAL.get_node(CurrentID);
+    var field = RAL.get_node(CurrentID).fields[idx];
     var value;
 
     el.classList.remove("invalid");
@@ -277,10 +294,11 @@ function onDecodedFieldInput(el){
         }
     }
 
-    if("encode" in node.fields[idx]) {
-        var el2 = document.getElementById("_FieldValueEnumTester" + node.fields[idx].name);
+    if("encode" in field) {
+        var el2 = document.getElementById("_FieldValueEnumTester" + field.name);
         el2.value = "0x" + value.toString(16);
     }
+    update_field_display(idx, value);
     update_reg_value_tester();
     save_reg_state();
 }
