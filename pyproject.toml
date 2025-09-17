@@ -7,10 +7,10 @@ name = "peakrdl-html"
 dynamic = ["version"]
 requires-python = ">=3.7"
 dependencies = [
-    "systemrdl-compiler >= 1.13.0, < 2",
-    "Jinja2>=2.9",
+    "systemrdl-compiler ~= 1.13",
+    "Jinja2 >= 2.9",
     "markdown",
-    "git-me-the-url>=2.0.3",
+    "git-me-the-url >= 2.0.3",
     "python-markdown-math",
 ]
 
