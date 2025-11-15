@@ -1,13 +1,13 @@
 {%- import "macros.html" as macros with context %}
-<h3 id="{{field.inst.inst_name}}.desc">
+<h3 id="{{field.inst_name}}.desc">
     {%- if field.get_property("name", default="") == "" -%}
-        {{- field.inst.inst_name -}}
+        {{- field.inst_name -}}
     {%- else -%}
-        {{- field.inst.inst_name}} - {{field.get_html_name()|safe -}}
+        {{- field.inst_name}} - {{field.get_html_name()|safe -}}
     {%- endif %}
-    <a class="headerlink" href="#{{field.inst.inst_name}}.desc" title="Permalink to this headline"></a>
+    <a class="headerlink" href="#{{field.inst_name}}.desc" title="Permalink to this headline"></a>
 </h3>
-<div id="_Content.{{field.inst.inst_name}}.desc">
+<div id="_Content.{{field.inst_name}}.desc">
 {%- if has_description(field) %}
 {{get_node_desc(field,3)|safe}}
 {%- endif %}

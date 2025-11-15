@@ -176,7 +176,7 @@ class HTMLExporter:
             if node.get_property('bridge'):
                 node.env.msg.warning(
                     "HTML generator does not have proper support for bridge addmaps yet. The 'bridge' property will be ignored.",
-                    node.inst.property_src_ref.get('bridge', node.inst.inst_src_ref)
+                    node.property_src_ref.get('bridge', node.inst_src_ref)
                 )
             self.visit_addressable_node(node)
 
@@ -190,7 +190,7 @@ class HTMLExporter:
         self.indexer.write_index_js(os.path.join(output_dir, "search"))
 
 
-    def visit_addressable_node(self, node: Node, parent_id: 'Optional[int]'=None) -> int:
+    def visit_addressable_node(self, node: AddressableNode, parent_id: 'Optional[int]'=None) -> int:
         self.current_id += 1
         this_id = self.current_id
         child_ids = [] # type: List[int]
@@ -200,14 +200,15 @@ class HTMLExporter:
         ral_entry = {
             'parent'    : parent_id,
             'children'  : child_ids,
-            'name'      : node.inst.inst_name,
-            'offset'    : BigInt(node.inst.addr_offset),
+            'name'      : node.inst_name,
+            'offset'    : BigInt(node.raw_address_offset),
             'size'      : BigInt(node.size),
         }
-        if node.inst.is_array:
-            ral_entry['dims'] = node.inst.array_dimensions
-            ral_entry['stride'] = BigInt(node.inst.array_stride)
-            ral_entry['idxs'] = [0] * len(node.inst.array_dimensions)
+        if node.array_dimensions:
+            assert node.array_stride is not None
+            ral_entry['dims'] = node.array_dimensions
+            ral_entry['stride'] = BigInt(node.array_stride)
+            ral_entry['idxs'] = [0] * len(node.array_dimensions)
 
         if isinstance(node, RegNode):
             ral_fields = []
@@ -221,9 +222,9 @@ class HTMLExporter:
                     field_reset = 0
 
                 ral_field = {
-                    'name' : field.inst.inst_name,
-                    'lsb'  : field.inst.lsb,
-                    'msb'  : field.inst.msb,
+                    'name' : field.inst_name,
+                    'lsb'  : field.lsb,
+                    'msb'  : field.msb,
                     'reset': BigInt(field_reset),
                     'disp' : 'H'
                 }
@@ -399,7 +400,7 @@ class HTMLExporter:
                 else:
                     # Looks like a relative path
                     # See if it points to something relative to the source file
-                    path = self.try_resolve_rel_path(node.inst.def_src_ref, img_src)
+                    path = self.try_resolve_rel_path(node.def_src_ref, img_src)
                     if path is not None:
                         img_src = path
 
@@ -468,7 +469,7 @@ class HTMLExporter:
         if not self.generate_source_links:
             return None, None
 
-        src_ref = node.inst.def_src_ref or node.inst.inst_src_ref
+        src_ref = node.def_src_ref or node.inst_src_ref
         if isinstance(src_ref, DetailedFileSourceRef):
             path = src_ref.path
             line = src_ref.line

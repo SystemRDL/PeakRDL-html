@@ -30,22 +30,22 @@
         <th></th>
     </tr>
     {%- for field in reversed(list(node.fields(skip_not_present=skip_not_present))) %}
-    {%- if loop.first and field.inst.high < (node.get_property('regwidth') - 1) %}
-    {{reserved_field(node.get_property('regwidth') - 1, field.inst.high + 1, reg_fields_are_low_to_high(node))}}
-    {%- elif (not loop.first) and field.inst.high < loop.previtem.inst.low - 1 %}
-    {{reserved_field(loop.previtem.inst.low - 1, field.inst.high + 1, reg_fields_are_low_to_high(node))}}
+    {%- if loop.first and field.high < (node.get_property('regwidth') - 1) %}
+    {{reserved_field(node.get_property('regwidth') - 1, field.high + 1, reg_fields_are_low_to_high(node))}}
+    {%- elif (not loop.first) and field.high < loop.previtem.low - 1 %}
+    {{reserved_field(loop.previtem.low - 1, field.high + 1, reg_fields_are_low_to_high(node))}}
     {%- endif %}
-    <tr id="{{field.inst.inst_name}}">
-        {%- if field.inst.msb == field.inst.lsb %}
-        <td>[{{field.inst.lsb}}]</td>
+    <tr id="{{field.inst_name}}">
+        {%- if field.msb == field.lsb %}
+        <td>[{{field.lsb}}]</td>
         {%- else %}
-        <td>[{{field.inst.msb}}:{{field.inst.lsb}}]</td>
+        <td>[{{field.msb}}:{{field.lsb}}]</td>
         {%- endif %}
         <td>
             {%- if (has_description(field) or has_enum_encoding(field)) -%}
-                <a href="#{{field.inst.inst_name}}.desc">{{field.inst.inst_name}}</a>
+                <a href="#{{field.inst_name}}.desc">{{field.inst_name}}</a>
             {%- else -%}
-                {{- field.inst.inst_name -}}
+                {{- field.inst_name -}}
             {%- endif -%}
         </td>
         <td>
@@ -69,12 +69,12 @@
             {%- endif %}
         </td>
         <td>
-            <input id="_FieldValueTester{{field.inst.inst_name}}" class="field-value-tester"
+            <input id="_FieldValueTester{{field.inst_name}}" class="field-value-tester"
                 type="text" autocomplete="off"
-                data-name="{{field.inst.inst_name}}" oninput="onDecodedFieldInput(this)"/>
+                data-name="{{field.inst_name}}" oninput="onDecodedFieldInput(this)"/>
             {%- if field.get_property("encode") != None %}
-            <select id="_FieldValueEnumTester{{field.inst.inst_name}}" class="field-value-enum-tester"
-                data-name="{{field.inst.inst_name}}" onchange="onDecodedFieldEnumChange(this)">
+            <select id="_FieldValueEnumTester{{field.inst_name}}" class="field-value-enum-tester"
+                data-name="{{field.inst_name}}" onchange="onDecodedFieldEnumChange(this)">
             {% for member in field.get_property("encode") %}
                 <option value="{{'0x%x' % member.value}}">{{member.name}}</option>
             {% endfor %}
@@ -83,14 +83,14 @@
         </td>
         <td>{{(field.get_html_name() or "-")|safe}}</td>
         <td>
-            <button type="button" id="_RadixButton{{field.inst.inst_name}}" class="radix-button"
+            <button type="button" id="_RadixButton{{field.inst_name}}" class="radix-button"
                 title="Switch radix" aria-label="Switch radix"
-                data-name="{{field.inst.inst_name}}" onclick="onRadixSwitch(this)">H</button>
-            <a class="headerlink" href="#{{field.inst.inst_name}}" title="Permalink to this row"></a>
+                data-name="{{field.inst_name}}" onclick="onRadixSwitch(this)">H</button>
+            <a class="headerlink" href="#{{field.inst_name}}" title="Permalink to this row"></a>
         </td>
     </tr>
-    {%- if loop.last and field.inst.low != 0 %}
-    {{reserved_field(field.inst.low - 1, 0, reg_fields_are_low_to_high(node))}}
+    {%- if loop.last and field.low != 0 %}
+    {{reserved_field(field.low - 1, 0, reg_fields_are_low_to_high(node))}}
     {%- endif %}
     {%- endfor %}
 </table>

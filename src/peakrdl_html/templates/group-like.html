@@ -19,23 +19,23 @@
     </tr>
     {%- set addr_digits = get_child_addr_digits(node) -%}
     {%- for child_id,child in children.items() %}
-    {%- if loop.first and child.inst.addr_offset != 0 %}
-    {{reserved_addr(child.inst.addr_offset-1, addr_digits)}}
-    {%- elif (not loop.first) and (loop.previtem[1].inst.addr_offset + loop.previtem[1].total_size) < child.inst.addr_offset %}
+    {%- if loop.first and child.raw_address_offset != 0 %}
+    {{reserved_addr(child.raw_address_offset-1, addr_digits)}}
+    {%- elif (not loop.first) and (loop.previtem[1].inst.addr_offset + loop.previtem[1].total_size) < child.raw_address_offset %}
     {{reserved_addr(loop.previtem[1].inst.addr_offset + loop.previtem[1].total_size, addr_digits)}}
     {%- endif %}
-    <tr id="{{child.inst.inst_name}}">
-        <td class="address">{{"0x{n:0{width}X}".format(n=child.inst.addr_offset, width=addr_digits)}}</td>
+    <tr id="{{child.inst_name}}">
+        <td class="address">{{"0x{n:0{width}X}".format(n=child.raw_address_offset, width=addr_digits)}}</td>
         <td><a href="?p={{child.get_path(empty_array_suffix='')}}" data-id="{{child_id}}" onclick="onClickNodeLink(event); return(false)">
-            {%- if child.inst.is_array -%}
-                {{child.inst.inst_name}}{% for dim in child.inst.array_dimensions %}[{{dim}}]{% endfor %}
+            {%- if child.is_array -%}
+                {{child.inst_name}}{% for dim in child.array_dimensions %}[{{dim}}]{% endfor %}
             {%- else -%}
-                {{child.inst.inst_name}}
+                {{child.inst_name}}
             {%- endif -%}
         </a></td>
         <td>{{(child.get_html_name() or "-")|safe}}</td>
         <td>
-            <a class="headerlink" href="#{{child.inst.inst_name}}" title="Permalink to this row"></a>
+            <a class="headerlink" href="#{{child.inst_name}}" title="Permalink to this row"></a>
         </td>
     </tr>
     {%- endfor %}

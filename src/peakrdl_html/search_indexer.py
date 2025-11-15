@@ -207,7 +207,7 @@ class SearchIndexer:
         #self._debug_print_stats(buckets)
 
 
-    def _debug_print_stats(self, buckets):
+    def _debug_print_stats(self, buckets: dict) -> None:
         word_counts = []
         for word, locations in self.index.items():
             word_counts.append((len(locations), word))
