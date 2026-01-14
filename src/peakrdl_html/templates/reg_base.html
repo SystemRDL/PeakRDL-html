@@ -30,8 +30,16 @@
         <th></th>
     </tr>
     {%- for field in reversed(list(node.fields(skip_not_present=skip_not_present))) %}
-    {%- if loop.first and field.high < (node.get_property('regwidth') - 1) %}
-    {{reserved_field(node.get_property('regwidth') - 1, field.high + 1, reg_fields_are_low_to_high(node))}}
+    {%- if loop.first %}
+    {%-     if highest_fields_first %}
+    {%-         if field.high < (node.get_property('regwidth') - 1) %}
+    {{              reserved_field(node.get_property('regwidth') - 1, field.high + 1, reg_fields_are_low_to_high(node))}}
+    {%-         endif %}
+    {%-     else %}
+    {%-         if field.low > 0 %}
+    {{              reserved_field(0, field.low - 1, reg_fields_are_low_to_high(node))}}
+    {%-         endif %}
+    {%-     endif %}
     {%- elif (not loop.first) and field.high < loop.previtem.low - 1 %}
     {{reserved_field(loop.previtem.low - 1, field.high + 1, reg_fields_are_low_to_high(node))}}
     {%- endif %}
@@ -89,8 +97,16 @@
             <a class="headerlink" href="#{{field.inst_name}}" title="Permalink to this row"></a>
         </td>
     </tr>
-    {%- if loop.last and field.low != 0 %}
-    {{reserved_field(field.low - 1, 0, reg_fields_are_low_to_high(node))}}
+    {%- if loop.last %}
+    {%-     if highest_fields_first %}
+    {%-         if field.low != 0 %}
+    {{              reserved_field(field.low - 1, 0, reg_fields_are_low_to_high(node))}}
+    {%-         endif %}
+    {%-     else %}
+    {%-         if field.high != node.get_property('regwidth') - 1 %}
+    {{              reserved_field(node.get_property('regwidth') - 1, field.high + 1, reg_fields_are_low_to_high(node))}}
+    {%-         endif %}
+    {%-     endif %}
     {%- endif %}
     {%- endfor %}
 </table>

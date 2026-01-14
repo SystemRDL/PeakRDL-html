@@ -63,6 +63,8 @@ Constructor for the HTML exporter class
     * Additional context variables to load into the template namespace.
 * `show_signals`
     * Show signal components. Default is False
+* `reverse-fields`
+    * Show fields in reverse order (LSB to MSB). Default is False
 * `extra_doc_properties`
     * List of properties to explicitly document.
 

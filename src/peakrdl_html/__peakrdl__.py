@@ -46,6 +46,13 @@ class Exporter(ExporterSubcommandPlugin):
             help="Show signal components in generated doc pages"
         )
 
+        arg_group.add_argument(
+            "--reverse-fields",
+            dest="reverse_fields",
+            default=False,
+            action="store_true",
+            help="Show fields in reverse order (LSB to MSB)"
+        )
 
     def do_export(self, top_node: 'AddrmapNode', options: 'argparse.Namespace') -> None:
         generate_source_links = self.cfg['generate_source_links']
@@ -54,6 +61,7 @@ class Exporter(ExporterSubcommandPlugin):
 
         html = HTMLExporter(
             show_signals=options.show_signals,
+            reverse_fields=options.reverse_fields,
             user_template_dir=self.cfg['user_template_dir'],
             user_static_dir=self.cfg['user_static_dir'],
             extra_doc_properties=self.cfg['extra_doc_properties'],
