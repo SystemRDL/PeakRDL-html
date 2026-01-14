@@ -19,6 +19,7 @@ class Exporter(ExporterSubcommandPlugin):
         "user_static_dir": schema.DirectoryPath(),
         "extra_doc_properties": [schema.String()],
         "generate_source_links": schema.Boolean(),
+        "reverse_fields": schema.Boolean(),
     }
 
 
@@ -49,7 +50,7 @@ class Exporter(ExporterSubcommandPlugin):
         arg_group.add_argument(
             "--reverse-fields",
             dest="reverse_fields",
-            default=False,
+            default=None,
             action="store_true",
             help="Show fields in reverse order (LSB to MSB)"
         )
@@ -59,9 +60,16 @@ class Exporter(ExporterSubcommandPlugin):
         if generate_source_links is None:
             generate_source_links = True
 
+        # Command-line option takes precedence over config file
+        reverse_fields = False
+        if self.cfg['reverse_fields'] is not None:
+            reverse_fields = self.cfg['reverse_fields']
+        if options.reverse_fields is not None:
+            reverse_fields = options.reverse_fields
+
         html = HTMLExporter(
             show_signals=options.show_signals,
-            reverse_fields=options.reverse_fields,
+            reverse_fields=reverse_fields,
             user_template_dir=self.cfg['user_template_dir'],
             user_static_dir=self.cfg['user_static_dir'],
             extra_doc_properties=self.cfg['extra_doc_properties'],
