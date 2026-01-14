@@ -45,6 +45,9 @@ class HTMLExporter:
             Additional context variables to load into the template namespace.
         show_signals: bool
             Show signal components. Default is False
+        reverse_fields: bool
+            (optional) Control whether register fields are displayed in reverse
+            bit order (LSB to MSB). Default is False
         extra_doc_properties: List[str]
             List of properties to explicitly document.
             Nodes that have a property explicitly set will show its value in a
@@ -60,10 +63,12 @@ class HTMLExporter:
         self.title = "" # type: str
         self.home_url = None # type: Optional[str]
         self.skip_not_present = True
+        self.reverse_fields = False
         self.current_top_node = None # type: AddrmapNode
 
         self.user_static_dir = kwargs.pop("user_static_dir", None) # type: Optional[str]
         self.show_signals = kwargs.pop("show_signals", False)
+        self.reverse_fields = kwargs.pop("reverse_fields", False)
         self.user_context = kwargs.pop("user_context", {})
         markdown_inst = kwargs.pop("markdown_inst", None) # type: Optional[markdown.Markdown]
         self.extra_properties = kwargs.pop("extra_doc_properties", []) # type: List[str]
@@ -299,6 +304,12 @@ class HTMLExporter:
 
     def write_page(self, this_id: int, node: Node, children: 'Dict[int, Node]') -> None:
 
+        def field_order(x):
+            if not self.reverse_fields:
+                return reversed(x)
+            else:
+                return x
+
         view_source_url, view_source_filename= self.get_view_source_info(node)
         context = {
             'this_id': this_id,
@@ -318,13 +329,14 @@ class HTMLExporter:
             'FieldNode': FieldNode,
             'AddressableNode': AddressableNode,
             'PropertyReference': rdltypes.PropertyReference,
-            'reversed': reversed,
+            'reversed': field_order,
             'isinstance': isinstance,
             'list': list,
             'view_source_url': view_source_url,
             'view_source_filename': view_source_filename,
             'reg_fields_are_low_to_high': reg_fields_are_low_to_high,
-            'skip_not_present': self.skip_not_present
+            'skip_not_present': self.skip_not_present,
+            'highest_fields_first': not self.reverse_fields
         }
         context.update(self.user_context)
 
