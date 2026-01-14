@@ -50,7 +50,7 @@ class Exporter(ExporterSubcommandPlugin):
         arg_group.add_argument(
             "--reverse-fields",
             dest="reverse_fields",
-            default=None,
+            default=False,
             action="store_true",
             help="Show fields in reverse order (LSB to MSB)"
         )
@@ -60,12 +60,7 @@ class Exporter(ExporterSubcommandPlugin):
         if generate_source_links is None:
             generate_source_links = True
 
-        # Command-line option takes precedence over config file
-        reverse_fields = False
-        if self.cfg['reverse_fields'] is not None:
-            reverse_fields = self.cfg['reverse_fields']
-        if options.reverse_fields is not None:
-            reverse_fields = options.reverse_fields
+        reverse_fields = options.reverse_fields or self.cfg['reverse_fields']
 
         html = HTMLExporter(
             show_signals=options.show_signals,
