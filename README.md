@@ -39,8 +39,8 @@ user_template_dir = "path/to/dir/"
 user_static_dir = "path/to/dir/"
 extra_doc_properties = ["list", "of", "properties"]
 generate_source_links = false
+reverse_fields = false
 ```
-
 
 
 ## Reference
@@ -63,8 +63,8 @@ Constructor for the HTML exporter class
     * Additional context variables to load into the template namespace.
 * `show_signals`
     * Show signal components. Default is False
-* `reverse-fields`
-    * Show fields in reverse order (LSB to MSB). Default is False
+* `reverse_fields`
+    * Show fields in reverse order (LSB to MSB). Default is False (MSB to LSB).
 * `extra_doc_properties`
     * List of properties to explicitly document.
 
